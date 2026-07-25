@@ -1,0 +1,2478 @@
+{
+  "openapi": "3.0.1",
+	"info": { 
+		"title": "Data Bridge", 
+		"description": "Endpoints for Data Bridge.", 
+		"version": "2022-09" },
+	"x-readme": {
+		"explorer-enabled": false,
+		"samples-languages": [ "curl", "java", "csharp", "node", "python" ],
+		"proxy-enabled": true,
+		"samples-enabled": true
+	},
+  "servers": [
+    {
+			"url": "https://{host}/databridge",
+			"description": "Intelligent Risk Platform",
+			"variables": {
+				"host": {
+					"enum": [ "api-euw1.rms.com", "api-use1.rms.com" ],
+					"default": "api-euw1.rms.com",
+					"description": "Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com."
+				}
+			}
+    }
+  ],
+	"security": [ { "RMS_Auth": [] } ],
+  "paths": {
+    "/v1/Cluster": {
+      "get": {
+				"tags": [ "Cluster" ],
+				"summary": "Get Data Bridge ACL",
+				"operationId":"getAcl",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Cluster"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Cluster"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Cluster"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Cluster/allowed-ips": {
+      "get": {
+				"tags": [ "Cluster" ],
+				"summary": "Get IP addresses",
+				"operationId": "getipaddresses",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+				"tags": [ "Cluster" ],
+				"summary": "Update Data Bridge ACL",
+				"operationId": "updateacl",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "patch": {
+				"tags": [ "Cluster" ],
+				"summary": "Overwrite Data Bridge ACL",
+				"operationId": "overwriteacl",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Cluster/allowed-ips/{ipAddress}": {
+      "delete": {
+				"tags": [ "Cluster" ],
+				"summary": "Delete IP address",
+				"operationId": "deleteipaddress",
+        "parameters": [
+          {
+            "name": "ipAddress",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Cluster/allowed-ips/{cidrIpAddress}/{cidrIpPrefix}": {
+      "delete": {
+				"tags": [ "Cluster" ],
+				"summary": "Delete range of IP addresses",
+				"operationId": "deleteipaddresses",
+        "parameters": [
+          { 
+            "name": "cidrIpAddress", 
+            "description":"Range of IP addresses in binary notation.",
+            "in": "path", 
+            "required": true,
+            "schema": { "type": "string" } },
+          {
+            "name": "cidrIpPrefix",
+						"description":"CIDR prefix that specifies the number of bits in the network ID. By default, `32`.",
+            "in": "path",
+            "required": true,
+						"schema": { "type": "string", "default": "32" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Cluster/server-security": {
+      "put": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Set TLS protocol version",
+        "operationId": "settlsprotocolversion",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Cluster"
+        ],
+        "summary": "Get cluster security",
+        "operationId": "identifyencryptedconnection",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Databases": {
+      "post": {
+				"tags": [ "Databases" ],
+				"summary": "Create database",
+				"operationId": "createdatabase",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+						"description": "Name of a managed SQL Server instance. The database is created on this instance.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Get databases by server instance",
+        "operationId": "getdatabasesbyinstance",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminMode",
+            "description": "Enables changes to a resource owned by others. If `true`, returns all databases. The principal making the request must have the appropriate permissions (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Get database by server instance",
+        "operationId": "getdatabasebyinstance",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminMode",
+            "description": "Enables changes to a resource owned by others. If `true`, returns the database. The principal making the request must have the appropriate permission (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Pin database",
+        "operationId": "pindatabase",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK. All went well."
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Databases/{databaseName}/export": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Export database to URI",
+        "operationId": "exportdatabase",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exportTo",
+						"description":"The file format of the exported database artifact. One of `0` (MDF), `1` (BAK), or `2` (DACPAC). By default, `0` (MDF). ",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Enums.ExportToType"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "409": {
+            "description": "Conflict. The requested resource already exists."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Databases/{databaseName}/import": {
+      "get": {
+				"tags": [ "Databases" ],
+				"summary": "Get upload directory URI",
+				"operationId": "getuploaddirectoryuri",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^[_\\-a-zA-Z0-9]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "importFrom",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Enums.ImportFromType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "409": {
+            "description": "Conflict. The requested resource already exists."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Import database from flat file",
+        "operationId": "importdatabase",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "importFrom",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Enums.ImportFromType"
+            }
+          },
+          {
+            "name": "groupIds",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "groupNames",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "409": {
+            "description": "Conflict. The requested resource already exists."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Databases/{databaseName}/groups": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Get groups by database",
+        "operationId": "getgroupbydatabase",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          },
+          {
+            "name": "adminMode",
+            "description": "Enables changes to a resource owned by others. If `true`, returns list of groups assigned to the database. The principal making the request must have the appropriate permissions (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Update group access to database",
+        "operationId": "updategroupaccess",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminMode",
+            "description": "Enables changes to resources owned by others. If `true`, updates group access to the database. The principal making the request must have the appropriate permissions (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/databases/{databaseName}/{fileExtension}/init-upload": {
+      "post": {
+        "tags": [
+          "Import Upload"
+        ],
+        "summary": "Initiate multipart upload",
+        "operationId": "initiatemultipartupload",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^[_\\-a-zA-Z0-9]+$",
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileExtension",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/databases/{databaseName}/{fileExtension}/upload-part/{uploadId}/{partNumber}": {
+      "get": {
+        "tags": [
+          "Import Upload"
+        ],
+        "summary": "Get pre-signed URL for multipart upload",
+        "operationId": "geturiformultipartupload",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileExtension",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Import Upload"
+        ],
+        "summary": "Upload data part by number",
+        "operationId": "uploaddatapartbynumber",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileExtension",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "partNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "byte"
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string",
+                "format": "byte"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "byte"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "format": "byte"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string",
+                "format": "byte"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/databases/{databaseName}/{fileExtension}/complete-upload": {
+      "post": {
+        "tags": [
+          "Import Upload"
+        ],
+        "summary": "Complete multipart upload",
+        "operationId": "completemultipartupload",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileExtension",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Jobs/{jobId}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get job status",
+        "operationId": "getjobstatus",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "410": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/Jobs/{jobId}/details": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get job details",
+        "operationId": "getjobdetails",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.BackgroundJobs.JobDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.BackgroundJobs.JobDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.BackgroundJobs.JobDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "410": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Logins": {
+      "get": {
+        "tags": [
+          "Logins"
+        ],
+        "summary": "Get logins by server instance",
+        "operationId": "getloginsbyinstance",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Login"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Login"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Login"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Logins"
+        ],
+        "summary": "Create login",
+        "operationId": "createlogin",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access that resource."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "409": {
+            "description": "Conflict. The requested resource already exists."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/Logins/{loginName}": {
+      "patch": {
+        "tags": [
+          "Logins"
+        ],
+        "summary": "Update login password",
+        "operationId": "updateloginpassword",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "loginName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. All went well."
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access that resource."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Logins"
+        ],
+        "summary": "Delete server instance login",
+        "operationId": "deleteinstancelogin",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "loginName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No content."
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "403": {
+            "description": "Forbidden. You do not have permission to access that resource."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/MyIp": {
+      "get": {
+        "tags": [
+          "Client IP"
+        ],
+        "summary": "Get client IP",
+        "operationId": "getclientip",
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}": {
+      "get": {
+        "tags": [
+          "Server Instances"
+        ],
+        "summary": "Get server instance",
+        "operationId": "getinstance",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances": {
+      "get": {
+        "tags": [
+          "Server Instances"
+        ],
+        "summary": "Get server instances",
+        "operationId": "getinstances",
+        "parameters": [
+          {
+            "name": "adminMode",
+            "description": "Enables changes to a resource owned by others. If `true`, returns server instances. The principal making the request must have the appropriate permissions (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    },
+    "/v1/sql-instances/{instanceName}/groups": {
+      "get": {
+        "tags": [
+          "Server Instances"
+        ],
+        "summary": "Get groups by server instance",
+        "operationId": "getgroupsbyinstance",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          },
+          {
+            "name": "adminMode",
+            "description": "Enables changes to a resource owned by others. If `true`, returns information about all server instances. The principal making the request must have the appropriate permissions (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Server Instances"
+        ],
+        "summary": "Update group access by server instance",
+        "operationId": "updategroupaccessbyinstance",
+        "parameters": [
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminMode",
+            "description": "Enables changes to a resource owned by others. If `true`, updates the groups assigned to all server instances. The principal making the request must have the appropriate permissions (e.g. Admin role).",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK. All went well.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Some of the provided parameters were not valid."
+          },
+          "404": {
+            "description": "Not found. The entity you are trying to interact with does not exist."
+          },
+          "500": {
+            "description": "Internal Server Error. If the problem persists you may want to contact the Administrator."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RMS.BackgroundJobs.JobDetails": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest": {
+        "required": [
+          "cidrEntry"
+        ],
+        "type": "object",
+        "properties": {
+          "cidrEntry": {
+            "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.CidrEntry": {
+        "required": [
+          "cidrBlock",
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "cidrBlock": {
+            "type": "string",
+            "description": "A <a href=\"https://www.rfc-editor.org/rfc/rfc4632.html\" target=\"_blank\">CIDR</a> block specifying a range of IP addresses that may access the cluster."
+          },
+          "comment": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.Cluster": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "nullable": true
+          },
+          "cidrEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest": {
+        "type": "object",
+        "properties": {
+          "uploadId": {
+            "type": "string",
+            "nullable": true
+          },
+          "etags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest": {
+        "required": [
+          "databaseName"
+        ],
+        "type": "object",
+        "properties": {
+          "databaseName": {
+            "type": "string",
+						"description": "Unique name of database. Valid characters:  `0`-`9`, `A`-`Z`, `a`-`z`, `_` (underscore), `-` (hyphen), `:` (colon), and ' ' (space). Maximum length is 80 characters."
+          },
+          "groupIds": {
+            "type": "array",
+						"description": "Array of group IDs that identify the groups that may access the database.",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "groupNames": {
+            "type": "array",
+						"description": "Array of group names that identify the groups that may access the database.",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest": {
+        "required": [
+          "login",
+          "password",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "login": {
+            "maxLength": 20,
+            "minLength": 0,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.Database": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "sizeInMb": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pinned": {
+            "type": "boolean"
+          },
+          "pinExpiration": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "databaseSchema": {
+            "type": "string",
+            "nullable": true
+          },
+          "databaseVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastIndexUpdate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups": {
+        "type": "object",
+        "properties": {
+          "filteredResult": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group"
+            },
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isFirst": {
+            "type": "boolean"
+          },
+          "isLast": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse": {
+        "type": "object",
+        "properties": {
+          "minTlsVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "allConnectionsEncrypted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse": {
+        "type": "object",
+        "properties": {
+          "clientIP": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAllowed": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.Group": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.GroupAction": {
+				"description":"Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.",
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.GroupOperation": {
+        "type": "object",
+        "properties": {
+          "groupAction": {
+            "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction"
+          },
+          "groupId": {
+						"description":"ID of group.",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse": {
+        "type": "object",
+        "properties": {
+          "uploadId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.Login": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "owner": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest": {
+        "type": "object",
+        "properties": {
+          "groupOperations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest": {
+        "type": "object",
+        "properties": {
+          "groupOperations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest": {
+        "required": [
+          "pinned"
+        ],
+        "type": "object",
+        "properties": {
+          "pinned": {
+            "type": "boolean"
+          },
+          "pinExpiration": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest": {
+        "type": "object",
+        "properties": {
+          "minTlsVersion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.SqlInstance": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "uid": {
+            "type": "string",
+            "nullable": true
+          },
+          "endpoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalEndpoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalDiskSpaceInMb": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "availableDiskSpaceInMb": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usedDiskSpaceInMb": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "databaseLimit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "pinnedDatabaseLimit": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest": {
+        "type": "object",
+        "properties": {
+          "addCidrEntries": {
+            "type": "array",
+            "description": "Array of entries that identify CIDR blocks that may access the cluser.",
+            "items": {
+              "$ref": "#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry"
+            },
+            "nullable": true
+          },
+          "removeCidrEntries": {
+            "type": "array",
+            "description": "Array CIDR blocks identifying IP addresses may no longer access the cluser.",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RMS.EnterpriseIntegrationHub.Enums.ExportToType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RMS.EnterpriseIntegrationHub.Enums.ImportFromType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "securitySchemes": {
+      "RMS_Auth": {
+        "type": "apiKey",
+				"name": "Authorization",
+        "in": "header",
+				"description": "An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.",
+				"x-default": "XXXXXXXXXX"
+      }
+    }
+  }
+}
+

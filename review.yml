@@ -1,0 +1,292 @@
+aid: moodys-rms
+name: Moody's RMS
+review:
+  question: >-
+    Does Moody's RMS expose a real, public, self-serve developer portal with downloadable API
+    specifications, and what is its ACORD posture as an insurance-sector data provider?
+  answer: true
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: United States
+  gated: true
+  gatedNote: >-
+    Documentation is fully public and readable without a login, but credentials are not self-serve.
+    API keys and security tokens are issued only to licensed Intelligent Risk Platform tenants, so
+    the integration surface itself is customer-gated. There is no signup flow, free tier, or sandbox.
+findings:
+  summary: |
+    Moody's RMS is one of the genuine API-forward outliers in a US insurance market that has no
+    federal regulator and no open-insurance mandate. It sits in the risk-data and analytics layer
+    between carriers and distribution — exactly where value accrued under the McCarran-Ferguson
+    settlement — and it behaves like a software vendor rather than a carrier.
+
+    The developer portal at https://developer.rms.com/ returned HTTP 200 on 2026-07-25 and is a
+    real, self-serve, publicly readable ReadMe (SuperHub) documentation hub, not a login wall and
+    not a marketing "innovation" page. Its home page enumerates five product areas, each a separate
+    ReadMe project with its own Guides / API Reference / Changelog / FAQ tabs, all readable
+    anonymously: /platform, /risk-modeler, /databridge, /location-intelligence, and
+    /climate-on-demand. The Platform API Reference alone lists roughly two dozen API families.
+
+    Three OpenAPI 3.0.1 definitions were harvested verbatim from the vendor's own public developer
+    assets repository, github.com/RMS/rms-developers, which is the same repository the portal serves
+    its stylesheet and product imagery from. Together they describe 667 paths. No downloadable
+    definition was found for the newer Platform APIs or for Climate On Demand; those are documented
+    as rendered reference pages plus Postman collections only.
+
+    The API hosts are live and real: an anonymous GET to
+    https://api-use1.rms.com/riskmodeler/v1/exposures returned HTTP 401, confirming the documented
+    host and rejecting unauthenticated access as expected.
+
+    None of the four insurance policy verbs are exposed. This is a risk-data and catastrophe-analytics
+    surface — exposure management, model execution, accumulation, geocoding, hazard lookup, climate
+    risk — consumed by carrier and reinsurer analytics teams. Underwriting is supported as decision
+    support (UnderwriteIQ), not as a quote/bind transaction.
+  developerPortal:
+    url: https://developer.rms.com/
+    httpStatus: 200
+    fetched: '2026-07-25'
+    type: real-self-serve-documentation-portal
+    platform: ReadMe (SuperHub, readme-subdomain rms-group)
+    loginRequiredToRead: false
+    credentialsSelfServe: false
+    note: >-
+      Reference docs are fully public. Keys are tenant-scoped and issued through the licensed
+      Intelligent Risk Platform, so onboarding is partner/customer-gated even though the docs are open.
+    projects:
+      - url: https://developer.rms.com/platform
+        httpStatus: 200
+        name: Platform APIs
+      - url: https://developer.rms.com/risk-modeler
+        httpStatus: 200
+        name: Risk Modeler API (legacy)
+      - url: https://developer.rms.com/databridge
+        httpStatus: 200
+        name: Data Bridge API
+      - url: https://developer.rms.com/location-intelligence
+        httpStatus: 200
+        name: Location Intelligence API
+      - url: https://developer.rms.com/climate-on-demand
+        httpStatus: 200
+        name: Climate On Demand API
+  probes:
+    - url: https://developer.rms.com/
+      status: 200
+      note: Live public developer portal.
+    - url: https://developers.rms.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://docs.rms.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://api.rms.com/
+      status: 000
+      note: Does not resolve. Real API hosts are regional — api-use1.rms.com and api-euw1.rms.com.
+    - url: https://www.rms.com/
+      status: 200
+      note: Redirects to https://www.moodys.com/web/en/us/who-we-serve/insurance.html
+    - url: https://rms.com/developers
+      status: 522
+      note: Apex host errors; only the www redirect and developer subdomain are served.
+    - url: https://api-use1.rms.com/riskmodeler/v1/exposures
+      status: 401
+      note: Anonymous request rejected. Confirms the documented API host is live.
+    - url: https://developer.rms.com/.well-known/openid-configuration
+      status: 404
+      note: No OpenID discovery document served by the portal.
+    - url: https://api-use1.rms.com/.well-known/openid-configuration
+      status: 403
+      note: Not served anonymously.
+    - url: https://api-use1.rms.com/.well-known/oauth-authorization-server
+      status: 403
+      note: Not served anonymously.
+    - url: https://developer.rms.com/platform/openapi.json
+      status: 404
+      note: No machine-readable spec endpoint on the ReadMe hub.
+  specsHarvested:
+    count: 3
+    totalPaths: 667
+    provenance:
+      sourceRepository: https://github.com/RMS/rms-developers
+      note: >-
+        Moody's RMS's own public developer-assets repository, referenced directly by the portal
+        (rms.github.io/rms-developers/rms-stylesheet.css and raw.githubusercontent.com/RMS/rms-developers
+        product imagery). The Climate On Demand developer page states plainly that "Moody's RMS makes
+        Open API specification resources available as files that you may download and use."
+    files:
+      - path: openapi/moodys-rms-risk-modeler-openapi.yml
+        title: Risk Modeler
+        openapi: 3.0.1
+        specVersion: 'March, 2023'
+        paths: 280
+        sourceURL: https://raw.githubusercontent.com/RMS/rms-developers/HEAD/.assets/rm/openapi.yml
+        httpStatus: 200
+        fetched: '2026-07-25'
+        verbatim: true
+      - path: openapi/moodys-rms-data-bridge-openapi.json
+        title: Data Bridge
+        openapi: 3.0.1
+        specVersion: '2022-09'
+        paths: 21
+        sourceURL: https://raw.githubusercontent.com/RMS/rms-developers/HEAD/.assets/db/db-openapi.json.zip
+        httpStatus: 200
+        fetched: '2026-07-25'
+        verbatim: true
+        note: Extracted verbatim from the published zip archive.
+      - path: openapi/moodys-rms-location-intelligence-openapi.yaml
+        title: Location Intelligence API
+        openapi: 3.0.1
+        specVersion: 2022.09.c
+        paths: 366
+        tags: [Geocoding, Composite, Risk Lookups]
+        sourceURL: https://raw.githubusercontent.com/RMS/rms-developers/HEAD/.assets/li/li-openapi.yaml.zip
+        httpStatus: 200
+        fetched: '2026-07-25'
+        verbatim: true
+        note: Extracted verbatim from the published zip archive.
+    notHarvested:
+      - name: Platform APIs
+        reason: >-
+          Reference is rendered client-side by ReadMe with no published or downloadable OpenAPI file;
+          /platform/openapi.json returned 404 and no api-registry or download link was exposed in the
+          server-rendered HTML.
+      - name: Climate On Demand API
+        reason: >-
+          Developer page offers a Postman collection download but no OpenAPI file was located.
+  acordPosture:
+    phrase: >-
+      No ACORD transactional surface — cat-risk standards instead (EDM/RDM, Risk Data Open Standard,
+      CEDE/OED); ACORD appears only as a geocode-resolution code mapping
+    evidence:
+      - >-
+        Zero occurrences of "ACORD", "AL3", "NGDS", "IVANS", "Vertafore" or "agency download" in the
+        Risk Modeler (280-path) or Data Bridge (21-path) OpenAPI definitions.
+      - >-
+        Exactly one ACORD reference across all harvested specs, in the Location Intelligence API:
+        field `rmsGeocodingResolutionCode`, described as "Indicates the geocoding resolutions that are
+        supported by the ACORD standard". This is a code-list alignment, not an ACORD message surface.
+      - >-
+        The company's actual exchange formats are its own: EDM (Exposure Data Module) and RDM
+        databases — 358 EDM and 28 RDM references in the Risk Modeler spec — plus the Risk Data Open
+        Standard (RDOS) that RMS authored and published, with documented import/transform services for
+        the CEDE and OED cat-exposure schemas.
+      - >-
+        Risk Data Exchange moves EDM/RDM databases and DLM/HD analysis results between platform
+        tenants — a vendor-native exchange, not IVANS agency download or ACORD XML.
+    summary: >-
+      This is the sector-diagnostic finding for Moody's RMS. Where a carrier or agency-system vendor
+      would show ACORD AL3 / ACORD XML moving over IVANS, a cat-risk vendor shows an entirely parallel
+      standards stack it wrote itself. ACORD governs the policy/submission idiom; RDOS, EDM/RDM, CEDE
+      and OED govern the exposure idiom. Moody's RMS lives wholly in the second.
+  insuranceVerbs:
+    quote: false
+    bind: false
+    issue: false
+    fnol: false
+    note: >-
+      None of the four policy verbs are exposed. The published surface covers exposure import/export,
+      catastrophe model execution, analysis results and metrics, accumulation and rollup, grouping,
+      currency conversion, geocoding, hazard and peril lookup, ESG and climate data, and tenant/security
+      administration. UnderwriteIQ supports underwriting as risk-scoring decision support consumed by
+      carrier and reinsurer analytics teams — it is not a quote or bind transaction API. Audience is
+      partner/tenant (licensed carriers, reinsurers, brokers, ILS and capital-markets participants),
+      never consumer and never agent self-serve.
+  authModel:
+    scheme: API key
+    detail: >-
+      Every harvested specification declares a single security scheme, `RMS_Auth`: type apiKey, in
+      header, name Authorization. The portal describes access as controlled "by means of API keys and
+      security tokens", where every request must present a valid API key or security token. No OAuth2
+      flow, no mTLS, and no OpenID discovery document is published; /.well-known probes returned 404
+      on the portal and 403 on the API hosts.
+    hosts:
+      - https://api-use1.rms.com
+      - https://api-euw1.rms.com
+    hostNote: >-
+      Specs template the host as a server variable with an enum of the two regional data centers that
+      host a tenant instance.
+  webhooks:
+    present: false
+    asyncapi: false
+    note: >-
+      No event catalog, webhook registry, or AsyncAPI document was found. Long-running work is handled
+      by a polling job model instead — the Platform reference documents a Platform Jobs family and the
+      Risk Modeler and Data Bridge specs expose job-status endpoints that clients poll for completion.
+  postman:
+    present: true
+    publicWorkspace: https://www.postman.com/rms-developers/rms-developers/overview
+    httpStatus: 200
+    collections:
+      - name: Climate On Demand
+        url: https://www.postman.com/rms-developers/workspace/cod/collection/21620294-578a748b-78a6-4a3a-b4b3-5c5380b7848e
+        httpStatus: 200
+      - name: Risk Modeler 2.0 (downloadable archive, with prod/npe environments for us-east-1 and eu-west-1)
+        url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+        httpStatus: 200
+      - name: Location Intelligence (downloadable archive)
+        url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+        httpStatus: 200
+  graphql:
+    present: false
+    note: No GraphQL endpoint or SDL is documented.
+  grpc:
+    present: false
+    note: No .proto files are published.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api-use1.rms.com/riskmodeler
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://api-use1.rms.com/databridge
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://api-use1.rms.com/li
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket surface is documented.
+    - protocol: ACORD AL3 / ACORD XML over IVANS
+      documented: false
+      note: >-
+        Not present. Moody's RMS is not in the agency-download plumbing; it exchanges EDM/RDM
+        databases and RDOS/CEDE/OED exposure data instead.
+sources:
+  - url: https://developer.rms.com/
+    type: DeveloperPortal
+    status: 200
+    note: Public ReadMe hub listing all five API products.
+  - url: https://developer.rms.com/platform/reference
+    type: APIReference
+    status: 200
+    note: Public reference index for the ~24 Platform API families.
+  - url: https://developer.rms.com/climate-on-demand
+    type: Documentation
+    status: 200
+    note: >-
+      States "Moody's RMS makes Open API specification resources available as files that you may
+      download and use" and links a public Postman collection.
+  - url: https://github.com/RMS/rms-developers
+    type: GitHubOrganization
+    status: 200
+    note: Vendor's public developer-assets repo; source of all three harvested OpenAPI definitions.
+  - url: https://www.moodys.com/web/en/us/who-we-serve/insurance/intelligent-risk-platform.html
+    type: Documentation
+    note: Intelligent Risk Platform product page; www.rms.com redirects into this Moody's insurance area.
+  - url: https://www.moodys.com/web/en/us/insights/announcements/rms-redefines-todays-data-standard-with-the-risk-data-open-standard.html
+    type: Documentation
+    note: Risk Data Open Standard (RDOS) announcement — the company's own data-standards posture.
+  - url: https://www.moodys.com/web/en/us/insights/insurance/risk-data-exchange-time-to-make-the-exchange-of-data-across-the-insurance-value-chain-seamless-and-simple.html
+    type: Documentation
+    note: Risk Data Exchange — EDM/RDM and DLM/HD result sharing between platform tenants.
+actions:
+  apisYmlCreated: true
+  apisListed: 5
+  openapiHarvested: 3
+  status: built
+  reason: >-
+    A real, confirmed, publicly readable self-serve developer portal exists with three verbatim
+    OpenAPI 3.0.1 definitions harvested from first-party sources. Recorded as built, with gated=true
+    because credentials remain tenant-scoped.

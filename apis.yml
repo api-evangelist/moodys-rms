@@ -1,0 +1,155 @@
+aid: moodys-rms
+url: https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/apis.yml
+name: Moody's RMS
+kind: company
+description: >-
+  Moody's RMS is the catastrophe risk modeling and risk-data business of Moody's Corporation, headquartered in Newark,
+  California in its home market of the United States and serving property and casualty insurers, reinsurers, brokers,
+  and capital-market participants worldwide. Founded at Stanford in 1988 as Risk Management Solutions and acquired by
+  Moody's in 2021, the company sells peril models (hurricane, earthquake, flood, wildfire, severe convective storm,
+  terror, cyber, pandemic) and the exposure data infrastructure that carriers use to price, accumulate, and transfer
+  catastrophe risk. Its products run on the cloud-native Intelligent Risk Platform, which fronts Risk Modeler,
+  ExposureIQ, UnderwriteIQ, TreatyIQ, and Risk Data Exchange. Unlike most of the US insurance sector, Moody's RMS is
+  genuinely API-forward: it operates a public, self-serve ReadMe developer portal at developer.rms.com covering
+  Platform APIs, Risk Modeler, Data Bridge, Location Intelligence, and Climate On Demand, publishes downloadable
+  OpenAPI 3.0 definitions and public Postman collections from its own rms-developers GitHub repository, and exposes
+  live REST hosts at api-use1.rms.com and api-euw1.rms.com. Reference documentation is readable without a login, but
+  the APIs themselves are tenant-scoped: keys are issued only to licensed Intelligent Risk Platform tenants, so there
+  is no self-serve signup and no sandbox. Its data-standards posture is cat-risk rather than ACORD — the exchange
+  formats are the RMS EDM/RDM databases, the Risk Data Open Standard (RDOS), and interoperability with CEDE and OED;
+  ACORD appears only as a geocoding-resolution code mapping inside the Location Intelligence API. These are risk-data
+  and analytics APIs, not policy APIs: no quote, bind, issue, or FNOL surface is published.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- United States
+- Property and Casualty
+- Reinsurance
+- Risk Data
+- Catastrophe Modeling
+- Underwriting
+- Climate Risk
+- Geocoding
+- Analytics
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis:
+- aid: moodys-rms:platform-apis
+  name: Moody's RMS Platform APIs
+  description: >-
+    A collection of REST APIs that let Intelligent Risk Platform tenants automate portfolio management, underwriting,
+    and risk-transfer workflows across Risk Modeler, UnderwriteIQ, TreatyIQ, ExposureIQ, and Risk Data Exchange. The
+    public reference is segmented into roughly two dozen families including Import, Export, Batch, Model, Accumulation,
+    Rollup, Grouping, Geohaz, Bulk Geohazard, Enrich Exposure, Currency Conversion, Auto Select, Clone, Copy, ESG Data,
+    Exchange Data, Reference Data, Risk Data, Admin Data, Tenant Data, Security, STEP, and Variation. No downloadable
+    OpenAPI definition was published for this family at the time of review.
+  humanURL: https://developer.rms.com/platform
+  tags:
+  - Platform
+  - Exposure Management
+  - Catastrophe Modeling
+  properties:
+  - type: Documentation
+    url: https://developer.rms.com/platform/docs
+  - type: APIReference
+    url: https://developer.rms.com/platform/reference
+  - type: PostmanCollection
+    url: https://www.postman.com/rms-developers/rms-developers/overview
+- aid: moodys-rms:risk-modeler-api
+  name: Moody's RMS Risk Modeler API
+  description: >-
+    The Risk Modeler 2.0 public API — the legacy catastrophe-modeling and underwriting surface of the Intelligent Risk
+    Platform, superseded by the Platform APIs but still documented and specified. The harvested OpenAPI 3.0.1
+    definition carries 280 paths covering exposure and EDM/RDM management, account and portfolio data, model profiles,
+    analysis runs, results and metrics, imports and exports, geohazard lookups, and job orchestration.
+  humanURL: https://developer.rms.com/risk-modeler
+  baseURL: https://api-use1.rms.com/riskmodeler
+  tags:
+  - Catastrophe Modeling
+  - Exposure Management
+  - Underwriting
+  properties:
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: OpenAPI
+    url: openapi/moodys-rms-risk-modeler-openapi.yml
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+- aid: moodys-rms:data-bridge-api
+  name: Moody's RMS Data Bridge API
+  description: >-
+    Administers database connections and moves exposure and results data into and out of the Intelligent Risk Platform.
+    The harvested OpenAPI 3.0.1 definition carries 21 paths covering database and server management, EDM/RDM database
+    creation and deletion, upload and download of exposure databases, and the job status endpoints that track those
+    transfers.
+  humanURL: https://developer.rms.com/databridge
+  baseURL: https://api-use1.rms.com/databridge
+  tags:
+  - Data Exchange
+  - Exposure Data
+  - ETL
+  properties:
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: OpenAPI
+    url: openapi/moodys-rms-data-bridge-openapi.json
+- aid: moodys-rms:location-intelligence-api
+  name: Moody's RMS Location Intelligence API
+  description: >-
+    Address geocoding and per-location peril and hazard risk lookups used to enrich exposure before modeling. The
+    harvested OpenAPI 3.0.1 definition carries 366 paths under three declared tags — Geocoding, Composite, and Risk
+    Lookups — returning geocode resolution (including a code mapped to the ACORD standard resolution scale), hazard
+    scores, and peril-specific risk attributes by location.
+  humanURL: https://developer.rms.com/location-intelligence
+  baseURL: https://api-use1.rms.com/li
+  tags:
+  - Geocoding
+  - Risk Data
+  - Hazard
+  properties:
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: OpenAPI
+    url: openapi/moodys-rms-location-intelligence-openapi.yaml
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:climate-on-demand-api
+  name: Moody's RMS Climate On Demand API
+  description: >-
+    Physical climate risk data delivered as an API so financial-services organizations can build climate applications
+    on the Intelligent Risk Platform. The public developer page documents four product surfaces — CoD Real Assets Stn,
+    CoD Real Assets Pro, CoD Corporates, and CoD Spatial Areas — and offers a public Postman collection. No
+    downloadable OpenAPI definition was found for this family at the time of review.
+  humanURL: https://developer.rms.com/climate-on-demand
+  tags:
+  - Climate Risk
+  - Physical Risk
+  - ESG
+  properties:
+  - type: Documentation
+    url: https://developer.rms.com/climate-on-demand
+  - type: PostmanCollection
+    url: https://www.postman.com/rms-developers/workspace/cod/collection/21620294-578a748b-78a6-4a3a-b4b3-5c5380b7848e
+common:
+- type: Website
+  url: https://www.moodys.com/web/en/us/who-we-serve/insurance.html
+- type: Documentation
+  url: https://developer.rms.com/
+- type: DeveloperPortal
+  url: https://developer.rms.com/
+- type: GitHubOrganization
+  url: https://github.com/RMS
+- type: PostmanCollection
+  url: https://www.postman.com/rms-developers/rms-developers/overview
+- type: APIReference
+  url: https://developer.rms.com/platform/reference
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
