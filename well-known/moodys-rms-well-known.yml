@@ -1,0 +1,40 @@
+generated: '2026-07-25'
+method: probed
+source: live probes of every apis.yml host and every OpenAPI servers[] host
+found: 0
+note: >-
+  No /.well-known/ discovery document is served on any Moody's RMS host. The API gateway rejects the
+  entire /.well-known/ namespace anonymously with 403 Forbidden; the ReadMe developer portal returns 404
+  or a redirect to its landing page; www.moodys.com is a client-rendered SPA whose 301 chain lands on its
+  error page. Recorded as negative evidence — no artifact pointer is wired because nothing was found.
+hosts:
+- host: https://api-use1.rms.com
+  role: API host (Risk Modeler, Data Bridge, Location Intelligence, Platform APIs, Platform MCP Server)
+  documents:
+  - {path: /.well-known/security.txt, status: 403}
+  - {path: /.well-known/openid-configuration, status: 403}
+  - {path: /.well-known/oauth-authorization-server, status: 403}
+  - {path: /.well-known/oauth-protected-resource, status: 403}
+  - {path: /.well-known/api-catalog, status: 403}
+  - {path: /.well-known/ai-plugin.json, status: 403}
+- host: https://developer.rms.com
+  role: Developer portal (ReadMe SuperHub)
+  documents:
+  - {path: /.well-known/security.txt, status: 302, note: Redirects to /}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 302, note: Redirects to /}
+- host: https://www.moodys.com
+  role: Corporate website
+  documents:
+  - {path: /.well-known/security.txt, status: 301, note: Redirect chain resolves to the site error page}
+  - {path: /.well-known/openid-configuration, status: 301}
+  - {path: /.well-known/oauth-authorization-server, status: 301}
+  - {path: /.well-known/oauth-protected-resource, status: 301}
+  - {path: /.well-known/api-catalog, status: 301}
+  - {path: /.well-known/ai-plugin.json, status: 301}
+llms_txt:
+  probed: https://developer.rms.com/llms.txt
+  status: 404

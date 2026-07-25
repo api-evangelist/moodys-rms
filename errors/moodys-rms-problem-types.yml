@@ -1,0 +1,142 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/moodys-rms-risk-modeler-openapi.yml, openapi/moodys-rms-data-bridge-openapi.json, openapi/moodys-rms-location-intelligence-openapi.yaml
+format: vendor-error-code
+rfc9457: false
+note: Derived from every 4xx/5xx response declared across the three published Moody's RMS OpenAPI definitions. The Platform APIs do not emit application/problem+json; the error body is the vendor envelope
+  {code, message, logId} catalogued in errors/moodys-rms-error-codes.yml.
+envelope_reference: errors/moodys-rms-error-codes.yml
+http_status_docs: https://developer.rms.com/platform/docs/http-status-codes
+counts:
+  distinct_statuses: 8
+  response_declarations: 2038
+problems:
+- status: 400
+  title: Bad Request
+  descriptions:
+  - Bad Request. Some of the provided parameters were not valid.
+  - Bad Request. The input data is invalid.
+  - 'Bad Request: Please check that you are provided all \ required values.'
+  - 'Bad Request: Please check that you are provided all required values.'
+  - 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Results" action.'
+  media_types:
+  - '*/*'
+  - application/json
+  occurrences: 757
+  specs:
+  - openapi/moodys-rms-data-bridge-openapi.json
+  - openapi/moodys-rms-location-intelligence-openapi.yaml
+  - openapi/moodys-rms-risk-modeler-openapi.yml
+  source_operations:
+  - openapi/moodys-rms-risk-modeler-openapi.yml#searchAccounts
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createAccount
+  - openapi/moodys-rms-risk-modeler-openapi.yml#getExposureCountAccount
+  - openapi/moodys-rms-risk-modeler-openapi.yml#getAccount
+  - openapi/moodys-rms-risk-modeler-openapi.yml#updateAccount
+- status: 401
+  title: Unauthorized
+  descriptions: []
+  media_types: []
+  occurrences: 365
+  specs:
+  - openapi/moodys-rms-location-intelligence-openapi.yaml
+  source_operations:
+  - openapi/moodys-rms-location-intelligence-openapi.yaml#genericLookup
+  - openapi/moodys-rms-location-intelligence-openapi.yaml#composite
+- status: 403
+  title: Forbidden
+  descriptions:
+  - Forbidden. You do not have permission to access that resource.
+  - 'Forbidden: Access to this resource has been denied.'
+  - 'Forbidden: Access to this resource is denied or not authorized to perform the "Add to Analysis Builder" action.'
+  - 'Forbidden: Access to this resource is denied or not authorized to perform the "Convert Event Rates" action.'
+  - 'Forbidden: Access to this resource is denied or not authorized to perform the "Convert Result Currency" action.'
+  media_types:
+  - '*/*'
+  - application/json
+  occurrences: 385
+  specs:
+  - openapi/moodys-rms-data-bridge-openapi.json
+  - openapi/moodys-rms-risk-modeler-openapi.yml
+  source_operations:
+  - openapi/moodys-rms-risk-modeler-openapi.yml#searchAccounts
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createAccount
+  - openapi/moodys-rms-risk-modeler-openapi.yml#getExposureCountAccount
+  - openapi/moodys-rms-risk-modeler-openapi.yml#getAccount
+  - openapi/moodys-rms-risk-modeler-openapi.yml#updateAccount
+- status: 404
+  title: Not Found
+  descriptions:
+  - Branch not found.
+  - Cedant not found.
+  - Facultative not found.
+  - Not found. The entity you are trying to interact with does not exist.
+  - The requested resource was not found.
+  media_types:
+  - application/json
+  occurrences: 134
+  specs:
+  - openapi/moodys-rms-data-bridge-openapi.json
+  - openapi/moodys-rms-location-intelligence-openapi.yaml
+  - openapi/moodys-rms-risk-modeler-openapi.yml
+  source_operations:
+  - openapi/moodys-rms-risk-modeler-openapi.yml#getBranchById
+  - openapi/moodys-rms-risk-modeler-openapi.yml#updateBranch
+  - openapi/moodys-rms-risk-modeler-openapi.yml#deleteBranch
+  - openapi/moodys-rms-risk-modeler-openapi.yml#getCedantById
+  - openapi/moodys-rms-risk-modeler-openapi.yml#updateCedant
+- status: 405
+  title: Method Not Allowed
+  descriptions:
+  - Method not allowed
+  media_types:
+  - application/json
+  occurrences: 1
+  specs:
+  - openapi/moodys-rms-risk-modeler-openapi.yml
+  source_operations:
+  - openapi/moodys-rms-risk-modeler-openapi.yml#batchProcessLocationConditions
+- status: 409
+  title: Conflict
+  descriptions:
+  - '409'
+  - Conflict. Resource already exists.
+  - Conflict. The requested resource already exists.
+  media_types:
+  - application/json
+  occurrences: 10
+  specs:
+  - openapi/moodys-rms-data-bridge-openapi.json
+  - openapi/moodys-rms-risk-modeler-openapi.yml
+  source_operations:
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createBranch
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createCedant
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createCurrencyv1
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createProducer
+  - openapi/moodys-rms-risk-modeler-openapi.yml#createUnderwriter
+- status: 410
+  title: Gone
+  descriptions:
+  - Not found. The entity you are trying to interact with does not exist.
+  media_types: []
+  occurrences: 2
+  specs:
+  - openapi/moodys-rms-data-bridge-openapi.json
+  source_operations:
+  - openapi/moodys-rms-data-bridge-openapi.json#getjobstatus
+  - openapi/moodys-rms-data-bridge-openapi.json#getjobdetails
+- status: 500
+  title: Internal Server Error
+  descriptions:
+  - Internal Server Error. If the problem persists you may want to contact the Administrator.
+  media_types: []
+  occurrences: 384
+  specs:
+  - openapi/moodys-rms-data-bridge-openapi.json
+  - openapi/moodys-rms-location-intelligence-openapi.yaml
+  source_operations:
+  - openapi/moodys-rms-data-bridge-openapi.json#createdatabase
+  - openapi/moodys-rms-data-bridge-openapi.json#getdatabasesbyinstance
+  - openapi/moodys-rms-data-bridge-openapi.json#getdatabasebyinstance
+  - openapi/moodys-rms-data-bridge-openapi.json#exportdatabase
+  - openapi/moodys-rms-data-bridge-openapi.json#getuploaddirectoryuri

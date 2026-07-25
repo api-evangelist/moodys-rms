@@ -1,0 +1,37 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Moody's RMS Risk Modeler
+  version: 1.0.0
+extends: openapi/moodys-rms-risk-modeler-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: moodys-rms
+    x-apievangelist-source: https://github.com/RMS/rms-developers
+    x-apievangelist-portal: https://developer.rms.com/
+    x-apievangelist-harvested: '2026-07-25'
+    x-apievangelist-operations: 383
+- target: $.info
+  update:
+    x-api-evangelist-artifacts:
+      authentication: authentication/moodys-rms-authentication.yml
+      conventions: conventions/moodys-rms-conventions.yml
+      errors: errors/moodys-rms-error-codes.yml
+      lifecycle: lifecycle/moodys-rms-lifecycle.yml
+      mcp: mcp/moodys-rms-mcp.yml
+      data_model: data-model/moodys-rms-data-model.yml
+- target: $.components.securitySchemes.RMS_Auth
+  update:
+    x-auth-docs: https://developer.rms.com/platform/docs/authentication-and-authorization
+    x-key-issuance: tenant-administrator
+    x-self-serve: false
+- target: $.info
+  update:
+    x-idempotency:
+      supported: true
+      header: x-rms-requestid
+      applies_to:
+      - POST
+      - PATCH
+      key_format: UUID
+      docs: https://developer.rms.com/platform/docs/idempotent-requests

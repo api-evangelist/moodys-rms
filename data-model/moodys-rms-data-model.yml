@@ -1,0 +1,2954 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/moodys-rms-risk-modeler-openapi.yml, openapi/moodys-rms-data-bridge-openapi.json, openapi/moodys-rms-location-intelligence-openapi.yaml
+note: 'Entity-relationship graph derived from components.schemas across the three published OpenAPI definitions: $ref links become has_one/has_many and *Id fields that name another schema become belongs_to.
+  The Intelligent Risk Platform core domain is exposure data (portfolios, accounts, locations, policies, treaties) stored in EDM databases, analysis results stored in RDM databases, and the jobs that move
+  between them.'
+domains:
+- name: Exposure
+  description: Portfolios, accounts, locations, policies, policy conditions, treaties, cedants, producers, underwriters and branches held in an EDM (Exposure Data Module) database.
+- name: Analysis
+  description: Model profiles, output profiles, analysis runs, EP/AAL metrics and result groupings held in an RDM (Results Data Module) database.
+- name: Data movement
+  description: Import, export, geohaz, batch, copy/clone and Data Bridge upload/download jobs, all asynchronous and polled by job id.
+- name: Location intelligence
+  description: Geocoding and per-peril hazard and risk lookups by location, versioned by data vintage in the path.
+counts:
+  entities: 289
+  relationships: 593
+entities:
+- name: LocationEqDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 198
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseSiteDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseCombinedDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: secondarySupply
+  - kind: has_one
+    target: ExposureValue
+    via: eqslSusceptibility
+  - kind: has_one
+    target: ExposureValue
+    via: sprinklerType
+  - kind: has_one
+    target: ExposureValue
+    via: baseIsolation
+  - kind: has_one
+    target: ExposureValue
+    via: bldgExterior
+  - kind: has_one
+    target: ExposureValue
+    via: cladding
+  - kind: has_one
+    target: ExposureValue
+    via: constructQuality
+  - kind: has_one
+    target: ExposureValue
+    via: ductility
+  - kind: has_one
+    target: ExposureValue
+    via: duress
+  - kind: has_one
+    target: ExposureValue
+    via: enggFoundation
+  - kind: has_one
+    target: ExposureValue
+    via: frameBolt
+  - kind: has_one
+    target: ExposureValue
+    via: hazardExposed
+  - kind: has_one
+    target: ExposureValue
+    via: internalMasonaryPart
+  - kind: has_one
+    target: ExposureValue
+    via: longSpan
+  - kind: has_one
+    target: ExposureValue
+    via: mechElecEquip
+  - kind: has_one
+    target: ExposureValue
+    via: ornamentation
+  - kind: has_one
+    target: ExposureValue
+    via: overhangProfile
+  - kind: has_one
+    target: ExposureValue
+    via: preFabrication
+  - kind: has_one
+    target: ExposureValue
+    via: pounding
+  - kind: has_one
+    target: ExposureValue
+    via: redundancy
+  - kind: has_one
+    target: ExposureValue
+    via: shapeConfigure
+  - kind: has_one
+    target: ExposureValue
+    via: shortColumn
+  - kind: has_one
+    target: ExposureValue
+    via: sidingType
+  - kind: has_one
+    target: ExposureValue
+    via: storyProfile
+  - kind: has_one
+    target: ExposureValue
+    via: structureUpgrade
+  - kind: has_one
+    target: ExposureValue
+    via: tank
+  - kind: has_one
+    target: ExposureValue
+    via: tiltupRetrofit
+  - kind: has_one
+    target: ExposureValue
+    via: torsion
+  - kind: has_one
+    target: ExposureValue
+    via: urmRetrofit
+  - kind: has_one
+    target: ExposureValue
+    via: wallsBrace
+  - kind: has_one
+    target: ExposureValue
+    via: tsDebris
+  - kind: has_one
+    target: ExposureValue
+    via: tsScour
+  - kind: has_one
+    target: ExposureValue
+    via: tsSafeDist
+  - kind: has_one
+    target: ExposureValue
+    via: tsProtect
+  - kind: has_one
+    target: ExposureValue
+    via: eqPackage
+  - kind: has_one
+    target: ExposureValue
+    via: eqProtect
+  - kind: has_one
+    target: ExposureValue
+    via: eqSalvage
+  - kind: has_one
+    target: ExposureValue
+    via: eqSpecieStorage
+  - kind: has_one
+    target: ExposureValue
+    via: urmChimney
+  - kind: has_one
+    target: ExposureValue
+    via: builtOnSlope
+  - kind: has_one
+    target: ExposureValue
+    via: landslideMatch
+  - kind: has_one
+    target: ExposureValue
+    via: liquefactionMatch
+  - kind: has_one
+    target: ExposureValue
+    via: soilMatch
+  - kind: has_one
+    target: ExposureValue
+    via: fireLossMatch
+  - kind: has_one
+    target: ExposureValue
+    via: apMatch
+  - kind: has_one
+    target: ExposureValue
+    via: mmiMatch
+  - kind: has_one
+    target: ExposureValue
+    via: soilVsMatch
+  - kind: has_one
+    target: ExposureValue
+    via: hdLiqMatch
+  - kind: has_one
+    target: ExposureValue
+    via: hdLandMatch
+  - kind: has_one
+    target: ExposureValue
+    via: hdSecMatch
+  - kind: has_one
+    target: ExposureValue
+    via: soilPeriodMatch
+  - kind: has_one
+    target: ExposureValue
+    via: groundwaterDepthMatch
+  - kind: has_one
+    target: ExposureValue
+    via: groundSlopeMatch
+  - kind: has_one
+    target: ExposureValue
+    via: eqslInsurance
+- name: LocationWsDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 126
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseSiteDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseCombinedDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: architecture
+  - kind: has_one
+    target: ExposureValue
+    via: cladRate
+  - kind: has_one
+    target: ExposureValue
+    via: cladType
+  - kind: has_one
+    target: ExposureValue
+    via: constructQuality
+  - kind: has_one
+    target: ExposureValue
+    via: designCode
+  - kind: has_one
+    target: ExposureValue
+    via: doorOpenings
+  - kind: has_one
+    target: ExposureValue
+    via: externalOrnament
+  - kind: has_one
+    target: ExposureValue
+    via: floodVulnerability
+  - kind: has_one
+    target: ExposureValue
+    via: foundation
+  - kind: has_one
+    target: ExposureValue
+    via: maintenance
+  - kind: has_one
+    target: ExposureValue
+    via: mechElecSide
+  - kind: has_one
+    target: ExposureValue
+    via: otherOpenings
+  - kind: has_one
+    target: ExposureValue
+    via: roofAge
+  - kind: has_one
+    target: ExposureValue
+    via: roofAnchor
+  - kind: has_one
+    target: ExposureValue
+    via: roofEquipment
+  - kind: has_one
+    target: ExposureValue
+    via: roofFrame
+  - kind: has_one
+    target: ExposureValue
+    via: roofGeometry
+  - kind: has_one
+    target: ExposureValue
+    via: roofParpet
+  - kind: has_one
+    target: ExposureValue
+    via: roofSystem
+  - kind: has_one
+    target: ExposureValue
+    via: windMissile
+  - kind: has_one
+    target: ExposureValue
+    via: windVulnerability
+  - kind: has_one
+    target: ExposureValue
+    via: floodMissiles
+  - kind: has_one
+    target: ExposureValue
+    via: floodProtection
+  - kind: has_one
+    target: ExposureValue
+    via: basement
+  - kind: has_one
+    target: ExposureValue
+    via: mechElecGround
+  - kind: has_one
+    target: ExposureValue
+    via: flashing
+  - kind: has_one
+    target: ExposureValue
+    via: ifmVerticalExpDist
+  - kind: has_one
+    target: ExposureValue
+    via: ifmStructCondition
+  - kind: has_one
+    target: ExposureValue
+    via: ifmEquipBracing
+  - kind: has_one
+    target: ExposureValue
+    via: ifmMissileExp
+  - kind: has_one
+    target: ExposureValue
+    via: wsPackage
+  - kind: has_one
+    target: ExposureValue
+    via: wsProtect
+  - kind: has_one
+    target: ExposureValue
+    via: wsSalvage
+  - kind: has_one
+    target: ExposureValue
+    via: wsSpecieStorage
+  - kind: has_one
+    target: ExposureValue
+    via: resistGarage
+  - kind: has_one
+    target: ExposureValue
+    via: wsFloorType
+  - kind: has_one
+    target: ExposureValue
+    via: wsFoundationType
+  - kind: has_one
+    target: ExposureValue
+    via: contamination
+  - kind: has_one
+    target: ExposureValue
+    via: floodDuration
+  - kind: has_one
+    target: ExposureValue
+    via: garaging
+  - kind: has_one
+    target: ExposureValue
+    via: treeDensity
+  - kind: has_one
+    target: ExposureValue
+    via: depreciationAge
+  - kind: has_one
+    target: ExposureValue
+    via: velocity
+  - kind: has_one
+    target: ExposureValue
+    via: elevationMatch
+  - kind: has_one
+    target: ExposureValue
+    via: naturalRoughnessMatch
+  - kind: has_one
+    target: ExposureValue
+    via: manMadeRoughnessMatch
+  - kind: has_one
+    target: ExposureValue
+    via: distToCoastMatch
+  - kind: has_one
+    target: ExposureValue
+    via: windPoolMatch
+  - kind: has_one
+    target: ExposureValue
+    via: nfipYearMatch
+  - kind: has_one
+    target: ExposureValue
+    via: buildingElevationMatch
+  - kind: has_one
+    target: ExposureValue
+    via: rmsBuildingElevationMatch
+- name: LocationToDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 67
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseSiteDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseCombinedDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: architecture
+  - kind: has_one
+    target: ExposureValue
+    via: cladRate
+  - kind: has_one
+    target: ExposureValue
+    via: cladType
+  - kind: has_one
+    target: ExposureValue
+    via: constructQuality
+  - kind: has_one
+    target: ExposureValue
+    via: designCode
+  - kind: has_one
+    target: ExposureValue
+    via: doorOpenings
+  - kind: has_one
+    target: ExposureValue
+    via: externalOrnament
+  - kind: has_one
+    target: ExposureValue
+    via: floodVulnerability
+  - kind: has_one
+    target: ExposureValue
+    via: foundation
+  - kind: has_one
+    target: ExposureValue
+    via: maintenance
+  - kind: has_one
+    target: ExposureValue
+    via: mechElecSide
+  - kind: has_one
+    target: ExposureValue
+    via: otherOpenings
+  - kind: has_one
+    target: ExposureValue
+    via: roofAge
+  - kind: has_one
+    target: ExposureValue
+    via: roofAnchor
+  - kind: has_one
+    target: ExposureValue
+    via: roofEquipment
+  - kind: has_one
+    target: ExposureValue
+    via: roofFrame
+  - kind: has_one
+    target: ExposureValue
+    via: roofGeometry
+  - kind: has_one
+    target: ExposureValue
+    via: roofParpet
+  - kind: has_one
+    target: ExposureValue
+    via: roofSystem
+  - kind: has_one
+    target: ExposureValue
+    via: windMissile
+  - kind: has_one
+    target: ExposureValue
+    via: windVulnerability
+  - kind: has_one
+    target: ExposureValue
+    via: basement
+  - kind: has_one
+    target: ExposureValue
+    via: mechElecGround
+  - kind: has_one
+    target: ExposureValue
+    via: floodMissiles
+  - kind: has_one
+    target: ExposureValue
+    via: floodProtection
+  - kind: has_one
+    target: ExposureValue
+    via: iceDamProtection
+  - kind: has_one
+    target: ExposureValue
+    via: plumbingInsulation
+  - kind: has_one
+    target: ExposureValue
+    via: atticInsulation
+  - kind: has_one
+    target: ExposureValue
+    via: roofVentilation
+  - kind: has_one
+    target: ExposureValue
+    via: snowGuards
+  - kind: has_one
+    target: ExposureValue
+    via: treeDensity
+  - kind: has_one
+    target: ExposureValue
+    via: garaging
+  - kind: has_one
+    target: ExposureValue
+    via: toPackage
+  - kind: has_one
+    target: ExposureValue
+    via: toProtect
+  - kind: has_one
+    target: ExposureValue
+    via: toSalvage
+  - kind: has_one
+    target: ExposureValue
+    via: toSpecieStorage
+- name: LocationFrDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 131
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: fireDepartmentRatingModifier
+  - kind: has_one
+    target: ExposureValue
+    via: fireDepartmentRating
+  - kind: has_one
+    target: ExposureValue
+    via: sprinklerSystem
+  - kind: has_one
+    target: ExposureValue
+    via: remoteAlarm
+  - kind: has_one
+    target: ExposureValue
+    via: frPackage
+  - kind: has_one
+    target: ExposureValue
+    via: frProtect
+  - kind: has_one
+    target: ExposureValue
+    via: frSalvage
+  - kind: has_one
+    target: ExposureValue
+    via: frSpecieStorage
+  - kind: has_one
+    target: ExposureValue
+    via: frRoofCovering
+  - kind: has_one
+    target: ExposureValue
+    via: frRoofGeometry
+  - kind: has_one
+    target: ExposureValue
+    via: frRoofAge
+  - kind: has_one
+    target: ExposureValue
+    via: frRoofVent
+  - kind: has_one
+    target: ExposureValue
+    via: frEmberAccumulator
+  - kind: has_one
+    target: ExposureValue
+    via: frSuppression
+  - kind: has_one
+    target: ExposureValue
+    via: frPerformance
+  - kind: has_one
+    target: ExposureValue
+    via: frSetback
+  - kind: has_one
+    target: ExposureValue
+    via: frExterior
+  - kind: has_one
+    target: ExposureValue
+    via: frResAppurtenant
+  - kind: has_one
+    target: ExposureValue
+    via: frComAppurtenant
+  - kind: has_one
+    target: ExposureValue
+    via: frDeckType
+  - kind: has_one
+    target: ExposureValue
+    via: frHeatResistance
+  - kind: has_one
+    target: ExposureValue
+    via: frAccessibilityCondition
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireHazard
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireSusceptibility
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireThreat
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireAreaDescription
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireSurfaceFuelType
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireAccessibility
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireMatch
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireSlopeFlag
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireFuel
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireFuelFlag
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireDistanceToVegFlag
+  - kind: has_one
+    target: ExposureValue
+    via: wildFireDistanceToVegUnit
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseSiteDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseCombinedDeductible
+- name: LocationFlDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 99
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseSiteDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseCombinedDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: floodProtect
+  - kind: has_one
+    target: ExposureValue
+    via: floorType
+  - kind: has_one
+    target: ExposureValue
+    via: floodMissile
+  - kind: has_one
+    target: ExposureValue
+    via: basement
+  - kind: has_one
+    target: ExposureValue
+    via: floodVulnerability
+  - kind: has_one
+    target: ExposureValue
+    via: mechElecGround
+  - kind: has_one
+    target: ExposureValue
+    via: cladType
+  - kind: has_one
+    target: ExposureValue
+    via: foundation
+  - kind: has_one
+    target: ExposureValue
+    via: duration
+  - kind: has_one
+    target: ExposureValue
+    via: contamination
+  - kind: has_one
+    target: ExposureValue
+    via: velocity
+  - kind: has_one
+    target: ExposureValue
+    via: flPackage
+  - kind: has_one
+    target: ExposureValue
+    via: flProtect
+  - kind: has_one
+    target: ExposureValue
+    via: flSalvage
+  - kind: has_one
+    target: ExposureValue
+    via: flSpecieStorage
+  - kind: has_one
+    target: ExposureValue
+    via: ifmVerticalExpDist
+  - kind: has_one
+    target: ExposureValue
+    via: flFoundationType
+  - kind: has_one
+    target: ExposureValue
+    via: ifmStructureCondition
+  - kind: has_one
+    target: ExposureValue
+    via: bespokeFloodDefenseLevelType
+  - kind: has_one
+    target: ExposureValue
+    via: flMatch
+  - kind: has_one
+    target: ExposureValue
+    via: hdFlMatch
+  - kind: has_one
+    target: ExposureValue
+    via: flFfHagFlag
+- name: AnalysesItemV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 37
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: modelProfile
+  - kind: has_one
+    target: ExposureValue
+    via: outputProfile
+  - kind: has_one
+    target: ExposureValue
+    via: engine
+  - kind: has_one
+    target: ExposureValue
+    via: status
+  - kind: has_one
+    target: ExposureValue
+    via: type
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+  - kind: has_one
+    target: ExposureValue
+    via: subPeril
+  - kind: has_one
+    target: ExposureValue
+    via: region
+  - kind: has_one
+    target: ExposureValue
+    via: lossAmplification
+  - kind: has_one
+    target: ExposureValue
+    via: mode
+  - kind: has_one
+    target: ExposureValue
+    via: insuranceType
+  - kind: has_one
+    target: ExposureValue
+    via: vulnerabilityCurve
+  - kind: has_one
+    target: ExposureValue
+    via: user
+  - kind: has_one
+    target: AnalysisCurrency
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: engineSubType
+  - kind: belongs_to
+    target: Job
+    via: jobId
+  - kind: belongs_to
+    target: ExposureSet
+    via: exposureSetId
+- name: Location
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 19
+  relationships:
+  - kind: has_one
+    target: LocationBuildingAttribute
+    via: esdbBuildingAttribute
+  - kind: has_one
+    target: Property
+    via: property
+  - kind: has_one
+    target: Address
+    via: address
+  - kind: has_one
+    target: LocationBiDetail
+    via: biDetail
+  - kind: has_one
+    target: LocationEqDetail
+    via: eqDetail
+  - kind: has_one
+    target: LocationWsDetail
+    via: wsDetail
+  - kind: has_one
+    target: LocationToDetail
+    via: toDetail
+  - kind: has_one
+    target: LocationFlDetail
+    via: flDetail
+  - kind: has_one
+    target: LocationFrDetail
+    via: frDetail
+  - kind: has_one
+    target: LocationTrDetail
+    via: trDetail
+  - kind: has_one
+    target: BuildingAttribute
+    via: buildingAttribute
+  - kind: has_many
+    target: LocationCoverage
+    via: coverages
+  - kind: has_many
+    target: ReinsuranceCession
+    via: reinsuranceCessions
+  - kind: has_many
+    target: LocationWcDetail
+    via: wcDetails
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_many
+    target: LocationCondition
+    via: locationConditions
+- name: LocationInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 23
+  relationships:
+  - kind: has_one
+    target: LocationBuildingAttribute
+    via: esdbBuildingAttribute
+  - kind: has_one
+    target: Property
+    via: property
+  - kind: has_one
+    target: Address
+    via: address
+  - kind: has_one
+    target: LocationBiDetail
+    via: biDetail
+  - kind: has_one
+    target: LocationEqDetail
+    via: eqDetail
+  - kind: has_one
+    target: LocationWsDetail
+    via: wsDetail
+  - kind: has_one
+    target: LocationToDetail
+    via: toDetail
+  - kind: has_one
+    target: LocationFlDetail
+    via: flDetail
+  - kind: has_one
+    target: LocationFrDetail
+    via: frDetail
+  - kind: has_one
+    target: LocationTrDetail
+    via: trDetail
+  - kind: has_one
+    target: BuildingAttribute
+    via: buildingAttribute
+  - kind: has_many
+    target: LocationCoverage
+    via: coverages
+  - kind: has_many
+    target: ReinsuranceCession
+    via: reinsuranceCessions
+  - kind: has_many
+    target: LocationWcDetail
+    via: wcDetails
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_many
+    target: LocationCondition
+    via: locationConditions
+- name: Property
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 46
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: buildingClassScheme
+  - kind: has_one
+    target: ExposureValue
+    via: buildingClass
+  - kind: has_one
+    target: ExposureValue
+    via: occupancyTypeScheme
+  - kind: has_one
+    target: ExposureValue
+    via: occupancyType
+  - kind: has_one
+    target: ExposureValue
+    via: siteName
+  - kind: has_one
+    target: ExposureValue
+    via: heightUnit
+  - kind: has_one
+    target: ExposureValue
+    via: huZone
+  - kind: has_one
+    target: ExposureValue
+    via: areaUnit
+  - kind: has_one
+    target: ExposureValue
+    via: floodDefenseElevationUnit
+  - kind: has_one
+    target: ExposureValue
+    via: rentalPropertyIdentifier
+  - kind: has_one
+    target: ExposureValue
+    via: mfdSubcategory
+  - kind: has_one
+    target: ExposureValue
+    via: contentLossTrigger
+  - kind: has_one
+    target: ExposureValue
+    via: useContentValue
+  - kind: belongs_to
+    target: Account
+    via: accountId
+  - kind: belongs_to
+    target: Location
+    via: locationId
+  - kind: belongs_to
+    target: Address
+    via: addressId
+- name: Policy
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 35
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: lob
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+  - kind: has_one
+    target: ExposureValue
+    via: status
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: structure
+  - kind: has_one
+    target: ExposureValue
+    via: coverageBase
+  - kind: has_one
+    target: ExposureValue
+    via: limitGU
+  - kind: has_many
+    target: PolicyCoverage
+    via: coverages
+  - kind: has_many
+    target: ReinsuranceCession
+    via: reinsuranceCessions
+  - kind: has_many
+    target: PolicyCondition
+    via: policyConditions
+  - kind: has_one
+    target: ExposureValue
+    via: newCauseOfLoss
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseDeductible
+  - kind: belongs_to
+    target: Account
+    via: accountId
+- name: PolicyInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 36
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: lob
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+  - kind: has_one
+    target: ExposureValue
+    via: status
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: structure
+  - kind: has_one
+    target: ExposureValue
+    via: coverageBase
+  - kind: has_one
+    target: ExposureValue
+    via: limitGU
+  - kind: has_many
+    target: PolicyCoverage
+    via: coverages
+  - kind: has_many
+    target: ReinsuranceCession
+    via: reinsuranceCessions
+  - kind: has_many
+    target: PolicyCondition
+    via: policyConditions
+  - kind: has_one
+    target: ExposureValue
+    via: newCauseOfLoss
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseDeductible
+  - kind: belongs_to
+    target: Account
+    via: accountId
+- name: BuildingAttribute
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 28
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: roofDeckType
+  - kind: has_one
+    target: ExposureValue
+    via: windowGlassdoorProtectionType
+  - kind: has_one
+    target: ExposureValue
+    via: windowGlassdoorThickness
+  - kind: has_one
+    target: ExposureValue
+    via: windowGlassdoorDoublepane
+  - kind: has_one
+    target: ExposureValue
+    via: windowGlassdoorProtectionAdequacy
+  - kind: has_one
+    target: ExposureValue
+    via: roofCoverType
+  - kind: has_one
+    target: ExposureValue
+    via: rooftopEquipment
+  - kind: has_one
+    target: ExposureValue
+    via: skylightImpactResistance
+  - kind: has_one
+    target: ExposureValue
+    via: roofSlope
+  - kind: has_one
+    target: ExposureValue
+    via: missileExposure
+  - kind: has_one
+    target: ExposureValue
+    via: windowGlassdoorGlassType
+  - kind: has_one
+    target: ExposureValue
+    via: claddingType
+- name: LocationWcDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 24
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: emergencyProtection
+  - kind: has_one
+    target: ExposureValue
+    via: hazardousMaterials
+  - kind: has_one
+    target: ExposureValue
+    via: wageRelativity
+  - kind: has_one
+    target: ExposureValue
+    via: riskManagement
+  - kind: has_one
+    target: ExposureValue
+    via: employeeDensity
+  - kind: has_one
+    target: ExposureValue
+    via: occupancyTypeScheme
+  - kind: has_one
+    target: ExposureValue
+    via: occupancyType
+  - kind: has_one
+    target: ExposureValue
+    via: shiftType
+  - kind: has_one
+    target: ExposureValue
+    via: excessComp
+- name: Pate
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 35
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: ExposureValue
+    via: treatyType
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: attachBasis
+  - kind: has_one
+    target: ExposureValue
+    via: attachLevel
+  - kind: has_many
+    target: LineOfBusiness
+    via: lobs
+  - kind: has_many
+    target: LossOccurrence
+    via: lossOccurrences
+  - kind: belongs_to
+    target: Treaty
+    via: treatyId
+- name: StepPolicy
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 19
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: lobDetId
+  - kind: has_one
+    target: ExposureValue
+    via: causeOfLoss
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: payoutFunctionId
+  - kind: has_one
+    target: ExposureValue
+    via: isPerRiskSubject
+  - kind: has_one
+    target: ExposureValue
+    via: subjectFunctionId
+  - kind: has_one
+    target: ExposureValue
+    via: coverageBase
+  - kind: has_one
+    target: ExposureValue
+    via: limitGU
+  - kind: belongs_to
+    target: Account
+    via: accountId
+- name: TreatyInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 34
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: ExposureValue
+    via: treatyType
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: attachBasis
+  - kind: has_one
+    target: ExposureValue
+    via: attachLevel
+  - kind: has_many
+    target: LineOfBusiness
+    via: lobs
+  - kind: has_many
+    target: LossOccurrence
+    via: lossOccurrences
+  - kind: belongs_to
+    target: Treaty
+    via: treatyId
+- name: TreatyWithAnalysisInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 33
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: ExposureValue
+    via: treatyType
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: attachBasis
+  - kind: has_one
+    target: ExposureValue
+    via: attachLevel
+  - kind: has_many
+    target: LineOfBusiness
+    via: lobs
+  - kind: has_many
+    target: LossOccurrence
+    via: lossOccurrences
+  - kind: belongs_to
+    target: Treaty
+    via: treatyId
+- name: TreatyWithAnalysisInfoV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 40
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: ExposureValue
+    via: treatyType
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: attachBasis
+  - kind: has_one
+    target: ExposureValue
+    via: attachLevel
+  - kind: has_many
+    target: LineOfBusiness
+    via: lobs
+  - kind: has_many
+    target: LossOccurrence
+    via: lossOccurrences
+  - kind: belongs_to
+    target: Treaty
+    via: treatyId
+- name: Treaty
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 31
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: ExposureValue
+    via: treatyType
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: attachBasis
+  - kind: has_one
+    target: ExposureValue
+    via: attachLevel
+  - kind: has_many
+    target: LineOfBusiness
+    via: lobs
+  - kind: has_many
+    target: LossOccurrence
+    via: lossOccurrences
+- name: AccountInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 26
+  relationships:
+  - kind: has_many
+    target: PolicyInput
+    via: policies
+  - kind: has_many
+    target: LocationInput
+    via: locations
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: UnderWriter
+    via: underwriter
+  - kind: has_one
+    target: Branch
+    via: branch
+  - kind: belongs_to
+    target: Link
+    via: linkId
+- name: LocationTrDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 68
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseSiteDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseCombinedDeductible
+  - kind: has_one
+    target: ExposureValue
+    via: trPackage
+  - kind: has_one
+    target: ExposureValue
+    via: trProtect
+  - kind: has_one
+    target: ExposureValue
+    via: trSalvage
+  - kind: has_one
+    target: ExposureValue
+    via: trSpecieStorage
+- name: Account
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 21
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: Producer
+    via: producer
+  - kind: has_one
+    target: UnderWriter
+    via: underwriter
+  - kind: has_one
+    target: Branch
+    via: branch
+  - kind: belongs_to
+    target: Link
+    via: linkId
+- name: BulkExposureInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships:
+  - kind: has_many
+    target: PortfolioInput
+    via: portfolios
+  - kind: has_many
+    target: AccountInput
+    via: accounts
+  - kind: has_many
+    target: LocationInput
+    via: locations
+  - kind: has_many
+    target: PolicyInput
+    via: policies
+  - kind: has_many
+    target: TreatyInput
+    via: treaties
+- name: MetricsOutput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 12
+  relationships:
+  - kind: has_one
+    target: MetricMetadata
+    via: metricMetadata
+  - kind: has_one
+    target: ModelSettings
+    via: modelSettings
+  - kind: has_many
+    target: MetricValue
+    via: metricValue
+  - kind: belongs_to
+    target: Workflow
+    via: workflowId
+  - kind: belongs_to
+    target: Portfolio
+    via: portfolioId
+- name: PolicyCondition
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 12
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: deductibleType
+  - kind: has_one
+    target: ExposureValue
+    via: conditionType
+  - kind: has_one
+    target: ExposureValue
+    via: parentCondition
+  - kind: has_many
+    target: PolicyConditionCriteria
+    via: policyConditionCriterias
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseDeductible
+- name: Address
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 65
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: area
+  - kind: has_one
+    target: ExposureValue
+    via: addressType
+  - kind: has_one
+    target: ExposureValue
+    via: country
+  - kind: has_one
+    target: ExposureValue
+    via: geoResolutionCode
+- name: LocationCoverage
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 18
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: label
+  - kind: has_one
+    target: ExposureValue
+    via: coverageModifier
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseDeductible
+- name: LossOccurrence
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: regionPeril
+  - kind: has_one
+    target: ExposureValue
+    via: radiusUnit
+  - kind: has_one
+    target: ExposureValue
+    via: multiLossOccurrence
+  - kind: belongs_to
+    target: Treaty
+    via: treatyId
+- name: ProcessInputV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 11
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+  - kind: has_one
+    target: GlobalAnalysisSettings
+    via: globalAnalysisSettings
+  - kind: belongs_to
+    target: EventRateScheme
+    via: eventRateSchemeId
+  - kind: belongs_to
+    target: OutputProfile
+    via: outputProfileId
+- name: AggregatePortfolio
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 8
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+- name: AggregatePortfolioSearchItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 9
+  relationships:
+  - kind: has_one
+    target: Cedant
+    via: cedant
+  - kind: has_one
+    target: ExposureValue
+    via: currency
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+- name: AnalysisGroupWithSimulation
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 13
+  relationships:
+  - kind: has_many
+    target: RegionPerilSimulation
+    via: regionPerilSimulationSet
+  - kind: has_many
+    target: RegionPerilSimulation
+    via: minimizedRegionPerilSimulationSet
+  - kind: has_one
+    target: Currency
+    via: currency
+- name: GlobalLocationInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: GeocodeOutput
+    via: address
+  - kind: has_one
+    target: CharacteristicsInput
+    via: characteristics
+  - kind: has_one
+    target: CoverageValuesInput
+    via: coverageValues
+- name: GroupingInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 13
+  relationships:
+  - kind: has_many
+    target: RegionPerilSimulation
+    via: regionPerilSimulationSet
+  - kind: has_many
+    target: RegionPerilSimulation
+    via: minimizedRegionPerilSimulationSet
+  - kind: has_one
+    target: Currency
+    via: currency
+- name: ImportMappingInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships:
+  - kind: has_many
+    target: ImportMappingItem
+    via: accountItems
+  - kind: has_many
+    target: ImportMappingItem
+    via: locationItems
+  - kind: has_many
+    target: ImportMappingItem
+    via: reinsuranceItems
+- name: ImportMappingOutput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: ImportMappingItem
+    via: accountItems
+  - kind: has_many
+    target: ImportMappingItem
+    via: locationItems
+  - kind: has_many
+    target: ImportMappingItem
+    via: reinsuranceItems
+- name: LocationBiDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: redundancy
+  - kind: has_one
+    target: ExposureValue
+    via: preparedness
+  - kind: has_one
+    target: ExposureValue
+    via: serviceInterruption
+- name: LocationInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: GeocodeOutput
+    via: address
+  - kind: has_one
+    target: CharacteristicsInput
+    via: characteristics
+  - kind: has_one
+    target: CoverageValuesInput
+    via: coverageValues
+- name: PateInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: Pate
+    via: insert
+  - kind: has_many
+    target: Pate
+    via: update
+  - kind: has_many
+    target: Pate
+    via: delete
+- name: PolicyCoverage
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 11
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+  - kind: has_one
+    target: ExposureValue
+    via: label
+  - kind: has_one
+    target: ExposureValue
+    via: isFranchiseDeductible
+- name: ProcessInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 10
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+  - kind: has_one
+    target: OutputProfile
+    via: outputSetting
+  - kind: belongs_to
+    target: EventRateScheme
+    via: eventRateSchemeId
+- name: WorkflowPlanProcessInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 9
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+  - kind: belongs_to
+    target: EventRateScheme
+    via: eventRateSchemeId
+  - kind: belongs_to
+    target: OutputProfile
+    via: outputProfileId
+- name: AccountMetrics
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 17
+  relationships:
+  - kind: has_one
+    target: Amount
+    via: totalInsuredValue
+  - kind: has_one
+    target: Account
+    via: linkedAccount
+- name: AlmProcessInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 13
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+  - kind: belongs_to
+    target: EventRateScheme
+    via: eventRateSchemeId
+- name: Assignment
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: Identifier
+    via: identifier
+  - kind: has_one
+    target: Expression
+    via: expression
+- name: BulkEdit
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 8
+  relationships:
+  - kind: has_one
+    target: Condition
+    via: editCondition
+  - kind: has_many
+    target: Assignment
+    via: updateConditions
+- name: Coordinate
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: geoResolutionCode
+  - kind: belongs_to
+    target: Location
+    via: locationId
+- name: DownloadResultsInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: LossDetails
+    via: lossDetails
+  - kind: belongs_to
+    target: Workflow
+    via: workflowId
+- name: InconsistentTreaties
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: TreatyWithAnalysisInfoV2
+    via: treaties
+  - kind: has_many
+    target: InconsistentField
+    via: inconsistentFields
+- name: LocationBuildingAttribute
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 25
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: esdbBuildingClass
+  - kind: has_one
+    target: ExposureValue
+    via: esdbOccupancyType
+- name: LocationCondition
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: belongs_to
+    target: Location
+    via: locationId
+  - kind: belongs_to
+    target: Condition
+    via: conditionId
+- name: MarginalImpactInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+  - kind: has_many
+    target: EventRateScheme
+    via: rateSchemes
+- name: MetaLinks
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Link
+    via: links
+  - kind: has_one
+    target: Meta
+    via: meta
+- name: MetricValue
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: Value
+    via: value
+  - kind: has_one
+    target: Bucket
+    via: bucket
+- name: PateBatchInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships:
+  - kind: belongs_to
+    target: Treaty
+    via: treatyId
+  - kind: belongs_to
+    target: Pate
+    via: pateId
+- name: PeriodLossItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 9
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: peril
+  - kind: has_one
+    target: ExposureValue
+    via: region
+- name: ReinsuranceCession
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 14
+  relationships:
+  - kind: has_one
+    target: FacReinsurer
+    via: facReinsurer
+  - kind: has_one
+    target: Treaty
+    via: treaty
+- name: SubmittedImportJob
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 15
+  relationships:
+  - kind: belongs_to
+    target: Bucket
+    via: bucketId
+  - kind: belongs_to
+    target: Portfolio
+    via: portfolioId
+- name: Workflow
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 14
+  relationships:
+  - kind: has_many
+    target: Job
+    via: jobs
+  - kind: has_many
+    target: JobMessage
+    via: messages
+- name: AccountSearchItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 27
+  relationships:
+  - kind: belongs_to
+    target: Account
+    via: accountId
+- name: AccountSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AccountSearchItem
+    via: searchItems
+- name: AddressInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 1
+  relationships:
+  - kind: has_one
+    target: GeocodeOutput
+    via: address
+- name: AggregateExposuresList
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships:
+  - kind: has_many
+    target: AlmErrorMessage
+    via: errorMessages
+- name: AggregateExposuresListSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AggregateExposuresList
+    via: searchItems
+- name: AggregatePortfolioSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AggregatePortfolioSearchItem
+    via: searchItems
+- name: AnalysesItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 39
+  relationships:
+  - kind: belongs_to
+    target: Job
+    via: jobId
+- name: AnalysisGroup
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships:
+  - kind: has_many
+    target: EventRateScheme
+    via: rateSchemes
+- name: AnalysisGroupSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AnalysisGroup
+    via: searchMatchingAnalysisGroupList
+- name: AnalysisRegionSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: RegionItem
+    via: searchItems
+- name: AnalysisRegionSearchResultV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: RegionItemV2
+    via: searchItems
+- name: AnalysisSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AnalysesItem
+    via: searchItems
+- name: AnalysisSearchResultV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AnalysesItemV2
+    via: searchItems
+- name: ArithmeticPair
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: Expression
+    via: expression
+- name: AuRiskScoreOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 5
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: BooleanPair
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: Condition
+    via: condition
+- name: BranchSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Branch
+    via: searchItems
+- name: CedantSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Cedant
+    via: searchItems
+- name: CompositeInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: LocationInput
+    via: location
+- name: ConvertResultCurrencyInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+- name: CountryMetrics
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: ExposureValue
+    via: country
+- name: CsRiskScoreOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: CustomBand
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Band
+    via: bands
+- name: DataBridgeDatabase
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 8
+  relationships:
+  - kind: belongs_to
+    target: ExposureSet
+    via: exposureSetId
+- name: DataBridgeDatabaseSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: DataBridgeDatabase
+    via: dataBridgeDatabases
+- name: DataBridgeRegisterInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships:
+  - kind: belongs_to
+    target: ExposureSet
+    via: exposureSetId
+- name: DataSourceSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: UserDatabaseV1
+    via: searchItems
+- name: DataSourceSearchResultV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: UserDatabaseV2
+    via: searchItems
+- name: DefaultAlmProfilesResponse
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: AlmProfileInfo
+    via: items
+- name: DomainItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships:
+  - kind: has_one
+    target: DomainSchema
+    via: domainSchema
+- name: DomainResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: DomainItem
+    via: domainItems
+- name: DomainSchema
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Field
+    via: fields
+- name: EPInterpolateResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: Result
+    via: result
+- name: EarthquakeHazardOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: EntityResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: EntityItem
+    via: entityItems
+- name: ErrorBody
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships:
+  - kind: has_many
+    target: Link
+    via: links
+- name: ErrorOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: ErrorItem
+    via: errors
+- name: EsdbOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 37
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: ExposureSet
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: GroupDetail
+    via: groups
+- name: ExposureSetSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: ExposureSet
+    via: searchItems
+- name: ExposureSummaryReportInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: CustomBand
+    via: customBands
+- name: FacultativeSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Facultative
+    via: searchItems
+- name: FemaOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 13
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: FlDepthBaseOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: FlSusceptibilityOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 4
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: GenericInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: LocationInput
+    via: location
+- name: GeoHazInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: LayerInfo
+    via: layers
+- name: GlobalNuclearD2TOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: GlobalVolcanoD2TOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: HurricaneHazardOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 5
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: ImportSourceFileResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships:
+  - kind: has_many
+    target: ImportSourceFileItem
+    via: items
+- name: Job
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 12
+  relationships:
+  - kind: belongs_to
+    target: Workflow
+    via: workflowId
+- name: LineOfBusinessSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: LineOfBusiness
+    via: searchItems
+- name: LocationAAL
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships:
+  - kind: belongs_to
+    target: Location
+    via: locationId
+- name: LocationAALResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships:
+  - kind: has_many
+    target: LocationAAL
+    via: locationAALs
+- name: LocationSearchItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: Location
+    via: location
+- name: LocationSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: LocationSearchItem
+    via: searchItems
+- name: LossCostBaseOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 4
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: MmiBaseOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: MmiOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 8
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: ModelSettings
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships:
+  - kind: has_one
+    target: Currency
+    via: currency
+- name: OutputProfile
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: MetricRequest
+    via: metricRequests
+- name: PateSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Pate
+    via: searchMatchingPateList
+- name: PolicyConditionSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: PolicyCondition
+    via: searchItems
+- name: PolicySearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Policy
+    via: policies
+- name: PortfolioInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 9
+  relationships:
+  - kind: has_many
+    target: AccountInput
+    via: accounts
+- name: PortfolioSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: PortfolioSearchItem
+    via: searchItems
+- name: ProducerSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Producer
+    via: searchItems
+- name: RDMImportInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 10
+  relationships:
+  - kind: belongs_to
+    target: ExposureSet
+    via: exposureSetId
+- name: RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships:
+  - kind: has_one
+    target: RMS.EnterpriseIntegrationHub.Contracts.CidrEntry
+    via: cidrEntry
+- name: RMS.EnterpriseIntegrationHub.Contracts.Cluster
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: RMS.EnterpriseIntegrationHub.Contracts.CidrEntry
+    via: cidrEntries
+- name: RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 4
+  relationships:
+  - kind: has_many
+    target: RMS.EnterpriseIntegrationHub.Contracts.Group
+    via: filteredResult
+- name: RMS.EnterpriseIntegrationHub.Contracts.GroupOperation
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: RMS.EnterpriseIntegrationHub.Contracts.GroupAction
+    via: groupAction
+- name: RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships:
+  - kind: has_many
+    target: RMS.EnterpriseIntegrationHub.Contracts.GroupOperation
+    via: groupOperations
+- name: RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships:
+  - kind: has_many
+    target: RMS.EnterpriseIntegrationHub.Contracts.GroupOperation
+    via: groupOperations
+- name: RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: RMS.EnterpriseIntegrationHub.Contracts.CidrEntry
+    via: addCidrEntries
+- name: RegionPerilSimulation
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 9
+  relationships:
+  - kind: belongs_to
+    target: EventRateScheme
+    via: eventRateSchemeId
+- name: ReportListSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: ReportListSearchItem
+    via: searchItems
+- name: ReportSearchItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 9
+  relationships:
+  - kind: has_many
+    target: ReportDetails
+    via: reportDetails
+- name: Result
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Values
+    via: values
+- name: RiskScoreBaseOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 5
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: SecondaryModifierResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: SecondaryModifierItem
+    via: secondaryModifierItem
+- name: SimulateELTToPLTInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships:
+  - kind: belongs_to
+    target: EventRateScheme
+    via: eventRateSchemeId
+- name: StepPolicySearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: StepPolicy
+    via: stepPolicies
+- name: TrRiskScoreOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 4
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: TreatySearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Treaty
+    via: searchMatchingTreatyList
+- name: USSubsidenceOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 4
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UnderwriterSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: UnderWriter
+    via: searchItems
+- name: UsD2FireStationOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UsD2InnerCoastOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UsD2LandfillOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UsEqFaultOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 4
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UsTrD2TOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UsWfRiskScoreOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: UserDatabaseV1
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 11
+  relationships:
+  - kind: belongs_to
+    target: ExposureSet
+    via: exposureSetId
+- name: UserDatabaseV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 10
+  relationships:
+  - kind: belongs_to
+    target: ExposureSet
+    via: exposureSetId
+- name: UserDefinedWorkflow
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships:
+  - kind: has_many
+    target: OperationV1
+    via: operations
+- name: WindpoolZoneOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 2
+  relationships:
+  - kind: has_one
+    target: WarningOutput
+    via: warnings
+- name: WorkflowSearchResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships:
+  - kind: has_many
+    target: Workflow
+    via: workflows
+- name: AccountFileInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: AggregatePortfolioCountryMetrics
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: AggregatePortfolioFlatFileMapping
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships: []
+- name: AggregatePortfolioMetrics
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 10
+  relationships: []
+- name: AlmErrorMessage
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: AlmProfileInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 14
+  relationships: []
+- name: Amount
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: AnalysisCurrency
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: AnalysisSummaryReportInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: Band
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: BatchRequest
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: Branch
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: CAWildfireOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 5
+  relationships: []
+- name: Cedant
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: CharacteristicsInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 8
+  relationships: []
+- name: ClimateChangeInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: Condition
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: ConvertEventInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: CopyAccountInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: CopyAggregatePortfolioInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: CopyPolicyInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: CopyPortfolioInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: CopyStepPolicyInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: CopyTreatyInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: CoverageValuesInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 3
+  relationships: []
+- name: Currency
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: DomainReference
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: EdmImportInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: EdmRequest
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: EntityItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: EntityMeta
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: ErrorItem
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 2
+  relationships: []
+- name: ErrorMessage
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: EventLossItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 15
+  relationships: []
+- name: EventRateScheme
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships: []
+- name: ExportInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: ExportOptions
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: ExposureMetricRequest
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: ExposureValue
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: Expression
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: FacReinsurer
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: Facultative
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: Field
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: FileInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: FlDepthInlandOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 14
+  relationships: []
+- name: FlDepthInlandProximityOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 1
+  relationships: []
+- name: FlDepthInlandSurgeOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 28
+  relationships: []
+- name: FlDepthInlandSurgeProximityOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 1
+  relationships: []
+- name: GeocodeInput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 18
+  relationships: []
+- name: GlobalAnalysisSettings
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: GlobalFlDepthInlandOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships: []
+- name: GroupDetail
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: ImportMappingItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: ImportSourceFileItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: InconsistentField
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: JobMessage
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: KeyLossItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: KeyValueStore
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: LayerInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: LineOfBusiness
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: Link
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: LocationConditionValidationInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: LossDetails
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: MapPerspectiveInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: Meta
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: MetricMetadata
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: MetricRequest
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: MetricsResult
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: OperationV1
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: PatchExposureSetReq
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: PolicyConditionCriteria
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships: []
+- name: PolicyConditionMetrics
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 3
+  relationships: []
+- name: Portfolio
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: PortfolioAccountsInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: PortfolioConditionCriteria
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 7
+  relationships: []
+- name: PortfolioFilteredAccountsInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: PortfolioMetrics
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 11
+  relationships: []
+- name: PortfolioSearchItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 13
+  relationships: []
+- name: Producer
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: QueryEntity
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: RMS.BackgroundJobs.JobDetails
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.CidrEntry
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 3
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 3
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.Database
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 10
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.Group
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.Login
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 4
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 2
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.SqlInstance
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 10
+  relationships: []
+- name: RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  properties: 1
+  relationships: []
+- name: ReferenceTableAdmin1Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 8
+  relationships: []
+- name: ReferenceTableAdmin2Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 11
+  relationships: []
+- name: ReferenceTableAdmin3Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 14
+  relationships: []
+- name: ReferenceTableAdmin4Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 17
+  relationships: []
+- name: ReferenceTableCityOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 17
+  relationships: []
+- name: ReferenceTableCountryOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 5
+  relationships: []
+- name: ReferenceTableLocationCodeOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 18
+  relationships: []
+- name: ReferenceTablePostalCodeOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 18
+  relationships: []
+- name: ReferenceTableZone1Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships: []
+- name: ReferenceTableZone3Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships: []
+- name: ReferenceTableZone4Output
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 7
+  relationships: []
+- name: RegionItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 4
+  relationships: []
+- name: RegionItemV2
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 12
+  relationships: []
+- name: RenameAnalysisInput
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: ReportDetails
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: ReportInfoRequest
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: ReportListSearchItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 8
+  relationships: []
+- name: S3Bucket
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 5
+  relationships: []
+- name: S3UploadHelper
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: SampledLossItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 6
+  relationships: []
+- name: SecondaryModifierItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: ServerInfo
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 12
+  relationships: []
+- name: StatisticsItem
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 15
+  relationships: []
+- name: USWildfireOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 5
+  relationships: []
+- name: USWildfireSupplementalOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 15
+  relationships: []
+- name: UnderWriter
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: UsWindSpeedOutput
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 4
+  relationships: []
+- name: Value
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: ValueObject
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 1
+  relationships: []
+- name: Values
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  properties: 2
+  relationships: []
+- name: WarningItem
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  properties: 2
+  relationships: []

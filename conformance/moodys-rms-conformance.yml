@@ -1,0 +1,114 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/moodys-rms-risk-modeler-openapi.yml, openapi/moodys-rms-data-bridge-openapi.json,
+  openapi/moodys-rms-location-intelligence-openapi.yaml, https://developer.rms.com/platform/docs/policies
+note: >-
+  Standards posture for Moody's RMS. This is a catastrophe-risk data provider, so the standards that
+  matter are the exposure-data standards (EDM/RDM, RDOS, CEDE, OED), not the policy-transaction standards
+  (ACORD) that govern carriers and agency systems. Cross-cutting web-API standards conformance is derived
+  from the three published OpenAPI definitions and the provider's published policies.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: All three published definitions declare openapi 3.0.1.
+- id: openapi-3.1
+  conforms: false
+  evidence: No 3.1 definition is published.
+- id: rfc9110-http-semantics
+  conforms: true
+  evidence: >-
+    The HTTP Status Codes reference explicitly documents Platform API status-code use against RFC 9110.
+  docs: https://developer.rms.com/platform/docs/http-status-codes
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are returned as a vendor envelope {code, message, logId} with media type application/json.
+    No application/problem+json response is declared in any published spec.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: Deprecation is signalled with the generic HTTP Warning header, not Sunset or Deprecation.
+- id: idempotency-key
+  conforms: true
+  evidence: >-
+    POST and PATCH operations accept an idempotency key in the x-rms-requestid header; the key is a UUID
+    the client generates.
+  docs: https://developer.rms.com/platform/docs/idempotent-requests
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme is declared in any published spec. The single scheme across all three is
+    RMS_Auth (apiKey, header, Authorization). Docs describe an access-token alternative but publish no
+    authorization or token endpoint, no flows and no scopes.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on developer.rms.com and 403 on api-use1.rms.com.
+- id: mutual-tls
+  conforms: false
+  evidence: No mutualTLS securityScheme is declared and none is documented.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt is served on developer.rms.com, api-use1.rms.com or www.moodys.com.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    No event, webhook or streaming surface is published. Long-running work uses a polled job model
+    instead. A webhook and notification service appear as open engineering tickets in the 2026.07.c
+    changelog but are not shipped or documented.
+- id: json-api
+  conforms: false
+  evidence: Responses are plain application/json resource objects, not JSON:API documents.
+- id: odata
+  conforms: false
+  evidence: >-
+    Filtering uses a bespoke q/filter expression grammar with =, !=, >, <, AND, OR, IN, NOT IN, LIKE,
+    NOT LIKE — not OData $filter.
+- id: graphql
+  conforms: false
+  evidence: >-
+    An ExposureIQ GraphQL API exists internally, but the provider's Support Policy explicitly names it as
+    an unsupported, undocumented internal API. No endpoint or SDL is published.
+- id: grpc-protobuf
+  conforms: false
+  evidence: No .proto definitions are published in the RMS GitHub organization or on the portal.
+- id: model-context-protocol
+  conforms: true
+  evidence: >-
+    The Platform MCP Server (irp-integration-mcp) is a published, hosted MCP server over Streamable HTTP
+    with a documented 16-tool surface, shipped in release 2026.07.c.
+  docs: https://developer.rms.com/platform/docs/platform-mcp-server-overview
+- id: acord
+  conforms: false
+  evidence: >-
+    No ACORD message surface. Exactly one ACORD reference exists across 780 operations — the Location
+    Intelligence field rmsGeocodingResolutionCode, described as indicating the geocoding resolutions
+    supported by the ACORD standard. That is a code-list alignment, not an ACORD transaction surface.
+- id: rdos-risk-data-open-standard
+  conforms: true
+  evidence: >-
+    RMS authored and published the Risk Data Open Standard, the open exposure and results data standard
+    the Intelligent Risk Platform is built around.
+- id: edm-rdm
+  conforms: true
+  evidence: >-
+    EDM (Exposure Data Module) and RDM (Results Data Module) databases are the platform's native exchange
+    format — 358 EDM and 28 RDM references in the Risk Modeler spec alone, with dedicated upload,
+    download, import, export and registration operations.
+- id: cede
+  conforms: true
+  evidence: The Import API documents a CEDE import path for the CEDE cat-exposure schema.
+- id: oed-open-exposure-data
+  conforms: true
+  evidence: Documented interoperability with the OED cat-exposure schema on import.
+- id: apache-parquet
+  conforms: true
+  evidence: >-
+    Import and Export APIs read and write Apache Parquet for exposure variations and RDM export
+    (releases 2025.11.b and 2026.03.b).
+compliance:
+  published: false
+  note: >-
+    No developer-facing trust center, certification list (SOC 2 / ISO 27001 / PCI DSS / HIPAA / FedRAMP)
+    or compliance page was found for the Moody's RMS developer surface. trust.moodys.com does not
+    resolve and www.moodys.com/trust resolves to the site error page. The only published posture is the
+    Security Policy section of the Platform API policies page.
+  security_policy: https://developer.rms.com/platform/docs/policies

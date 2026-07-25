@@ -225,9 +225,34 @@ findings:
       - name: Location Intelligence (downloadable archive)
         url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
         httpStatus: 200
+  mcp:
+    present: true
+    found: '2026-07-25'
+    server: irp-integration-mcp
+    name: Platform MCP Server
+    transport: Streamable HTTP
+    released: 2026.07.c (2026-06-30)
+    endpoints:
+      - https://api-use1.rms.com/platform/integration/v1/mcp
+      - https://api-euw1.rms.com/platform/integration/v1/mcp
+    toolsPublished: 16
+    toolsListStatus: 401
+    docs:
+      - https://developer.rms.com/platform/docs/platform-mcp-server-overview
+      - https://developer.rms.com/platform/docs/platform-mcp-server-tools
+      - https://developer.rms.com/platform/docs/platform-mcp-server-integration
+    note: >-
+      Missed in the first review round. Moody's RMS ships a real, hosted, documented MCP server that
+      turns the Platform API specs, docs, and code samples into a queryable knowledge graph. Fifteen of
+      its sixteen tools are graph/discovery/session meta-tools; only execute-api dispatches to REST, and
+      it can reach any Platform operation the caller's role allows. Authentication is the same tenant
+      API key at Moody's gateway, plus an IRP Agentic Tools User role. Anonymous tools/list returns 401,
+      so the tool list here comes from the published Platform MCP Server Tools reference.
   graphql:
     present: false
-    note: No GraphQL endpoint or SDL is documented.
+    note: >-
+      No public GraphQL endpoint or SDL. An ExposureIQ GraphQL API exists internally, but the provider's
+      own Support Policy names it as an unsupported, undocumented internal API.
   grpc:
     present: false
     note: No .proto files are published.

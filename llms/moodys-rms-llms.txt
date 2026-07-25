@@ -1,0 +1,78 @@
+# Moody's RMS
+
+> Moody's RMS is the catastrophe risk modeling and risk-data business of Moody's Corporation. It sells peril models (hurricane, earthquake, flood, wildfire, severe convective storm, terror, cyber, pandemic) and the exposure-data infrastructure that property-and-casualty insurers, reinsurers, brokers and capital-market participants use to price, accumulate and transfer catastrophe risk. Its products run on the cloud-native Intelligent Risk Platform, which fronts Risk Modeler, ExposureIQ, UnderwriteIQ, TreatyIQ and Risk Data Exchange. The developer portal is public and readable without a login, but the APIs are tenant-scoped: API keys are issued only to licensed Intelligent Risk Platform tenants, so there is no self-serve signup and no sandbox.
+> Generated 2026-07-25 by API Evangelist from https://github.com/api-evangelist/moodys-rms
+
+## APIs
+
+- [Platform APIs](https://developer.rms.com/platform): ~24 REST API families that automate portfolio management, underwriting and risk-transfer workflows across Risk Modeler, UnderwriteIQ, ExposureIQ, TreatyIQ and Risk Data Exchange. No downloadable OpenAPI is published.
+- [Risk Modeler API](https://developer.rms.com/risk-modeler): the Risk Modeler 2.0 public API — 280 paths / 383 operations covering exposure and EDM/RDM management, accounts and portfolios, model profiles, analysis runs, results and metrics, imports, exports, geohazard and job orchestration. Base URL https://api-use1.rms.com/riskmodeler
+- [Data Bridge API](https://developer.rms.com/databridge): 21 paths / 32 operations administering database connections and moving exposure and results data in and out of the platform. Base URL https://api-use1.rms.com/databridge
+- [Location Intelligence API](https://developer.rms.com/location-intelligence): 366 paths / 365 operations for address geocoding and per-location peril and hazard risk lookups. Base URL https://api-use1.rms.com/li
+- [Climate On Demand API](https://developer.rms.com/climate-on-demand): physical climate risk data as an API — CoD Real Assets Stn, CoD Real Assets Pro, CoD Corporates, CoD Spatial Areas. Postman collection only.
+
+## Specs
+
+- [Risk Modeler OpenAPI 3.0.1](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/openapi/moodys-rms-risk-modeler-openapi.yml)
+- [Data Bridge OpenAPI 3.0.1](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/openapi/moodys-rms-data-bridge-openapi.json)
+- [Location Intelligence OpenAPI 3.0.1](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/openapi/moodys-rms-location-intelligence-openapi.yaml)
+- [Vendor source repository](https://github.com/RMS/rms-developers): the RMS developer-assets repo all three definitions were harvested from.
+
+## Agent surface
+
+- [Platform MCP Server overview](https://developer.rms.com/platform/docs/platform-mcp-server-overview): hosted MCP server `irp-integration-mcp`, shipped in release 2026.07.c.
+- [Platform MCP Server tools](https://developer.rms.com/platform/docs/platform-mcp-server-tools): 16 tools in 5 categories — Knowledge Graph, API Discovery, API Execution, Skills (beta), Session Management.
+- [Platform MCP Server configuration](https://developer.rms.com/platform/docs/platform-mcp-server-integration): endpoints https://api-use1.rms.com/platform/integration/v1/mcp (US) and https://api-euw1.rms.com/platform/integration/v1/mcp (EU).
+- [MCP manifest](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/mcp/moodys-rms-mcp.yml)
+- [Tool crosswalk](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/mcp/moodys-rms-tool-crosswalk.yml)
+- [Agent skills index](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/skills/_index.yml)
+
+## Docs
+
+- [Developer portal](https://developer.rms.com/)
+- [Get started](https://developer.rms.com/platform/docs/get-started)
+- [Introduction to Platform APIs](https://developer.rms.com/platform/docs/introduction)
+- [Authentication and authorization](https://developer.rms.com/platform/docs/authentication-and-authorization)
+- [Access controls](https://developer.rms.com/platform/docs/access-control)
+- [Idempotent requests](https://developer.rms.com/platform/docs/idempotent-requests)
+- [Filtering and pagination](https://developer.rms.com/platform/docs/filtering-and-pagination)
+- [HTTP status codes](https://developer.rms.com/platform/docs/http-status-codes)
+- [Custom error codes](https://developer.rms.com/platform/docs/custom-error-codes)
+- [Policies — security, versioning, deprecation, support](https://developer.rms.com/platform/docs/policies)
+- [Changelog](https://developer.rms.com/platform/changelog)
+- [Status page](https://status.rms.com)
+- [Postman workspace](https://www.postman.com/rms-developers/rms-developers/overview)
+
+## Conventions
+
+- Auth: API key (or session access token) in the `Authorization` header, no bearer prefix. Keys are issued by a tenant administrator; there is no self-serve signup.
+- Hosts: regional — `api-use1.rms.com` (Americas) or `api-euw1.rms.com` (Europe).
+- Idempotency: pass a client-generated UUID in the `x-rms-requestid` header on POST and PATCH.
+- Pagination: `limit` + `offset`; filtering via `q`/`filter` with `=`, `!=`, `>`, `<`, AND, OR, IN, NOT IN, LIKE, NOT LIKE; ordering via `sort`. Exposure calls also carry `datasource` naming the EDM.
+- Async: everything expensive is a polled job — no webhooks, no events, no AsyncAPI.
+- Errors: vendor envelope `{code, message, logId}` in `application/json`; 2,125 documented codes across 106 domain prefixes. Not RFC 9457.
+- Versioning: URI path (`/v1/`, `/v2/`); calendar releases named `YYYY.MM.<letter>`. A superseded version is deprecated immediately and stays live for one year, announced in a `Warning` header.
+
+## Artifacts
+
+- [apis.yml](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/apis.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/authentication/moodys-rms-authentication.yml)
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/conventions/moodys-rms-conventions.yml)
+- [Error-code registry](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/errors/moodys-rms-error-codes.yml)
+- [Problem types](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/errors/moodys-rms-problem-types.yml)
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/lifecycle/moodys-rms-lifecycle.yml)
+- [Changelog](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/changelog/moodys-rms-changelog.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/conformance/moodys-rms-conformance.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/data-model/moodys-rms-data-model.yml)
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/security/moodys-rms-domain-security.yml)
+- [Agentic access](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/agentic-access/moodys-rms-agentic-access.yml)
+- [Well-known probe record](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/well-known/moodys-rms-well-known.yml)
+
+## Not published
+
+- No OpenAPI for the Platform APIs or Climate On Demand — rendered reference pages plus Postman collections only.
+- No AsyncAPI, webhooks, event catalog or streaming surface. Long-running work is polled.
+- No GraphQL SDL (an ExposureIQ GraphQL API exists but the provider names it unsupported and undocumented). No gRPC/Protobuf.
+- No first-party SDKs or CLI on npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist or crates.io.
+- No `/.well-known/` documents, no `llms.txt`, no security.txt, no bug-bounty or vulnerability-disclosure program, no developer trust center.
+- No sandbox, free tier or self-serve signup.

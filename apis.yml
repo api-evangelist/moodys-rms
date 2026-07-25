@@ -45,6 +45,7 @@ apis:
     Exchange Data, Reference Data, Risk Data, Admin Data, Tenant Data, Security, STEP, and Variation. No downloadable
     OpenAPI definition was published for this family at the time of review.
   humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
   tags:
   - Platform
   - Exposure Management
@@ -54,6 +55,10 @@ apis:
     url: https://developer.rms.com/platform/docs
   - type: APIReference
     url: https://developer.rms.com/platform/reference
+  - type: GettingStarted
+    url: https://developer.rms.com/platform/docs/get-started
+  - type: ChangeLog
+    url: https://developer.rms.com/platform/changelog
   - type: PostmanCollection
     url: https://www.postman.com/rms-developers/rms-developers/overview
 - aid: moodys-rms:risk-modeler-api
@@ -76,6 +81,10 @@ apis:
     url: https://developer.rms.com/risk-modeler/reference
   - type: OpenAPI
     url: openapi/moodys-rms-risk-modeler-openapi.yml
+  - type: Overlay
+    url: overlays/moodys-rms-risk-modeler-overlay.yaml
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
   - type: PostmanCollection
     url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
 - aid: moodys-rms:data-bridge-api
@@ -98,6 +107,10 @@ apis:
     url: https://developer.rms.com/databridge/reference
   - type: OpenAPI
     url: openapi/moodys-rms-data-bridge-openapi.json
+  - type: Overlay
+    url: overlays/moodys-rms-data-bridge-overlay.yaml
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
 - aid: moodys-rms:location-intelligence-api
   name: Moody's RMS Location Intelligence API
   description: >-
@@ -118,6 +131,10 @@ apis:
     url: https://developer.rms.com/location-intelligence/reference
   - type: OpenAPI
     url: openapi/moodys-rms-location-intelligence-openapi.yaml
+  - type: Overlay
+    url: overlays/moodys-rms-location-intelligence-overlay.yaml
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
   - type: PostmanCollection
     url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
 - aid: moodys-rms:climate-on-demand-api
@@ -137,7 +154,79 @@ apis:
     url: https://developer.rms.com/climate-on-demand
   - type: PostmanCollection
     url: https://www.postman.com/rms-developers/workspace/cod/collection/21620294-578a748b-78a6-4a3a-b4b3-5c5380b7848e
+- aid: moodys-rms:platform-mcp-server
+  name: Moody's RMS Platform MCP Server
+  description: >-
+    A hosted Model Context Protocol server, irp-integration-mcp, released with Intelligent Risk Platform
+    version 2026.07.c on 2026-06-30. It transforms the Platform API specifications, documentation, and
+    code samples into a single queryable knowledge graph so that tenant AI applications can discover and
+    implement catastrophe modeling and reinsurance workflows. Sixteen tools ship across five categories —
+    Knowledge Graph, API Discovery, API Execution, Skills (beta), and Session Management — but only one
+    of them, execute-api, actually calls Platform API operations; the rest reason over the graph. The
+    transport is Streamable HTTP on two regional endpoints, and every request is authenticated at
+    Moody's API gateway by an Intelligent Risk Platform API key whose user group carries the IRP Agentic
+    Tools User role. Supported hosts include Claude Code, Claude Desktop, Cursor, Devin, JetBrains AI
+    Assistant, and Visual Studio Code. All tenant data stays on the Intelligent Risk Platform.
+  humanURL: https://developer.rms.com/platform/docs/platform-mcp-server-overview
+  baseURL: https://api-use1.rms.com/platform/integration/v1/mcp
+  tags:
+  - MCP
+  - Agents
+  - Catastrophe Modeling
+  properties:
+  - type: MCPServer
+    url: mcp/moodys-rms-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/moodys-rms-tool-crosswalk.yml
+  - type: Documentation
+    url: https://developer.rms.com/platform/docs/platform-mcp-server-overview
+  - type: APIReference
+    url: https://developer.rms.com/platform/docs/platform-mcp-server-tools
+  - type: GettingStarted
+    url: https://developer.rms.com/platform/docs/platform-mcp-server-integration
 common:
+- type: MCPServer
+  url: mcp/moodys-rms-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/moodys-rms-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Idempotency
+  url: conventions/moodys-rms-conventions.yml
+- type: Conventions
+  url: conventions/moodys-rms-conventions.yml
+- type: ErrorCatalog
+  url: errors/moodys-rms-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/moodys-rms-lifecycle.yml
+- type: StatusPage
+  url: https://status.rms.com
+- type: Deprecation
+  url: https://developer.rms.com/platform/docs/policies
+- type: ChangeLog
+  url: changelog/moodys-rms-changelog.yml
+- type: Conformance
+  url: conformance/moodys-rms-conformance.yml
+- type: DataModel
+  url: data-model/moodys-rms-data-model.yml
+- type: LLMsTxt
+  url: llms/moodys-rms-llms.txt
+- type: GettingStarted
+  url: https://developer.rms.com/platform/docs/get-started
+- type: Support
+  url: https://support.rms.com/o/html-doc/OLH_Content/SCGuide_Help_Center/Content/SCGuide/Welcome.htm
+- type: TermsOfService
+  url: https://www.moodys.com/web/en/us/legal/terms-of-use.html
+- type: PrivacyPolicy
+  url: https://www.moodys.com/web/en/us/legal/privacy-policy.html
+- type: Postman
+  url: https://www.postman.com/rms-developers/rms-developers/overview
+- type: AgenticAccess
+  url: agentic-access/moodys-rms-agentic-access.yml
+- type: DomainSecurity
+  url: security/moodys-rms-domain-security.yml
+- type: Authentication
+  url: authentication/moodys-rms-authentication.yml
 - type: Website
   url: https://www.moodys.com/web/en/us/who-we-serve/insurance.html
 - type: Documentation

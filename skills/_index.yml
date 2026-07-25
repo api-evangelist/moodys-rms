@@ -1,0 +1,38 @@
+generated: '2026-07-25'
+method: generated
+source: openapi/moodys-rms-risk-modeler-openapi.yml, openapi/moodys-rms-data-bridge-openapi.json,
+  openapi/moodys-rms-location-intelligence-openapi.yaml, mcp/moodys-rms-mcp.yml,
+  conventions/moodys-rms-conventions.yml, errors/moodys-rms-error-codes.yml
+note: >-
+  Packaged agent operating instructions for the four marquee Moody's RMS flows. Every operationId
+  referenced was verified verbatim against the published OpenAPI definitions; every MCP tool name was
+  verified against the provider's published Platform MCP Server Tools reference.
+skills:
+- file: moodys-rms-import-and-geocode-exposure.md
+  name: Import and geocode exposure into an EDM
+  api: openapi/moodys-rms-risk-modeler-openapi.yml
+  operations: [searchEdms, getUrlForUpload, CreateUploadTask, createJob, getWorkflowv1, searchPortfoliosv2,
+    createPortfoliov2, managePortfolioAccountsv2, geohazPortfoliov2, validateAccountv2]
+- file: moodys-rms-run-catastrophe-analysis.md
+  name: Run a catastrophe analysis and read the results
+  api: openapi/moodys-rms-risk-modeler-openapi.yml
+  operations: [searchPortfoliosv2, getPortfoliov2, processPortfolioV2, processAggregatePortfoliov2,
+    getWorkflowv1, getPortfolioAnalysesResultsV2, getAnalysesResultsv2, getEPMetricsByAnalysisv2,
+    getEventLossTableResultsv2, getPeriodLossTableResultsv2, getStatisticsResultsv2, getAALMetricsv2,
+    getMetrics, runRenameAnalysisv2]
+- file: moodys-rms-move-databases-with-data-bridge.md
+  name: Move EDM and RDM databases with Data Bridge
+  api: openapi/moodys-rms-data-bridge-openapi.json
+  operations: [getinstances, getinstance, createdatabase, getdatabasesbyinstance, getdatabasebyinstance,
+    getuploaddirectoryuri, initiatemultipartupload, geturiformultipartupload, uploaddatapartbynumber,
+    completemultipartupload, importdatabase, exportdatabase, getjobstatus, getjobdetails, getclientip,
+    getipaddresses, updateacl, identifyencryptedconnection]
+- file: moodys-rms-geocode-and-look-up-hazard.md
+  name: Geocode an address and look up peril hazard
+  api: openapi/moodys-rms-location-intelligence-openapi.yaml
+  operations: [composite, genericLookup]
+- file: moodys-rms-connect-agent-to-platform-mcp.md
+  name: Connect an agent to the Platform MCP Server
+  api: mcp/moodys-rms-mcp.yml
+  operations: [graph-suggest-workflow, graph-validate-chain, search-api-spec, get-operation-spec,
+    get-workflow, execute-api, set-variable, get-variables]

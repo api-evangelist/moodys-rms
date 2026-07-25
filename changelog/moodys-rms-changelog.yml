@@ -1,0 +1,338 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.rms.com/platform/changelog
+docs: https://developer.rms.com/platform/changelog
+scheme: calendar-release
+scheme_note: Platform releases are named YYYY.MM.<letter> (for example 2026.07.c). Individual API operations carry an independent URI path version (/v1/, /v2/). Releases before 2025.05 were titled by month
+  name.
+current_version: 2026.07.c
+current_version_date: '2026-06-30'
+per_product_changelogs:
+- product: Platform APIs
+  url: https://developer.rms.com/platform/changelog
+- product: Risk Modeler API
+  url: https://developer.rms.com/risk-modeler/changelog
+- product: Data Bridge API
+  url: https://developer.rms.com/databridge/changelog
+- product: Location Intelligence API
+  url: https://developer.rms.com/location-intelligence/changelog
+- product: Climate On Demand API
+  url: https://developer.rms.com/climate-on-demand/changelog
+counts:
+  entries_published: 29
+  entries_captured: 29
+entries:
+- version: 2026.07.c
+  date: '2026-06-30'
+  slug: 202607b
+  url: https://developer.rms.com/platform/changelog/202607b
+  summary: The 2026.07.c release introduces the Platform MCP Server, hazard curve details, and updates to accumulation profiles.
+  highlights:
+  - The Platform MCP Server enables Intelligent Risk Platform tenants to discover and implement catastrophe modeling and reinsurance workflows.
+  - The Accumulation API now returns detail information about accumulation profiles.
+  - The Model API now supports hazard curve analysis. A hazard curve analysis is a type of probabilistic analysis that produce cumulative distributions curves, which show the probability that a specific
+    hazard (e.g. earthquake ground shaking) will exceed a certain amount at a specific location.
+  - The Risk Data API now return hazard curve data the HD Earthquake Hazard Curve analysis.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2026.06.c
+  date: '2026-05-11'
+  slug: 202606a
+  url: https://developer.rms.com/platform/changelog/202606a
+  summary: The 2026.06.c release adds enhancements to the Copy API, Risk Data API, and Tenant Data API.
+  highlights:
+  - The Create Copy Job operation now supports _deep copying_ by which copied portfolios are linked to _copies_ of the child accounts of the original portfolio.
+  - The EDM Batch Edit operation now enables clients to add or update location conditions and policy conditions without the need to specify a parent `location` or `policy`. Previously, updating either required
+    that the updates be nested in a parent location or policy.
+  - The Get EP Metrics operation now supports the optional `epType` query parameter that enables the client to filter EP metrics by exceedence probability metric type.
+  - The Search VPN Connection operation now returns the operational status of the VPN connection.
+  mentions_deprecation: true
+  mentions_breaking: false
+- version: 2026.04.d
+  date: '2026-04-03'
+  slug: 202604d
+  url: https://developer.rms.com/platform/changelog/202604d
+  summary: The 2026.04.d release adds enhancements to the Admin Data API, Risk Data API, and Tenant Data API.
+  highlights:
+  - The Admin Data API now supports operations for managing databases. New operation support moving databases between servers, reorganizing database indexes, updating database statistics, shrinking databases,
+    archiving and deleting databases.
+  - The Risk Data API introduces improvements to location building attribute data.
+  - The Tenant Data API now supports operations for managing VPN connections.
+  mentions_deprecation: true
+  mentions_breaking: false
+- version: 2026.03.b
+  date: '2026-02-12'
+  slug: 202603b
+  url: https://developer.rms.com/platform/changelog/202603b
+  summary: The 2026.03.b release adds the Peril Converter API and enhancements to the Accumulations API, Export API, and Risk Data API.
+  highlights:
+  - The Peril Converter API enables Intelligent Risk Platform tenants to update peril coverage (peril-specific policies and location coverages) in bulk for the location exposures associated with account
+    or portfolio resources.
+  - The Accumulations API now supports a batch process that enables tenants to create accumulation analyses in bulk.
+  - The Export API introduces the ability to estimate the size loss data exported in RDM and RDM Data Bridge export jobs. RDM export jobs now support exporting to Parquet files.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2026.01.c
+  date: '2025-12-17'
+  slug: 202601c
+  url: https://developer.rms.com/platform/changelog/202601c
+  summary: The 2026.01.c release introduces the Auto Select API and enhancements to the Export API, Risk Data API, and Tenant Data API.
+  highlights:
+  - The Auto Select API supports the creation and management of tasks that automatically identify catastrophe modeling configurations (e.g. model profiles) that are applicable to a specified exposure.
+  - The Export API now supports exporting exposure and analysis result data as data that is compatible with earlier versions of the EDM and RDM database schemas.
+  - The Import API now supports workflows for importing ELT data and creating new risk sources for programs based on data.
+  - The Tenant Data API now supports the management of encryption keys and VPN connections in support of VPN for Data Bridge.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.12.b
+  date: '2025-10-23'
+  slug: 202512b
+  url: https://developer.rms.com/platform/changelog/202512b
+  summary: The 2025.12.b release introduces the Accumulation API, Auto Select API, Risk Data API, and the North America Severe Convective Storm HD models.
+  highlights:
+  - The Accumulation API enables underwriters to incorporate reinsurance treaties in accumulation analysis so that they can account for reinsurance cessions when determining the risk concentration on an
+    account.
+  - The North America Severe Convective Storm HD Models (HDv1.0) represent a significant advancement in risk modeling for tornado, hail, and straight-line wind perils across the contiguous United States.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.11.b
+  date: '2025-10-23'
+  slug: 202511b
+  url: https://developer.rms.com/platform/changelog/202511b
+  summary: The 2025.11.b release provides documentation features that support exposure variation workflows.
+  highlights:
+  - Import API supports importing exposure variations from Parquet files uploaded to import folders on Amazon S3.
+  - Export API supports exporting exposure variations Parquet files.
+  - Geohaz API supports running `GEOHAZ` jobs on exposure variations.
+  - Model API supports running `Model` jobs on exposure variations.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.10.e
+  date: '2025-10-13'
+  slug: 202510d
+  url: https://developer.rms.com/platform/changelog/202510d
+  summary: The 2025.10.e release introduces the Risk Data API.
+  highlights:
+  - The Create Accumulation Job operation initiates a `ACCUMULATION` job to create an accumulation analysis based on the specified business hierarchy, account, account variation, portfolio, or portfolio
+    variation.
+  - The Search Accounts by Portfolio operation returns a list of accounts linked to the specified portfolio.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.09.d
+  date: '2025-09-18'
+  slug: 202509d
+  url: https://developer.rms.com/platform/changelog/202509d
+  summary: The 2025.09.d release introduces updates to the Admin Data API.
+  highlights:
+  - 'Data Vault now supports two types of archives: databases and exposure sets.'
+  - The Restore Archive operation nows supports restoring archived data (databases or exposure sets) to new and existing securables.
+  - The Update Archive operation now updates the `storageType` of an archive. One of `temporary` or `permanent`.
+  - The Delete Securable operation supports "soft deletes" of exposure set securables.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.09.b
+  date: '2025-08-19'
+  slug: 202509b
+  url: https://developer.rms.com/platform/changelog/202509b
+  summary: The 2025.09.b release introduces updates to the Risk Data API.
+  highlights:
+  - The Risk Data API now manages Exposure Bulk Edit responses differently depending on the size of the response object. Response data can be downloaded from separate link.
+  - The Risk Data API now returns new analysis properties that provide information about settings used in the analysis.
+  - The Risk Data API now supports enhancements in support of TreatyIQ workflows including the retrieval of rollup pricing statistics and updates to the bulk creation of risk sources.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.08.b
+  date: '2025-08-08'
+  slug: 202508b
+  url: https://developer.rms.com/platform/changelog/202508b
+  summary: The 2025.08.b release introduces updates to the Accumulation API and Risk Data API.
+  highlights:
+  - The Accumulation API now supports accumulation analyses based on accounts and account variations.
+  - The Risk Data API now supports several new accumulation reports for UnderwriteIQ clients.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.07.b
+  date: '2025-05-28'
+  slug: july-2025
+  url: https://developer.rms.com/platform/changelog/july-2025
+  summary: The July release introduces updates to the Exchange Data API, Legacy API, Variation API, and Moody's Insurance Solutions Developer Portal access controls.
+  highlights:
+  - 'Batch API: Adds support for converting event rates and losses in user-defined workflows.'
+  - 'Exchange Data API: Adds support for managing share requests, a method for securely sharing exposure or analysis data.'
+  - 'Export API: Adds support uploading Version 25 EDM and RDM databases.'
+  - 'Legacy API: Adds support for managing batch templates for creating UnderwriteIQ reports and improved support for the modeling locations and policies covered by facultative cessions using HD models.'
+  - 'Risk Data API: Adds support for calculating climate change analyses as a post-analysis action using SSP scenarios and the ability to retrieve EP metrics and key loss statistics for TreatyIQ rollup
+    analyses.'
+  - 'Variations API: Now accepts an optional riskViews parameter, which determines whether risk-by-peril data is provided for the portfolio variations created in the request.'
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.05.d
+  date: '2025-05-05'
+  slug: may-2025
+  url: https://developer.rms.com/platform/changelog/may-2025
+  summary: The 2025.05.d release introduces updates to the Admin Data, Import, and Risk Data APIs.
+  highlights:
+  - The Risk Data API offers enhanced filtering and sorting of EDMs.
+  - Moody's Insurance Solutions has released version 2.0 of the Moody's RMS™ North America Wildfire HD Model that features an enhanced US region of the model and expands coverage to include the Hawaiian
+    Islands.
+  - Moody's Insurance Solutions has released version 25.0 of the geocoding engine. Version 25 includes significant geocoding enhancements that expand global coverage and increase precision.The geocoding
+    and hazard data versions available in the Platform APIs now include 25.0.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.04.c
+  date: '2025-03-26'
+  slug: april-2025
+  url: https://developer.rms.com/platform/changelog/april-2025
+  summary: The 2025.04.c release introduces updates to the Admin Data, Exchange Data, Import, and Risk Data APIs.
+  highlights:
+  - The Admin Data API now supports the management of archives stored in Data Vault.
+  - The Exchange Data API adds enhanced support for managing share requests.
+  - The Import API now supports importing exposure variations in bulk and importing programs.
+  - The Risk Data API adds a new operation that returns key event statistics.
+  mentions_deprecation: false
+  mentions_breaking: true
+- version: 2025.03.a
+  date: '2025-02-05'
+  slug: march-2025
+  url: https://developer.rms.com/platform/changelog/march-2025
+  summary: The March 2025 release introduces updates to the Risk Data API, Exposure API, Grouping API, and Import APIs.
+  highlights:
+  - The Create Marginal Impact Report operation supports that creation of marginal impact reports that measure the effect of adding additional accounts to an existing portfolio as differential losses.
+  - The Bulk Replace Condition Criteria operation supports updating complex policy condition criteria in bulk.
+  - The Delete Report View operation supports the deletion of specific report views.
+  - The Create Import Folders and Create Import Job operations now supports workflows that import exposure data from JSON files uploaded to AWS.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: 2025.01.d
+  date: '2025-01-22'
+  slug: january-2025
+  url: https://developer.rms.com/platform/changelog/january-2025
+  summary: The 2025.01.d release introduces updates to the Admin Data, Risk Data, and Risk View APIs.
+  highlights:
+  - The Search EDMs operation now returns the `exposureSetName` property.
+  - The Risk Data API now enables clients with the `RI-UNDERWRITEIQ` entitlement to filter Report View data by analysis. Report View lists can now be filtered by either `appAnalysisId` or `analysisId`.
+  - The Get Report View operation now returns marginal impact analysis metrics (if available) as part of a report view.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: December 2024
+  date: '2024-11-29'
+  slug: december-2024
+  url: https://developer.rms.com/platform/changelog/december-2024
+  summary: The December release introduces
+  highlights:
+  - The Batch API now supports polling the status of specific tasks within a batch job. A batch job defines a series of tasks that are managed and performed in sequence. The API supports operations for
+    running, updating, retrieving batch jobs.
+  - The Bulk Geohaz API supports operations for geocoding exposures in bulk. Licensed clients can leverage AWS APIs to upload text-delimited flat files of data to AWS, and use the Bulk Geohaz API to geocode
+    those exposures without importing those exposures into the Intelligenct Risk Platform or utilizing Moody's applications (e.g. Risk Modeler).
+  - The Reference Data API now supports operations for managing TreatyIQ rollup reference data including rollup models, rollup defaults, pricing formulae, and share sets.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: November, 2024
+  date: '2024-10-31'
+  slug: november-2024
+  url: https://developer.rms.com/platform/changelog/november-2024
+  summary: The November release introduces
+  highlights:
+  - The Batch API now supports the management of user-defined workflows as batch jobs. A batch job defines a series of tasks that are managed and performed in sequence. The API supports operations for running,
+    updating, retrieving batch jobs.
+  - The Reference Data API now supports operations for defining and managing the rollup models used in rollup analysis. Clients may manage default rollup job settings, rollup model setting sets, rollup
+    model sets, and rollup models.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: September, 2024
+  date: '2024-08-15'
+  slug: september-2024
+  url: https://developer.rms.com/platform/changelog/september-2024
+  summary: The September release introduces support for ExposureIQ analysis types, rollup analysis of program variations, tracking of usage metrics.
+  highlights:
+  - The Risk Data API now supports operations for retrieving information about ExposureIQ accumulation and rollup analyses, ExposureIQ portfolio accumulation reports,
+  - The Rollup API now support rollup analysis of program variations.
+  - The Tenant Data API supports operations that enable tenant administrators to better monitor and manage the allocation of licensed system resources across multiple entitlements.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: August,  2024
+  date: '2024-08-13'
+  slug: august-2024
+  url: https://developer.rms.com/platform/changelog/august-2024
+  summary: The August release introduces
+  highlights:
+  - The Predefined Conditions API enables tenants to create and manage predefined conditions, which are templates for creating the _special conditions_ that effect the scope of policies. A policy condition
+    may restrict coverage to a subset of locations or set limits on coverage provided to a subset of locations.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: July, 2024
+  date: '2024-07-16'
+  slug: july-2024
+  url: https://developer.rms.com/platform/changelog/july-2024
+  summary: The July release introduces operations for managing database archives and policy condition templates.
+  highlights:
+  - The Admin Data API introduces support for managing database archives.
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: June, 2024
+  date: '2024-06-11'
+  slug: june-2024
+  url: https://developer.rms.com/platform/changelog/june-2024
+  summary: The June release introduces operations for managing archived databases in the Admin Data API and enhanced analysis results filtering.
+  highlights:
+  - The Risk Data API now supports batch processing for creating, updating, or deleting exposures.
+  - The Rollup API supports the rollup analysis for programs and business hierarchies.
+  - The ESG API now supports ESG_Details and PCAF_Details reports.
+  - Intelligent Risk Platform no longer supports SQL Server 2014. Requests that specify the export of databases in that format now return an error message.
+  mentions_deprecation: true
+  mentions_breaking: false
+- version: May, 2024
+  date: '2024-05-14'
+  slug: may-2024
+  url: https://developer.rms.com/platform/changelog/may-2024
+  summary: The May release introduces enhanced reporting of Risk Data API jobs.
+  highlights:
+  - The Risk Data API now supports enhanced reporting
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: April, 2024
+  date: '2024-04-02'
+  slug: april-2024
+  url: https://developer.rms.com/platform/changelog/april-2024
+  summary: The April release introduces new risk data resources and support for SQL 2016.
+  highlights:
+  - New API Operations for Report Views, Programs, Business Hierarchies, Risk Sources
+  - The Create Export Job operation now support exporting EDM and RDM in`sqlVersion` 2016
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: February, 2024
+  date: '2024-02-08'
+  slug: february-2024
+  url: https://developer.rms.com/platform/changelog/february-2024
+  summary: The February release introduces currency conversion and cloning.
+  highlights:
+  - 'New APIs: Currency Conversion API, Copy API, and Clone API'
+  - 'New Operation: Create Risk Data Report supporting Exposure Summary and Analysis Summary reports in PDF and JSON ✨'
+  - The Convert Event Rates and Losses operation now supports overriding of event IDs in an analysis
+  - The Create Export Job operation now supports a maximum of 100 analyses for RDM export type
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: December, 2023
+  date: '2023-12-07'
+  slug: december-2023
+  url: https://developer.rms.com/platform/changelog/december-2023
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: November, 2023
+  date: '2023-11-07'
+  slug: november-2023
+  url: https://developer.rms.com/platform/changelog/november-2023
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: September, 2023
+  date: '2023-09-27'
+  slug: september-2023
+  url: https://developer.rms.com/platform/changelog/september-2023
+  mentions_deprecation: false
+  mentions_breaking: false
+- version: August, 2023
+  date: '2023-06-15'
+  slug: welcome-to-rms6
+  url: https://developer.rms.com/platform/changelog/welcome-to-rms6
+  mentions_deprecation: false
+  mentions_breaking: false

@@ -1,0 +1,130 @@
+generated: '2026-07-25'
+method: derived
+source: mcp/moodys-rms-mcp.yml, openapi/moodys-rms-risk-modeler-openapi.yml, openapi/moodys-rms-data-bridge-openapi.json,
+  openapi/moodys-rms-location-intelligence-openapi.yaml
+note: >-
+  Moody's RMS's Platform MCP Server is a meta-tool server, not a one-tool-per-endpoint projection of the
+  REST surface. Fifteen of its sixteen tools operate on a knowledge graph built from the Platform API
+  specifications, documentation, and code samples; only one tool — execute-api — actually calls REST
+  operations, and it is a generic dispatcher that can reach any Platform API operation the caller's
+  role permits. The crosswalk therefore binds tools to REST by ROLE (discovery/meta vs execution) rather
+  than one-to-one, and records the divergence honestly instead of inventing per-operation tools.
+surfaces:
+  openapi:
+  - file: openapi/moodys-rms-risk-modeler-openapi.yml
+    title: Risk Modeler
+    operations: 383
+    gated: false
+  - file: openapi/moodys-rms-data-bridge-openapi.json
+    title: Data Bridge
+    operations: 32
+    gated: false
+  - file: openapi/moodys-rms-location-intelligence-openapi.yaml
+    title: Location Intelligence API
+    operations: 365
+    gated: false
+    note: Only 2 of 365 operations declare an operationId, so this spec cannot be bound by operationId.
+  graphql:
+    present: false
+    note: >-
+      An ExposureIQ GraphQL API exists internally but the provider's own Support Policy names it as an
+      unsupported, undocumented internal API. No endpoint or SDL is published, so it is out of scope.
+  mcp:
+    server: irp-integration-mcp
+    url: https://api-use1.rms.com/platform/integration/v1/mcp
+    gated: true
+    gate_note: 'tools/list returned HTTP 401 {"message":"Unauthorized"} on 2026-07-25; tool names and descriptions come from the published Platform MCP Server Tools reference.'
+  platform_apis:
+    documented: true
+    openapi_published: false
+    note: >-
+      The ~24 Platform API families (Accumulation, Admin Data, Auto Select, Batch, Bulk Geohaz, Clone,
+      Copy, Currency Conversion, Enrich Exposure, ESG Data, Exchange Data, Export, Geohaz, Grouping,
+      Import, Legacy, Model, Peril Converter, Reference Data, Risk Data, Security, STEP, Tenant Data,
+      Variation) are the surface execute-api actually dispatches to, but no downloadable OpenAPI is
+      published for them. They are documented as rendered ReadMe reference pages only.
+crosswalk:
+- tool: execute-api
+  category: API Execution
+  binding: rest
+  rest:
+  - '*'
+  confidence: medium
+  note: >-
+    Generic dispatcher. Runs any Platform API operation the MCP client is entitled to by role-based
+    permission. It fans out to the whole REST surface rather than a named operationId, so no single
+    backing operation can be asserted. Its real input contract is the target operation's parameters and
+    requestBody in the corresponding Platform API reference.
+mcp_only:
+- tool: graph-suggest-workflow
+  reason: Knowledge-graph reasoning over the specs; no REST equivalent is published.
+- tool: graph-find-related
+  reason: Knowledge-graph traversal; no REST equivalent is published.
+- tool: graph-explore
+  reason: Knowledge-graph traversal (upstream/downstream); no REST equivalent is published.
+- tool: graph-get-workflow
+  reason: Returns curated workflow patterns held server-side; no REST equivalent is published.
+- tool: graph-validate-chain
+  reason: Server-side feasibility check over a proposed operation chain; no REST equivalent.
+- tool: get-doc-context
+  reason: Returns developer documentation, which is a ReadMe surface and not a Platform API resource.
+- tool: vector-search
+  reason: Semantic search over the knowledge graph; no REST search endpoint is published.
+- tool: search-api-spec
+  reason: Searches the Platform API specifications themselves; the specs are not exposed as a REST resource.
+- tool: get-operation-spec
+  reason: Returns an operation's specification; no public spec-retrieval endpoint exists.
+- tool: search-workflows
+  reason: Searches a server-side workflow library with no REST counterpart.
+- tool: get-workflow
+  reason: Returns a runnable workflow collection held server-side; no REST counterpart.
+- tool: skill-workflow-assist
+  reason: Beta guided-reasoning composite requiring MCP sampling; inherently MCP-native.
+- tool: skill-fetch-api-data
+  reason: Beta guided documentation retrieval; inherently MCP-native.
+- tool: set-variable
+  reason: MCP session state (hosts, credentials); protocol-level, not a Platform resource.
+- tool: get-variables
+  reason: MCP session state; protocol-level, not a Platform resource.
+rest_only:
+- capability: Exposure management (Risk Modeler)
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  note: >-
+    Accounts, portfolios, aggregate portfolios, locations, policies, policy conditions, treaties,
+    cedants, producers, underwriters and branches — CRUD plus copy/move/validate. Reachable only through
+    execute-api, never as a named tool.
+  examples: [searchAccounts, createAccount, updateAccount, deleteAccount, searchPortfolios, createPortfolio, managePortfolioAccounts, copyPortfolio]
+- capability: Model execution and results
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  examples: [processAccount, processPortfolio, processAggregatePortfoliov2, getAnalysesResults, getEPMetricsByAnalysis, getEventLossTableResults, getPeriodLossTableResults, getStatisticsResults, runClimateChange, marginalImpactv1]
+- capability: Geohazard enrichment
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  examples: [geohazAccount, geohazPortfolio, geohazAccountv2, geohazPortfoliov2]
+- capability: Import and export
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  examples: [getUrlForUpload, CreateUploadTask, CreateUploadTaskForRdm, createJob, exportdatav2, downloadResults]
+- capability: Workflow and job orchestration
+  spec: openapi/moodys-rms-risk-modeler-openapi.yml
+  examples: [getWorkflowsv1, createUserDefinedWorkflow, getWorkflowv1, cancelWorkflowv1]
+- capability: Data Bridge database administration
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  examples: [createdatabase, getdatabasesbyinstance, exportdatabase, importdatabase, getuploaddirectoryuri, initiatemultipartupload, completemultipartupload, getjobstatus, getjobdetails]
+- capability: Data Bridge network and login administration
+  spec: openapi/moodys-rms-data-bridge-openapi.json
+  examples: [getAcl, updateacl, overwriteacl, deleteipaddress, settlsprotocolversion, createlogin, updateloginpassword, deleteinstancelogin, getclientip]
+- capability: Geocoding and per-peril hazard lookup
+  spec: openapi/moodys-rms-location-intelligence-openapi.yaml
+  examples: [genericLookup, composite]
+  note: >-
+    363 of the 365 Location Intelligence operations carry no operationId, so they cannot be referenced
+    by id. They are addressed by path — /{layer}/{version} — which is exactly what genericLookup models.
+coverage:
+  tools_named: 16
+  tools_bound_to_rest: 1
+  mcp_only: 15
+  rest_operations_total: 780
+  rest_operations_with_a_named_tool: 0
+  rest_operations_reachable_via_execute_api: 780
+  note: >-
+    Zero REST operations have a dedicated MCP tool. Every one of them is reachable through the single
+    execute-api dispatcher, subject to the caller's entitlements and roles.

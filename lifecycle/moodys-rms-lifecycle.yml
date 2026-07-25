@@ -1,0 +1,87 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.rms.com/platform/docs/policies
+docs: https://developer.rms.com/platform/docs/policies
+versioning:
+  scheme: uri-path
+  current: v2
+  release_naming: 'Calendar releases named YYYY.MM.<letter>, e.g. 2026.07.c'
+  current_release: 2026.07.c
+  current_release_date: '2026-06-30'
+  policy: >-
+    Moody's Insurance Solutions releases a new version of an API operation whenever a change is made to
+    the endpoint path, to the parameters specified in an operation request, or to the resource properties
+    returned by an operation. Multiple versions of an operation may be served simultaneously — for
+    example /riskmodeler/v1/accounts/{id}/analyses and /riskmodeler/v2/accounts/{id}/analyses — each
+    documented separately in the API Reference.
+  docs: https://developer.rms.com/platform/docs/policies
+deprecation:
+  policy_url: https://developer.rms.com/platform/docs/policies
+  policy: >-
+    API resources are marked deprecated whenever an updated version of that resource is released. As soon
+    as a new version ships, the previous version is immediately deprecated. Deprecated resources remain
+    accessible for at least one year after deprecation, but are no longer recommended for use.
+  sunset_period: 1 year
+  sunset_header: false
+  deprecation_header: false
+  warning_header: true
+  notification_channels:
+  - channel: HTTP header
+    detail: >-
+      Deprecated operations return a deprecation notice in a Warning HTTP header identifying the
+      replacement endpoint and the date the current endpoint will be retired. Example — "This API
+      endpoint is deprecated, please switch to riskmodeler/v2/accounts/{id}/analyses. Support for this
+      endpoint will end on Wednesday, 26 Jan 2022 00:00:00 GMT."
+  - channel: API reference documentation
+    detail: Deprecated operations carry a Deprecated admonition naming the end-of-support date and the replacement operation.
+  - channel: Changelog
+    detail: The Platform changelog identifies newly deprecated operations with the deprecated version, replacement version, and end-of-life date.
+  note: >-
+    RFC 8594 Sunset and the Deprecation header field are NOT used; the provider signals deprecation with
+    the generic HTTP Warning header instead.
+support:
+  policy_url: https://developer.rms.com/platform/docs/policies
+  covers:
+  - Risk Modeler API
+  - Data Bridge API
+  - Location Intelligence API
+  - Climate On Demand API
+  - Platform APIs
+  excludes:
+  - Private or internal Intelligent Risk Platform APIs and operations
+  - ExposureIQ GraphQL API
+  - TreatyIQ API
+  - Deprecated or retired API operations
+  detail: >-
+    The support policy covers every public API operation — one documented in the developer portal.
+    Operations not documented in the portal are unsupported, not covered by any policy, and liable to
+    change at any time without notice.
+  support_guide: https://support.rms.com/o/html-doc/OLH_Content/SCGuide_Help_Center/Content/SCGuide/Welcome.htm
+security_policy:
+  url: https://developer.rms.com/platform/docs/policies
+  summary: >-
+    Access to the Intelligent Risk Platform is controlled by API keys and security tokens; every request
+    must present a valid credential or be rejected. Tenants define granular access controls through
+    role-based permissions and group-based access rights. All calls to and from the platform are
+    encrypted.
+sla:
+  published: false
+  note: No public uptime target or SLA document was found on the developer portal.
+status_page: https://status.rms.com
+status_page_title: Moody's Intelligent Risk Platform Status Page
+status_page_status: 200
+status_page_probed: '2026-07-25'
+changelog: https://developer.rms.com/platform/changelog
+changelog_artifact: changelog/moodys-rms-changelog.yml
+deprecated_operations:
+- openapi/moodys-rms-risk-modeler-openapi.yml#getAccountAnalysesResults
+- openapi/moodys-rms-risk-modeler-openapi.yml#processAccount
+- openapi/moodys-rms-risk-modeler-openapi.yml#getAggregateExposureListsv1
+- openapi/moodys-rms-risk-modeler-openapi.yml#exportDatav1
+- openapi/moodys-rms-risk-modeler-openapi.yml#downloadResults
+- openapi/moodys-rms-risk-modeler-openapi.yml#getAnalysesResults
+- openapi/moodys-rms-risk-modeler-openapi.yml#getPortfolioAnalysesResults
+- openapi/moodys-rms-risk-modeler-openapi.yml#processPortfolio
+deprecated_operations_note: >-
+  Derived from deprecated: true in the published Risk Modeler OpenAPI. The Data Bridge and Location
+  Intelligence definitions declare no deprecated operations.

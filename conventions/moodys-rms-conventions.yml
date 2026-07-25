@@ -1,0 +1,166 @@
+generated: '2026-07-25'
+method: searched
+source: https://developer.rms.com/platform/docs
+docs:
+- https://developer.rms.com/platform/docs/authentication-and-authorization
+- https://developer.rms.com/platform/docs/idempotent-requests
+- https://developer.rms.com/platform/docs/filtering-and-pagination
+- https://developer.rms.com/platform/docs/http-status-codes
+- https://developer.rms.com/platform/docs/custom-error-codes
+- https://developer.rms.com/platform/docs/policies
+- https://developer.rms.com/platform/docs/get-started
+note: >-
+  Cross-cutting request/response semantics for the Moody's RMS Intelligent Risk Platform APIs, captured
+  from the public developer portal and cross-checked against the three published OpenAPI definitions.
+
+authentication:
+  style: api-key
+  header: Authorization
+  scheme_name: RMS_Auth
+  value: The raw API key or access token, passed with no bearer prefix.
+  alternatives:
+  - type: access-token
+    description: >-
+      A short-lived access token identifying a user account, passed as a bearer credential in the same
+      Authorization header. The provider recommends API keys for production and positions token-based
+      auth as appropriate for evaluation and testing only.
+  self_serve: false
+  issuance: Tenant administrator, via Admin Center. Contact the tenant administrator to obtain a key.
+  artifact: authentication/moodys-rms-authentication.yml
+  docs: https://developer.rms.com/platform/docs/authentication-and-authorization
+
+idempotency:
+  supported: true
+  header: x-rms-requestid
+  applies_to:
+  - POST
+  - PATCH
+  naturally_idempotent:
+  - GET
+  - PUT
+  - DELETE
+  key_format: UUID
+  key_guidance: >-
+    The idempotency key must be unique. Moody's recommends the client generate a UUID to identify the
+    request. Repeated requests carrying the same key are recognized as redundant; only the initial
+    request changes the resource.
+  retention: not-published
+  conflict_behavior: >-
+    A 409 Conflict response means the server has not finished processing the original request; wait and
+    retry. A 400 Bad Request means the request body was malformed — correct it and resubmit under a NEW
+    idempotency key.
+  example: |-
+    curl --request POST \
+         --url https://api-euw1.rms.com/platform/perilconverter/v1/jobs \
+         --header 'accept: */*' \
+         --header 'content-type: application/json' \
+         --header 'x-rms-requestid: a8bd2ac7-34b7-4dd1-86b7-b42d8cb02d9f' \
+         --header 'x-rms-resource-group-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+  docs: https://developer.rms.com/platform/docs/idempotent-requests
+
+pagination:
+  style: offset-limit
+  parameters:
+  - name: limit
+    in: query
+    description: Maximum number of items returned. Declared on 55 Risk Modeler operations.
+  - name: offset
+    in: query
+    description: Zero-based index of the first item returned. Declared on 53 Risk Modeler operations.
+  response_fields: not-published
+  docs: https://developer.rms.com/platform/docs/filtering-and-pagination
+
+filtering_and_sorting:
+  parameters:
+  - name: datasource
+    in: query
+    description: >-
+      Selects the EDM (Exposure Data Module) database to query. The single most common parameter in the
+      Risk Modeler surface — declared on 254 operations.
+  - name: filter
+    in: query
+    description: Filters results by property expressions.
+  - name: q
+    in: query
+    description: >-
+      The Risk Modeler equivalent of filter. Supports comparison (=, !=, >, <), logical (AND, OR), list
+      (IN, NOT IN) and matching (LIKE, NOT LIKE) operators.
+  - name: sort
+    in: query
+    description: Sorts results by property, ASC or DESC.
+  - name: include
+    in: query
+    description: Includes additional related properties in the response.
+  operators:
+    comparison: ['=', '!=', '>', '<']
+    logical: [AND, OR]
+    list: [IN, NOT IN]
+    matching: [LIKE, NOT LIKE]
+  docs: https://developer.rms.com/platform/docs/filtering-and-pagination
+
+async_model:
+  style: job-polling
+  description: >-
+    Long-running work — import, export, geohaz, model execution, accumulation, rollup, copy, clone and
+    Data Bridge upload/download — is submitted as a job that returns 202 Accepted with a job or workflow
+    id. The client polls that id for completion. There is no webhook, callback or event stream.
+  risk_modeler_operations: [createUserDefinedWorkflow, getWorkflowsv1, getWorkflowv1, cancelWorkflowv1]
+  data_bridge_operations: [getjobstatus, getjobdetails]
+  docs: https://developer.rms.com/platform/docs/managing-jobs
+
+request_context:
+  headers:
+  - name: x-rms-requestid
+    purpose: idempotency key and request correlation
+  - name: x-rms-resource-group-id
+    purpose: identifies the resource group the request is charged and scoped to
+  response_correlation:
+    field: logId
+    description: Every application error carries a logId that identifies the error in the response log.
+
+versioning:
+  scheme: uri-path
+  description: >-
+    Every endpoint carries a version path segment (/v1/, /v2/). The path is composed of app path
+    (platform, riskmodeler, databridge, li), api path (riskdata, admindata, tenantdata, import, ...),
+    version path, then resource path. A new version is released whenever the endpoint path, the request
+    parameters, or the resource properties returned change. As soon as a new version ships, the previous
+    version is immediately deprecated.
+  release_naming: 'Calendar releases named YYYY.MM.<letter>, e.g. 2026.07.c'
+  artifact: lifecycle/moodys-rms-lifecycle.yml
+  docs: https://developer.rms.com/platform/docs/policies
+
+error_envelope:
+  rfc9457: false
+  media_type: application/json
+  shape:
+    code: Domain prefix plus number, e.g. ACCT-001, INT-999
+    message: Human-readable cause, sometimes with resolution steps. May embed %d/%s placeholders.
+    logId: Identifier of the error in the response log
+  status_codes: Standard HTTP status codes per RFC 9110
+  catalog: errors/moodys-rms-error-codes.yml
+  derived: errors/moodys-rms-problem-types.yml
+  docs: https://developer.rms.com/platform/docs/custom-error-codes
+
+rate_limits:
+  published: false
+  note: >-
+    No rate-limit quota, throttling headers, or 429 responses are documented, and no 429 is declared in
+    any of the three published OpenAPI definitions. Capacity is governed instead by tenant entitlements
+    and resource-group allocation, which the Tenant Data API exposes as usage metrics.
+
+encryption:
+  in_transit: >-
+    All calls to and from the Intelligent Risk Platform are encrypted, including all requests and
+    responses that use Platform API operations.
+  docs: https://developer.rms.com/platform/docs/policies
+
+hosts:
+  style: regional
+  variable: host
+  values:
+  - api-use1.rms.com
+  - api-euw1.rms.com
+  note: >-
+    The OpenAPI servers block templates the host as a server variable enumerating the two regional data
+    centers. A tenant uses the host matching the data center that runs its instance.
