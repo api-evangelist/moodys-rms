@@ -20,9 +20,8 @@ server:
     url: https://api-use1.rms.com/platform/integration/v1/mcp
   - region: Europe (EU)
     url: https://api-euw1.rms.com/platform/integration/v1/mcp
-  description: >-
-    A service that securely connects a tenant's AI applications with the Intelligent Risk Platform and
-    developer resources. The Platform MCP Server transforms Platform API specifications, documentation,
+  description: A service that securely connects a tenant's AI applications with the Intelligent Risk Platform
+    and developer resources. The Platform MCP Server transforms Platform API specifications, documentation,
     and code samples into a single queryable knowledge graph that lets Intelligent Risk Platform tenants
     discover and implement catastrophe modeling and reinsurance workflows.
 authentication:
@@ -30,30 +29,29 @@ authentication:
   in: header
   parameter: Authorization
   self_serve: false
-  note: >-
-    Every request is authenticated at Moody's API gateway by an Intelligent Risk Platform API key. API keys
-    are issued by a tenant administrator in Admin Center, never self-serve. The API key must belong to a
-    user group assigned the "IRP Agentic Tools User" role.
+  note: Every request is authenticated at Moody's API gateway by an Intelligent Risk Platform API key.
+    API keys are issued by a tenant administrator in Admin Center, never self-serve. The API key must
+    belong to a user group assigned the "IRP Agentic Tools User" role.
   roles:
   - role: IRP Agentic Tools User
     permissions:
     - action: Access Platform MCP Server
       level: read
-      description: Connect to Platform MCP Server and use Knowledge Graph, API Discovery, Skills, and Session Management tools.
+      description: Connect to Platform MCP Server and use Knowledge Graph, API Discovery, Skills, and
+        Session Management tools.
     - action: Execute APIs with Platform MCP Server
       level: write
       description: Use the Execution tool to make Platform API requests.
   docs: https://developer.rms.com/platform/docs/authentication-and-authorization
 probe:
   url: https://api-use1.rms.com/platform/integration/v1/mcp
-  method: 'POST jsonrpc tools/list'
+  method: POST jsonrpc tools/list
   status: 401
   body: '{"message":"Unauthorized"}'
   date: '2026-07-25'
-  note: >-
-    Live tools/list introspection is auth-gated. The tool list below is captured verbatim from the
-    provider''s published Platform MCP Server Tools reference; per-tool inputSchema requires an
-    authenticated tenant introspection and is therefore not recorded.
+  note: Live tools/list introspection is auth-gated. The tool list below is captured verbatim from the
+    provider''s published Platform MCP Server Tools reference; per-tool inputSchema requires an authenticated
+    tenant introspection and is therefore not recorded.
 supported_hosts:
 - Claude Code
 - Claude Desktop
@@ -62,24 +60,17 @@ supported_hosts:
 - JetBrains AI Assistant (IntelliJ)
 - Visual Studio Code
 install:
-  claude_code: |-
-    claude mcp add --transport http irp-integration-mcp \
-      https://api-use1.rms.com/platform/integration/v1/mcp \
-      --header "Authorization: YOUR_IRP_API_KEY"
-  json: |-
-    {
-      "mcpServers": {
-        "irp-integration-mcp": {
-          "url": "https://api-use1.rms.com/platform/integration/v1/mcp",
-          "headers": { "Authorization": "YOUR_IRP_API_KEY" }
-        }
-      }
-    }
+  claude_code: "claude mcp add --transport http irp-integration-mcp \\\n  https://api-use1.rms.com/platform/integration/v1/mcp\
+    \ \\\n  --header \"Authorization: YOUR_IRP_API_KEY\""
+  json: "{\n  \"mcpServers\": {\n    \"irp-integration-mcp\": {\n      \"url\": \"https://api-use1.rms.com/platform/integration/v1/mcp\"\
+    ,\n      \"headers\": { \"Authorization\": \"YOUR_IRP_API_KEY\" }\n    }\n  }\n}"
 tool_categories:
 - name: Knowledge Graph
-  description: Explore the Platform MCP Server knowledge graph to identify Platform API operations and resources that support a given Intelligent Risk Platform workflow.
+  description: Explore the Platform MCP Server knowledge graph to identify Platform API operations and
+    resources that support a given Intelligent Risk Platform workflow.
 - name: API Discovery
-  description: Search Platform API specifications and developer resources for information on using Platform APIs.
+  description: Search Platform API specifications and developer resources for information on using Platform
+    APIs.
 - name: API Execution
   description: Submit requests using the Platform APIs.
 - name: Skills
@@ -126,7 +117,8 @@ tools:
 - name: skill-workflow-assist
   category: Skills
   status: beta
-  description: Workflow assistant that combines knowledge graph discovery with guided reasoning to perform multi-step workflows. Requires the MCP client to support MCP sampling.
+  description: Workflow assistant that combines knowledge graph discovery with guided reasoning to perform
+    multi-step workflows. Requires the MCP client to support MCP sampling.
 - name: skill-fetch-api-data
   category: Skills
   status: beta
@@ -140,6 +132,12 @@ tools:
 counts:
   tools: 16
   categories: 5
-data_residency: >-
-  All tenant data remains on the Intelligent Risk Platform. Data is not duplicated, copied, or moved to an
-  AI environment outside the Intelligent Risk Platform.
+data_residency: All tenant data remains on the Intelligent Risk Platform. Data is not duplicated, copied,
+  or moved to an AI environment outside the Intelligent Risk Platform.
+deployment:
+  mode: remote
+  endpoint: https://api-use1.rms.com/platform/integration/v1/mcp
+  verified: probed
+  probe: wall
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,841 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Data Bridge",
+    "version": "2022-09"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Data Bridge ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/Cluster"
+          },
+          "docs": "Get Data Bridge ACL"
+        },
+        {
+          "info": {
+            "name": "Get IP addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/Cluster/allowed-ips"
+          },
+          "docs": "Get IP addresses"
+        },
+        {
+          "info": {
+            "name": "Update Data Bridge ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/databridge/v1/Cluster/allowed-ips",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Data Bridge ACL"
+        },
+        {
+          "info": {
+            "name": "Overwrite Data Bridge ACL",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{host}/databridge/v1/Cluster/allowed-ips",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrite Data Bridge ACL"
+        },
+        {
+          "info": {
+            "name": "Delete IP address",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/databridge/v1/Cluster/allowed-ips/:ipAddress",
+            "params": [
+              {
+                "name": "ipAddress",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete IP address"
+        },
+        {
+          "info": {
+            "name": "Delete range of IP addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/databridge/v1/Cluster/allowed-ips/:cidrIpAddress/:cidrIpPrefix",
+            "params": [
+              {
+                "name": "cidrIpAddress",
+                "value": "",
+                "type": "path",
+                "description": "Range of IP addresses in binary notation."
+              },
+              {
+                "name": "cidrIpPrefix",
+                "value": "",
+                "type": "path",
+                "description": "CIDR prefix that specifies the number of bits in the network ID. By default, `32`."
+              }
+            ]
+          },
+          "docs": "Delete range of IP addresses"
+        },
+        {
+          "info": {
+            "name": "Get cluster security",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/Cluster/server-security"
+          },
+          "docs": "Get cluster security"
+        },
+        {
+          "info": {
+            "name": "Set TLS protocol version",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/databridge/v1/Cluster/server-security",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set TLS protocol version"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Databases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get databases by server instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to a resource owned by others. If `true`, returns all databases. The principal making the request must have the appropriate permissions (e.g. Admin role)."
+              }
+            ]
+          },
+          "docs": "Get databases by server instance"
+        },
+        {
+          "info": {
+            "name": "Create database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path",
+                "description": "Name of a managed SQL Server instance. The database is created on this instance."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create database"
+        },
+        {
+          "info": {
+            "name": "Get database by server instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to a resource owned by others. If `true`, returns the database. The principal making the request must have the appropriate permission (e.g. Admin role)."
+              }
+            ]
+          },
+          "docs": "Get database by server instance"
+        },
+        {
+          "info": {
+            "name": "Pin database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Pin database"
+        },
+        {
+          "info": {
+            "name": "Export database to URI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName/export",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "exportTo",
+                "value": "",
+                "type": "query",
+                "description": "The file format of the exported database artifact. One of `0` (MDF), `1` (BAK), or `2` (DACPAC). By default, `0` (MDF). "
+              }
+            ]
+          },
+          "docs": "Export database to URI"
+        },
+        {
+          "info": {
+            "name": "Get upload directory URI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName/import",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "importFrom",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get upload directory URI"
+        },
+        {
+          "info": {
+            "name": "Import database from flat file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName/import",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "importFrom",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupIds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "groupNames",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Import database from flat file"
+        },
+        {
+          "info": {
+            "name": "Get groups by database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName/groups",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to a resource owned by others. If `true`, returns list of groups assigned to the database. The principal making the request must have the appropriate permissions (e.g. Admin role)."
+              }
+            ]
+          },
+          "docs": "Get groups by database"
+        },
+        {
+          "info": {
+            "name": "Update group access to database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Databases/:databaseName/groups",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to resources owned by others. If `true`, updates group access to the database. The principal making the request must have the appropriate permissions (e.g. Admin role)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update group access to database"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Import Upload",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initiate multipart upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/databases/:databaseName/:fileExtension/init-upload",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileExtension",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Initiate multipart upload"
+        },
+        {
+          "info": {
+            "name": "Get pre-signed URL for multipart upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/databases/:databaseName/:fileExtension/upload-part/:uploadId/:partNumber",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileExtension",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get pre-signed URL for multipart upload"
+        },
+        {
+          "info": {
+            "name": "Upload data part by number",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/databases/:databaseName/:fileExtension/upload-part/:uploadId/:partNumber",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileExtension",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uploadId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "partNumber",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload data part by number"
+        },
+        {
+          "info": {
+            "name": "Complete multipart upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/databases/:databaseName/:fileExtension/complete-upload",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "databaseName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileExtension",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete multipart upload"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/Jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get job status"
+        },
+        {
+          "info": {
+            "name": "Get job details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/Jobs/:jobId/details",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get job details"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get logins by server instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Logins",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get logins by server instance"
+        },
+        {
+          "info": {
+            "name": "Create login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Logins",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create login"
+        },
+        {
+          "info": {
+            "name": "Update login password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Logins/:loginName",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "loginName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update login password"
+        },
+        {
+          "info": {
+            "name": "Delete server instance login",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/Logins/:loginName",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "loginName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete server instance login"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Client IP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get client IP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/MyIp"
+          },
+          "docs": "Get client IP"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Server Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get server instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get server instance"
+        },
+        {
+          "info": {
+            "name": "Get server instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances",
+            "params": [
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to a resource owned by others. If `true`, returns server instances. The principal making the request must have the appropriate permissions (e.g. Admin role)."
+              }
+            ]
+          },
+          "docs": "Get server instances"
+        },
+        {
+          "info": {
+            "name": "Get groups by server instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/groups",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to a resource owned by others. If `true`, returns information about all server instances. The principal making the request must have the appropriate permissions (e.g. Admin role)."
+              }
+            ]
+          },
+          "docs": "Get groups by server instance"
+        },
+        {
+          "info": {
+            "name": "Update group access by server instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{host}/databridge/v1/sql-instances/:instanceName/groups",
+            "params": [
+              {
+                "name": "instanceName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "adminMode",
+                "value": "",
+                "type": "query",
+                "description": "Enables changes to a resource owned by others. If `true`, updates the groups assigned to all server instances. The principal making the request must have the appropriate permissions (e.g. Admin role)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update group access by server instance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
