@@ -38,12 +38,13 @@ apis:
 - aid: moodys-rms:platform-apis
   name: Moody's RMS Platform APIs
   description: >-
-    A collection of REST APIs that let Intelligent Risk Platform tenants automate portfolio management, underwriting,
-    and risk-transfer workflows across Risk Modeler, UnderwriteIQ, TreatyIQ, ExposureIQ, and Risk Data Exchange. The
-    public reference is segmented into roughly two dozen families including Import, Export, Batch, Model, Accumulation,
-    Rollup, Grouping, Geohaz, Bulk Geohazard, Enrich Exposure, Currency Conversion, Auto Select, Clone, Copy, ESG Data,
-    Exchange Data, Reference Data, Risk Data, Admin Data, Tenant Data, Security, STEP, and Variation. No downloadable
-    OpenAPI definition was published for this family at the time of review.
+    A collection of REST APIs that let Intelligent Risk Platform tenants automate portfolio management,
+    underwriting, and risk-transfer workflows across Risk Modeler, UnderwriteIQ, TreatyIQ, ExposureIQ,
+    and Risk Data Exchange. The public reference is segmented into roughly two dozen families including
+    Import, Export, Batch, Model, Accumulation, Rollup, Grouping, Geohaz, Bulk Geohazard, Enrich Exposure,
+    Currency Conversion, Auto Select, Clone, Copy, ESG Data, Exchange Data, Reference Data, Risk Data,
+    Admin Data, Tenant Data, Security, STEP, and Variation. No downloadable OpenAPI definition was published
+    for this family at the time of review.
   humanURL: https://developer.rms.com/platform
   baseURL: https://api-use1.rms.com/platform
   tags:
@@ -61,89 +62,13 @@ apis:
     url: https://developer.rms.com/platform/changelog
   - type: PostmanCollection
     url: https://www.postman.com/rms-developers/rms-developers/overview
-- aid: moodys-rms:risk-modeler-api
-  name: Moody's RMS Risk Modeler API
-  description: >-
-    The Risk Modeler 2.0 public API — the legacy catastrophe-modeling and underwriting surface of the Intelligent Risk
-    Platform, superseded by the Platform APIs but still documented and specified. The harvested OpenAPI 3.0.1
-    definition carries 280 paths covering exposure and EDM/RDM management, account and portfolio data, model profiles,
-    analysis runs, results and metrics, imports and exports, geohazard lookups, and job orchestration.
-  humanURL: https://developer.rms.com/risk-modeler
-  baseURL: https://api-use1.rms.com/riskmodeler
-  tags:
-  - Catastrophe Modeling
-  - Exposure Management
-  - Underwriting
-  properties:
-  - type: Documentation
-    url: https://developer.rms.com/risk-modeler
-  - type: APIReference
-    url: https://developer.rms.com/risk-modeler/reference
-  - type: OpenAPI
-    url: openapi/moodys-rms-risk-modeler-openapi.yml
-  - type: Overlay
-    url: overlays/moodys-rms-risk-modeler-overlay.yaml
-  - type: ChangeLog
-    url: https://developer.rms.com/risk-modeler/changelog
-  - type: PostmanCollection
-    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
-- aid: moodys-rms:data-bridge-api
-  name: Moody's RMS Data Bridge API
-  description: >-
-    Administers database connections and moves exposure and results data into and out of the Intelligent Risk Platform.
-    The harvested OpenAPI 3.0.1 definition carries 21 paths covering database and server management, EDM/RDM database
-    creation and deletion, upload and download of exposure databases, and the job status endpoints that track those
-    transfers.
-  humanURL: https://developer.rms.com/databridge
-  baseURL: https://api-use1.rms.com/databridge
-  tags:
-  - Data Exchange
-  - Exposure Data
-  - ETL
-  properties:
-  - type: Documentation
-    url: https://developer.rms.com/databridge
-  - type: APIReference
-    url: https://developer.rms.com/databridge/reference
-  - type: OpenAPI
-    url: openapi/moodys-rms-data-bridge-openapi.json
-  - type: Overlay
-    url: overlays/moodys-rms-data-bridge-overlay.yaml
-  - type: ChangeLog
-    url: https://developer.rms.com/databridge/changelog
-- aid: moodys-rms:location-intelligence-api
-  name: Moody's RMS Location Intelligence API
-  description: >-
-    Address geocoding and per-location peril and hazard risk lookups used to enrich exposure before modeling. The
-    harvested OpenAPI 3.0.1 definition carries 366 paths under three declared tags — Geocoding, Composite, and Risk
-    Lookups — returning geocode resolution (including a code mapped to the ACORD standard resolution scale), hazard
-    scores, and peril-specific risk attributes by location.
-  humanURL: https://developer.rms.com/location-intelligence
-  baseURL: https://api-use1.rms.com/li
-  tags:
-  - Geocoding
-  - Risk Data
-  - Hazard
-  properties:
-  - type: Documentation
-    url: https://developer.rms.com/location-intelligence
-  - type: APIReference
-    url: https://developer.rms.com/location-intelligence/reference
-  - type: OpenAPI
-    url: openapi/moodys-rms-location-intelligence-openapi.yaml
-  - type: Overlay
-    url: overlays/moodys-rms-location-intelligence-overlay.yaml
-  - type: ChangeLog
-    url: https://developer.rms.com/location-intelligence/changelog
-  - type: PostmanCollection
-    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
 - aid: moodys-rms:climate-on-demand-api
   name: Moody's RMS Climate On Demand API
   description: >-
-    Physical climate risk data delivered as an API so financial-services organizations can build climate applications
-    on the Intelligent Risk Platform. The public developer page documents four product surfaces — CoD Real Assets Stn,
-    CoD Real Assets Pro, CoD Corporates, and CoD Spatial Areas — and offers a public Postman collection. No
-    downloadable OpenAPI definition was found for this family at the time of review.
+    Physical climate risk data delivered as an API so financial-services organizations can build climate
+    applications on the Intelligent Risk Platform. The public developer page documents four product surfaces
+    — CoD Real Assets Stn, CoD Real Assets Pro, CoD Corporates, and CoD Spatial Areas — and offers a public
+    Postman collection. No downloadable OpenAPI definition was found for this family at the time of review.
   humanURL: https://developer.rms.com/climate-on-demand
   tags:
   - Climate Risk
@@ -153,17 +78,18 @@ apis:
   - type: Documentation
     url: https://developer.rms.com/climate-on-demand
   - type: PostmanCollection
-    url: https://www.postman.com/rms-developers/workspace/cod/collection/21620294-578a748b-78a6-4a3a-b4b3-5c5380b7848e
+    url: >-
+      https://www.postman.com/rms-developers/workspace/cod/collection/21620294-578a748b-78a6-4a3a-b4b3-5c5380b7848e
 - aid: moodys-rms:platform-mcp-server
   name: Moody's RMS Platform MCP Server
   description: >-
     A hosted Model Context Protocol server, irp-integration-mcp, released with Intelligent Risk Platform
     version 2026.07.c on 2026-06-30. It transforms the Platform API specifications, documentation, and
     code samples into a single queryable knowledge graph so that tenant AI applications can discover and
-    implement catastrophe modeling and reinsurance workflows. Sixteen tools ship across five categories —
-    Knowledge Graph, API Discovery, API Execution, Skills (beta), and Session Management — but only one
-    of them, execute-api, actually calls Platform API operations; the rest reason over the graph. The
-    transport is Streamable HTTP on two regional endpoints, and every request is authenticated at
+    implement catastrophe modeling and reinsurance workflows. Sixteen tools ship across five categories
+    — Knowledge Graph, API Discovery, API Execution, Skills (beta), and Session Management — but only
+    one of them, execute-api, actually calls Platform API operations; the rest reason over the graph.
+    The transport is Streamable HTTP on two regional endpoints, and every request is authenticated at
     Moody's API gateway by an Intelligent Risk Platform API key whose user group carries the IRP Agentic
     Tools User role. Supported hosts include Claude Code, Claude Desktop, Cursor, Devin, JetBrains AI
     Assistant, and Visual Studio Code. All tenant data stays on the Intelligent Risk Platform.
@@ -184,7 +110,1523 @@ apis:
     url: https://developer.rms.com/platform/docs/platform-mcp-server-tools
   - type: GettingStarted
     url: https://developer.rms.com/platform/docs/platform-mcp-server-integration
+- aid: moodys-rms:moodys-rms-accountv1-api
+  name: Moody's RMS Account V1 API
+  description: The AccountV1 API from Moody's RMS — 21 operation(s) for accountv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - AccountV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-accountv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-accountv2-api
+  name: Moody's RMS Account V2 API
+  description: The AccountV2 API from Moody's RMS — 21 operation(s) for accountv2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - AccountV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-accountv2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-aggregate-portfoliov1-api
+  name: Moody's RMS Aggregate PortfolioV1 API
+  description: >-
+    The Aggregate PortfolioV1 API from Moody's RMS — 12 operation(s) for aggregate portfoliov1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Aggregate PortfolioV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-aggregate-portfoliov1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-aggregate-portfoliov2-api
+  name: Moody's RMS Aggregate PortfolioV2 API
+  description: >-
+    The Aggregate PortfolioV2 API from Moody's RMS — 12 operation(s) for aggregate portfoliov2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Aggregate PortfolioV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-aggregate-portfoliov2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-analysis-groupsv1-api
+  name: Moody's RMS Analysis GroupsV1 API
+  description: The Analysis GroupsV1 API from Moody's RMS — 4 operation(s) for analysis groupsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Analysis GroupsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-analysis-groupsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-analysis-groupsv2-api
+  name: Moody's RMS Analysis GroupsV2 API
+  description: The Analysis GroupsV2 API from Moody's RMS — 4 operation(s) for analysis groupsv2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Analysis GroupsV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-analysis-groupsv2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-branchv1-api
+  name: Moody's RMS Branch V1 API
+  description: The BranchV1 API from Moody's RMS — 2 operation(s) for branchv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - BranchV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-branchv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-cedantv1-api
+  name: Moody's RMS Cedant V1 API
+  description: The CedantV1 API from Moody's RMS — 2 operation(s) for cedantv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - CedantV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-cedantv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-client-ip-api
+  name: Moody's RMS Client IP API
+  description: The Client IP API from Moody's RMS — 1 operation(s) for client ip.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Client IP
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-client-ip-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-cluster-api
+  name: Moody's RMS Cluster API
+  description: The Cluster API from Moody's RMS — 5 operation(s) for cluster.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-composite-api
+  name: Moody's RMS Composite API
+  description: >-
+    Returns multiple layers for an address, including chaining the output of one layer into the input
+    for another
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Composite
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-composite-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-databases-api
+  name: Moody's RMS Databases API
+  description: The Databases API from Moody's RMS — 5 operation(s) for databases.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Databases
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-databases-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-datasourcesv1-api
+  name: Moody's RMS Datasources V1 API
+  description: The DatasourcesV1 API from Moody's RMS — 3 operation(s) for datasourcesv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - DatasourcesV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-datasourcesv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-datasourcesv2-api
+  name: Moody's RMS Datasources V2 API
+  description: The DatasourcesV2 API from Moody's RMS — 3 operation(s) for datasourcesv2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - DatasourcesV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-datasourcesv2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-datastorev1-api
+  name: Moody's RMS Datastore V1 API
+  description: The DatastoreV1 API from Moody's RMS — 3 operation(s) for datastorev1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - DatastoreV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-datastorev1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-datastorev2-api
+  name: Moody's RMS Datastore V2 API
+  description: The DatastoreV2 API from Moody's RMS — 3 operation(s) for datastorev2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - DatastoreV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-datastorev2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-domainsv1-api
+  name: Moody's RMS Domains V1 API
+  description: The DomainsV1 API from Moody's RMS — 8 operation(s) for domainsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - DomainsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-domainsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-earthquake-hazard-lookup-api
+  name: Moody's RMS Earthquake Hazard Lookup API
+  description: >-
+    The Earthquake Hazard Lookup API from Moody's RMS — 40 operation(s) for earthquake hazard lookup.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Earthquake Hazard Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-earthquake-hazard-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-exportsv1-api
+  name: Moody's RMS Exports V1 API
+  description: The ExportsV1 API from Moody's RMS — 2 operation(s) for exportsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - ExportsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-exportsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-exportsv2-api
+  name: Moody's RMS Exports V2 API
+  description: The ExportsV2 API from Moody's RMS — 1 operation(s) for exportsv2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - ExportsV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-exportsv2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-exposure-batchv3-api
+  name: Moody's RMS Exposure BatchV3 API
+  description: The Exposure BatchV3 API from Moody's RMS — 1 operation(s) for exposure batchv3.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Exposure BatchV3
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-exposure-batchv3-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-exposure-setsv1-api
+  name: Moody's RMS Exposure SetsV1 API
+  description: The Exposure SetsV1 API from Moody's RMS — 3 operation(s) for exposure setsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Exposure SetsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-exposure-setsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-file-storagev1-api
+  name: Moody's RMS File StorageV1 API
+  description: The File StorageV1 API from Moody's RMS — 8 operation(s) for file storagev1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - File StorageV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-file-storagev1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-geocoding-api
+  name: Moody's RMS Geocoding API
+  description: Geocodes an address
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Geocoding
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-geocoding-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-import-upload-api
+  name: Moody's RMS Import Upload API
+  description: The Import Upload API from Moody's RMS — 3 operation(s) for import upload.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Import Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-import-upload-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-importsv1-api
+  name: Moody's RMS Imports V1 API
+  description: The ImportsV1 API from Moody's RMS — 6 operation(s) for importsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - ImportsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-importsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-jobs-api
+  name: Moody's RMS Jobs API
+  description: The Jobs API from Moody's RMS — 2 operation(s) for jobs.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-line-of-businessv1-api
+  name: Moody's RMS Line of BusinessV1 API
+  description: The Line of BusinessV1 API from Moody's RMS — 2 operation(s) for line of businessv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Line of BusinessV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-line-of-businessv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-locationv1-api
+  name: Moody's RMS Location V1 API
+  description: The LocationV1 API from Moody's RMS — 30 operation(s) for locationv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - LocationV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-locationv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-logins-api
+  name: Moody's RMS Logins API
+  description: The Logins API from Moody's RMS — 2 operation(s) for logins.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Logins
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-logins-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-metricsv1-api
+  name: Moody's RMS Metrics V1 API
+  description: The MetricsV1 API from Moody's RMS — 24 operation(s) for metricsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - MetricsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-metricsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-metricsv2-api
+  name: Moody's RMS Metrics V2 API
+  description: The MetricsV2 API from Moody's RMS — 27 operation(s) for metricsv2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - MetricsV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-metricsv2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-patev1-api
+  name: Moody's RMS Pate V1 API
+  description: The PateV1 API from Moody's RMS — 2 operation(s) for patev1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - PateV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-patev1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-policy-conditionv1-api
+  name: Moody's RMS Policy ConditionV1 API
+  description: The Policy ConditionV1 API from Moody's RMS — 1 operation(s) for policy conditionv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Policy ConditionV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-policy-conditionv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-policyv1-api
+  name: Moody's RMS Policy V1 API
+  description: The PolicyV1 API from Moody's RMS — 15 operation(s) for policyv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - PolicyV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-policyv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-portfoliov1-api
+  name: Moody's RMS Portfolio V1 API
+  description: The PortfolioV1 API from Moody's RMS — 16 operation(s) for portfoliov1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - PortfolioV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-portfoliov1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-portfoliov2-api
+  name: Moody's RMS Portfolio V2 API
+  description: The PortfolioV2 API from Moody's RMS — 16 operation(s) for portfoliov2.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - PortfolioV2
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-portfoliov2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-producerv1-api
+  name: Moody's RMS Producer V1 API
+  description: The ProducerV1 API from Moody's RMS — 2 operation(s) for producerv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - ProducerV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-producerv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-reportsv1-api
+  name: Moody's RMS Reports V1 API
+  description: The ReportsV1 API from Moody's RMS — 2 operation(s) for reportsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - ReportsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-reportsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-risk-lookups-api
+  name: Moody's RMS Risk Lookups API
+  description: Returns one exposure, hazard, risk score, or loss cost layer for an address
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Risk Lookups
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-risk-lookups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-server-instances-api
+  name: Moody's RMS Server Instances API
+  description: The Server Instances API from Moody's RMS — 3 operation(s) for server instances.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Server Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-server-instances-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-step-policyv1-api
+  name: Moody's RMS Step PolicyV1 API
+  description: The Step PolicyV1 API from Moody's RMS — 3 operation(s) for step policyv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Step PolicyV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-step-policyv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-treatyv1-api
+  name: Moody's RMS Treaty V1 API
+  description: The TreatyV1 API from Moody's RMS — 11 operation(s) for treatyv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - TreatyV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-treatyv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-underwriterv1-api
+  name: Moody's RMS Underwriter V1 API
+  description: The UnderwriterV1 API from Moody's RMS — 2 operation(s) for underwriterv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - UnderwriterV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-underwriterv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-utilityv1-api
+  name: Moody's RMS Utility V1 API
+  description: The UtilityV1 API from Moody's RMS — 6 operation(s) for utilityv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - UtilityV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-utilityv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-windstorm-hazard-lookup-api
+  name: Moody's RMS Windstorm Hazard Lookup API
+  description: >-
+    The Windstorm Hazard Lookup API from Moody's RMS — 14 operation(s) for windstorm hazard lookup.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - Windstorm Hazard Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-windstorm-hazard-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
+- aid: moodys-rms:moodys-rms-workflowsv1-api
+  name: Moody's RMS Workflows V1 API
+  description: The WorkflowsV1 API from Moody's RMS — 2 operation(s) for workflowsv1.
+  humanURL: https://developer.rms.com/platform
+  baseURL: https://api-use1.rms.com/platform
+  tags:
+  - WorkflowsV1
+  properties:
+  - type: OpenAPI
+    url: openapi/moodys-rms-workflowsv1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.rms.com/risk-modeler
+  - type: APIReference
+    url: https://developer.rms.com/risk-modeler/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/risk-modeler/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip
+  - type: Documentation
+    url: https://developer.rms.com/databridge
+  - type: APIReference
+    url: https://developer.rms.com/databridge/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/databridge/changelog
+  - type: Documentation
+    url: https://developer.rms.com/location-intelligence
+  - type: APIReference
+    url: https://developer.rms.com/location-intelligence/reference
+  - type: ChangeLog
+    url: https://developer.rms.com/location-intelligence/changelog
+  - type: PostmanCollection
+    url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
 common:
+- type: Overlay
+  url: overlays/moodys-rms-risk-modeler-overlay.yaml
+- type: Overlay
+  url: overlays/moodys-rms-data-bridge-overlay.yaml
+- type: Overlay
+  url: overlays/moodys-rms-location-intelligence-overlay.yaml
 - type: MCPServer
   url: mcp/moodys-rms-mcp.yml
 - type: ToolCrosswalk
