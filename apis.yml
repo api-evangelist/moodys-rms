@@ -19,6 +19,18 @@ description: >-
   formats are the RMS EDM/RDM databases, the Risk Data Open Standard (RDOS), and interoperability with CEDE and OED;
   ACORD appears only as a geocoding-resolution code mapping inside the Location Intelligence API. These are risk-data
   and analytics APIs, not policy APIs: no quote, bind, issue, or FNOL surface is published.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
