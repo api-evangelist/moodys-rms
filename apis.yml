@@ -1633,6 +1633,9 @@ apis:
   - type: PostmanCollection
     url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
 common:
+- type: CapabilityMap
+  url: capabilities/moodys-rms-capability-edges.yml
+  name: Moody's RMS Business Capability Map
 - type: Overlay
   url: overlays/moodys-rms-risk-modeler-overlay.yaml
 - type: Overlay

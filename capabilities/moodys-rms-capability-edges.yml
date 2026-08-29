@@ -1,0 +1,59 @@
+slug: moodys-rms
+provider: Moody's RMS
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Insurance
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: MetricsV1
+  spec_file: moodys-rms-metricsv1-api-openapi.yml
+  capability_id: BC-2180.60
+  capability_id_l1: BC-2180
+  capability_name: Catastrophe Modelling
+  confidence: 0.8
+  evidence: GET /v1/analyses/{id}/ep getEPMetricsByAnalysis Get EP metrics; POST /v1/analyses/{id}/climate-change
+    runClimateChange Calculate climate change; schemas LocationAAL, EventLossItem, LossOccurrence
+  reason: Operations retrieve catastrophe model output metrics — exceedance probability curves, event
+    loss tables, location AAL, climate-change recalculation — which is exactly catastrophe modelling output
+    (PML/AAL calculation) rather than any accounting or policy process.
+- tag: MetricsV2
+  spec_file: moodys-rms-metricsv2-api-openapi.yml
+  capability_id: BC-2180.60
+  capability_id_l1: BC-2180
+  capability_name: Catastrophe Modelling
+  confidence: 0.8
+  evidence: GET /v2/analyses/{id}/ep getEPMetricsByAnalysisv2 Get EP metrics; GET /v2/analyses/{id}/elt
+    Get ELT; schemas LocationAAL, EventLossItem
+  reason: 'V2 of the same catastrophe model results surface: EP metrics, event loss tables, AAL and climate-change
+    conversion — catastrophe modelling analytics.'
+- tag: Risk Lookups
+  spec_file: moodys-rms-risk-lookups-api-openapi.yml
+  capability_id: BC-2130.20
+  capability_id_l1: BC-2130
+  capability_name: Risk Assessment & Selection
+  confidence: 0.8
+  evidence: '"risk scoring, and loss costs to provide information for key decisions in the underwriting
+    workflow, including screening, selection, and pricing"; POST /au_eq_risk_score/latest Australia Earthquake
+    Risk Score Latest'
+  reason: Per-location hazard, risk score and loss cost lookups explicitly positioned for underwriting
+    screening and selection — i.e. risk scoring for risk assessment and selection.
+- tag: Composite
+  spec_file: moodys-rms-composite-api-openapi.yml
+  capability_id: BC-2130.20
+  capability_id_l1: BC-2130
+  capability_name: Risk Assessment & Selection
+  confidence: 0.7
+  evidence: '''exposure enhancement, geocoding, hazard, risk scoring, and loss costs to provide information
+    for key decisions in the underwriting workflow, including screening, selection, and pricing''; POST
+    /composite ''Composite Lookup'''
+  reason: The endpoint returns hazard and risk-score data for a location expressly to support underwriting
+    screening and selection, which is risk assessment and selection. Some ambiguity with risk-data enrichment
+    at intake or pricing, hence 0.7.
