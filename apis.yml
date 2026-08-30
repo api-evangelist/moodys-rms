@@ -965,6 +965,8 @@ apis:
   humanURL: https://developer.rms.com/platform
   baseURL: https://api-use1.rms.com/platform
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -1093,6 +1095,8 @@ apis:
   humanURL: https://developer.rms.com/platform
   baseURL: https://api-use1.rms.com/platform
   tags:
+  - Metrics V1
+  tags_raw:
   - MetricsV1
   properties:
   - type: OpenAPI
@@ -1633,6 +1637,11 @@ apis:
   - type: PostmanCollection
     url: https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/moodys/
+  name: Moody's
+  x-relationship: acquired
+  x-evidence: "Founded at Stanford in 1988 as Risk Management Solutions and acquired by Moody's in 2021, the company sells peril models (hurricane, earthquake, flood, wildfire, severe convective storm, terror, cyber, pandemic) and the exposure data infras"
 - type: CapabilityMap
   url: capabilities/moodys-rms-capability-edges.yml
   name: Moody's RMS Business Capability Map
