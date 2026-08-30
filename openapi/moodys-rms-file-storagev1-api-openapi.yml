@@ -1,0 +1,642 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler File StorageV1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: File StorageV1
+paths:
+  /v1/storage:
+    post:
+      operationId: createBucket
+      summary: Create storage bucket
+      description: ''
+      responses:
+        '201':
+          description: Storage bucket is successfully created.
+          headers:
+            Location:
+              description: Location of the new bucket
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/storage/{bucketId}/files/{fileId}/aggregate-exposures-lists:
+    post:
+      operationId: extractAggregateExposureValues
+      summary: Extract aggregate exposure values
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: Bucket ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fileId
+        in: path
+        description: ID of the file.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: delimiter
+        in: query
+        schema:
+          type: string
+          enum:
+          - TAB
+          - COMMA
+          - SEMICOLON
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/AggregatePortfolioFlatFileMapping'
+        required: true
+      responses:
+        '201':
+          description: List of aggregate exposure values retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregateExposuresList'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/storage/{bucketId}/files/{fileId}/media:
+    get:
+      operationId: getFileContents
+      summary: Get file URI by storage bucket
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: Bucket ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fileId
+        in: path
+        description: ID of the file requested.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Media information for the specified file is successfully retrieved.
+          headers:
+            Content-Disposition:
+              description: Pre-signed S3 URL for uploading database
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/storage/{bucketId}/files/aggregate-exposures-lists:
+    post:
+      operationId: saveObjectFromExtractedAlmFile
+      summary: Get aggregate exposures
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: Bucket ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/AggregateExposuresList'
+        required: true
+      responses:
+        '201':
+          description: Success saving.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/storage/{bucketId}/path:
+    post:
+      operationId: getBucketPath
+      summary: Get file location on S3
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: Bucket ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileInput'
+        required: true
+      responses:
+        '201':
+          description: File id and S3 location is successfully retrieved.
+          headers:
+            Location:
+              description: File Resource location
+              style: simple
+              schema:
+                type: string
+                format: URI
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3Bucket'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/uploads:
+    get:
+      operationId: getUrlForUpload
+      summary: Get storage bucket URL
+      parameters:
+      - name: filename
+        in: query
+        description: Name of the file. Includes the file extension.
+        required: true
+        schema:
+          type: string
+      - name: dbtype
+        in: query
+        description: 'Database type of the data source. One of `ANLSHAZARD`, `DLMPROFILES`, `EDM`, `EVENTINFO`, `GEOCODE`, `GEOGRAPHY`, `MAPCONFIG`, `NONE`, `RDM`, `REPORT`, `SYSTEMDATA`, `TABDATA`, `TARGET`, `USERCONFIG`, `UWG`, `VULNERABILITY`, `WEB`. '
+        required: true
+        schema:
+          type: string
+          enum:
+          - NONE
+          - EDM
+          - USERCONFIG
+          - EVENTINFO
+          - RDM
+          - WEB
+          - TABDATA
+          - TARGET
+          - SYSTEMDATA
+          - GEOGRAPHY
+          - GEOCODE
+          - MAPCONFIG
+          - DLMPROFILES
+          - VULNERABILITY
+          - ANLSHAZARD
+          - REPORT
+          - UWG
+      - name: fileextension
+        in: query
+        description: File extension of file. One of `BAK`, `CSV`, `MDF`, or `PARQUET`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - CSV
+          - PARQUET
+          - BAK
+          - MDF
+      responses:
+        '201':
+          description: Bucket URL.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3UploadHelper'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Databases/Exposure Sets" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/uploads/{uploadId}/edm:
+    post:
+      operationId: CreateUploadTask
+      summary: Upload EDM
+      description: ''
+      parameters:
+      - name: uploadId
+        in: path
+        description: ID for upload requested.
+        required: true
+        schema:
+          type: string
+      - name: datasource
+        in: query
+        description: Name of the EDM to be created. Data Source name can only contain characters from 0-9 A-Z a-z and _ (underscore) - (hyphen) and ' '(space)
+        required: true
+        schema:
+          type: string
+          maxLength: 80
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+      - name: servername
+        in: query
+        description: Name of the server instance to host the EDM.
+        schema:
+          type: string
+      requestBody:
+        description: Specify the edm import input
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdmImportInput'
+      responses:
+        '202':
+          description: 'Accepted: An `UPLOAD_EDM` job was added to the workflow engine queue for processing. Returns a URL in the `Location` header that enables you to track the status of the job e.g. `/{host}/v1/workflows/100000`. Send periodic HTTP GET requests to the URL for the job status. See [Workflow Engine](https://developer.rms.com/rms-developers/docs/workflow-engine).
+
+            '
+          headers:
+            Location:
+              description: Location of the file
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Databases/Exposure Sets" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+  /v1/uploads/{uploadId}/rdm:
+    post:
+      operationId: CreateUploadTaskForRdm
+      summary: Upload RDM
+      description: ''
+      parameters:
+      - name: uploadId
+        in: path
+        description: ID for AWS upload task or name of RDM on Data Bridge.
+        required: true
+        schema:
+          type: string
+      - name: servername
+        in: query
+        description: Name of the server instance hosting the RDM. Required if `importFromServer` is `true`.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RDMImportInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: An `UPLOAD_RDM` job was added to the workflow engine queue for processing. Returns a URL in the `Location` header that enables you to track the status of the job e.g. `/{host}/v1/workflows/100000`. Send periodic HTTP GET requests to the URL for the job status. See [Workflow Engine](https://developer.rms.com/rms-developers/docs/workflow-engine).
+
+            '
+          headers:
+            Location:
+              description: Location of the file
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Databases/Exposure Sets" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - File StorageV1
+components:
+  schemas:
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        method:
+          type: string
+      required:
+      - href
+      - method
+      - rel
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    S3UploadHelper:
+      type: object
+      properties:
+        bucketPrefix:
+          type: string
+        awsRegion:
+          type: string
+        uploadId:
+          type: string
+        uploadKey1:
+          type: string
+        uploadKey2:
+          type: string
+        uploadKey3:
+          type: string
+    EdmImportInput:
+      type: object
+      properties:
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+    S3Bucket:
+      type: object
+      properties:
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        sessionToken:
+          type: string
+        s3Path:
+          type: string
+        s3Region:
+          type: string
+    FileInput:
+      type: object
+      properties:
+        fileInputType:
+          type: string
+          enum:
+          - MRI
+          - ALM
+        fileType:
+          type: string
+        fileSize:
+          type: integer
+          format: int64
+        fileName:
+          type: string
+      required:
+      - fileName
+      - fileType
+    ErrorBody:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        category:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    RDMImportInput:
+      type: object
+      properties:
+        uploadId:
+          type: string
+          description: ID for AWS upload task or name of RDM on Data Bridge.
+        rdmName:
+          type: string
+          description: User-friendly name to tag all imported results.
+        edmDataSourceName:
+          type: string
+          description: 'Filter results data by exposure set. If an EDM is specified, the operation only imports results data that is based on exposure data stored in the specified EDM.
+
+            '
+        analysisIdFilter:
+          type: array
+          description: 'Filter results data by ID numbers. If specified, the operation imports the specified IDs and ignores all others.
+
+            '
+          items:
+            type: integer
+            format: int32
+        tableFilter:
+          type: array
+          description: 'Filter results data by database table. If specified, the operation only imports results data that stored in that table.
+
+            '
+          items:
+            type: string
+        perspectiveFilter:
+          type: array
+          description: 'Filter for selecting results data based on the <<glossary:financial perspective>>s used in calculating those results. Identified by a two-character string (e.g. `GU` `GR`, `RG`).
+
+            '
+          items:
+            type: string
+        exposureSetId:
+          type: string
+          description: 'ID number of exposure set. If specified, results data is added to the specified exposure set.
+
+            '
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        importFromServer:
+          type: boolean
+          description: If `true`, imports results data from the specified `serverName` query parameter. By default, `false`.
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      required:
+      - rdmName
+      - uploadId
+    AlmErrorMessage:
+      type: object
+      properties:
+        row:
+          type: string
+        column:
+          type: string
+        text:
+          type: string
+    AggregatePortfolioFlatFileMapping:
+      type: object
+      properties:
+        resolutionConversionFrom:
+          type: string
+        resolutionConversionTo:
+          type: string
+        columnMapping:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        dataRowStart:
+          type: integer
+          format: int32
+          minimum: 1
+        countryCode:
+          type: string
+        resolution:
+          type: string
+        dependencyResolution:
+          type: string
+      required:
+      - columnMapping
+      - countryCode
+      - resolution
+    AggregateExposuresList:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+        lobs:
+          type: array
+          items:
+            type: string
+        resolutionValues:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+        errorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlmErrorMessage'
+        countryCode:
+          type: string
+        resolution:
+          type: string
+        dependencyResolution:
+          type: string
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

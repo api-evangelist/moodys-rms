@@ -1,0 +1,72 @@
+openapi: 3.2.0
+info:
+  title: Data Bridge Client IP API
+  description: Endpoints for Data Bridge.
+  version: 2022-09
+servers:
+- url: https://{host}/databridge
+  description: Intelligent Risk Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Client IP
+paths:
+  /v1/MyIp:
+    get:
+      tags:
+      - Client IP
+      summary: Get client IP
+      operationId: getclientip
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+components:
+  schemas:
+    RMS.EnterpriseIntegrationHub.Contracts.GetMyIpResponse:
+      type: object
+      properties:
+        clientIP:
+          type:
+          - string
+          - 'null'
+        isAllowed:
+          type: boolean
+      additionalProperties: false
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

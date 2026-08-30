@@ -1,0 +1,253 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Datastore V2 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: DatastoreV2
+paths:
+  /v2/data-bridge/{serverId}/databases:
+    get:
+      operationId: getAvailableDatabasesv2
+      summary: Get data modules on Data Bridge
+      description: ''
+      parameters:
+      - name: serverId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: dbType
+        in: query
+        schema:
+          type: string
+          default: EDM
+          enum:
+          - EDM
+          - RDM
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List all available EDMs from DB instance is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataBridgeDatabaseSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatastoreV2
+  /v2/data-bridge/register:
+    post:
+      operationId: registerDatabaseV2
+      summary: Register EDM
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataBridgeRegisterInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: "Bad Request: Please check that you are provided all\n  required values."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatastoreV2
+  /v2/data-bridge/de-register/{datasourcename}:
+    delete:
+      operationId: deregisterDatabasev2
+      summary: Deregister EDM
+      description: ''
+      parameters:
+      - name: datasourcename
+        in: path
+        description: Data source name
+        required: true
+        schema:
+          type: string
+          maxLength: 80
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatastoreV2
+components:
+  schemas:
+    DataBridgeDatabase:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        serverId:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+        version:
+          type: string
+        datasource:
+          type: string
+        dbType:
+          type: string
+          enum:
+          - EDM
+          - RDM
+        exposureSetId:
+          type: string
+        groups:
+          type: array
+          items:
+            type: string
+    DataBridgeRegisterInput:
+      type: object
+      properties:
+        serverId:
+          type: integer
+          format: int64
+          minimum: 1
+        datasourceName:
+          type: string
+          maxLength: 80
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+        exposureSetId:
+          type: string
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      required:
+      - datasourceName
+    DataBridgeDatabaseSearchResult:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          format: int32
+        dataBridgeDatabases:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataBridgeDatabase'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

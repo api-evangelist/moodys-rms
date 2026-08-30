@@ -1,0 +1,281 @@
+openapi: 3.2.0
+info:
+  title: Data Bridge Logins API
+  description: Endpoints for Data Bridge.
+  version: 2022-09
+servers:
+- url: https://{host}/databridge
+  description: Intelligent Risk Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Logins
+paths:
+  /v1/sql-instances/{instanceName}/Logins:
+    get:
+      tags:
+      - Logins
+      summary: Get logins by server instance
+      operationId: getloginsbyinstance
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Login'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Login'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Login'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    post:
+      tags:
+      - Logins
+      summary: Create login
+      operationId: createlogin
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest'
+      responses:
+        '202':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '403':
+          description: Forbidden. You do not have permission to access that resource.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '409':
+          description: Conflict. The requested resource already exists.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+  /v1/sql-instances/{instanceName}/Logins/{loginName}:
+    patch:
+      tags:
+      - Logins
+      summary: Update login password
+      operationId: updateloginpassword
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: loginName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest'
+      responses:
+        '200':
+          description: OK. All went well.
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '403':
+          description: Forbidden. You do not have permission to access that resource.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    delete:
+      tags:
+      - Logins
+      summary: Delete server instance login
+      operationId: deleteinstancelogin
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: loginName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse'
+        '202':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse'
+        '204':
+          description: No content.
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '403':
+          description: Forbidden. You do not have permission to access that resource.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+components:
+  schemas:
+    RMS.EnterpriseIntegrationHub.Contracts.Login:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        role:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        owner:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest:
+      required:
+      - login
+      - password
+      - role
+      type: object
+      properties:
+        login:
+          maxLength: 20
+          minLength: 0
+          type: string
+        password:
+          maxLength: 128
+          minLength: 0
+          type: string
+        role:
+          type: string
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          maxLength: 128
+          minLength: 0
+          type: string
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

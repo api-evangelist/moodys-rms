@@ -1,0 +1,5790 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Location V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: LocationV1
+paths:
+  /v1/locations:
+    get:
+      operationId: searchLocations
+      summary: Get locations
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify comma-delimited field names followed by `ASC` (to display the results in alphabetical or numerical ascending order) or `DESC` (to display the results in descending order.)
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      - name: withflzone
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: List of locations is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    post:
+      operationId: createLocation
+      summary: Create location
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '201':
+          description: Created. New location is successfully created.
+          headers:
+            Location:
+              description: URL for the new location
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}:
+    get:
+      operationId: getLocation
+      summary: Get location
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ' Information for a specified location is successfully retrieved.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocation
+      summary: Update location
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '204':
+          description: Location updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocation
+      summary: Delete location
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationbidetail:
+    post:
+      operationId: createLocationBiDetail
+      summary: Create BI peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationBiDetail'
+        required: true
+      responses:
+        '201':
+          description: Bi detail successfully created.
+          headers:
+            Location:
+              description: Location of the new bi detail
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationbidetail/{locationbidetailid}:
+    get:
+      operationId: getLocationBiDetail
+      summary: Get BI peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationbidetailid
+        in: path
+        description: ID number of the location bi detail record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns location BI detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationBiDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationBiDetail
+      summary: Update BI peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationbidetailid
+        in: path
+        description: ID number of the location bi detail record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationBiDetail'
+        required: true
+      responses:
+        '204':
+          description: Bi detail successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaLinks'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationBiDetail
+      summary: Delete BI peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationbidetailid
+        in: path
+        description: ID number of the location bi detail record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Bi detail successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationcondition:
+    post:
+      operationId: createLocationCondition
+      summary: Add location condition
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationCondition'
+        required: true
+      responses:
+        '201':
+          description: Location condition successfully created
+          headers:
+            Location:
+              description: Location of the new location condition
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/locationcondition/batch:
+    post:
+      operationId: batchProcessLocationConditions
+      summary: Manage location conditions in batch
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BatchRequest'
+        required: true
+      responses:
+        '201':
+          description: Batch successfully initiated
+          headers:
+            Location:
+              description: Location of the locationcondition/batch
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationcondition/{conditionid}:
+    get:
+      operationId: getLocationConditionById
+      summary: Get location condition
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: conditionid
+        in: path
+        description: ID number of the location condition.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Building attribute successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuildingAttribute'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationCondition
+      summary: Update location condition
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: conditionid
+        in: path
+        description: ID number of the location condition record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationCondition'
+        required: true
+      responses:
+        '204':
+          description: Location condition successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaLinks'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationCondition
+      summary: Delete location condition
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: conditionid
+        in: path
+        description: ID number of the location condition record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location condition successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/coverage:
+    post:
+      operationId: createLocationCoverage
+      summary: Create location coverage
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationCoverage'
+        required: true
+      responses:
+        '201':
+          description: Coverage successfully created.
+          headers:
+            Location:
+              description: Location of the new coverage
+              style: simple
+              schema:
+                type: string
+                format: URI
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/coverage/{coverageid}:
+    get:
+      operationId: getLocationCoverage
+      summary: Get location coverage
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: coverageid
+        in: path
+        description: ID number of the location coverage record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationCoverage'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationCoverage
+      summary: Update coverage
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: coverageid
+        in: path
+        description: ID number of the location coverage record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationCoverage'
+        required: true
+      responses:
+        '204':
+          description: Coverage successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaLinks'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationCoverage
+      summary: Delete location coverage
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: coverageid
+        in: path
+        description: ID number of the location coverage record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location coverage successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationeqdetail:
+    post:
+      operationId: createLocationEqDetail
+      summary: Create EQ peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationEqDetail'
+        required: true
+      responses:
+        '201':
+          description: EQ detail successfully created.
+          headers:
+            Location:
+              description: Location of the new EQ detail
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationeqdetail/{locationeqdetailid}:
+    get:
+      operationId: getLocationEqDetail
+      summary: Get EQ peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationeqdetailid
+        in: path
+        description: ID number of the location earthquake record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: EQ detail successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationEqDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationEqDetail
+      summary: Update EQ peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationeqdetailid
+        in: path
+        description: ID number of the location earthquake record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationEqDetail'
+        required: true
+      responses:
+        '204':
+          description: EQ Detail Successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaLinks'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationEqDetail
+      summary: Delete EQ peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationeqdetailid
+        in: path
+        description: ID number of the location earthquake record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: EQ detail successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationfldetail:
+    post:
+      operationId: createLocationFlDetail
+      summary: Create FL peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationFlDetail'
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: Location of the new FL detail
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationfldetail/{locationfldetailid}:
+    get:
+      operationId: getLocationFlDetail
+      summary: Get FL peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationfldetailid
+        in: path
+        description: ID number of the location flood record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FL detail successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationFlDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationFlDetail
+      summary: Update FL peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationfldetailid
+        in: path
+        description: ID number of the location flood record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationFlDetail'
+        required: true
+      responses:
+        '204':
+          description: FL detail successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationFlDetail
+      summary: Delete FL peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationfldetailid
+        in: path
+        description: ID number of the location flood record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: FL detail successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationfrdetail:
+    post:
+      operationId: createLocationFrDetail
+      summary: Create FR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationFrDetail'
+        required: true
+      responses:
+        '201':
+          description: FR Detail successfully created
+          headers:
+            Location:
+              description: Location of new FR detail
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationfrdetail/{locationfrdetailid}:
+    get:
+      operationId: getLocationFrDetail
+      summary: Get FR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationfrdetailid
+        in: path
+        description: ID number of the location fire record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FR detail successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationFrDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationFrDetail
+      summary: Update FR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationfrdetailid
+        in: path
+        description: ID number of the location fire record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationFrDetail'
+        required: true
+      responses:
+        '204':
+          description: FR detail successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationFrDetail
+      summary: Delete FR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationfrdetailid
+        in: path
+        description: ID number of the location fire record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: FR detail successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/cession:
+    post:
+      operationId: createLocationReinsuranceCession
+      summary: Create reinsurance cession
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReinsuranceCession'
+        required: true
+      responses:
+        '201':
+          description: Created. New location is successfully created.
+          headers:
+            Location:
+              description: url of the new location
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/cession/{cessionid}:
+    get:
+      operationId: getLocationReinsuranceCessionDetail
+      summary: Get reinsurance cession
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: cessionid
+        in: path
+        description: ID number of the cession.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ReinsuranceCession details successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReinsuranceCession'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationReinsuranceCession
+      summary: Update reinsurance cession
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: cessionid
+        in: path
+        description: ID number of the cession.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReinsuranceCession'
+        required: true
+      responses:
+        '204':
+          description: Location reinsurance cession successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationReinsuranceCession
+      summary: Delete reinsurance cession
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: cessionid
+        in: path
+        description: ID number of the cession.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location reinsurance cession successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationtodetail:
+    post:
+      operationId: createLocationToDetail
+      summary: Create TO peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationToDetail'
+        required: true
+      responses:
+        '201':
+          description: TO detail successfully created
+          headers:
+            Location:
+              description: Location of the new TO detail
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationtodetail/{locationtodetailid}:
+    get:
+      operationId: getLocationToDetail
+      summary: Get TO peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationtodetailid
+        in: path
+        description: ID number of the location tornado record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: TO detail successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationToDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationToDetail
+      summary: Update TO peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationtodetailid
+        in: path
+        description: ID number of the location tornado record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationToDetail'
+        required: true
+      responses:
+        '204':
+          description: TO detail successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaLinks'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationToDetail
+      summary: Delete TO peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationtodetailid
+        in: path
+        description: ID number of the location tornado record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: TO detail successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationtrdetail:
+    post:
+      operationId: createLocationTrDetail
+      summary: Create TR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationTrDetail'
+        required: true
+      responses:
+        '201':
+          description: Location TR details successfully created.
+          headers:
+            Location:
+              description: Location of Location TR Details
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationtrdetail/{locationtrdetailid}:
+    get:
+      operationId: getLocationTrDetail
+      summary: Get TR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationtrdetailid
+        in: path
+        description: ID number of the location terrorism record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location TR detail successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationTrDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationTrDetail
+      summary: Update TR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationtrdetailid
+        in: path
+        description: ID number of the location terrorism record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationTrDetail'
+        required: true
+      responses:
+        '204':
+          description: Location TR detail successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationTrDetail
+      summary: Delete TR peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationtrdetailid
+        in: path
+        description: ID number of the location terrorism record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location TR detail successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationwcdetail:
+    post:
+      operationId: createLocationWcDetail
+      summary: Create WC
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationWcDetail'
+        required: true
+      responses:
+        '201':
+          description: Location WC details successfully created
+          headers:
+            Location:
+              description: Location of Location WC Detail
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationwcdetail/{locationwcdetailid}:
+    get:
+      operationId: getLocationWcDetail
+      summary: Get WC
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationwcdetailid
+        in: path
+        description: ID number of the location worker compensation record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location WC detail successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationWcDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationWcDetail
+      summary: Update WC
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationwcdetailid
+        in: path
+        description: ID number of the location worker compensation record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationWcDetail'
+        required: true
+      responses:
+        '204':
+          description: Location WC details successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationWcDetail
+      summary: Delete WC
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationwcdetailid
+        in: path
+        description: ID number of the location worker compensation record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location WC detail successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationwsdetail:
+    post:
+      operationId: createLocationWsDetail
+      summary: Create WS peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationWsDetail'
+        required: true
+      responses:
+        '201':
+          description: Location WS Details successfully created
+          headers:
+            Location:
+              description: Location of Location WS Details
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/locationwsdetail/{locationwsdetailid}:
+    get:
+      operationId: getLocationWsDetail
+      summary: Get WS peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationwsdetailid
+        in: path
+        description: ID number of the location windstorm record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location WS Detail successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationWsDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateLocationWsDetail
+      summary: Update WS peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationwsdetailid
+        in: path
+        description: ID number of the location windstorm record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationWsDetail'
+        required: true
+      responses:
+        '204':
+          description: Location WS Detail successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteLocationWsDetail
+      summary: Delete WS peril
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: locationwsdetailid
+        in: path
+        description: ID number of the location windstorm record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Location WS Detail successfully deleted.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/buildingattribute:
+    post:
+      operationId: createBuildingAttribute
+      summary: Create building attribute
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildingAttribute'
+        required: true
+      responses:
+        '201':
+          description: Building attribute successfully created
+          headers:
+            Location:
+              description: Location of the new building attribute
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/buildingattribute/{buildingattributeid}:
+    get:
+      operationId: getBuildingAttribute
+      summary: Get building attribute
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: buildingattributeid
+        in: path
+        description: ID number of the building attribute.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Building attribute successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildingAttribute'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    put:
+      operationId: updateBuildingAttribute
+      summary: Update building attribute
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: buildingattributeid
+        in: path
+        description: ID number of the location building attribute record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildingAttribute'
+        required: true
+      responses:
+        '204':
+          description: Building attribute updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetaLinks'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+    delete:
+      operationId: deleteBuildingAttribute
+      summary: Delete building attribute
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: buildingattributeid
+        in: path
+        description: ID number of the location building attribute record.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Building attribute successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/geocode:
+    post:
+      operationId: geoCodeByAddress
+      summary: Geocode address
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      responses:
+        '200':
+          description: The geocoding of the address is successfully performed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/geocode:
+    post:
+      operationId: geoCodeByLocationId
+      summary: Geocode or hazard location
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/LayerInfo'
+        required: true
+      responses:
+        '201':
+          description: Created. The location geocod request is created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+  /v1/locations/{id}/policyconditions:
+    get:
+      operationId: getPolicyConditions
+      summary: Get policy conditions by location
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ' Policy conditions successfully retrieved.'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PolicyCondition'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - LocationV1
+components:
+  schemas:
+    FacReinsurer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Location:
+      type: object
+      properties:
+        esdbBuildingAttribute:
+          $ref: '#/components/schemas/LocationBuildingAttribute'
+        property:
+          $ref: '#/components/schemas/Property'
+        address:
+          $ref: '#/components/schemas/Address'
+        biDetail:
+          $ref: '#/components/schemas/LocationBiDetail'
+        eqDetail:
+          $ref: '#/components/schemas/LocationEqDetail'
+        wsDetail:
+          $ref: '#/components/schemas/LocationWsDetail'
+        toDetail:
+          $ref: '#/components/schemas/LocationToDetail'
+        flDetail:
+          $ref: '#/components/schemas/LocationFlDetail'
+        frDetail:
+          $ref: '#/components/schemas/LocationFrDetail'
+        trDetail:
+          $ref: '#/components/schemas/LocationTrDetail'
+        buildingAttribute:
+          $ref: '#/components/schemas/BuildingAttribute'
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationCoverage'
+        reinsuranceCessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReinsuranceCession'
+        wcDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationWcDetail'
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        tiv:
+          type: number
+          format: double
+        riskAssessorCurves:
+          type: string
+        locationConditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationCondition'
+        maxCvgBldgValuation:
+          type: number
+          format: double
+      required:
+      - address
+      - property
+    Property:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        locationId:
+          type: integer
+          format: int32
+        addressId:
+          type: integer
+          format: int32
+        locationNumber:
+          type: string
+        locationName:
+          type: string
+        userId1:
+          type: string
+        userId2:
+          type: string
+        userText1:
+          type: string
+        userText2:
+          type: string
+        expireDate:
+          type: string
+        inceptDate:
+          type: string
+        yearBuilt:
+          type: string
+        createDate:
+          type: string
+        updateDate:
+          type: string
+        buildingClassScheme:
+          $ref: '#/components/schemas/ExposureValue'
+        buildingClass:
+          $ref: '#/components/schemas/ExposureValue'
+        occupancyTypeScheme:
+          $ref: '#/components/schemas/ExposureValue'
+        occupancyType:
+          $ref: '#/components/schemas/ExposureValue'
+        primaryLocId:
+          type: integer
+          format: int32
+        siteName:
+          $ref: '#/components/schemas/ExposureValue'
+        buildings:
+          type: integer
+          format: int32
+        stories:
+          type: integer
+          format: int32
+        floorOccupancy:
+          type: string
+        floorArea:
+          type: number
+          format: double
+        bldgHeight:
+          type: number
+          format: double
+        heightUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        slope:
+          type: number
+          format: double
+        otherZone:
+          type: string
+        huZone:
+          $ref: '#/components/schemas/ExposureValue'
+        areaUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        bldgValuation:
+          type: number
+          format: double
+        valuationDiffAmt:
+          type: number
+          format: double
+        valuationDiffPercent:
+          type: number
+          format: double
+        floodDefenseElevation:
+          type: number
+          format: double
+        floodDefenseElevationUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        rentalPropertyIdentifier:
+          $ref: '#/components/schemas/ExposureValue'
+        mfdSubcategory:
+          $ref: '#/components/schemas/ExposureValue'
+        dwellTime:
+          type: integer
+          format: int32
+        userGroundElev:
+          type: number
+          format: double
+        userBfe:
+          type: number
+          format: double
+        floodDefHtAboveGrnd:
+          type: number
+          format: double
+        contentLossTrigger:
+          $ref: '#/components/schemas/ExposureValue'
+        isPrimaryBldg:
+          type: boolean
+        useContentValue:
+          $ref: '#/components/schemas/ExposureValue'
+        nship:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+      required:
+      - locationNumber
+    LocationBuildingAttribute:
+      type: object
+      properties:
+        buildingId:
+          type: string
+        buildingNumber:
+          type: string
+        streetPrefix:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type: string
+        streetSuffix:
+          type: string
+        cityName:
+          type: string
+        stateCode:
+          type: string
+        country:
+          type: string
+        latitude:
+          description: Latitude coordinates.
+          type: number
+          format: double
+        longitude:
+          description: Longitude coordinates.
+          type: number
+          format: double
+        buildingClassScheme:
+          type: string
+          enum:
+          - RMS
+          - ATC
+          - ISO
+          - FIRE
+          - RMS_IND
+          - JPBLDG
+          - EURO
+          - RMS_BR
+          - RMS_OP
+          - USER
+        occupancyTypeScheme:
+          type: string
+          enum:
+          - ATC
+          - SIC
+          - NAICS
+          - NCCI
+          - ISO
+          - IBC
+          - RMS_IND
+          - JPOCC
+          - EURO
+          - RMS_BR
+          - RMS_OP
+          - WOCC
+        derivedStories:
+          type: integer
+          format: int32
+        areaUnit:
+          type: string
+          enum:
+          - SqFeet
+          - SqMeter
+        yearRange:
+          type: integer
+          format: int32
+        exterior:
+          type: string
+        fireproof:
+          type: string
+        esdbBuildingName:
+          type: string
+        esdbBuildingClass:
+          $ref: '#/components/schemas/ExposureValue'
+        esdbOccupancyType:
+          $ref: '#/components/schemas/ExposureValue'
+        esdbBldgHeight:
+          type: number
+          format: double
+        esdbStories:
+          type: integer
+          format: int32
+        esdbSquareFootage:
+          type: number
+          format: double
+        esdbYearBuilt:
+          type: string
+    LocationCondition:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        conditionId:
+          type: integer
+          format: int32
+        isIncluded:
+          type: string
+          enum:
+          - NotIncluded
+          - Included
+          - UserIncluded
+    PolicyCondition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPredefined:
+          type: boolean
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        deductibleType:
+          $ref: '#/components/schemas/ExposureValue'
+        conditionType:
+          $ref: '#/components/schemas/ExposureValue'
+        parentCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        policyNumber:
+          type: string
+        policyConditionCriterias:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyConditionCriteria'
+        percentOfLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+    BatchRequest:
+      type: object
+      properties:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    LocationToDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        fireClass:
+          type: string
+        rmsClass:
+          type: string
+        userClass:
+          type: string
+        atcOccupancy:
+          type: string
+        isoOccupancy:
+          type: string
+        userOccupancy:
+          type: string
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        architecture:
+          $ref: '#/components/schemas/ExposureValue'
+        cladRate:
+          $ref: '#/components/schemas/ExposureValue'
+        cladType:
+          $ref: '#/components/schemas/ExposureValue'
+        constructQuality:
+          $ref: '#/components/schemas/ExposureValue'
+        designCode:
+          $ref: '#/components/schemas/ExposureValue'
+        doorOpenings:
+          $ref: '#/components/schemas/ExposureValue'
+        externalOrnament:
+          $ref: '#/components/schemas/ExposureValue'
+        floodVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        foundation:
+          $ref: '#/components/schemas/ExposureValue'
+        maintenance:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecSide:
+          $ref: '#/components/schemas/ExposureValue'
+        otherOpenings:
+          $ref: '#/components/schemas/ExposureValue'
+        roofAge:
+          $ref: '#/components/schemas/ExposureValue'
+        roofAnchor:
+          $ref: '#/components/schemas/ExposureValue'
+        roofEquipment:
+          $ref: '#/components/schemas/ExposureValue'
+        roofFrame:
+          $ref: '#/components/schemas/ExposureValue'
+        roofGeometry:
+          $ref: '#/components/schemas/ExposureValue'
+        roofParpet:
+          $ref: '#/components/schemas/ExposureValue'
+        roofSystem:
+          $ref: '#/components/schemas/ExposureValue'
+        windMissile:
+          $ref: '#/components/schemas/ExposureValue'
+        windVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        basement:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecGround:
+          $ref: '#/components/schemas/ExposureValue'
+        floodMissiles:
+          $ref: '#/components/schemas/ExposureValue'
+        floodProtection:
+          $ref: '#/components/schemas/ExposureValue'
+        iceDamProtection:
+          $ref: '#/components/schemas/ExposureValue'
+        plumbingInsulation:
+          $ref: '#/components/schemas/ExposureValue'
+        atticInsulation:
+          $ref: '#/components/schemas/ExposureValue'
+        roofVentilation:
+          $ref: '#/components/schemas/ExposureValue'
+        snowGuards:
+          $ref: '#/components/schemas/ExposureValue'
+        treeDensity:
+          $ref: '#/components/schemas/ExposureValue'
+        garaging:
+          $ref: '#/components/schemas/ExposureValue'
+        toPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        toProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        toSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        toSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        dominantSubperilCS:
+          type: integer
+          format: int64
+        percentInGeographyCS:
+          type: number
+          format: double
+        score1CS:
+          type: integer
+          format: int32
+        score2CS:
+          type: integer
+          format: int32
+        score3CS:
+          type: integer
+          format: int32
+        scoreOverallCS:
+          type: integer
+          format: int32
+        dominantSubperilWT:
+          type: integer
+          format: int64
+        percentInGeographyWT:
+          type: number
+          format: double
+        score1WT:
+          type: integer
+          format: int32
+        score2WT:
+          type: integer
+          format: int32
+        score3WT:
+          type: integer
+          format: int32
+        scoreOverallWT:
+          type: integer
+          format: int32
+    MetaLinks:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - links
+      - meta
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    LocationWcDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        totalPayroll:
+          type: number
+          format: double
+        totalNumEmployees:
+          type: number
+          format: double
+        numEmployeesShift1:
+          type: number
+          format: double
+        numEmployeesShift2:
+          type: number
+          format: double
+        numEmployeesShift3:
+          type: number
+          format: double
+        numEmployeesShift4:
+          type: number
+          format: double
+        calcNumEmployees:
+          type: number
+          format: double
+        emergencyProtection:
+          $ref: '#/components/schemas/ExposureValue'
+        hazardousMaterials:
+          $ref: '#/components/schemas/ExposureValue'
+        wageRelativity:
+          $ref: '#/components/schemas/ExposureValue'
+        riskManagement:
+          $ref: '#/components/schemas/ExposureValue'
+        employeeDensity:
+          $ref: '#/components/schemas/ExposureValue'
+        undMngtAdjustment:
+          type: number
+          format: double
+        groupNum:
+          type: string
+        groupName:
+          type: string
+        occupancyTypeScheme:
+          $ref: '#/components/schemas/ExposureValue'
+        occupancyType:
+          $ref: '#/components/schemas/ExposureValue'
+        maxEmployees:
+          type: number
+          format: double
+        shiftType:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        uslh:
+          type: boolean
+        excessComp:
+          $ref: '#/components/schemas/ExposureValue'
+    LocationCoverage:
+      type: object
+      properties:
+        limitExtension:
+          description: Indicates if limit extensions apply each coverage type.
+          type: number
+          format: double
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        waitingPeriod:
+          description: The waiting period deductible (in days) to apply to business interruption coverage.
+          type: number
+          format: double
+        id:
+          type: integer
+          format: int32
+        label:
+          $ref: '#/components/schemas/ExposureValue'
+        eqslModifier:
+          description: The grade of contents covered in case of earthquake sprinkler leakage (EQSL).
+          type: integer
+          format: int32
+        lossType:
+          description: The loss type covered. One of `Building`, `Contents`, `BI`, or `CombinedCvg`.
+          type: string
+          enum:
+          - Building
+          - Contents
+          - BI
+          - CombinedCvg
+        percentSprinkler:
+          description: The percentage of buidling contents that are beneath a sprinkler and susceptible to water damage.
+          type: number
+          format: double
+        value:
+          description: The full replacement value of covered buildings and contents and the value of one year of income for business interruption coverage.
+          type: number
+          format: double
+        biPoi:
+          description: The business interruption period of indemnity in months.
+          type: number
+          format: double
+        deductible:
+          description: The location coverage deductible.
+          type: number
+          format: double
+        coverageModifier:
+          $ref: '#/components/schemas/ExposureValue'
+        accumulation:
+          description: The accumulation coverage. One of `Building`, `Contents`, `BI`, or `Combined`.
+          type: string
+          enum:
+          - Building
+          - Contents
+          - Bi
+          - Combined
+        limit:
+          type: number
+          format: double
+        peril:
+          description: The perils covered.
+          $ref: '#/components/schemas/ExposureValue'
+        percentageLossDeductibleAmount:
+          description: The percent of loss deductible amount as a percentage. Deductible expressed as a percentage of loss for a given coverage or combination of coverages. As the loss increases, the deductible amount increases.
+          type: number
+          format: double
+        isFranchiseDeductible:
+          description: Indicates if the deductible amount is franchise.
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          description: Indicates if location coverage is valid.
+          type: boolean
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    LocationSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationSearchItem'
+    LocationWsDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        coastalSegment:
+          type: string
+        fireClass:
+          type: string
+        rmsClass:
+          type: string
+        userClass:
+          type: string
+        atcOccupancy:
+          type: string
+        isoOccupancy:
+          type: string
+        sicOccupancy:
+          type: string
+        ibcOccupancy:
+          type: string
+        userOccupancy:
+          type: string
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        architecture:
+          $ref: '#/components/schemas/ExposureValue'
+        cladRate:
+          $ref: '#/components/schemas/ExposureValue'
+        cladType:
+          $ref: '#/components/schemas/ExposureValue'
+        constructQuality:
+          $ref: '#/components/schemas/ExposureValue'
+        designCode:
+          $ref: '#/components/schemas/ExposureValue'
+        doorOpenings:
+          $ref: '#/components/schemas/ExposureValue'
+        externalOrnament:
+          $ref: '#/components/schemas/ExposureValue'
+        floodVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        foundation:
+          $ref: '#/components/schemas/ExposureValue'
+        maintenance:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecSide:
+          $ref: '#/components/schemas/ExposureValue'
+        otherOpenings:
+          $ref: '#/components/schemas/ExposureValue'
+        roofAge:
+          $ref: '#/components/schemas/ExposureValue'
+        roofAnchor:
+          $ref: '#/components/schemas/ExposureValue'
+        roofEquipment:
+          $ref: '#/components/schemas/ExposureValue'
+        roofFrame:
+          $ref: '#/components/schemas/ExposureValue'
+        roofGeometry:
+          $ref: '#/components/schemas/ExposureValue'
+        roofParpet:
+          $ref: '#/components/schemas/ExposureValue'
+        roofSystem:
+          $ref: '#/components/schemas/ExposureValue'
+        windMissile:
+          $ref: '#/components/schemas/ExposureValue'
+        windVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        floodMissiles:
+          $ref: '#/components/schemas/ExposureValue'
+        floodProtection:
+          $ref: '#/components/schemas/ExposureValue'
+        basement:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecGround:
+          $ref: '#/components/schemas/ExposureValue'
+        flashing:
+          $ref: '#/components/schemas/ExposureValue'
+        ifmVerticalExpDist:
+          $ref: '#/components/schemas/ExposureValue'
+        ifmStructCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        ifmEquipBracing:
+          $ref: '#/components/schemas/ExposureValue'
+        ifmMissileExp:
+          $ref: '#/components/schemas/ExposureValue'
+        wsPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        wsProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        wsSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        wsSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        resistGarage:
+          $ref: '#/components/schemas/ExposureValue'
+        wsFloorType:
+          $ref: '#/components/schemas/ExposureValue'
+        wsFoundationType:
+          $ref: '#/components/schemas/ExposureValue'
+        contamination:
+          $ref: '#/components/schemas/ExposureValue'
+        floodDuration:
+          $ref: '#/components/schemas/ExposureValue'
+        garaging:
+          $ref: '#/components/schemas/ExposureValue'
+        treeDensity:
+          $ref: '#/components/schemas/ExposureValue'
+        depreciationAge:
+          $ref: '#/components/schemas/ExposureValue'
+        velocity:
+          description: A secondary modifier that applies if an area is prone to fast-flowing floodwater or in event of extreme flow conditions. Valid values vary by country.
+          $ref: '#/components/schemas/ExposureValue'
+        floodIndex:
+          type: number
+          format: double
+        distToCoast:
+          type: number
+          format: double
+        sysDistToCoast:
+          type: number
+          format: double
+        elevation:
+          type: number
+          format: double
+        manMadeCov:
+          type: number
+          format: double
+        naturalCov:
+          type: number
+          format: double
+        elevationCov:
+          type: number
+          format: double
+        distToCoastCov:
+          type: number
+          format: double
+        manMadeRoughness:
+          type: integer
+          format: int32
+        naturalRoughness:
+          type: integer
+          format: int32
+        windPool:
+          type: integer
+          format: int32
+        biZone:
+          type: integer
+          format: int32
+        topologyFeature:
+          type: integer
+          format: int32
+        elevationMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        naturalRoughnessMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        manMadeRoughnessMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        distToCoastMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        windPoolMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        windExposure:
+          type: integer
+          format: int32
+        nfipRate:
+          type: number
+          format: double
+        nfipYear:
+          type: integer
+          format: int32
+        nfipYearMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        buildingElevation:
+          type: number
+          format: double
+        buildingElevationMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        rmsBuildingElevation:
+          type: number
+          format: double
+        rmsBuildingElevationMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        zoneGroup:
+          type: integer
+          format: int32
+        perBasement:
+          type: number
+          format: double
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        percentInGeography:
+          type: number
+          format: double
+        score1:
+          type: integer
+          format: int32
+        score2:
+          type: integer
+          format: int32
+        score3:
+          type: integer
+          format: int32
+        scoreOverall:
+          type: integer
+          format: int32
+        windpoolZone:
+          type: string
+        distanceToInnerCoast:
+          type: number
+          format: double
+        ws1YrRpWind:
+          type: number
+          format: double
+        ws2YrRpWind:
+          type: number
+          format: double
+        ws5YrRpWind:
+          type: number
+          format: double
+        ws10YrRpWind:
+          type: number
+          format: double
+        ws25YrRpWind:
+          type: number
+          format: double
+        ws50YrRpWind:
+          type: number
+          format: double
+        ws100YrRpWind:
+          type: number
+          format: double
+        ws200YrRpWind:
+          type: number
+          format: double
+        ws250YrRpWind:
+          type: number
+          format: double
+        ws500YrRpWind:
+          type: number
+          format: double
+        ws1000YrRpWind:
+          type: number
+          format: double
+        ws10000YrRpWind:
+          type: number
+          format: double
+        ws1YrRpSurgeDef:
+          type: number
+          format: double
+        ws2YrRpSurgeDef:
+          type: number
+          format: double
+        ws5YrRpSurgeDef:
+          type: number
+          format: double
+        ws10YrRpSurgeDef:
+          type: number
+          format: double
+        ws25YrRpSurgeDef:
+          type: number
+          format: double
+        ws50YrRpSurgeDef:
+          type: number
+          format: double
+        ws100YrRpSurgeDef:
+          type: number
+          format: double
+        ws200YrRpSurgeDef:
+          type: number
+          format: double
+        ws250YrRpSurgeDef:
+          type: number
+          format: double
+        ws500YrRpSurgeDef:
+          type: number
+          format: double
+        ws1000YrRpSurgeDef:
+          type: number
+          format: double
+        ws10000YrRpSurgeDef:
+          type: number
+          format: double
+    Treaty:
+      description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
+
+        '
+      type: object
+      properties:
+        treatyId:
+          type: integer
+          format: int32
+        treatyNumber:
+          type: string
+          maxLength: 20
+          minLength: 0
+        treatyName:
+          type: string
+          maxLength: 40
+          minLength: 0
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        producer:
+          $ref: '#/components/schemas/Producer'
+        treatyType:
+          description: The treaty type.
+          $ref: '#/components/schemas/ExposureValue'
+        currency:
+          description: Indicates treaty currency. All monetary fields for a single treaty are considered to be in the same currency. However, treaties can be in a different currency than the exposures to which they are being attached. During analysis, Risk Modeler converts all currencies to the analysis currency..
+          $ref: '#/components/schemas/ExposureValue'
+        attachBasis:
+          $ref: '#/components/schemas/ExposureValue'
+        attachLevel:
+          $ref: '#/components/schemas/ExposureValue'
+        premium:
+          type: number
+          format: double
+        occurLimit:
+          description: Maximum amount that a treaty pays out for all locations for any event.
+          type: number
+          format: double
+        attachPt:
+          description: Value at which the treaty takes effect.
+          type: number
+          format: double
+        riskLimit:
+          type: number
+          format: double
+        retentAmt:
+          type: number
+          format: double
+        pcntPlaced:
+          type: number
+          format: double
+        effectDate:
+          type: string
+        expireDate:
+          type: string
+        pcntRetent:
+          description: Percentage of the reinsurer's share of the treaty losses that are not covered by retrocessions. Determines the losses for the reinsurance net loss financial perspective and the net premium that a reinsurer receives for a treaty. Calculated as reinsurance gross loss multiplied by the percentage retention by treaty.
+          type: number
+          format: double
+        pcntRiShare:
+          type: number
+          format: double
+        pcntCovered:
+          description: Percentage of loss greater than the attachment point covered by a treaty. Not applicable to Surplus Share treaties.
+          type: number
+          format: double
+        priority:
+          type: integer
+          format: int32
+        numOfReinst:
+          type: integer
+          format: int32
+        reinstCharge:
+          type: number
+          format: double
+        maolAmount:
+          type: number
+          format: double
+        isValid:
+          type: boolean
+        userId1:
+          type: string
+        userId2:
+          type: string
+        lobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineOfBusiness'
+        aggregateDeductible:
+          type: number
+          format: double
+        aggregateLimit:
+          type: number
+          format: double
+        lossOccurrences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LossOccurrence'
+      required:
+      - attachLevel
+      - cedant
+      - treatyNumber
+      - treatyType
+    LocationSearchItem:
+      type: object
+      properties:
+        propertyReference:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        method:
+          type: string
+      required:
+      - href
+      - method
+      - rel
+    Address:
+      type: object
+      properties:
+        addressId:
+          description: ID for address.
+          type: integer
+          format: int32
+        area:
+          $ref: '#/components/schemas/ExposureValue'
+        buildingId:
+          description: ID for building.
+          type: string
+        buildingName:
+          description: Name of building.
+          type: string
+        addressType:
+          $ref: '#/components/schemas/ExposureValue'
+        country:
+          $ref: '#/components/schemas/ExposureValue'
+        countryScheme:
+          description: Standard for user-supplied country code, e.g. `ISO2A`
+          type: string
+        countryGeoId:
+          type: integer
+          format: int32
+        countryRmsCode:
+          description: Internal RMS code for country.
+          type: string
+        latitude:
+          description: Latitude coordinates.
+          type: number
+          format: double
+        longitude:
+          description: Longitude coordinates.
+          type: number
+          format: double
+        addressText:
+          description: Supplemental text captured for address.
+          type: string
+        streetAddress:
+          description: Address containing number, street name, street type, etc.
+          type: string
+        cityCode:
+          description: Code for city/town.
+          type: string
+        cityName:
+          description: Name of city/town.
+          type: string
+        cityGeoId:
+          description: Globally unique ID of city/town.
+          type: integer
+          format: int64
+        postalCode:
+          description: Postal code.
+          type: string
+        postalGeoId:
+          description: Globally unique ID for postal code.
+          type: integer
+          format: int64
+        block:
+          description: ID of block.
+          type: string
+        blockGroup:
+          description: ID of block group.
+          type: string
+        locationCode:
+          description: Census track number / Sonpro / Sector / Short post code.
+          type: string
+        locationCodeGeoId:
+          type: integer
+          format: int64
+        parcelNumber:
+          description: ID of parcel.
+          type: string
+        subLocality:
+          description: Name of sub-locality (neighborhood).
+          type: string
+        geoResolutionConfidence:
+          description: Geocode confidence percentage.
+          type: number
+          format: double
+        geoAccuracyBuffer:
+          description: Geocode accuracy buffer.
+          type: number
+          format: double
+        geoProductVersion:
+          type: string
+        geoLocationCode:
+          description: Accuracy of assigned geocode for US high resolution geocoding.
+          type: string
+        geoMatchCode:
+          description: 'Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
+
+            '
+          type: string
+        geoDataSourceId:
+          description: Geocode data source ID.
+          type: integer
+          format: int32
+        geoResolutionCode:
+          $ref: '#/components/schemas/ExposureValue'
+        geoDataSourceVersionId:
+          type: integer
+          format: int32
+        geoDateTime:
+          type: string
+        createDateTime:
+          description: Date and time address record was created.
+          type: string
+        updateDateTime:
+          description: Date and time address record was updated.
+          type: string
+        admin1Code:
+          description: 'Code for administrative level 1. Admin1 represents large geographic divisions, such as states or provinces.
+
+            '
+          type: string
+        admin1GeoId:
+          description: 'Globally unique RMS ID for administrative level 1.
+
+            '
+          type: integer
+          format: int64
+        admin1Name:
+          description: 'Name of administrative level 1.
+
+            '
+          type: string
+        admin2Code:
+          description: 'Code for administrative level 2. Admin2 represents smaller geographic divisions, such as counties.
+
+            '
+          type: string
+        admin2GeoId:
+          description: 'Globally unique RMS ID for administrative level 2.
+
+            '
+          type: integer
+          format: int64
+        admin2Name:
+          description: 'Name of administrative level 2.
+
+            '
+          type: string
+        admin3Code:
+          description: 'Code for administrative level 3. Admin3 represents smaller geographic divisions, such as districts.
+
+            '
+          type: string
+        admin3GeoId:
+          description: 'Globally unique RMS ID for administrative level 3.
+
+            '
+          type: integer
+          format: int64
+        admin3Name:
+          description: 'Name of administrative level 3.
+
+            '
+          type: string
+        admin4Code:
+          description: 'Code for administrative level 4.
+
+            '
+          type: string
+        admin4GeoId:
+          description: 'Globally unique RMS ID for administrative level 4.
+
+            '
+          type: integer
+          format: int64
+        admin4Name:
+          type: string
+          description: 'Name of administrative level 4.
+
+            '
+        admin5Code:
+          description: 'Code for administrative level 5.
+
+            '
+          type: string
+        admin5GeoId:
+          description: 'Globally unique RMS ID for administrative level 5.
+
+            '
+          type: integer
+          format: int64
+        admin5Name:
+          description: Name of administrative level 5.
+          type: string
+        zone1GeoId:
+          description: Zone level 1 GeoID.
+          type: integer
+          format: int64
+        zone2GeoId:
+          description: Zone level 2 GeoID.
+          type: integer
+          format: int64
+        zone3GeoId:
+          description: Zone level 3 GeoID.
+          type: integer
+          format: int64
+        zone4GeoId:
+          description: Zone level 4 GeoID.
+          type: integer
+          format: int64
+        zone5GeoId:
+          description: Zone level 5 GeoID.
+          type: integer
+          format: int64
+        zone1:
+          description: 'CRESTA zone ID
+
+            '
+          type: string
+        zone2:
+          description: 'For finer zone definitions.
+
+            '
+          type: string
+        zone3:
+          description: 'For further finer zone definitions.
+
+            '
+          type: string
+        zone3Name:
+          type: string
+        zone4Name:
+          type: string
+        zone5Name:
+          type: string
+        zone3Code:
+          type: string
+        zone4Code:
+          type: string
+        zone5Code:
+          type: string
+        ugid:
+          description: Unique global identifier.
+          type: string
+    LocationBiDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        redundancy:
+          $ref: '#/components/schemas/ExposureValue'
+        siWaitingPeriod:
+          type: number
+          format: double
+        siLimit:
+          type: number
+          format: double
+        preparedness:
+          $ref: '#/components/schemas/ExposureValue'
+        serviceInterruption:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+    LocationFlDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        floodProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        floorType:
+          $ref: '#/components/schemas/ExposureValue'
+        floodMissile:
+          $ref: '#/components/schemas/ExposureValue'
+        basement:
+          $ref: '#/components/schemas/ExposureValue'
+        floodVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecGround:
+          $ref: '#/components/schemas/ExposureValue'
+        cladType:
+          $ref: '#/components/schemas/ExposureValue'
+        foundation:
+          $ref: '#/components/schemas/ExposureValue'
+        duration:
+          $ref: '#/components/schemas/ExposureValue'
+        contamination:
+          $ref: '#/components/schemas/ExposureValue'
+        velocity:
+          $ref: '#/components/schemas/ExposureValue'
+        flPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        flProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        flSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        flSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        ifmVerticalExpDist:
+          $ref: '#/components/schemas/ExposureValue'
+        flFoundationType:
+          $ref: '#/components/schemas/ExposureValue'
+        ifmStructureCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        bespokeFloodDefenseLevel:
+          type: number
+          format: double
+        bespokeFloodDefenseLevelType:
+          $ref: '#/components/schemas/ExposureValue'
+        floodIndex:
+          type: number
+          format: double
+        elevation:
+          type: number
+          format: double
+        elevationCov:
+          type: number
+          format: double
+        annProb:
+          type: string
+        flZone:
+          type: string
+        bfe:
+          type: string
+        additionalInfo:
+          type: string
+        panel:
+          type: string
+        cobra:
+          type: string
+        floodWay:
+          type: string
+        sfha:
+          type: string
+        community:
+          type: string
+        confidence:
+          type: number
+          format: double
+        underRev:
+          type: string
+        panelDate:
+          type: string
+        buffer:
+          type: number
+          format: double
+        otherZones:
+          type: string
+        huZones:
+          type: string
+        mapSource:
+          type: integer
+          format: int32
+        flMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        finishedFloor:
+          type: number
+          format: double
+        userId1:
+          type: string
+        userId2:
+          type: string
+        basinName:
+          type: string
+        catchmentId:
+          type: integer
+          format: int32
+        floodDriver:
+          type: string
+        rms100Flzone:
+          type: integer
+          format: int32
+        rms500Flzone:
+          type: integer
+          format: int32
+        fl30YrRpDef:
+          type: integer
+          format: int32
+        fl50YrRpDef:
+          type: integer
+          format: int32
+        fl75YrRpDef:
+          type: integer
+          format: int32
+        fl100YrRpDef:
+          type: integer
+          format: int32
+        fl200YrRpDef:
+          type: integer
+          format: int32
+        fl250YrRpDef:
+          type: integer
+          format: int32
+        fl500YrRpDef:
+          type: integer
+          format: int32
+        fl1000YrRpDef:
+          type: integer
+          format: int32
+        fl10000YrRpDef:
+          type: integer
+          format: int32
+        fl30YrRpUndef:
+          type: integer
+          format: int32
+        fl50YrRpUndef:
+          type: integer
+          format: int32
+        fl75YrRpUndef:
+          type: integer
+          format: int32
+        fl100YrRpUndef:
+          type: integer
+          format: int32
+        fl200YrRpUndef:
+          type: integer
+          format: int32
+        fl250YrRpUndef:
+          type: integer
+          format: int32
+        fl500YrRpUndef:
+          type: integer
+          format: int32
+        fl1000YrRpUndef:
+          type: integer
+          format: int32
+        fl10000YrRpUndef:
+          type: integer
+          format: int32
+        hdFlMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        flFfHag:
+          type: number
+          format: double
+        flFfHagFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        flZoneGroup:
+          type: integer
+          format: int32
+        flPerBasement:
+          type: number
+          format: double
+        protectedByLevee:
+          type: string
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        score1:
+          type: integer
+          format: int32
+        score2:
+          type: integer
+          format: int32
+        score3:
+          type: integer
+          format: int32
+        scoreOverall:
+          type: integer
+          format: int32
+        fl10YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl30YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl50YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl100YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl200YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl250YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl500YRInlandDepthUndef:
+          type: integer
+          format: int32
+        fl1000YRInlandDepthUndef:
+          type: integer
+          format: int32
+    PolicyConditionCriteria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        logic:
+          type: string
+        openPar:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        closePar:
+          type: string
+    Meta:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int32
+    ReinsuranceCession:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - POL
+          - LOC
+        type:
+          type: string
+          enum:
+          - None
+          - Facultative
+          - Treaty
+        facReinsurer:
+          $ref: '#/components/schemas/FacReinsurer'
+        treaty:
+          $ref: '#/components/schemas/Treaty'
+        layerNumber:
+          type: integer
+          format: int32
+        layerAmount:
+          type: number
+          format: double
+        excessAmount:
+          type: number
+          format: double
+        percentReinsurance:
+          type: number
+          format: double
+        maolAmount:
+          type: number
+          format: double
+        priority:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+    BuildingAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        yearBuilt:
+          type: string
+        isValid:
+          type: boolean
+        roofDeckType:
+          $ref: '#/components/schemas/ExposureValue'
+        roofDeckResistanceField:
+          type: number
+          format: double
+        windowGlassdoorProtectionType:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorThickness:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorDoublepane:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorProtectionAdequacy:
+          $ref: '#/components/schemas/ExposureValue'
+        roofCoverType:
+          $ref: '#/components/schemas/ExposureValue'
+        rooftopEquipment:
+          $ref: '#/components/schemas/ExposureValue'
+        skylightAreaPercent:
+          type: number
+          format: double
+        dockDoorAreaPercent:
+          type: number
+          format: double
+        dockDoorPressureResistance:
+          type: number
+          format: double
+        skylightImpactResistance:
+          $ref: '#/components/schemas/ExposureValue'
+        roofCoverResistanceCorner:
+          type: number
+          format: double
+        roofSlope:
+          $ref: '#/components/schemas/ExposureValue'
+        flashingPulloutResistance:
+          type: number
+          format: double
+        missileExposure:
+          $ref: '#/components/schemas/ExposureValue'
+        roofCoverResistancePerimeter:
+          type: number
+          format: double
+        roofDeckResistancePerimeter:
+          type: number
+          format: double
+        claddingPressureResistance:
+          type: number
+          format: double
+        windowGlassdoorGlassType:
+          $ref: '#/components/schemas/ExposureValue'
+        claddingType:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorAreaPercent:
+          type: number
+          format: double
+        roofDeckResistanceCorner:
+          type: number
+          format: double
+        roofCoverResistanceField:
+          type: number
+          format: double
+        roofArea:
+          type: number
+          format: double
+    LocationFrDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        fireDepartmentRatingModifier:
+          $ref: '#/components/schemas/ExposureValue'
+        fireDepartmentRating:
+          $ref: '#/components/schemas/ExposureValue'
+        sprinklerSystem:
+          $ref: '#/components/schemas/ExposureValue'
+        remoteAlarm:
+          $ref: '#/components/schemas/ExposureValue'
+        frPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        frProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        frSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        frSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofCovering:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofGeometry:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofAge:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofVent:
+          $ref: '#/components/schemas/ExposureValue'
+        frEmberAccumulator:
+          $ref: '#/components/schemas/ExposureValue'
+        frSuppression:
+          $ref: '#/components/schemas/ExposureValue'
+        frPerformance:
+          $ref: '#/components/schemas/ExposureValue'
+        frSetback:
+          $ref: '#/components/schemas/ExposureValue'
+        frExterior:
+          $ref: '#/components/schemas/ExposureValue'
+        frResAppurtenant:
+          $ref: '#/components/schemas/ExposureValue'
+        frComAppurtenant:
+          $ref: '#/components/schemas/ExposureValue'
+        frDeckType:
+          $ref: '#/components/schemas/ExposureValue'
+        frHeatResistance:
+          $ref: '#/components/schemas/ExposureValue'
+        frAccessibilityCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireHazard:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSusceptibility:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireThreat:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireAreaDescription:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSurfaceFuelType:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSpecialConditions:
+          type: string
+        wildFireLocalHistory:
+          type: number
+          format: double
+        wildFireNearbyHistory:
+          type: number
+          format: double
+        wildFireAccessibility:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSlope:
+          type: integer
+          format: int32
+        wildFireSlopeFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireFuel:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireFuelFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireDistanceToVeg:
+          type: integer
+          format: int32
+        wildFireDistanceToVegFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireDistanceToVegUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSiteHazVer:
+          type: string
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        percentInGeography:
+          type: number
+          format: double
+        score1:
+          type: integer
+          format: int32
+        scoreOverall:
+          type: integer
+          format: int32
+        distanceToWuiIntermix:
+          type: integer
+          format: int32
+        distanceToWuiInterface:
+          type: integer
+          format: int32
+        stochasticBurnProb:
+          type: number
+          format: double
+        urbanConFlagRationScore:
+          type: integer
+          format: int32
+        distanceToCalFireVeryHigh:
+          type: number
+          format: double
+        distanceToCalFireHigh:
+          type: number
+          format: double
+        distanceToCalFireMedium:
+          type: number
+          format: double
+        yearLastHistFire250m:
+          type: integer
+          format: int32
+        histFireYearCount250m:
+          type: integer
+          format: int32
+        histFireYearCount2km:
+          type: integer
+          format: int32
+        histFireYearCount5km:
+          type: integer
+          format: int32
+        histFireYearCount10km:
+          type: integer
+          format: int32
+        histFireYearCount20km:
+          type: integer
+          format: int32
+        firestationsName1:
+          type: string
+        firestationsLatitude1:
+          type: number
+          format: double
+        firestationsLongitude1:
+          type: number
+          format: double
+        firestationsDistance1:
+          type: number
+          format: double
+        firestationsStreetAddress1:
+          type: string
+        firestationsCityName1:
+          type: string
+        firestationsPostalCode1:
+          type: string
+        firestationsAdmin2name1:
+          type: string
+        firestationsAdmin1code1:
+          type: string
+        firestationsLevel1:
+          type: string
+        firestationsEms1:
+          type: string
+        firestationsFirestationType1:
+          type: string
+        firestationsName2:
+          type: string
+        firestationsLatitude2:
+          type: number
+          format: double
+        firestationsLongitude2:
+          type: number
+          format: double
+        firestationsDistance2:
+          type: number
+          format: double
+        firestationsStreetAddress2:
+          type: string
+        firestationsCityName2:
+          type: string
+        firestationsPostalCode2:
+          type: string
+        firestationsAdmin2name2:
+          type: string
+        firestationsAdmin1code2:
+          type: string
+        firestationsLevel2:
+          type: string
+        firestationsEms2:
+          type: string
+        firestationsFireStationType2:
+          type: string
+        firestationsName3:
+          type: string
+        firestationsLatitude3:
+          type: number
+          format: double
+        firestationsLongitude3:
+          type: number
+          format: double
+        fireStationsDistance3:
+          type: number
+          format: double
+        fireStationsStreetaddress3:
+          type: string
+        fireStationsCityname3:
+          type: string
+        fireStationsPostalcode3:
+          type: string
+        fireStationsAdmin2name3:
+          type: string
+        fireStationsAdmin1code3:
+          type: string
+        fireStationsLevel3:
+          type: string
+        fireStationsEms3:
+          type: string
+        fireStationsFireStationType3:
+          type: string
+        fireStationsName4:
+          type: string
+        fireStationsLatitude4:
+          type: number
+          format: double
+        fireStationsLongitude4:
+          type: number
+          format: double
+        fireStationsDistance4:
+          type: number
+          format: double
+        fireStationsStreetAddress4:
+          type: string
+        fireStationsCityName4:
+          type: string
+        fireStationsPostalCode4:
+          type: string
+        fireStationsAdmin2name4:
+          type: string
+        fireStationsAdmin1code4:
+          type: string
+        fireStationsLevel4:
+          type: string
+        fireStationsEms4:
+          type: string
+        fireStationsFireStationType4:
+          type: string
+        fireStationsName5:
+          type: string
+        fireStationsLatitude5:
+          type: number
+          format: double
+        fireStationsLongitude5:
+          type: number
+          format: double
+        fireStationsDistance5:
+          type: number
+          format: double
+        fireStationsStreetAddress5:
+          type: string
+        fireStationsCityName5:
+          type: string
+        fireStationsPostalcode5:
+          type: string
+        fireStationsAdmin2name5:
+          type: string
+        fireStationsAdmin1code5:
+          type: string
+        fireStationsLevel5:
+          type: string
+        fireStationsEms5:
+          type: string
+        fireStationsFireStationType5:
+          type: string
+        isValid:
+          type: boolean
+    LocationTrDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        trPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        trProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        trSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        trSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        score1:
+          type: integer
+          format: int32
+        scoreOverall:
+          type: integer
+          format: int32
+        targetsName1:
+          type: string
+        targetsId1:
+          type: integer
+          format: int32
+        targetsScore1:
+          type: number
+          format: double
+        targetsDistance1:
+          type: number
+          format: double
+        targetsCategory1:
+          type: number
+          format: double
+        targetsCityName1:
+          type: string
+        targetsAdmin1code1:
+          type: string
+        targetsName2:
+          type: string
+        targetsId2:
+          type: integer
+          format: int32
+        targetsScore2:
+          type: number
+          format: double
+        targetsDistance2:
+          type: number
+          format: double
+        targetsCategory2:
+          type: number
+          format: double
+        targetsCityName2:
+          type: string
+        targetsAdmin1code2:
+          type: string
+        targetsName3:
+          type: string
+        targetsId3:
+          type: integer
+          format: int32
+        targetsScore3:
+          type: number
+          format: double
+        targetsDistance3:
+          type: number
+          format: double
+        targetsCategory3:
+          type: number
+          format: double
+        targetsCityName3:
+          type: string
+        targetsAdmin1code3:
+          type: string
+        targetsName4:
+          type: string
+        targetsId4:
+          type: integer
+          format: int32
+        targetsScore4:
+          type: number
+          format: double
+        targetsDistance4:
+          type: number
+          format: double
+        targetsCategory4:
+          type: number
+          format: double
+        targetsCityName4:
+          type: string
+        targetsAdmin1code4:
+          type: string
+        targetsName5:
+          type: string
+        targetsId5:
+          type: integer
+          format: int32
+        targetsScore5:
+          type: number
+          format: double
+        targetsDistance5:
+          type: number
+          format: double
+        targetsCategory5:
+          type: number
+          format: double
+        targetsCityName5:
+          type: string
+        targetsAdmin1code5:
+          type: string
+        dominantSubperilCS:
+          type: integer
+          format: int64
+        percentInGeographyCS:
+          type: number
+          format: double
+        score1CS:
+          type: integer
+          format: int32
+        score2CS:
+          type: integer
+          format: int32
+        score3CS:
+          type: integer
+          format: int32
+        scoreOverallCS:
+          type: integer
+          format: int32
+        dominantSubperilWT:
+          type: integer
+          format: int64
+        percentInGeographyWT:
+          type: number
+          format: double
+        score1WT:
+          type: integer
+          format: int32
+        score2WT:
+          type: integer
+          format: int32
+        score3WT:
+          type: integer
+          format: int32
+        scoreOverallWT:
+          type: integer
+          format: int32
+    LocationEqDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        yearSprinkler:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        atcClass:
+          type: string
+        isoClass:
+          type: string
+        fireClass:
+          type: string
+        rmsClass:
+          type: string
+        userClass:
+          type: string
+        atcOccupancy:
+          type: string
+        isoOccupancy:
+          type: string
+        sicOccupancy:
+          type: string
+        ibcOccupancy:
+          type: string
+        userOccupancy:
+          type: string
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        secondarySupply:
+          $ref: '#/components/schemas/ExposureValue'
+        eqslSusceptibility:
+          $ref: '#/components/schemas/ExposureValue'
+        sprinklerType:
+          $ref: '#/components/schemas/ExposureValue'
+        baseIsolation:
+          $ref: '#/components/schemas/ExposureValue'
+        bldgExterior:
+          $ref: '#/components/schemas/ExposureValue'
+        cladding:
+          $ref: '#/components/schemas/ExposureValue'
+        constructQuality:
+          $ref: '#/components/schemas/ExposureValue'
+        ductility:
+          $ref: '#/components/schemas/ExposureValue'
+        duress:
+          $ref: '#/components/schemas/ExposureValue'
+        enggFoundation:
+          $ref: '#/components/schemas/ExposureValue'
+        frameBolt:
+          $ref: '#/components/schemas/ExposureValue'
+        hazardExposed:
+          $ref: '#/components/schemas/ExposureValue'
+        internalMasonaryPart:
+          $ref: '#/components/schemas/ExposureValue'
+        longSpan:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecEquip:
+          $ref: '#/components/schemas/ExposureValue'
+        ornamentation:
+          $ref: '#/components/schemas/ExposureValue'
+        overhangProfile:
+          $ref: '#/components/schemas/ExposureValue'
+        preFabrication:
+          $ref: '#/components/schemas/ExposureValue'
+        pounding:
+          $ref: '#/components/schemas/ExposureValue'
+        redundancy:
+          $ref: '#/components/schemas/ExposureValue'
+        shapeConfigure:
+          $ref: '#/components/schemas/ExposureValue'
+        shortColumn:
+          $ref: '#/components/schemas/ExposureValue'
+        sidingType:
+          $ref: '#/components/schemas/ExposureValue'
+        storyProfile:
+          $ref: '#/components/schemas/ExposureValue'
+        structureUpgrade:
+          $ref: '#/components/schemas/ExposureValue'
+        tank:
+          $ref: '#/components/schemas/ExposureValue'
+        tiltupRetrofit:
+          $ref: '#/components/schemas/ExposureValue'
+        torsion:
+          $ref: '#/components/schemas/ExposureValue'
+        urmRetrofit:
+          $ref: '#/components/schemas/ExposureValue'
+        wallsBrace:
+          $ref: '#/components/schemas/ExposureValue'
+        tsDebris:
+          $ref: '#/components/schemas/ExposureValue'
+        tsScour:
+          $ref: '#/components/schemas/ExposureValue'
+        tsSafeDist:
+          $ref: '#/components/schemas/ExposureValue'
+        tsProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        eqPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        eqProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        eqSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        eqSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        urmChimney:
+          $ref: '#/components/schemas/ExposureValue'
+        builtOnSlope:
+          $ref: '#/components/schemas/ExposureValue'
+        alquistPreoloZone:
+          type: integer
+          format: int32
+        soil:
+          type: number
+          format: double
+        landslide:
+          type: number
+          format: double
+        liquefaction:
+          type: number
+          format: double
+        biZone:
+          type: integer
+          format: int32
+        landslideMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        liquefactionMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        soilMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        fireLossMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        landslideCov:
+          type: number
+          format: double
+        liquefactionCov:
+          type: number
+          format: double
+        soilCov:
+          type: number
+          format: double
+        fireLossCov:
+          type: number
+          format: float
+        soilPeriod:
+          type: number
+          format: double
+        soilThickness:
+          type: number
+          format: double
+        fire1:
+          type: number
+          format: double
+        fire2:
+          type: number
+          format: double
+        fire3:
+          type: number
+          format: double
+        fire4:
+          type: number
+          format: double
+        fire5:
+          type: number
+          format: double
+        fire6:
+          type: number
+          format: double
+        fire7:
+          type: number
+          format: double
+        fire8:
+          type: number
+          format: double
+        mmi100:
+          type: number
+          format: double
+        mmi200:
+          type: number
+          format: double
+        mmi250:
+          type: number
+          format: double
+        mmi475:
+          type: number
+          format: double
+        avgSlope:
+          type: number
+          format: double
+        distFault1:
+          type: number
+          format: double
+        apMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        mmiMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        distSinkhole:
+          type: number
+          format: double
+        distMine:
+          type: number
+          format: double
+        sinkholeZone:
+          type: integer
+          format: int32
+        soilVs:
+          type: number
+          format: double
+        soilVsMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        basinLocId:
+          type: integer
+          format: int32
+        di:
+          type: number
+          format: double
+        critd:
+          type: number
+          format: double
+        n160CS:
+          type: number
+          format: double
+        t15:
+          type: number
+          format: double
+        wff:
+          type: number
+          format: double
+        distriv:
+          type: number
+          format: double
+        gwd:
+          type: number
+          format: double
+        dc:
+          type: number
+          format: double
+        liqcv:
+          type: number
+          format: double
+        hdLiqMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        phi:
+          type: number
+          format: double
+        rough:
+          type: number
+          format: double
+        ndvi:
+          type: number
+          format: double
+        cohes:
+          type: number
+          format: double
+        landcv:
+          type: number
+          format: double
+        hdLandMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        eqSlope:
+          type: number
+          format: double
+        elev:
+          type: number
+          format: double
+        cti:
+          type: number
+          format: double
+        precip:
+          type: number
+          format: double
+        topo:
+          type: number
+          format: double
+        hdSecMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        soilPeriodMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        groundwaterDepthMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        groundSlopeMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        percentInGeography:
+          type: number
+          format: double
+        score1:
+          type: integer
+          format: int32
+        score2:
+          type: integer
+          format: int32
+        score3:
+          type: integer
+          format: int32
+        scoreOverall:
+          type: integer
+          format: int32
+        mmi500:
+          type: number
+          format: double
+        mmi1000:
+          type: number
+          format: double
+        mmi1500:
+          type: number
+          format: double
+        faultsName1:
+          type: string
+        faultsDistance1:
+          type: number
+          format: double
+        faultsReturnPeriodM601:
+          type: integer
+          format: int32
+        faultsReturnPeriodM651:
+          type: integer
+          format: int32
+        faultsReturnPeriodM701:
+          type: integer
+          format: int32
+        faultsName2:
+          type: string
+        faultsDistance2:
+          type: number
+          format: double
+        faultsReturnPeriodM602:
+          type: integer
+          format: int32
+        faultsReturnPeriodM652:
+          type: integer
+          format: int32
+        faultsReturnPeriodM702:
+          type: integer
+          format: int32
+        faultsName3:
+          type: string
+        faultsDistance3:
+          type: number
+          format: double
+        faultsReturnPeriodM603:
+          type: integer
+          format: int32
+        faultsReturnPeriodM653:
+          type: integer
+          format: int32
+        faultsReturnPeriodM703:
+          type: integer
+          format: int32
+        faultsName4:
+          type: string
+        faultsDistance4:
+          type: number
+          format: double
+        faultsReturnPeriodM604:
+          type: integer
+          format: int32
+        faultsReturnPeriodM654:
+          type: integer
+          format: int32
+        faultsReturnPeriodM704:
+          type: integer
+          format: int32
+        faultsName5:
+          type: string
+        faultsDistance5:
+          type: number
+          format: double
+        faultsReturnPeriodM605:
+          type: integer
+          format: int32
+        faultsReturnPeriodM655:
+          type: integer
+          format: int32
+        faultsReturnPeriodM705:
+          type: integer
+          format: int32
+        faultsBackgroundRates:
+          type: string
+        mineName1:
+          type: string
+        mineType1:
+          type: string
+        mineStatus1:
+          type: string
+        mineArea1:
+          type: number
+          format: double
+        mineDistance1:
+          type: number
+          format: double
+        mineName2:
+          type: string
+        mineType2:
+          type: string
+        mineStatus2:
+          type: string
+        mineArea2:
+          type: number
+          format: double
+        mineDistance2:
+          type: number
+          format: double
+        mineName3:
+          type: string
+        mineType3:
+          type: string
+        mineStatus3:
+          type: string
+        mineArea3:
+          type: number
+          format: double
+        mineDistance3:
+          type: number
+          format: double
+        mineName4:
+          type: string
+        mineType4:
+          type: string
+        mineStatus4:
+          type: string
+        mineArea4:
+          type: number
+          format: double
+        mineDistance4:
+          type: number
+          format: double
+        mineName5:
+          type: string
+        mineType5:
+          type: string
+        mineStatus5:
+          type: string
+        mineArea5:
+          type: number
+          format: double
+        mineDistance5:
+          type: number
+          format: double
+        sinkHoleArea1:
+          type: number
+          format: double
+        sinkHoleDistance1:
+          type: number
+          format: double
+        sinkHoleArea2:
+          type: number
+          format: double
+        sinkHoleDistance2:
+          type: number
+          format: double
+        sinkHoleArea3:
+          type: number
+          format: double
+        sinkHoleDistance3:
+          type: number
+          format: double
+        sinkHoleArea4:
+          type: number
+          format: double
+        sinkHoleDistance4:
+          type: number
+          format: double
+        sinkHoleArea5:
+          type: number
+          format: double
+        sinkHoleDistance5:
+          type: number
+          format: double
+        isValid:
+          type: boolean
+        eqslInsurance:
+          $ref: '#/components/schemas/ExposureValue'
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

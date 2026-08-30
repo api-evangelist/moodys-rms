@@ -1,0 +1,506 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Imports V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: ImportsV1
+paths:
+  /v1/imports:
+    post:
+      operationId: createJob
+      summary: Import exposures from file
+      description: ''
+      parameters:
+      - in: header
+        name: Accept-Language
+        description: Language convention assumed for imported dates and numbers. By default, `en-US`.
+        schema:
+          type: string
+          enum:
+          - en-US
+          - en-GB
+          - de-DE
+          - fr-FR
+          default: en-US
+        required: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmittedImportJob'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: An `MRI_IMPORT` or `ALM_IMPORT` job was added to the workflow engine queue for processing. Returns a URL in the `Location` header that enables you to track the status of the job e.g. `/{host}/v1/workflows/100000`. Send periodic HTTP GET requests to the URL for the job status. See [Workflow Engine](https://developer.rms.com/rms-developers/docs/workflow-engine).
+
+            '
+          headers:
+            Location:
+              description: workflowId
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Import Flat Files" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ImportsV1
+  /v1/imports/createaccount/{bucketId}:
+    post:
+      operationId: createAccountData
+      summary: Create account source file
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: ID number of the <<glossary:storage bucket>>.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: delimiter
+        in: query
+        description: 'Text delimiter for account data. One of `TAB`, `COMMA`, `SEMICOLON`.
+
+          '
+        schema:
+          type: string
+          enum:
+          - TAB
+          - COMMA
+          - SEMICOLON
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountFileInput'
+        required: true
+      responses:
+        '201':
+          description: Created. Account file needed by MRI for running the import of account data is successfully created.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Import Flat Files" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ImportsV1
+  /v1/imports/createmapping/{bucketId}:
+    post:
+      operationId: sendMapping
+      summary: Create import mapping file
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: ID number of the <<glossary:storage bucket>>.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportMappingInput'
+        required: true
+      responses:
+        '201':
+          description: Created. Mapping file is successfully created.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Import Flat Files" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ImportsV1
+  /v1/imports/extractaccountsfromlocationfile/{bucketId}/{fileId}:
+    get:
+      operationId: extractAccountsFromLocationFile
+      summary: Extract account data from MRI location file
+      parameters:
+      - name: bucketId
+        in: path
+        description: Bucket ID.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fileId
+        in: path
+        description: File ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: delimiter
+        in: query
+        schema:
+          type: string
+          enum:
+          - TAB
+          - COMMA
+          - SEMICOLON
+      responses:
+        '200':
+          description: Import job initiated.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int32
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Import Flat Files" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ImportsV1
+  /v1/imports/extractmapping/{bucketId}/{fileId}:
+    get:
+      operationId: extractMapping
+      summary: Extract data from MRI mapping file
+      description: ''
+      parameters:
+      - name: bucketId
+        in: path
+        description: ID number of the <<glossary:storage bucket>>.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fileId
+        in: path
+        description: File ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Data from a specified mapping file is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportMappingOutput'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Import Flat Files" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ImportsV1
+  /v1/imports/extractsample/{bucketId}/{fileId}:
+    get:
+      operationId: extractData
+      summary: Extract data from MRI file
+      parameters:
+      - name: bucketId
+        in: path
+        description: ID number of the <<glossary:storage bucket>>.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fileId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: delimiter
+        in: query
+        schema:
+          type: string
+          enum:
+          - TAB
+          - COMMA
+          - SEMICOLON
+      responses:
+        '200':
+          description: MRI extraction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportSourceFileResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Import Flat Files" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ImportsV1
+components:
+  schemas:
+    ImportMappingOutput:
+      type: object
+      properties:
+        accountItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        locationItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        reinsuranceItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+      required:
+      - accountItems
+      - locationItems
+      - reinsuranceItems
+    ImportMappingItem:
+      type: object
+      properties:
+        source:
+          type: string
+        destination:
+          type: string
+    ImportSourceFileResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportSourceFileItem'
+    ImportMappingInput:
+      type: object
+      properties:
+        mapFileName:
+          type: string
+          description: Name of the import mapping file.
+        accountItems:
+          type: array
+          description: Array of mappings between <<glossary:account resource file>> columns and EDM columns.
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        locationItems:
+          description: Array of mappings between <<glossary:location resource file>> columns and EDM columns.
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        reinsuranceItems:
+          type: array
+          description: Array of mappings between <<glossary:reinsurance resource file>> columns and EDM columns.
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+      required:
+      - accountItems
+      - locationItems
+      - mapFileName
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    AccountFileInput:
+      type: object
+      properties:
+        number:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      - number
+    SubmittedImportJob:
+      type: object
+      properties:
+        bucketId:
+          description: ID of the Amazon S3 storage bucket.
+          example: 3456
+          type: integer
+          format: int32
+          minimum: 1
+        accountsFileId:
+          description: ID of uploaded <<glossary:account source file>>.
+          example: 451
+          type: integer
+          format: int32
+        locationsFileId:
+          description: ID of uploaded <<glossary:location source file>>.
+          example: 571
+          type: integer
+          format: int32
+        reinsuranceFileId:
+          description: ID of uploaded <<glossary:reinsurance source file>>.
+          example: 138
+          type: integer
+          format: int32
+        mappingFileId:
+          description: ID of uploaded <<glossary:import mapping file>>.
+          example: 76
+          type: integer
+          format: int32
+        locale:
+          type: string
+          description: 'Language convention assumed for imported dates and numbers. One of `de-DE` (Standarddeutsch), `en-GB` (British English), `en-US` (American English), `fr-FR` (le français standard). By default, `en-US`.
+
+            '
+          example: en-US
+        currency:
+          description: 'Default currency for imported data. Specifies the currency used if the currency column for an imported exposure is undefined or blank. Does not overwrite specified currency values.
+
+            '
+          example: USD
+          type: string
+        dataSourceName:
+          description: Name of EDM datastore into which the account, location, and reinsurance data is imported.
+          type: string
+          example: myEDM
+        delimiter:
+          description: Delimiter used to identify data columns in the flat files. One of `TAB`, `COMMA`, `SEMICOLON`.
+          type: string
+          enum:
+          - TAB
+          - COMMA
+          - SEMICOLON
+        skipLines:
+          description: Number of lines to skip in source files if the flat files contain header columns.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 0
+        appendLocations:
+          description: If `true`, imported location data is added to an existing account.
+          type: boolean
+          example: false
+        geoHaz:
+          description: This functionality is not supported. By default, `false`.
+          type: boolean
+          example: false
+        portfolioId:
+          description: 'ID of portfolio. If specified, the imported accounts are associated that portfolio. If null, the uploaded accounts are not associated with any portfolio.
+
+            '
+          type: integer
+          example: 57
+          format: int32
+        importType:
+          description: Import job type. One of `MRI`, `ALM`.
+          type: string
+          enum:
+          - MRI
+          - ALM
+        portfolioIds:
+          description: 'Array of portfolios identifed by ID.
+
+            '
+          type: array
+          items:
+            type: integer
+            format: int32
+      required:
+      - bucketId
+      - dataSourceName
+      - delimiter
+    ImportSourceFileItem:
+      type: object
+      properties:
+        source:
+          type: string
+        sourceExample:
+          type: string
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

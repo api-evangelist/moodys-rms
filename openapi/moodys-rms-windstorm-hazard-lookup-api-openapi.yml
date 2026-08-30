@@ -1,0 +1,1175 @@
+openapi: 3.2.0
+info:
+  title: Location Intelligence Windstorm Hazard Lookup API
+  version: 2022.09.c
+  description: Use LI API data to access RMS model insights in a flexible, scalable, and programmable way. The suite of layers includes exposure enhancement, geocoding, hazard, risk scoring, and loss costs to provide information for key decisions in the underwriting workflow, including screening, selection, and pricing.
+servers:
+- url: https://{host}/li
+  description: Location Intelligence
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- apiKey: []
+tags:
+- name: Windstorm Hazard Lookup
+paths:
+  /au_ws_hazard/18.0:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Australia Windstorm Hazard 18.0
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/AuAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /au_ws_hazard/18.1:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Australia Windstorm Hazard 18.1
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/AuAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /au_ws_hazard/latest:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Australia Windstorm Hazard Latest
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/AuAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /cc_ws_hazard/18.0:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Hong Kong Windstorm Hazard 18.0
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/HkAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /cc_ws_hazard/18.1:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Hong Kong Windstorm Hazard 18.1
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/HkAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /cc_ws_hazard/latest:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Hong Kong Windstorm Hazard Latest
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/HkAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /gu_ws_hazard/18.0:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Guam Windstorm Hazard 18.0
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/GuAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /gu_ws_hazard/18.1:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Guam Windstorm Hazard 18.1
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/GuAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /gu_ws_hazard/latest:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: Guam Windstorm Hazard Latest
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/GuAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /na_ws_hazard/18.0:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: North America Windstorm Hazard 18.0
+      description: ''
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - admin1Code
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/NaWsAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /na_ws_hazard/18.1:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: North America Windstorm Hazard 18.1
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - admin1Code
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/NaWsAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /na_ws_hazard/latest:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: North America Windstorm Hazard Latest
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - admin1Code
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/NaWsAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HurricaneHazardOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /us_ws_windpool_zone/1.0:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: US Wind Pool Zones 1.0
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - admin1Code
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/USWindpoolZoneAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WindpoolZoneOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+  /us_ws_windpool_zone/latest:
+    post:
+      tags:
+      - Windstorm Hazard Lookup
+      summary: US Wind Pool Zones Latest
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - location
+              properties:
+                location:
+                  type: object
+                  allOf:
+                  - $ref: '#/components/schemas/AddressInput'
+                  - type: object
+                  properties:
+                    address:
+                      type: object
+                      required:
+                      - latitude
+                      - longitude
+                      - countryRmsCode
+                      - admin1Code
+                      - rmsGeoModelResolutionCode
+                      example:
+                        $ref: '#/components/examples/USWindpoolZoneAddress/value'
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WindpoolZoneOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+components:
+  schemas:
+    ErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ERR_XXXX
+          description: 'Error codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | ERR_4000 | No details found for requested layer. |
+
+            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
+
+            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
+
+            | ERR_4003 | Location is in a region that is not supported by this layer. |
+
+            | ERR_4005 | Insufficient information to look up requested data. |
+
+            | ERR_4041 | Invalid input. |
+
+            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
+
+            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
+
+            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
+
+            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
+
+            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
+
+            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
+
+            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
+
+            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
+
+            | ERR_4400 | General error for the layer. |
+
+            | ERR_4401 | Invalid address input. Incorrect field. |
+
+            | ERR_4010 | Forbidden. |
+
+            | ERR_4030 | Unauthorized. |
+
+            | ERR_4040 | Not found. |
+
+            | ERR_4050 | Method not allowed. |
+
+            | ERR_4060 | Not acceptable. |
+
+            | ERR_4080 | Request timeout. |
+
+            | ERR_4130 | Request too large. |
+
+            | ERR_4150 | Unsupported media type. |
+
+            | ERR_4220 | Unprocessable entity. |
+
+            | ERR_4290 | Quota exceeded. |
+
+            | ERR_5000 | Internal server error. |
+
+            | ERR_5040 | Gateway timeout. |
+
+            '
+        message:
+          type: string
+          example: Error message
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    GeocodeInput:
+      type: object
+      required:
+      - countryCode
+      - countryScheme
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: User defined id
+          example: 0
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: ''
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: ''
+          maxLength: 256
+        admin4Code:
+          type: string
+          description: Code for administrative level 4
+          example: '044230130'
+          maxLength: 16
+        admin4Name:
+          type: string
+          description: Name of administrative level 4
+          example: '044230130'
+          maxLength: 256
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: NEWARK
+          maxLength: 256
+        countryCode:
+          type: string
+          description: Country Code (optional for geocoding if latitude and longitude are provided)
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryScheme:
+          type: string
+          description: Standard for user-supplied country code (optional for geocoding if latitude and longitude are provided)
+          example: ISO2A
+          enum:
+          - ISO2A
+          - ISO3A
+          - ISO3N
+          - FIPS
+        latitude:
+          type: number
+          format: double
+          description: Location Latitude
+          example: 37.54120000000001
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: double
+          description: Location Longitude
+          example: -122.06061000000001
+          minimum: -180
+          maximum: 180
+        postalCode:
+          type: string
+          description: Postal Code
+          example: '94560'
+          maxLength: 16
+        streetAddress:
+          type: string
+          description: Address containing Number, Street Name, Street Type, etc.
+          example: 7575 GATEWAY BLVD
+          maxLength: 256
+        name:
+          type: string
+          description: Supplemental text captured for the address
+          example: ''
+          maxLength: 512
+    WindpoolZoneOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        windpoolZone:
+          type: string
+          description: Windpool Zone
+          example: Zone 5
+          maxLength: 60
+    GeocodeOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/GeocodeInput'
+      - type: object
+        properties:
+          admin1GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+            example: 99999106
+          admin2GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+            example: 99999206001
+          admin3GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 3. Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+            example: 12695859
+          admin4GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 4.
+            example: 62219571
+          admin5GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 5.
+            example: 0
+          cityGeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for City/Town
+            example: 999993061080
+          countryFips:
+            type: string
+            description: Country FIPS code
+            example: US
+            maxLength: 4
+          countryGeoId:
+            type: integer
+            description: Globally unique ID for Country
+            example: 840
+          countryRmsCode:
+            type: string
+            description: RMS code for Country
+            example: US
+            maxLength: 4
+          geoDataSourceId:
+            type: integer
+            description: Geocode Data Source ID
+            example: 8
+          geoMatchCode:
+            type: string
+            description: Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
+            example: T1-999993061080-T1A1-S0T100A100-S1A1-00-B-A-X
+            maxLength: 255
+          locationCode:
+            type: string
+            description: Census Tract Number / Sonpo / Sector / Short Postal Code
+            example: '060014443.01'
+            maxLength: 16
+          locationCodeGeoId:
+            type: integer
+            format: int64
+            description: Unique identification code for the location
+            example: 0
+          parcelId:
+            type: integer
+            format: int64
+            description: Parcel id
+            example: 0
+          postalCodeGeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for postal code
+            example: 99999494560
+          rmsGeoModelResolutionCode:
+            type: integer
+            description: 'Address match level: * `0` - None * `1` - Coordinate * `2` - Street / Parcel / Building * `3` - High Resolution Postcode / Other * `4` - Block Group/Census Tract * `5` - Postal code * `6` - Neighborhood * `7` - City * `8` - District / Municipality * `9` - County * `10` - State/Province * `11` - CRESTA * `12` - Multiple * `13` - User Defined * `14` - Country
+
+              '
+            example: 2
+            minimum: 0
+            maximum: 14
+          rmsGeocodingResolutionCode:
+            type: integer
+            description: Indicates the geocoding resolutions that are supported by the ACORD standard
+            example: 31
+          ugid:
+            type: string
+            description: Unique global identifier
+            example: USS3121778167575
+            maxLength: 50
+          zone1Code:
+            type: string
+            description: CRESTA code
+            example: A2
+            maxLength: 16
+          zone2Code:
+            type: string
+            description: zone2 code
+            example: ''
+            maxLength: 16
+          zone3Code:
+            type: string
+            description: zone3 code (Low Resolution CRESTA Zone)
+            example: ''
+            maxLength: 16
+          zone4Code:
+            type: string
+            description: zone4 code (High Resolution CRESTA Zone)
+            example: ''
+            maxLength: 16
+          zone3Name:
+            type: string
+            description: zone3 name (Low Resolution CRESTA Zone)
+            example: ''
+            maxLength: 256
+          zone4Name:
+            type: string
+            description: zone4 name (High Resolution CRESTA Zone)
+            example: ''
+            maxLength: 256
+          zone1GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone1 (CRESTA)
+            example: 999995062
+          zone2GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone2 (CRESTA)
+            example: 0
+          zone3GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone3 (Low Resolution CRESTA Zone)
+            example: 22505979
+          zone4GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone4 (High Resolution CRESTA Zone)
+            example: 20235111
+          dataVersion:
+            type: string
+            description: Data version
+            example: xx.x.xxxx.x
+            maxLength: 20
+    WarningItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: FLG_XXXX
+          description: 'Warning codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | FLG_4001 | Layer option was skipped. Response based on its default value. |
+
+            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
+
+            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
+
+            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
+
+            | FLG_4103 | No additional options can be provided to this lookup. |
+
+            | FLG_4201 | Location not matched in ESDB building attributes database. |
+
+            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
+
+            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
+
+            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
+
+            | FLG_4205 | The geocoding version used is not recommended for this layer. |
+
+            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
+
+            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
+
+            | FLG_4208 | Insufficient geocoding information to look up requested data. |
+
+            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
+
+            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
+
+            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
+
+            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
+
+            | FLG_4306 | Missing required field to perform gross loss calculations. |
+
+            | FLG_4307 | Gross losses can only be calculated for reference view. |
+
+            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
+
+            | FLG_4401 | No data found for this location. |
+
+            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
+
+            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
+
+            | FLG_4403 | The location entered is outside of supported region, Response based on default value
+
+            '
+        message:
+          type: string
+          example: Warning message
+    AddressInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
+    HurricaneHazardOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        elevationGround:
+          type: string
+          description: elevation
+          example: '1822.11'
+          maxLength: 30
+        distanceToCoast:
+          type: string
+          description: distance to coast
+          example: '91.4007'
+          maxLength: 30
+        elevationGroundUnit:
+          type: string
+          description: elevation ground unit
+          example: feet
+          maxLength: 8
+        distanceToCoastUnit:
+          type: string
+          description: distance to coast unit
+          example: miles
+          maxLength: 8
+    WarningOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/WarningItem'
+  examples:
+    USWindpoolZoneAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: AL
+        latitude: 30.905307
+        longitude: -88.043782
+        rmsGeoModelResolutionCode: 1
+    GuAddress:
+      value:
+        countryCode: GU
+        countryScheme: ISO2A
+        countryRmsCode: GU
+        latitude: 13.495093
+        longitude: 144.780626
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 60073592
+        admin3GeoId: 60073615
+    HkAddress:
+      value:
+        countryCode: HK
+        countryRmsCode: HK
+        countryScheme: ISO2A
+        rmsGeoModelResolutionCode: 4
+        latitude: 22.449
+        longitude: 114.044
+        admin1GeoId: 24703004
+        admin2GeoId: 24703143
+        zone1GeoId: 60345327
+        cityGeoId: 2165358
+    AuAddress:
+      value:
+        countryCode: AU
+        countryScheme: ISO2A
+        countryRmsCode: AU
+        latitude: -19.284868
+        longitude: 146.772049
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 2344702
+        postalCodeGeoId: 12708445
+    NaWsAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: DE
+        latitude: 38.9264
+        longitude: -75.4281
+        rmsGeoModelResolutionCode: 1
+        postalCodeGeoId: 99999419963
+        admin1GeoId: 99999110
+        admin2GeoId: 99999210005
+  responses:
+    401Response:
+      description: No valid API key provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    500Response:
+      description: Something went wrong on our end (this happens rarely)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    400Response:
+      description: The request was unacceptable, likely due to missing a required input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+externalDocs:
+  description: Find out more about RMS
+  url: https://www.rms.com/programs/location-intelligence-api/
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

@@ -1,0 +1,1650 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Portfolio V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: PortfolioV1
+paths:
+  /v1/portfolios:
+    get:
+      operationId: searchPortfolios
+      summary: Get portfolios
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of portfolios retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+    post:
+      operationId: createPortfolio
+      summary: Create portfolio
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+        required: true
+      responses:
+        '201':
+          description: Portfolio created.
+          headers:
+            Location:
+              description: Portfolio resource
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}:
+    get:
+      operationId: getPortfolio
+      summary: Get portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Portfolio information retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+    put:
+      operationId: updatePortfolio
+      summary: Update portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+        required: true
+      responses:
+        '204':
+          description: Portfolio successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+    delete:
+      operationId: deletePortfolio
+      summary: Delete portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: deleteType
+        in: query
+        description: 'The scope of the data deleted: `PORTFOLIO_INFO`, `PORTFOLIO_ALL_ACCOUNTS`, or `PORTFOLIO_EXCEPT_ACCOUNTS`'
+        required: true
+        schema:
+          type: string
+          enum:
+          - PORTFOLIO_INFO
+          - PORTFOLIO_ALL_ACCOUNTS
+          - PORTFOLIO_EXCEPT_ACCOUNTS
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/accounts:
+    get:
+      operationId: searchPortfolioAccounts
+      summary: Get accounts by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of accounts retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+    put:
+      operationId: managePortfolioAccounts
+      summary: Manage accounts by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortfolioAccountsInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/analyses:
+    get:
+      operationId: getPortfolioAnalysesResults
+      summary: Get analyses by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Analyses for exposure successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Results" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      deprecated: true
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/convertcurrency:
+    post:
+      operationId: convertPortfolioCurrency
+      summary: Convert currency by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Currency'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: Bad Request. The input data is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/coordinate:
+    get:
+      operationId: getCoordinateByLatitudeAndLongitudePortfolio
+      summary: Get portfolio locations
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: latitude
+        in: query
+        description: Latitude coordinates.
+        schema:
+          type: number
+          format: double
+      - name: longitude
+        in: query
+        description: Longitude coordinates.
+        schema:
+          type: number
+          format: double
+      responses:
+        '200':
+          description: Location coordinate retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Coordinate'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/coordinates:
+    get:
+      operationId: getCoordinatesByPortfolio
+      summary: Get location coordinates by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Location coordinates retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Coordinate'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/copy:
+    post:
+      operationId: copyPortfolio
+      summary: Copy portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyPortfolioInfo'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/count:
+    get:
+      operationId: getExposureCountPortfolio
+      summary: Count portfolios
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Portfolio count successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/filteredaccounts:
+    put:
+      operationId: manageFilteredAccounts
+      summary: Manage filtered accounts by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PortfolioFilteredAccountsInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/geohaz:
+    post:
+      operationId: geohazPortfolio
+      summary: Geohazard portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/LayerInfo'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/metrics:
+    get:
+      operationId: getPortfolioMetrics
+      summary: Get metrics by portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Metrics for a specified portfolio are successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortfolioMetrics'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/process:
+    post:
+      operationId: processPortfolio
+      summary: Analyze portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Add to Analysis Builder" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      deprecated: true
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/portfolios/{id}/reports:
+    get:
+      tags:
+      - PortfolioV1
+      summary: Get portfolio reports
+      description: ''
+      operationId: portfolioReportsv1
+      parameters:
+      - name: id
+        in: path
+        description: ID number of portfolio.
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of reports successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportListSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+  /v1/portfolios/{id}/summary_report:
+    post:
+      operationId: summaryReportPortfolio
+      summary: Generate summary report by portfolio
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExposureSummaryReportInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Download Report" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+  /v1/exposurebatches:
+    post:
+      operationId: executeBatchOperation
+      summary: Manage portfolio exposures in batch
+      description: ''
+      parameters:
+      - name: operation
+        in: query
+        description: Operation of batch resource
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BatchRequest'
+      responses:
+        '200':
+          description: Operation executed.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - PortfolioV1
+components:
+  schemas:
+    BatchRequest:
+      type: object
+      properties:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
+    AnalysesItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        runDate:
+          type: string
+        description:
+          type: string
+        currency:
+          type: string
+        type:
+          type: integer
+          format: int32
+        exposureType:
+          type: integer
+          format: int32
+        peril:
+          type: string
+        status:
+          type: integer
+          format: int32
+        region:
+          type: string
+        engineVersion:
+          type: string
+        groupType:
+          type: string
+        cedant:
+          type: string
+        lob:
+          type: string
+        engineType:
+          type: integer
+          format: int32
+        subperil:
+          type: integer
+          format: int32
+        exposureId:
+          type: integer
+          format: int32
+        dataSource:
+          type: string
+        jobId:
+          type: integer
+          format: int64
+        jobUUID:
+          type: string
+        isGroup:
+          type: boolean
+        engineName:
+          type: string
+        statusName:
+          type: string
+        typeName:
+          type: string
+        subperilName:
+          type: string
+        rdmName:
+          type: string
+        regroup:
+          type: integer
+          format: int32
+        currencyName:
+          type: string
+        perilName:
+          type: string
+        regionName:
+          type: string
+        lossAmplification:
+          type: integer
+          format: int32
+        lossAmplificationName:
+          type: string
+        mode:
+          type: integer
+          format: int32
+        modeName:
+          type: string
+        insuranceType:
+          type: integer
+          format: int32
+        insuranceTypeName:
+          type: string
+        vulnerabilityCurve:
+          type: integer
+          format: int32
+        vulnerabilityCurveName:
+          type: string
+        riGuid:
+          type: string
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    CopyPortfolioInfo:
+      type: object
+      properties:
+        deep:
+          type: boolean
+        newName:
+          type: string
+        newNumber:
+          type: string
+        newDescription:
+          type: string
+        isDeep:
+          type: boolean
+      required:
+      - newDescription
+      - newName
+      - newNumber
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    PortfolioSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortfolioSearchItem'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    PortfolioFilteredAccountsInput:
+      type: object
+      properties:
+        selectAll:
+          type: boolean
+        queryFilter:
+          type: string
+        markedAccounts:
+          type: array
+          items:
+            type: integer
+            format: int32
+        manageExistingAccounts:
+          type: boolean
+    AccountSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountSearchItem'
+    MetricRequest:
+      type: object
+      properties:
+        granularity:
+          type: array
+          items:
+            type: string
+        metricType:
+          type: string
+        perspective:
+          type: string
+        includeIntermediateSums:
+          type: boolean
+    PortfolioAccountsInput:
+      type: object
+      properties:
+        accountsToAdd:
+          type: array
+          items:
+            type: integer
+            format: int32
+        accountsToRemove:
+          type: array
+          items:
+            type: integer
+            format: int32
+    PortfolioMetrics:
+      type: object
+      properties:
+        totalAccounts:
+          type: integer
+          format: int32
+        totalLocations:
+          type: integer
+          format: int32
+        totalPolicies:
+          type: integer
+          format: int32
+        perilsExposed:
+          type: string
+        name:
+          type: string
+        number:
+          type: string
+        description:
+          type: string
+        owner:
+          type: string
+        createDate:
+          type: string
+        geocodeVersion:
+          type: string
+        hazardVersion:
+          type: string
+    AccountSearchItem:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        cedantName:
+          type: string
+        producerName:
+          type: string
+        underwriterName:
+          type: string
+        branchName:
+          type: string
+        numLocations:
+          type: integer
+          format: int32
+        userId1:
+          type: string
+        userId2:
+          type: string
+        userId3:
+          type: string
+        userId4:
+          type: string
+        userText1:
+          type: string
+        userText2:
+          type: string
+        geocodeVersion:
+          type: string
+        hazardVersion:
+          type: string
+        ownerName:
+          type: string
+        updatedBy:
+          type: string
+        stampDate:
+          type: string
+        jobStatus:
+          type: string
+        jobStartDate:
+          type: string
+        jobEndDate:
+          type: string
+        resultsCount:
+          type: integer
+          format: int32
+        policyExpirationDate:
+          type: string
+        policyExpirationStatus:
+          type: string
+        totalTIV:
+          type: number
+          format: float
+        reportsCount:
+          type: integer
+          format: int32
+          example: 0
+    ProcessInput:
+      type: object
+      properties:
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        edm:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        modelProfileId:
+          type: integer
+          format: int32
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        treaties:
+          type: array
+          items:
+            type: integer
+            format: int32
+        jobName:
+          type: string
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        id:
+          type: integer
+          format: int32
+          minimum: 1
+        outputSetting:
+          $ref: '#/components/schemas/OutputProfile'
+        outputProfile:
+          type: string
+      required:
+      - currency
+      - edm
+      - outputSetting
+    OutputProfile:
+      type: object
+      properties:
+        name:
+          type: string
+        metricRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricRequest'
+    Portfolio:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        number:
+          type: string
+        description:
+          type: string
+        createDate:
+          type: string
+        stampDate:
+          type: string
+      required:
+      - description
+      - name
+      - number
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    Band:
+      type: object
+      properties:
+        greaterThanOrEqualTo:
+          type: number
+          format: double
+          minimum: 0
+        lessThan:
+          type: number
+          format: double
+          maximum: 10000
+      required:
+      - greaterThanOrEqualTo
+    ReportListSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        edmName:
+          type: string
+        createDate:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        userName:
+          type: string
+        notes:
+          type: string
+    ReportListSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportListSearchItem'
+    CustomBand:
+      type: object
+      properties:
+        hazard:
+          type: string
+        bands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Band'
+          maxItems: 10
+          minItems: 1
+      required:
+      - hazard
+    Coordinate:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        locationNumber:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        streetAddress:
+          type: string
+        geoResolutionCode:
+          $ref: '#/components/schemas/ExposureValue'
+    AnalysisSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysesItem'
+    PortfolioSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        number:
+          type: string
+        description:
+          type: string
+        createDate:
+          type: string
+        stampDate:
+          type: string
+        geocodeVersion:
+          type: string
+        hazardVersion:
+          type: string
+        ownerName:
+          type: string
+        updatedBy:
+          type: string
+        jobStatus:
+          type: string
+        jobStartDate:
+          type: string
+        jobEndDate:
+          type: string
+      required:
+      - description
+      - name
+      - number
+    ExposureSummaryReportInput:
+      type: object
+      properties:
+        perilList:
+          type: array
+          items:
+            type: string
+          maxItems: 2147483647
+          minItems: 1
+        reportName:
+          type: string
+        customBands:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomBand'
+      required:
+      - perilList
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

@@ -1,0 +1,332 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Producer V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: ProducerV1
+paths:
+  /v1/producers:
+    get:
+      operationId: getProducers
+      summary: Get producers
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify comma-delimited field names followed by `ASC` (to display the results in alphabetical or numerical ascending order) or `DESC` (to display the results in descending order.)
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Number of pages offset before the first page returned records. By default, _0_.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of producers in the data source is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProducerSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Contract Tags" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ProducerV1
+    post:
+      operationId: createProducer
+      summary: Create producer
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+        required: true
+      responses:
+        '201':
+          description: New producer is created in the data source is successfully.
+          headers:
+            Location:
+              description: 'location of the new Producer '
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Contract Tags" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '409':
+          description: '409'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ProducerV1
+  /v1/producers/{id}:
+    get:
+      operationId: getProducerById
+      summary: Get producer by ID
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID of the Producer.
+        required: true
+        schema:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Producer by Id in the data source is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producer'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Contract Tags" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ProducerV1
+    put:
+      operationId: updateProducer
+      summary: Update producer
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Producer'
+        required: true
+      responses:
+        '204':
+          description: Producer is updated in the data source is successfully.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Contract Tags" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ProducerV1
+    delete:
+      operationId: deleteProducer
+      summary: Delete producer
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: ID number of the location.
+        required: true
+        schema:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+      responses:
+        '204':
+          description: Producer is deleted from the data source is successfully.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Contract Tags" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '404':
+          description: The requested resource was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - ProducerV1
+components:
+  schemas:
+    ProducerSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Producer'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

@@ -1,0 +1,647 @@
+openapi: 3.2.0
+info:
+  title: Data Bridge Databases API
+  description: Endpoints for Data Bridge.
+  version: 2022-09
+servers:
+- url: https://{host}/databridge
+  description: Intelligent Risk Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Databases
+paths:
+  /v1/sql-instances/{instanceName}/Databases:
+    post:
+      tags:
+      - Databases
+      summary: Create database
+      operationId: createdatabase
+      parameters:
+      - name: instanceName
+        in: path
+        description: Name of a managed SQL Server instance. The database is created on this instance.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest'
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse'
+        '202':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    get:
+      tags:
+      - Databases
+      summary: Get databases by server instance
+      operationId: getdatabasesbyinstance
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: adminMode
+        description: Enables changes to a resource owned by others. If `true`, returns all databases. The principal making the request must have the appropriate permissions (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+  /v1/sql-instances/{instanceName}/Databases/{databaseName}:
+    get:
+      tags:
+      - Databases
+      summary: Get database by server instance
+      operationId: getdatabasebyinstance
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: adminMode
+        description: Enables changes to a resource owned by others. If `true`, returns the database. The principal making the request must have the appropriate permission (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Database'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    put:
+      tags:
+      - Databases
+      summary: Pin database
+      operationId: pindatabase
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest'
+        required: true
+      responses:
+        '200':
+          description: OK. All went well.
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+  /v1/sql-instances/{instanceName}/Databases/{databaseName}/export:
+    post:
+      tags:
+      - Databases
+      summary: Export database to URI
+      operationId: exportdatabase
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: exportTo
+        description: 'The file format of the exported database artifact. One of `0` (MDF), `1` (BAK), or `2` (DACPAC). By default, `0` (MDF). '
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Enums.ExportToType'
+      responses:
+        '202':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '409':
+          description: Conflict. The requested resource already exists.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+  /v1/sql-instances/{instanceName}/Databases/{databaseName}/import:
+    get:
+      tags:
+      - Databases
+      summary: Get upload directory URI
+      operationId: getuploaddirectoryuri
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          pattern: ^[_\-a-zA-Z0-9]+$
+          type: string
+      - name: importFrom
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Enums.ImportFromType'
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '409':
+          description: Conflict. The requested resource already exists.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    post:
+      tags:
+      - Databases
+      summary: Import database from flat file
+      operationId: importdatabase
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: importFrom
+        in: query
+        schema:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Enums.ImportFromType'
+      - name: groupIds
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: groupNames
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '202':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '409':
+          description: Conflict. The requested resource already exists.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+  /v1/sql-instances/{instanceName}/Databases/{databaseName}/groups:
+    get:
+      tags:
+      - Databases
+      summary: Get groups by database
+      operationId: getgroupbydatabase
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: adminMode
+        description: Enables changes to a resource owned by others. If `true`, returns list of groups assigned to the database. The principal making the request must have the appropriate permissions (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    patch:
+      tags:
+      - Databases
+      summary: Update group access to database
+      operationId: updategroupaccess
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: databaseName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: adminMode
+        description: Enables changes to resources owned by others. If `true`, updates group access to the database. The principal making the request must have the appropriate permissions (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest'
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+components:
+  schemas:
+    RMS.EnterpriseIntegrationHub.Enums.ImportFromType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      format: int32
+    RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest:
+      required:
+      - pinned
+      type: object
+      properties:
+        pinned:
+          type: boolean
+        pinExpiration:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.Group:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.Database:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        error:
+          type:
+          - string
+          - 'null'
+        sizeInMb:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        createdAt:
+          type: string
+          format: date-time
+        pinned:
+          type: boolean
+        pinExpiration:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        databaseSchema:
+          type:
+          - string
+          - 'null'
+        databaseVersion:
+          type:
+          - string
+          - 'null'
+        lastIndexUpdate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupAction:
+      description: Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest:
+      type: object
+      properties:
+        groupOperations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
+      type: object
+      properties:
+        filteredResult:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group'
+        count:
+          type: integer
+          format: int32
+        isFirst:
+          type: boolean
+        isLast:
+          type: boolean
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest:
+      required:
+      - databaseName
+      type: object
+      properties:
+        databaseName:
+          type: string
+          description: 'Unique name of database. Valid characters:  `0`-`9`, `A`-`Z`, `a`-`z`, `_` (underscore), `-` (hyphen), `:` (colon), and '' '' (space). Maximum length is 80 characters.'
+        groupIds:
+          type:
+          - array
+          - 'null'
+          description: Array of group IDs that identify the groups that may access the database.
+          items:
+            type: string
+        groupNames:
+          type:
+          - array
+          - 'null'
+          description: Array of group names that identify the groups that may access the database.
+          items:
+            type: string
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse:
+      type: object
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
+      type: object
+      properties:
+        groupAction:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
+        groupId:
+          description: ID of group.
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Enums.ExportToType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      format: int32
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

@@ -1,0 +1,191 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Exports V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: ExportsV1
+paths:
+  /v1/exports:
+    post:
+      operationId: exportDatav1
+      summary: Export data module to file
+      description: ''
+      parameters:
+      - name: servername
+        in: query
+        description: The optional `servername` query parameter specifies the name of the server.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: URL of the export job.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      deprecated: true
+      security:
+      - RMS_Auth: []
+      tags:
+      - ExportsV1
+  /v1/exports/downloadresults:
+    post:
+      operationId: downloadResults
+      summary: Download analysis results
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadResultsInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: Workflow relative URL
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Download CSV/Parquet" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      deprecated: true
+      security:
+      - RMS_Auth: []
+      tags:
+      - ExportsV1
+components:
+  schemas:
+    ExportInput:
+      type: object
+      properties:
+        type:
+          description: 'The `type` attribute identifies the model type: `ExposureExportInput`, `LocationResultsExportInput`, `ResultsExportInputV2`.'
+          type: string
+          example: ExposureExportInput
+        exportType:
+          description: 'The required `exportType` identifies the database to export: EDM, LocationResults, or RDM.'
+          type: string
+          example: EDM
+          enum:
+          - EDM
+          - RDM
+          - LOCATION_RESULTS
+        exportFormat:
+          description: The `exportFormat` attribute specified the format of the exported data (BAK, CSV, MDF or PARQUET). EDM and RDM data modules may be exported to the BAK and MDF formats. Analysis results may be exported to the CSV or PARQUET formats. Locations results can be exported to the CSV format.
+          type: string
+          example: BAK
+          enum:
+          - CSV
+          - PARQUET
+          - BAK
+          - MDF
+          - JSON
+      discriminator:
+        propertyName: type
+      required:
+      - exportType
+    DownloadResultsInput:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        lossDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/LossDetails'
+      required:
+      - workflowId
+    LossDetails:
+      description: List with loss details.
+      type: object
+      properties:
+        lossType:
+          description: Different type of losses.
+          type: string
+          example: STATS
+        outputLevels:
+          type: array
+          items:
+            type: string
+            description: Output Levels that should be saved in the result.
+            example: '[Admin1, Admin2, Contract, Country]'
+        perspectives:
+          type: array
+          items:
+            type: string
+            description: Financial perspectives that should be saved in the result.
+            example: '[GU, GR]'
+      example: '[LossDetails_STATS, LossDetails_EP, LossDetails_LOSS_TABLE]'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

@@ -1,0 +1,365 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Datasources V2 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: DatasourcesV2
+paths:
+  /v2/datasources:
+    get:
+      operationId: searchEdmsV2
+      summary: Get EDMs
+      description: ''
+      parameters:
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+          default: datasourceName ASC
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: EDM list is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSourceSearchResultV2'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatasourcesV2
+    post:
+      operationId: dbOperationsv2
+      summary: Administer EDM
+      description: ''
+      parameters:
+      - name: datasourcename
+        in: query
+        description: 'Unique name of EDM data source. Valid characters: `0`-`9`, `A`-`Z`, `a`-`z`, `_` (underscore), `-` (hyphen), and '' '' (space). Maximum length is 80 characters.'
+        required: true
+        schema:
+          type: string
+          maxLength: 80
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+      - name: filename
+        in: query
+        description: 'Name of the file for download. Valid characters: `0`-`9`, `A`-`Z`, `a`-`z`, `_` (underscore), `-` (hyphen), and '''' '''' (space).'
+        schema:
+          type: string
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+      - name: operation
+        in: query
+        description: Database operation to perform. One of `CREATE`, `DOWNLOAD_EDM`, or `EDM_DATA_UPGRADE`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - CREATE
+          - DOWNLOAD_EDM
+          - EDM_DATA_UPGRADE
+      - name: servername
+        in: query
+        description: Name of server instance hosting the EDM.
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: File format downloaded database artifact. By default, `BAK`.
+        schema:
+          type: string
+          default: BAK
+          enum:
+          - CSV
+          - PARQUET
+          - BAK
+          - MDF
+      - name: sqlversion
+        in: query
+        description: SQL server version of exported BAK or MDF.
+        schema:
+          type: string
+          default: '2014'
+          enum:
+          - '2014'
+          - '2019'
+      requestBody:
+        description: Specify the edm request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EdmRequest'
+      responses:
+        '202':
+          description: 'Accepted: A `CREATE_EDM`, `DOWNLOAD_EDM`, or EDM_DATA_UPGRADE` job was added to the workflow engine queue for processing. Returns a URL in the `Location` header that enables you to track the status of the job, e.g. `/{host}/v1/workflows/100000`. Send periodic HTTP GET requests to the URL for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatasourcesV2
+  /v2/datasources/{datasourcename}:
+    delete:
+      operationId: deleteEdm_1
+      summary: Delete EDM
+      description: ''
+      parameters:
+      - name: datasourcename
+        in: path
+        description: Data source name
+        required: true
+        schema:
+          type: string
+          maxLength: 80
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Databases/Exposure Sets" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatasourcesV2
+  /v2/datasources/db-instances:
+    get:
+      operationId: searchDbInstancesv2
+      summary: Get SQL Server instances
+      description: ''
+      parameters:
+      - name: type
+        in: query
+        description: DB instance namespace RM or Data Bridge
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: DB instance status active or inactive
+        schema:
+          type: string
+      responses:
+        '200':
+          description: tenant DB instance list is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServerInfo'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - DatasourcesV2
+components:
+  schemas:
+    ServerInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+          enum:
+          - RISK_MODELER
+          - DATA_BRIDGE
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+        host:
+          type: string
+          writeOnly: true
+        port:
+          type: string
+          writeOnly: true
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        totalDiskSpaceInMb:
+          type: string
+          example: 2096128
+        availableDiskSpaceInMb:
+          type: string
+          example: 1995111
+        usedDiskSpaceInMb:
+          type: string
+          example: 101018
+        defaultServer:
+          type: boolean
+          example: false
+    DataSourceSearchResultV2:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDatabaseV2'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    EdmRequest:
+      type: object
+      properties:
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+    UserDatabaseV2:
+      type: object
+      properties:
+        datasourceName:
+          type: string
+        edmName:
+          type: string
+        permissionType:
+          type: integer
+          format: int32
+        isDefault:
+          type: boolean
+        metrics:
+          type: object
+          additionalProperties:
+            type: object
+        serverState:
+          type: string
+          enum:
+          - READY
+          - UPGRADING
+          - UPGRADE_FAILED
+          - LOCK
+        serverNamespace:
+          type: string
+          enum:
+          - RISK_MODELER
+          - DATA_BRIDGE
+        owner:
+          type: string
+        exposureSetId:
+          type: string
+        serverName:
+          type: string
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

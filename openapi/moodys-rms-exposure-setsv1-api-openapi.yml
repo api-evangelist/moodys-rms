@@ -1,0 +1,235 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Exposure SetsV1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Exposure SetsV1
+paths:
+  /v1/exposuresets:
+    get:
+      operationId: searchExposureSetId
+      summary: Get exposure sets
+      description: ''
+      parameters:
+      - name: q
+        in: query
+        description: 'Filters applied to the query results of the `id` or `name` attribute. The operation supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sort order for query results based on the `id` or `name` attribute. Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Number of pages offset before the first page of returned records starting at ''0''.'
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Exposure set list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExposureSetSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Exposure SetsV1
+  /v1/exposuresets/{exposureSetId}:
+    patch:
+      operationId: updateExposureSet
+      summary: Update exposure set
+      parameters:
+      - name: exposureSetId
+        in: path
+        description: ID of the exposure set to update.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Specify the patch request input
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PatchExposureSetReq'
+      responses:
+        '200':
+          description: Update to exposure set name or group successfully.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Databases/Exposure Sets" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Exposure SetsV1
+  /v1/exposuresets/{exposureSetId}/groups:
+    get:
+      operationId: searchExposureSetGroups
+      summary: Get groups by exposure set
+      description: ''
+      parameters:
+      - name: exposureSetId
+        in: path
+        description: ID exposure set to update.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Exposure set group list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupDetail'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Exposure SetsV1
+components:
+  schemas:
+    GroupDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    PatchExposureSetReq:
+      type: object
+      properties:
+        operation:
+          description: Edit to make to the exposure set. `ADD` or `REMOVE` groups. `UPDATE` names.
+          type: string
+          enum:
+          - ADD
+          - UPDATE
+          - REMOVE
+        targetProperty:
+          description: Exposure set attribute to edit. `GROUPS` if edit is to `ADD` or `REMOVE` groups applied to exposure set. `NAME` if edit is to `UPDATE` the name of the exposure set.
+          type: string
+          enum:
+          - NAME
+          - GROUPS
+        value:
+          description: Value of edited attribute. If `GROUPS`, the ID of a group. If `NAME`, the updated name of the exposure set.
+          type: string
+      required:
+      - operation
+      - targetProperty
+      - value
+    ExposureSet:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupDetail'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    ExposureSetSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExposureSet'
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

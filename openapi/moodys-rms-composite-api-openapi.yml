@@ -1,0 +1,605 @@
+openapi: 3.2.0
+info:
+  title: Location Intelligence Composite API
+  version: 2022.09.c
+  description: Use LI API data to access RMS model insights in a flexible, scalable, and programmable way. The suite of layers includes exposure enhancement, geocoding, hazard, risk scoring, and loss costs to provide information for key decisions in the underwriting workflow, including screening, selection, and pricing.
+servers:
+- url: https://{host}/li
+  description: Location Intelligence
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- apiKey: []
+tags:
+- name: Composite
+  description: Returns multiple layers for an address, including chaining the output of one layer into the input for another
+paths:
+  /composite:
+    post:
+      tags:
+      - Composite
+      summary: Composite Lookup
+      description: Performs multiple lookups a specific location. If geocoding is included, the geocoded address is used for all other lookups.
+      operationId: composite
+      requestBody:
+        description: Request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompositeInput'
+            example:
+              location:
+                address:
+                  admin1Code: CA
+                  cityName: NEWARK
+                  countryCode: US
+                  countryScheme: ISO2A
+                  postalCode: '94560'
+                  streetAddress: 7575 GATEWAY BLVD
+                characteristics:
+                  construction: ATC1
+                  occupancy: ATC1
+                  yearBuilt: 1973
+                  numOfStories: 3
+                coverageValues:
+                  buildingValue: 1000000
+                  contentsValue: 100000
+                  businessInterruptionValue: 50000
+              layers:
+              - name: geocode
+                version: latest
+              - name: us_eq_loss_cost
+                version: latest
+              - name: us_fema_firm
+                version: latest
+                options:
+                  distanceUnit: feet
+                  proximityDistance: 100
+        required: true
+      responses:
+        '200':
+          description: Everything worked as expected.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompositeOutput'
+        '400':
+          $ref: '#/components/responses/400Response'
+        '401':
+          $ref: '#/components/responses/401Response'
+        '500':
+          $ref: '#/components/responses/500Response'
+components:
+  schemas:
+    ErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ERR_XXXX
+          description: 'Error codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | ERR_4000 | No details found for requested layer. |
+
+            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
+
+            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
+
+            | ERR_4003 | Location is in a region that is not supported by this layer. |
+
+            | ERR_4005 | Insufficient information to look up requested data. |
+
+            | ERR_4041 | Invalid input. |
+
+            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
+
+            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
+
+            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
+
+            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
+
+            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
+
+            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
+
+            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
+
+            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
+
+            | ERR_4400 | General error for the layer. |
+
+            | ERR_4401 | Invalid address input. Incorrect field. |
+
+            | ERR_4010 | Forbidden. |
+
+            | ERR_4030 | Unauthorized. |
+
+            | ERR_4040 | Not found. |
+
+            | ERR_4050 | Method not allowed. |
+
+            | ERR_4060 | Not acceptable. |
+
+            | ERR_4080 | Request timeout. |
+
+            | ERR_4130 | Request too large. |
+
+            | ERR_4150 | Unsupported media type. |
+
+            | ERR_4220 | Unprocessable entity. |
+
+            | ERR_4290 | Quota exceeded. |
+
+            | ERR_5000 | Internal server error. |
+
+            | ERR_5040 | Gateway timeout. |
+
+            '
+        message:
+          type: string
+          example: Error message
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    GeocodeInput:
+      type: object
+      required:
+      - countryCode
+      - countryScheme
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: User defined id
+          example: 0
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: ''
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: ''
+          maxLength: 256
+        admin4Code:
+          type: string
+          description: Code for administrative level 4
+          example: '044230130'
+          maxLength: 16
+        admin4Name:
+          type: string
+          description: Name of administrative level 4
+          example: '044230130'
+          maxLength: 256
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: NEWARK
+          maxLength: 256
+        countryCode:
+          type: string
+          description: Country Code (optional for geocoding if latitude and longitude are provided)
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryScheme:
+          type: string
+          description: Standard for user-supplied country code (optional for geocoding if latitude and longitude are provided)
+          example: ISO2A
+          enum:
+          - ISO2A
+          - ISO3A
+          - ISO3N
+          - FIPS
+        latitude:
+          type: number
+          format: double
+          description: Location Latitude
+          example: 37.54120000000001
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: double
+          description: Location Longitude
+          example: -122.06061000000001
+          minimum: -180
+          maximum: 180
+        postalCode:
+          type: string
+          description: Postal Code
+          example: '94560'
+          maxLength: 16
+        streetAddress:
+          type: string
+          description: Address containing Number, Street Name, Street Type, etc.
+          example: 7575 GATEWAY BLVD
+          maxLength: 256
+        name:
+          type: string
+          description: Supplemental text captured for the address
+          example: ''
+          maxLength: 512
+    CompositeOutput:
+      type: array
+      description: results
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Layer name
+            example: geocode
+          version:
+            type: string
+            description: Layer version
+            example: latest
+          results:
+            type: object
+            additionalProperties:
+              anyOf:
+              - type: string
+              - type: integer
+              - type: number
+              - type: boolean
+              - type: object
+              - type: array
+              description: For result fields, see the individual layer documentation
+          errors:
+            type: array
+            items:
+              $ref: '#/components/schemas/ErrorItem'
+    CompositeInput:
+      type: object
+      required:
+      - location
+      - layers
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationInput'
+        layers:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            - version
+            properties:
+              name:
+                type: string
+                description: Layer name
+                example: geocode
+              version:
+                type: string
+                description: Layer version
+                example: latest
+              options:
+                description: Layer options
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: string
+                  - type: integer
+                  - type: number
+                  - type: boolean
+                  - type: object
+    GeocodeOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/GeocodeInput'
+      - type: object
+        properties:
+          admin1GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+            example: 99999106
+          admin2GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+            example: 99999206001
+          admin3GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 3. Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+            example: 12695859
+          admin4GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 4.
+            example: 62219571
+          admin5GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 5.
+            example: 0
+          cityGeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for City/Town
+            example: 999993061080
+          countryFips:
+            type: string
+            description: Country FIPS code
+            example: US
+            maxLength: 4
+          countryGeoId:
+            type: integer
+            description: Globally unique ID for Country
+            example: 840
+          countryRmsCode:
+            type: string
+            description: RMS code for Country
+            example: US
+            maxLength: 4
+          geoDataSourceId:
+            type: integer
+            description: Geocode Data Source ID
+            example: 8
+          geoMatchCode:
+            type: string
+            description: Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
+            example: T1-999993061080-T1A1-S0T100A100-S1A1-00-B-A-X
+            maxLength: 255
+          locationCode:
+            type: string
+            description: Census Tract Number / Sonpo / Sector / Short Postal Code
+            example: '060014443.01'
+            maxLength: 16
+          locationCodeGeoId:
+            type: integer
+            format: int64
+            description: Unique identification code for the location
+            example: 0
+          parcelId:
+            type: integer
+            format: int64
+            description: Parcel id
+            example: 0
+          postalCodeGeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for postal code
+            example: 99999494560
+          rmsGeoModelResolutionCode:
+            type: integer
+            description: 'Address match level: * `0` - None * `1` - Coordinate * `2` - Street / Parcel / Building * `3` - High Resolution Postcode / Other * `4` - Block Group/Census Tract * `5` - Postal code * `6` - Neighborhood * `7` - City * `8` - District / Municipality * `9` - County * `10` - State/Province * `11` - CRESTA * `12` - Multiple * `13` - User Defined * `14` - Country
+
+              '
+            example: 2
+            minimum: 0
+            maximum: 14
+          rmsGeocodingResolutionCode:
+            type: integer
+            description: Indicates the geocoding resolutions that are supported by the ACORD standard
+            example: 31
+          ugid:
+            type: string
+            description: Unique global identifier
+            example: USS3121778167575
+            maxLength: 50
+          zone1Code:
+            type: string
+            description: CRESTA code
+            example: A2
+            maxLength: 16
+          zone2Code:
+            type: string
+            description: zone2 code
+            example: ''
+            maxLength: 16
+          zone3Code:
+            type: string
+            description: zone3 code (Low Resolution CRESTA Zone)
+            example: ''
+            maxLength: 16
+          zone4Code:
+            type: string
+            description: zone4 code (High Resolution CRESTA Zone)
+            example: ''
+            maxLength: 16
+          zone3Name:
+            type: string
+            description: zone3 name (Low Resolution CRESTA Zone)
+            example: ''
+            maxLength: 256
+          zone4Name:
+            type: string
+            description: zone4 name (High Resolution CRESTA Zone)
+            example: ''
+            maxLength: 256
+          zone1GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone1 (CRESTA)
+            example: 999995062
+          zone2GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone2 (CRESTA)
+            example: 0
+          zone3GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone3 (Low Resolution CRESTA Zone)
+            example: 22505979
+          zone4GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone4 (High Resolution CRESTA Zone)
+            example: 20235111
+          dataVersion:
+            type: string
+            description: Data version
+            example: xx.x.xxxx.x
+            maxLength: 20
+    LocationInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
+        characteristics:
+          $ref: '#/components/schemas/CharacteristicsInput'
+        coverageValues:
+          $ref: '#/components/schemas/CoverageValuesInput'
+    CharacteristicsInput:
+      type: object
+      properties:
+        construction:
+          type: string
+          description: Construction combines both scheme and class. Construction `scheme` (e.g., ATC) is represented by the letters at the beginning. It is a system used for classifying a building's construction class. Construction `class` is represented by the number(s) following the scheme. It is an attribute referring to the dominant material used in constructing the building frame/structure. Unknown=0.
+          example: ATC1
+          default: ATC0
+          externalDocs:
+            description: List of constructions
+            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Const_Class_Schemes_by_Country.htm
+        occupancy:
+          type: string
+          description: Occupancy combines both scheme and type. Occupancy `scheme` (e.g., ATC) is represented by the letters at the beginning. It is the classification used for identifying a building's occupancy type. Occupancy `type` is represented by the number(s) following the scheme. It is an attribute that describes the typical or dominant use of the building (e.g., residential, or schools, or commercial usage). Unknown=0.
+          example: ATC1
+          default: ATC0
+          externalDocs:
+            description: List of occupancies
+            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Occ_Type_Schemes_by_Country.htm
+        yearBuilt:
+          type: integer
+          description: Attribute describing the year when a structure was constructed. For many RMS peril models, year built is a primary vulnerability attribute.
+          example: 1980
+          default: 0
+        numOfStories:
+          type: integer
+          description: Attribute that represents the number of floors for a structure. It is a single number, such as 6 or 22, not a range of numbers. Structures are classified according to the number of floors they have.
+          default: 0
+          example: 1
+        foundationType:
+          type: integer
+          description: Attribute that captures this differentiating factor for flood risk. This attribute is used to infer the height of the first floor during hazard retrieval.
+          default: 0
+          example: 0
+        firstFloorHeightAboveGround:
+          type: integer
+          description: First floor height above ground
+          example: 5
+          default: 0
+        basement:
+          type: string
+          description: Indicates whether there is a basement or not
+          example: 'YES'
+          default: DEFAULT
+          enum:
+          - DEFAULT
+          - 'YES'
+          - 'NO'
+        floorArea:
+          type: integer
+          description: Floor area is a primary building characteristic that represents a building's total living area, across all floors. It excludes garages, porches, decks, sunrooms, and basements.
+          example: 1452
+          default: 0
+    CoverageValuesInput:
+      type: object
+      properties:
+        buildingValue:
+          type: number
+          format: double
+          description: Building value
+          default: 0
+          example: 1000000
+        contentsValue:
+          type: number
+          format: double
+          description: Contents value
+          default: 0
+          example: 100000
+        businessInterruptionValue:
+          type: number
+          format: double
+          description: Business interruption value
+          default: 0
+          example: 50000
+  responses:
+    401Response:
+      description: No valid API key provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    500Response:
+      description: Something went wrong on our end (this happens rarely)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    400Response:
+      description: The request was unacceptable, likely due to missing a required input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+externalDocs:
+  description: Find out more about RMS
+  url: https://www.rms.com/programs/location-intelligence-api/
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

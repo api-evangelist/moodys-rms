@@ -1,0 +1,1369 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Aggregate PortfolioV1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Aggregate PortfolioV1
+paths:
+  /v1/aggregate-portfolios:
+    get:
+      operationId: searchAggregatePortfoliosv1
+      summary: Get aggregate portfolios
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of aggregate portfolios retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregatePortfolioSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+    post:
+      operationId: createAggregatePortfoliov1
+      summary: Create aggregate portfolio
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AggregatePortfolio'
+        required: true
+      responses:
+        '201':
+          description: Aggregate portfolio created.
+          headers:
+            Location:
+              description: Aggregate portfolio resource
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/count:
+    get:
+      operationId: getExposureCountAggregatePortfolio
+      summary: Count aggregate portfolios
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Aggregate portfolio count successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}:
+    get:
+      operationId: getAggregatePortfolioByIdv1
+      summary: Get aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Aggregate portfolio retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregatePortfolioSearchItem'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+    put:
+      operationId: updateAggregatePortfoliov1
+      summary: Update aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AggregatePortfolio'
+        required: true
+      responses:
+        '204':
+          description: Aggregate portfolio successfully updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+    delete:
+      operationId: deleteAggregatePortfoliov1
+      summary: Delete aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/aggregate-exposures-lists:
+    get:
+      operationId: getAggregateExposureListsv1
+      summary: Get exposures by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: countryCode
+        in: query
+        description: Country to filter by.
+        required: true
+        schema:
+          type: string
+      - name: resolution
+        in: query
+        description: Resolution to filter by.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of aggregate exposure values retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregateExposuresList'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      deprecated: true
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/analyses:
+    get:
+      operationId: getAggregatePortfolioAnalysesResultsv1
+      summary: Get results by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Analyses for exposure successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisSearchResultV2'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Results" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/convert-currency:
+    post:
+      operationId: convertAggregatePortfolioCurrencyv1
+      summary: Convert currency by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Currency'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: workflowId
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: Bad Request. The input data is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/copy:
+    post:
+      operationId: copyAggregatePortfoliov1
+      summary: Copy aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyAggregatePortfolioInfo'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: workflowId
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Edit Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/countries:
+    get:
+      operationId: getCountriesByAggregatePortfoliov1
+      summary: Get countries by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of countries retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregatePortfolioCountryMetrics'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/metrics:
+    get:
+      operationId: getAggregatePortfolioMetricsv1
+      summary: Get metrics by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Metrics for a specified aggregate portfolio are successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AggregatePortfolioMetrics'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/process:
+    post:
+      operationId: processAggregatePortfoliov1
+      summary: Analyze aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlmProcessInput'
+        required: true
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+          headers:
+            Location:
+              description: url containing identifier of the submitted workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "Add to Analysis Builder" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/profiles:
+    get:
+      operationId: getDefaultProfilesv1
+      summary: Get ALM profiles by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: softwareVersionCode
+        in: query
+        description: Software version code.
+        required: true
+        schema:
+          type: string
+      - name: includeHD
+        in: query
+        description: Indicator to include HD profiles
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of ALM profiles retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultAlmProfilesResponse'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+  /v1/aggregate-portfolios/{id}/treaties:
+    get:
+      operationId: getAggregatePortfolioTreatiesv1
+      summary: Get treaties by aggregate portfolio
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the aggregate portfolio.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Treaties applicable for a specified aggregate portfolio are successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TreatySearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the "View Aggregate Portfolios" action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Aggregate PortfolioV1
+components:
+  schemas:
+    AnalysesItemV2:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        runDate:
+          type: string
+        description:
+          type: string
+        rdmName:
+          type: string
+        regroup:
+          type: integer
+          format: int32
+        exposureType:
+          type: integer
+          format: int32
+        engineVersion:
+          type: string
+        groupType:
+          type: string
+        cedant:
+          type: string
+        lob:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        dataSource:
+          type: string
+        riGuid:
+          type: string
+        jobId:
+          type: integer
+          format: int64
+        jobUUID:
+          type: string
+        isGroup:
+          type: boolean
+        modelProfile:
+          $ref: '#/components/schemas/ExposureValue'
+        outputProfile:
+          $ref: '#/components/schemas/ExposureValue'
+        engine:
+          $ref: '#/components/schemas/ExposureValue'
+        status:
+          $ref: '#/components/schemas/ExposureValue'
+        type:
+          $ref: '#/components/schemas/ExposureValue'
+        peril:
+          $ref: '#/components/schemas/ExposureValue'
+        subPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        region:
+          $ref: '#/components/schemas/ExposureValue'
+        lossAmplification:
+          $ref: '#/components/schemas/ExposureValue'
+        mode:
+          $ref: '#/components/schemas/ExposureValue'
+        insuranceType:
+          $ref: '#/components/schemas/ExposureValue'
+        vulnerabilityCurve:
+          $ref: '#/components/schemas/ExposureValue'
+        user:
+          $ref: '#/components/schemas/ExposureValue'
+        eventRateSchemes:
+          type: array
+          items:
+            type: string
+        currency:
+          $ref: '#/components/schemas/AnalysisCurrency'
+        engineSubType:
+          $ref: '#/components/schemas/ExposureValue'
+        framework:
+          type: string
+        simulationSetId:
+          type: integer
+          format: int64
+        simulationPeriods:
+          type: integer
+          format: int32
+        exposureSetId:
+          type: string
+    AggregatePortfolioMetrics:
+      type: object
+      properties:
+        totalAggregateExposures:
+          type: integer
+          format: int32
+        perilsExposed:
+          type: string
+        total:
+          type: number
+          format: double
+        name:
+          type: string
+        number:
+          type: string
+        source:
+          type: string
+        currency:
+          type: string
+        createDate:
+          type: string
+        owner:
+          type: string
+        cedant:
+          type: string
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    AlmProcessInput:
+      type: object
+      properties:
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        edm:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        modelProfileId:
+          type: integer
+          format: int32
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        treaties:
+          type: array
+          items:
+            type: integer
+            format: int32
+        jobName:
+          type: string
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        id:
+          type: integer
+          format: int32
+          minimum: 1
+        almProfileIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+        analysisMode:
+          type: string
+        portEltByGeoidByLobByCedant:
+          type: boolean
+        portStatsByGeoidByLobByCedant:
+          type: boolean
+        portStatsByGeoidByCedant:
+          type: boolean
+      required:
+      - almProfileIds
+      - currency
+      - edm
+    AggregatePortfolioSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatePortfolioSearchItem'
+    AlmErrorMessage:
+      type: object
+      properties:
+        row:
+          type: string
+        column:
+          type: string
+        text:
+          type: string
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    AlmProfileInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        internalId:
+          type: integer
+          format: int32
+        profileName:
+          type: string
+        profileType:
+          type: string
+        country:
+          type: string
+        peril:
+          type: string
+        rmsLob:
+          type: string
+        geoRes:
+          type: string
+        trackingId:
+          type: string
+        descFin:
+          type: string
+        descReg:
+          type: string
+        descInv:
+          type: string
+        dataTab:
+          type: string
+        softwareVersionCode:
+          type: string
+    AnalysisSearchResultV2:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysesItemV2'
+    TreatySearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingTreatyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Treaty'
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    AggregatePortfolioCountryMetrics:
+      type: object
+      properties:
+        countryMetrics:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    AggregateExposuresList:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+        lobs:
+          type: array
+          items:
+            type: string
+        resolutionValues:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+        errorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlmErrorMessage'
+        countryCode:
+          type: string
+        resolution:
+          type: string
+        dependencyResolution:
+          type: string
+    AggregatePortfolio:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        number:
+          type: string
+          maxLength: 20
+          minLength: 0
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+        source:
+          type: string
+          maxLength: 10
+          minLength: 0
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        createDate:
+          type: string
+        peril:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - cedant
+      - name
+      - number
+      - peril
+    Treaty:
+      description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
+
+        '
+      type: object
+      properties:
+        treatyId:
+          type: integer
+          format: int32
+        treatyNumber:
+          type: string
+          maxLength: 20
+          minLength: 0
+        treatyName:
+          type: string
+          maxLength: 40
+          minLength: 0
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        producer:
+          $ref: '#/components/schemas/Producer'
+        treatyType:
+          description: The treaty type.
+          $ref: '#/components/schemas/ExposureValue'
+        currency:
+          description: Indicates treaty currency. All monetary fields for a single treaty are considered to be in the same currency. However, treaties can be in a different currency than the exposures to which they are being attached. During analysis, Risk Modeler converts all currencies to the analysis currency..
+          $ref: '#/components/schemas/ExposureValue'
+        attachBasis:
+          $ref: '#/components/schemas/ExposureValue'
+        attachLevel:
+          $ref: '#/components/schemas/ExposureValue'
+        premium:
+          type: number
+          format: double
+        occurLimit:
+          description: Maximum amount that a treaty pays out for all locations for any event.
+          type: number
+          format: double
+        attachPt:
+          description: Value at which the treaty takes effect.
+          type: number
+          format: double
+        riskLimit:
+          type: number
+          format: double
+        retentAmt:
+          type: number
+          format: double
+        pcntPlaced:
+          type: number
+          format: double
+        effectDate:
+          type: string
+        expireDate:
+          type: string
+        pcntRetent:
+          description: Percentage of the reinsurer's share of the treaty losses that are not covered by retrocessions. Determines the losses for the reinsurance net loss financial perspective and the net premium that a reinsurer receives for a treaty. Calculated as reinsurance gross loss multiplied by the percentage retention by treaty.
+          type: number
+          format: double
+        pcntRiShare:
+          type: number
+          format: double
+        pcntCovered:
+          description: Percentage of loss greater than the attachment point covered by a treaty. Not applicable to Surplus Share treaties.
+          type: number
+          format: double
+        priority:
+          type: integer
+          format: int32
+        numOfReinst:
+          type: integer
+          format: int32
+        reinstCharge:
+          type: number
+          format: double
+        maolAmount:
+          type: number
+          format: double
+        isValid:
+          type: boolean
+        userId1:
+          type: string
+        userId2:
+          type: string
+        lobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineOfBusiness'
+        aggregateDeductible:
+          type: number
+          format: double
+        aggregateLimit:
+          type: number
+          format: double
+        lossOccurrences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LossOccurrence'
+      required:
+      - attachLevel
+      - cedant
+      - treatyNumber
+      - treatyType
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    AnalysisCurrency:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    DefaultAlmProfilesResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlmProfileInfo'
+    AggregatePortfolioSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        number:
+          type: string
+          maxLength: 20
+          minLength: 0
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+        source:
+          type: string
+          maxLength: 10
+          minLength: 0
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        createDate:
+          type: string
+        peril:
+          $ref: '#/components/schemas/ExposureValue'
+        ownerName:
+          type: string
+      required:
+      - cedant
+      - name
+      - number
+      - peril
+    CopyAggregatePortfolioInfo:
+      type: object
+      properties:
+        newNumber:
+          type: string
+          maxLength: 20
+          minLength: 0
+        newName:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - newName
+      - newNumber
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

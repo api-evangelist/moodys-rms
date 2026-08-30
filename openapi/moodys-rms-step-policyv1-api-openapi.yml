@@ -1,0 +1,410 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Step PolicyV1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Step PolicyV1
+paths:
+  /v1/steppolicies:
+    get:
+      operationId: searchStepPolicies
+      summary: Get step policies
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify comma-delimited field names followed by `ASC` (to display the results in alphabetical or numerical ascending order) or `DESC` (to display the results in descending order.)
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records returned per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Number of pages offset before the first page returned records. By default, _0_.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of step policies is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepPolicySearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Step PolicyV1
+    post:
+      operationId: createStepPolicy
+      summary: Create step policy
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepPolicy'
+        required: true
+      responses:
+        '201':
+          description: Step Policy is successfully created.
+          headers:
+            Location:
+              description: Location of the new step policy
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Step PolicyV1
+  /v1/steppolicies/copy:
+    post:
+      operationId: copyStepPolicy
+      summary: Copy step policy
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyStepPolicyInfo'
+        required: true
+      responses:
+        '201':
+          description: Existing step policy is successfully copied.
+          headers:
+            Location:
+              description: Step policy id of the copy step policy
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Step PolicyV1
+  /v1/steppolicies/{id}:
+    get:
+      operationId: getStepPolicy
+      summary: Get step policy
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the step policy.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Information on a specified step policy is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StepPolicy'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Step PolicyV1
+    put:
+      operationId: updateStepPolicy
+      summary: Update step policy
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the step policy.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StepPolicy'
+        required: true
+      responses:
+        '204':
+          description: Step policy successfully updated
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Step PolicyV1
+    delete:
+      operationId: deleteStepPolicy
+      summary: Delete step policy
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the step policy.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Step policy successfully deleted
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Step PolicyV1
+components:
+  schemas:
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    CopyStepPolicyInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+    StepPolicySearchResult:
+      type: object
+      properties:
+        totalSearchCount:
+          type: integer
+          format: int64
+        stepPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepPolicy'
+    StepPolicy:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        accountId:
+          type: integer
+          format: int32
+          minimum: 1
+        number:
+          type: string
+          maxLength: 50
+          minLength: 0
+        name:
+          type: string
+          maxLength: 50
+          minLength: 0
+        stepOrderId:
+          type: integer
+          format: int32
+        lobDetId:
+          $ref: '#/components/schemas/ExposureValue'
+        causeOfLoss:
+          $ref: '#/components/schemas/ExposureValue'
+        inceptionDate:
+          type: string
+        expirationDate:
+          type: string
+        payoutAmount:
+          type: number
+          format: double
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        payoutFunctionId:
+          $ref: '#/components/schemas/ExposureValue'
+        share:
+          type: number
+          format: double
+        excessAmount:
+          type: number
+          format: double
+        isPerRiskSubject:
+          $ref: '#/components/schemas/ExposureValue'
+        childOrderId:
+          type: string
+          pattern: ^$|^([1-9][0-9]*)(,([1-9][0-9]*))*$
+        subjectFunctionId:
+          $ref: '#/components/schemas/ExposureValue'
+        coverageBase:
+          $ref: '#/components/schemas/ExposureValue'
+        limitGU:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - expirationDate
+      - inceptionDate
+      - number
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

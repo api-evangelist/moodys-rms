@@ -1,0 +1,541 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Analysis GroupsV1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Analysis GroupsV1
+paths:
+  /v1/analysis-groups:
+    get:
+      operationId: getAnalysisGroups
+      summary: Get analysis groups
+      description: ''
+      parameters:
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages offset before the first page of returned records. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of all Analysis Groups have been successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisGroupSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the View Results action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Analysis GroupsV1
+    post:
+      operationId: createAnalysisGroup
+      summary: Create analysis group
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisGroup'
+        required: true
+      responses:
+        '201':
+          description: The Analysis Group resource was successfully created.
+          headers:
+            Location:
+              description: workflowId
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the Grouping action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Analysis GroupsV1
+  /v1/analysis-groups/{id}:
+    get:
+      operationId: getAnalysisGroupById
+      summary: Get analysis group
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: Analysis Group ID
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Analysis Group has been successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalysisGroup'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the View Results action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Analysis GroupsV1
+    put:
+      operationId: updateAnalysisGroup
+      summary: Update analysis group
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the Analysis Group.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalysisGroup'
+        required: true
+      responses:
+        '204':
+          description: Analysis Group successfully updated
+          headers:
+            Location:
+              description: workflowId
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the Grouping action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Analysis GroupsV1
+  /v1/analysis-groups/{id}/regroup:
+    post:
+      operationId: regroupAnalysisGroup
+      summary: Regroup analysis group
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of the Analysis Group.
+        required: true
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+      responses:
+        '204':
+          description: Analysis Group successfully updated
+          headers:
+            Location:
+              description: workflowId
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource is denied or not authorized to perform the Grouping action.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Analysis GroupsV1
+  /v1/analysis-groups/validate:
+    post:
+      operationId: validateAnalysisGroup
+      summary: Validate analysis group
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+                format: int32
+        required: true
+      responses:
+        '200':
+          description: List of inconsistent treaties has been retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TreatyWithAnalysisInfo'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: "Forbidden: Access to this resource is denied or not authorized to\n  perform the Grouping action."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Analysis GroupsV1
+components:
+  schemas:
+    EventRateScheme:
+      type: object
+      properties:
+        modelRegionCode:
+          type: string
+          maxLength: 4
+          minLength: 4
+        perilCode:
+          type: string
+          maxLength: 2
+          minLength: 2
+        modelVersion:
+          type: string
+        eventRateSchemeName:
+          type: string
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        isDefault:
+          type: boolean
+        isActive:
+          type: boolean
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    AnalysisGroup:
+      type: object
+      properties:
+        groupId:
+          type: integer
+          format: int64
+        propagateDetailedLosses:
+          type: boolean
+        analysisIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+        rateSchemes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventRateScheme'
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        description:
+          type: string
+        currency:
+          type: string
+      required:
+      - name
+    AnalysisGroupSearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingAnalysisGroupList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysisGroup'
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    TreatyWithAnalysisInfo:
+      type: object
+      properties:
+        treatyId:
+          type: integer
+          format: int32
+        treatyNumber:
+          type: string
+          maxLength: 20
+          minLength: 0
+        treatyName:
+          type: string
+          maxLength: 40
+          minLength: 0
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        producer:
+          $ref: '#/components/schemas/Producer'
+        treatyType:
+          $ref: '#/components/schemas/ExposureValue'
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        attachBasis:
+          $ref: '#/components/schemas/ExposureValue'
+        attachLevel:
+          $ref: '#/components/schemas/ExposureValue'
+        premium:
+          type: number
+          format: double
+        occurLimit:
+          type: number
+          format: double
+        attachPt:
+          type: number
+          format: double
+        riskLimit:
+          type: number
+          format: double
+        retentAmt:
+          type: number
+          format: double
+        pcntPlaced:
+          type: number
+          format: double
+        effectDate:
+          type: string
+        expireDate:
+          type: string
+        pcntRetent:
+          type: number
+          format: double
+        pcntRiShare:
+          type: number
+          format: double
+        pcntCovered:
+          type: number
+          format: double
+        priority:
+          type: integer
+          format: int32
+        numOfReinst:
+          type: integer
+          format: int32
+        reinstCharge:
+          type: number
+          format: double
+        maolAmount:
+          type: number
+          format: double
+        isValid:
+          type: boolean
+        userId1:
+          type: string
+        userId2:
+          type: string
+        lobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineOfBusiness'
+        aggregateDeductible:
+          type: number
+          format: double
+        aggregateLimit:
+          type: number
+          format: double
+        lossOccurrences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LossOccurrence'
+        analysisId:
+          type: integer
+          format: int64
+        analysisName:
+          type: string
+      required:
+      - attachLevel
+      - cedant
+      - treatyNumber
+      - treatyType
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

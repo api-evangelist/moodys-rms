@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Policy ConditionV1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Policy ConditionV1
+paths:
+  /v1/policyconditions:
+    get:
+      operationId: getAllPolicyConditions
+      summary: Get policy conditions
+      description: ''
+      parameters:
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieves all policy conditions in the EDM
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyCondition'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - Policy ConditionV1
+components:
+  schemas:
+    PolicyConditionCriteria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        logic:
+          type: string
+        openPar:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        closePar:
+          type: string
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    PolicyCondition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPredefined:
+          type: boolean
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        deductibleType:
+          $ref: '#/components/schemas/ExposureValue'
+        conditionType:
+          $ref: '#/components/schemas/ExposureValue'
+        parentCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        policyNumber:
+          type: string
+        policyConditionCriterias:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyConditionCriteria'
+        percentOfLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

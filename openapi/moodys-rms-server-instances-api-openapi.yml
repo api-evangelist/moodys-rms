@@ -1,0 +1,311 @@
+openapi: 3.2.0
+info:
+  title: Data Bridge Server Instances API
+  description: Endpoints for Data Bridge.
+  version: 2022-09
+servers:
+- url: https://{host}/databridge
+  description: Intelligent Risk Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Server Instances
+paths:
+  /v1/sql-instances/{instanceName}:
+    get:
+      tags:
+      - Server Instances
+      summary: Get server instance
+      operationId: getinstance
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+  /v1/sql-instances:
+    get:
+      tags:
+      - Server Instances
+      summary: Get server instances
+      operationId: getinstances
+      parameters:
+      - name: adminMode
+        description: Enables changes to a resource owned by others. If `true`, returns server instances. The principal making the request must have the appropriate permissions (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SqlInstance'
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+  /v1/sql-instances/{instanceName}/groups:
+    get:
+      tags:
+      - Server Instances
+      summary: Get groups by server instance
+      operationId: getgroupsbyinstance
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: adminMode
+        description: Enables changes to a resource owned by others. If `true`, returns information about all server instances. The principal making the request must have the appropriate permissions (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+    patch:
+      tags:
+      - Server Instances
+      summary: Update group access by server instance
+      operationId: updategroupaccessbyinstance
+      parameters:
+      - name: instanceName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: adminMode
+        description: Enables changes to a resource owned by others. If `true`, updates the groups assigned to all server instances. The principal making the request must have the appropriate permissions (e.g. Admin role).
+        in: query
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest'
+      responses:
+        '200':
+          description: OK. All went well.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups'
+        '400':
+          description: Bad Request. Some of the provided parameters were not valid.
+        '404':
+          description: Not found. The entity you are trying to interact with does not exist.
+        '500':
+          description: Internal Server Error. If the problem persists you may want to contact the Administrator.
+components:
+  schemas:
+    RMS.EnterpriseIntegrationHub.Contracts.SqlInstance:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        uid:
+          type:
+          - string
+          - 'null'
+        endpoint:
+          type:
+          - string
+          - 'null'
+        internalEndpoint:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        totalDiskSpaceInMb:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        availableDiskSpaceInMb:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        usedDiskSpaceInMb:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        databaseLimit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        pinnedDatabaseLimit:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest:
+      type: object
+      properties:
+        groupOperations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.Group:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupAction:
+      description: Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
+      type: object
+      properties:
+        filteredResult:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group'
+        count:
+          type: integer
+          format: int32
+        isFirst:
+          type: boolean
+        isLast:
+          type: boolean
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
+      type: object
+      properties:
+        groupAction:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
+        groupId:
+          description: ID of group.
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

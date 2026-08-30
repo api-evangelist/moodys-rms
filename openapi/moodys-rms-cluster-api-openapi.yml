@@ -1,0 +1,280 @@
+openapi: 3.2.0
+info:
+  title: Data Bridge Cluster API
+  description: Endpoints for Data Bridge.
+  version: 2022-09
+servers:
+- url: https://{host}/databridge
+  description: Intelligent Risk Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: Cluster
+paths:
+  /v1/Cluster:
+    get:
+      tags:
+      - Cluster
+      summary: Get Data Bridge ACL
+      operationId: getAcl
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Cluster'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Cluster'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Cluster'
+  /v1/Cluster/allowed-ips:
+    get:
+      tags:
+      - Cluster
+      summary: Get IP addresses
+      operationId: getipaddresses
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+    put:
+      tags:
+      - Cluster
+      summary: Update Data Bridge ACL
+      operationId: updateacl
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest'
+      responses:
+        '200':
+          description: Success
+    patch:
+      tags:
+      - Cluster
+      summary: Overwrite Data Bridge ACL
+      operationId: overwriteacl
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest'
+      responses:
+        '200':
+          description: Success
+  /v1/Cluster/allowed-ips/{ipAddress}:
+    delete:
+      tags:
+      - Cluster
+      summary: Delete IP address
+      operationId: deleteipaddress
+      parameters:
+      - name: ipAddress
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  /v1/Cluster/allowed-ips/{cidrIpAddress}/{cidrIpPrefix}:
+    delete:
+      tags:
+      - Cluster
+      summary: Delete range of IP addresses
+      operationId: deleteipaddresses
+      parameters:
+      - name: cidrIpAddress
+        description: Range of IP addresses in binary notation.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: cidrIpPrefix
+        description: CIDR prefix that specifies the number of bits in the network ID. By default, `32`.
+        in: path
+        required: true
+        schema:
+          type: string
+          default: '32'
+      responses:
+        '200':
+          description: Success
+  /v1/Cluster/server-security:
+    put:
+      tags:
+      - Cluster
+      summary: Set TLS protocol version
+      operationId: settlsprotocolversion
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest'
+      responses:
+        '200':
+          description: Success
+    get:
+      tags:
+      - Cluster
+      summary: Get cluster security
+      operationId: identifyencryptedconnection
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse'
+components:
+  schemas:
+    RMS.EnterpriseIntegrationHub.Contracts.CidrEntry:
+      required:
+      - cidrBlock
+      - comment
+      type: object
+      properties:
+        cidrBlock:
+          type: string
+          description: A <a href="https://www.rfc-editor.org/rfc/rfc4632.html" target="_blank">CIDR</a> block specifying a range of IP addresses that may access the cluster.
+        comment:
+          type: string
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest:
+      type: object
+      properties:
+        minTlsVersion:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest:
+      required:
+      - cidrEntry
+      type: object
+      properties:
+        cidrEntry:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.Cluster:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        cidrEntries:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse:
+      type: object
+      properties:
+        minTlsVersion:
+          type:
+          - string
+          - 'null'
+        allConnectionsEncrypted:
+          type: boolean
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest:
+      type: object
+      properties:
+        addCidrEntries:
+          type:
+          - array
+          - 'null'
+          description: Array of entries that identify CIDR blocks that may access the cluser.
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+        removeCidrEntries:
+          type:
+          - array
+          - 'null'
+          description: Array CIDR blocks identifying IP addresses may no longer access the cluser.
+          items:
+            type: string
+      additionalProperties: false
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

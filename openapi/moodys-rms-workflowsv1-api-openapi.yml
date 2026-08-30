@@ -1,0 +1,656 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Workflows V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: WorkflowsV1
+paths:
+  /v1/workflows:
+    get:
+      operationId: getWorkflowsv1
+      summary: Get workflows
+      description: ''
+      parameters:
+      - name: ids
+        in: query
+        description: Comma-separated list of workflow IDs.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: 'Number of pages that are offset before the initial page of records returned. By default, _0_.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: 'Status of the workflow, e.g. `QUEUED`,`RUNNING`, `FINISHED`, `FAILED`, `CANCELLED`, `PENDING`, `CANCELLING`, `CANCEL_REQUESTED`.
+
+          '
+        schema:
+          type: string
+      - name: workflowtype
+        in: query
+        description: Type of the workflow, e.g. `ANALYTICS_JOB`.
+        schema:
+          type: string
+      - name: from
+        in: query
+        description: Timestamp of earliest submission date.
+        schema:
+          type: string
+      - name: to
+        in: query
+        description: Timestamp of latest submission date.
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: Name of <<glossary:principal>> that submitted the workflow.
+        schema:
+          type: string
+      - name: workflowname
+        in: query
+        description: Name of workflow.
+        schema:
+          type: string
+      - name: sortby
+        in: query
+        description: Attribute on which to sort returned records.
+        schema:
+          type: string
+      - name: sortorder
+        in: query
+        description: 'Sort order (alphabetical or numerical) of returned records. One of `ASC` or `DESC`.
+
+          '
+        schema:
+          type: string
+      - name: scheduled
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of workflows retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - WorkflowsV1
+    post:
+      operationId: createUserDefinedWorkflow
+      summary: Process user-defined workflow
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDefinedWorkflow'
+      responses:
+        '202':
+          description: 'Accepted: User-defined workflow job with the specified `workflowId` was added to the workflow engine queue for processing. Returns URL in `Location` header that enables you to track the status of the job, e.g. `/{host}/v1/workflows/10000`. See [Workflow Engine](https://developer.rms.com/rms-developers/docs/workflow-engine).
+
+            '
+          headers:
+            Location:
+              description: URL of the batch workflow.
+              style: simple
+              schema:
+                type: string
+                format: URI
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - WorkflowsV1
+  /v1/workflows/{id}:
+    get:
+      operationId: getWorkflowv1
+      summary: Get workflow or operation
+      description: ''
+      parameters:
+      - name: id
+        description: ID number of a workflow job or workflow operation.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: parent
+        in: query
+        description: 'ID number of the <<glossary:user-defined workflow>> that is the parent of the workflow operation.
+
+          '
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Workflow or operation retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '204':
+          description: Content not ready for the requested operation. It may be retried after a delay
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - WorkflowsV1
+    delete:
+      operationId: cancelWorkflowv1
+      summary: Cancel workflow
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        description: ID number of a workflow job.
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: 'Accepted: A job with the specified ID has been added to the workflow engine queue for processing. Send periodic HTTP GET requests to the URI for the job status. See [Workflow Engine Jobs](https://developer.rms.com/rms-developers/docs/workflow-engine).'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+      tags:
+      - WorkflowsV1
+components:
+  schemas:
+    RegionPerilSimulation:
+      type: object
+      properties:
+        perilCode:
+          type: string
+        modelVersion:
+          type: string
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        regionCode:
+          type: string
+        simulationSetId:
+          type: integer
+          format: int64
+        simulationPeriods:
+          type: integer
+          format: int64
+        modelRegionCode:
+          type: string
+        eltAnalysisId:
+          type: integer
+          format: int64
+        engineVersion:
+          type: string
+      required:
+      - simulationPeriods
+      - simulationSetId
+    GeoHazInput:
+      type: object
+      properties:
+        datasource:
+          type: string
+        id:
+          type: string
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LayerInfo'
+      required:
+      - datasource
+      - layers
+    ProcessOperationV1:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/WorkflowPlanProcessInput'
+      required:
+      - input
+      - label
+      - operation
+    WorkflowPlanProcessInput:
+      type: object
+      properties:
+        id:
+          type: string
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        edm:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        modelProfileId:
+          type: integer
+          format: int32
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        treaties:
+          type: array
+          items:
+            type: integer
+            format: int32
+        jobName:
+          type: string
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        outputProfileId:
+          type: integer
+          format: int32
+      required:
+      - currency
+      - edm
+    GroupingInput:
+      type: object
+      properties:
+        groupId:
+          type: integer
+          format: int64
+        analysisIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+          maxItems: 2147483647
+          minItems: 1
+          uniqueItems: true
+        reportingWindowStart:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+        numOfSimulations:
+          type: integer
+          format: int64
+        simulationWindowStart:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+        simulationWindowEnd:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+        simulateToPLT:
+          type: boolean
+        propagateDetailedLosses:
+          type: boolean
+        regionPerilSimulationSet:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionPerilSimulation'
+        minimizedRegionPerilSimulationSet:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionPerilSimulation'
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        description:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+      required:
+      - analysisIds
+      - currency
+      - name
+      - numOfSimulations
+      - propagateDetailedLosses
+      - simulateToPLT
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        taskId:
+          type: integer
+          format: int32
+        workflowId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        submitTime:
+          type: string
+        createdAt:
+          type: string
+        name:
+          type: string
+        input:
+          type: object
+          additionalProperties:
+            type: object
+        output:
+          type: object
+          additionalProperties:
+            type: object
+        priorJobs:
+          type: array
+          items:
+            type: string
+            format: uuid
+        percentComplete:
+          type: integer
+          format: int32
+        continueOnFailure:
+          type: boolean
+    OperationV2:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          operation:
+            description: The `operation` attribute identifies the operation API to be invoked.
+            type: string
+          input:
+            type: object
+      required:
+      - input
+      - label
+      - operation
+    JobMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        type:
+          type: string
+    GeohazOperationV1:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/GeoHazInput'
+      required:
+      - input
+      - label
+      - operation
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    OperationV1:
+      description: List containing sub-jobs of the batch workflow
+      type: object
+      properties:
+        label:
+          description: The unique name of the operation.
+          type: string
+          maxLength: 16
+          minLength: 2
+          pattern: '[a-zA-Z]+[a-zA-Z0-9_]*'
+        operation:
+          description: The `operation` attribute identifies the operation model type and API to be invoked. It can be one of `geohaz`, `process` or `group`
+          type: string
+        input:
+          type: object
+          additionalProperties:
+            type: object
+        dependsOn:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        continueOnFailure:
+          type: boolean
+      anyOf:
+      - $ref: '#/components/schemas/GeohazOperationV1'
+      - $ref: '#/components/schemas/ProcessOperationV1'
+      - $ref: '#/components/schemas/GroupOperationV1'
+      - $ref: '#/components/schemas/OperationV2'
+      discriminator:
+        propertyName: operation
+      required:
+      - input
+      - label
+      - operation
+    WorkflowSearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int32
+        workflows:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workflow'
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    Workflow:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        tenantName:
+          type: string
+        userName:
+          type: string
+        status:
+          type: string
+          enum:
+          - QUEUED
+          - RUNNING
+          - FINISHED
+          - FAILED
+          - CANCELLED
+          - PENDING
+          - CANCELLING
+          - CANCEL_REQUESTED
+        submitTime:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        summary:
+          type: object
+          additionalProperties:
+            type: string
+        output:
+          type: object
+          additionalProperties:
+            type: object
+        progress:
+          type: integer
+          format: int32
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobMessage'
+    GroupOperationV1:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/GroupingInput'
+      required:
+      - input
+      - label
+      - operation
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    UserDefinedWorkflow:
+      type: object
+      properties:
+        type:
+          description: '`PortfolioWorkflow` or `AccountWorkflow`. Required if workflow operations are identified by keyword (e.g. `geohaz`, `group`, `batch`). May be omitted if operations are identfied by path.
+
+            '
+          type: string
+          example: PortfolioWorkflow
+        name:
+          description: Name of user-defined workflow.
+          type: string
+          example: Batch_Workflow
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        operations:
+          description: 'Array of operation objects. Each object is defined by four attributes: `label`, `operation`, `dependsOn`, `input`.
+
+            '
+          type: array
+          items:
+            $ref: '#/components/schemas/OperationV1'
+          maxItems: 2147483647
+          minItems: 1
+      required:
+      - name
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true

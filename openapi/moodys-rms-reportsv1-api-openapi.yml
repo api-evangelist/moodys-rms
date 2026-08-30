@@ -1,0 +1,337 @@
+openapi: 3.2.0
+info:
+  title: Risk Modeler Reports V1 API
+  description: This documentation provides information on the Risk Modeler 2.0 public API.
+  version: March, 2023
+servers:
+- url: https://{host}/riskmodeler
+  description: Risk Intelligence Analytics Platform
+  variables:
+    host:
+      enum:
+      - api-euw1.rms.com
+      - api-use1.rms.com
+      default: api-euw1.rms.com
+      description: 'Data center that hosts the tenant instance: api-euw1.rms.com or api-use1.rms.com.'
+security:
+- RMS_Auth: []
+tags:
+- name: ReportsV1
+paths:
+  /v1/reports/{id}:
+    get:
+      tags:
+      - ReportsV1
+      summary: Get report
+      description: ''
+      operationId: getReportById
+      parameters:
+      - name: id
+        in: path
+        description: ID of the report.
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: datasource
+        in: query
+        description: Name of EDM.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Report Details successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSearchItem'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+    put:
+      tags:
+      - ReportsV1
+      summary: Update report
+      description: ''
+      operationId: updateReport
+      parameters:
+      - name: id
+        in: path
+        description: ID number of report.
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      - name: datasource
+        in: query
+        description: Name of the EDM.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportInfoRequest'
+        required: true
+      responses:
+        '204':
+          description: Report updated.
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+  /v1/reports:
+    get:
+      tags:
+      - ReportsV1
+      summary: Get reports
+      description: ''
+      operationId: searchReports
+      parameters:
+      - name: exposureId
+        in: query
+        description: ID number of exposure.
+        schema:
+          minimum: 1
+          type: integer
+          format: int32
+      - name: exposureType
+        in: query
+        description: Type of exposure, e.g. `ACCOUNT`, `PORTFOLIO`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+      - name: datasource
+        in: query
+        description: Name of EDM.
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: 'Filters query results by evaluating the value of expressions. Supports four types of operators:
+
+          * Comparison: `q=[attribute][comparison operator][value]` e.g. `id=100`, `id!=100`, `id>100`
+
+          * Logical: `q=[expression][logical operator][expression]` e.g. `id=100 AND name="xyz"` , `id=100 OR type="abc"`
+
+          * List: `q=[attribute][list operator][values list]` e.g. `id IN (1,2,3]`, `name NOT IN ("abc","xyz")`
+
+          * Matching: `q=[attribute][comparison operator][pattern]`, e.g. `name LIKE "abc "` , `type NOT LIKE " xyz* "`
+
+          To learn more, see [Query Exposure Data](https://developer.rms.com/rms-developers/docs/query-exposure-data).'
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Specify `ASC` to display the results in alphabetical or numerical ascending order or `DESC` to display the results in descending order.
+
+          '
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of records displayed per page.
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Number of pages that are offset before the initial page of records returned. By default, _0_.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of reports successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportListSearchResult'
+        '400':
+          description: 'Bad Request: Please check that you are provided all required values.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        '403':
+          description: 'Forbidden: Access to this resource has been denied.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+      security:
+      - RMS_Auth: []
+components:
+  schemas:
+    ReportListSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        edmName:
+          type: string
+        createDate:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        userName:
+          type: string
+        notes:
+          type: string
+    ReportListSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportListSearchItem'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    ReportInfoRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          description: Name of report.
+          type: string
+        notes:
+          description: Descriptive comments on note.
+          maxLength: 500
+          minLength: 0
+          type: string
+    ReportDetails:
+      type: object
+      properties:
+        reportInternalUrl:
+          type: string
+        metricsType:
+          type: string
+          enum:
+          - STATS
+          - ELT
+          - EP
+          - LLR
+          - PLT
+          - EXPOSURE_SUMMARY
+          - LOCATION_RESULTS
+          - POLICY_EP
+          - POLICY_STATS
+          - LOCATION_AAL
+        analysisId:
+          type: integer
+          format: int64
+        reportURL:
+          type: string
+        additionalInfo:
+          type: object
+          additionalProperties:
+            type: object
+    ReportSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        edmName:
+          type: string
+        createDate:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        userName:
+          type: string
+        notes:
+          type: string
+        reportDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportDetails'
+  securitySchemes:
+    RMS_Auth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: An API key is a token that enables a client application to make requests to tenant applications running on Intelligent Risk Platform.
+      x-default: XXXXXXXXXX
+x-readme:
+  explorer-enabled: false
+  samples-languages:
+  - curl
+  - java
+  - csharp
+  - node
+  - python
+  proxy-enabled: true
+  samples-enabled: true
