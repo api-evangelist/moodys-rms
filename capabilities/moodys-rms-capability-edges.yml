@@ -14,7 +14,8 @@ capability_model:
 edge_count: 4
 edges:
 - tag: MetricsV1
-  spec_file: moodys-rms-metricsv1-api-openapi.yml
+  spec_file: moodys-rms-metrics-v1-api-openapi.yml
+  reanchored_from: moodys-rms-metricsv1-api-openapi.yml
   capability_id: BC-2180.60
   capability_id_l1: BC-2180
   capability_name: Catastrophe Modelling
