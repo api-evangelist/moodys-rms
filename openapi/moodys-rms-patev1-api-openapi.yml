@@ -163,16 +163,6 @@ paths:
       - PateV1
 components:
   schemas:
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
     LossOccurrence:
       type: object
       properties:
@@ -196,42 +186,6 @@ components:
           $ref: '#/components/schemas/ExposureValue'
       required:
       - treatyId
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
     Pate:
       type: object
       properties:
@@ -355,6 +309,52 @@ components:
         name:
           type: string
           maxLength: 40
+          minLength: 0
+      required:
+      - name
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
           minLength: 0
       required:
       - name

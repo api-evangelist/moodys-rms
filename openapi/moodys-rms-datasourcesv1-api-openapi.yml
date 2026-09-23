@@ -231,6 +231,15 @@ paths:
       - DatasourcesV1
 components:
   schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     UserDatabaseV1:
       type: object
       properties:
@@ -269,16 +278,6 @@ components:
         datasourceId:
           type: integer
           format: int32
-    DataSourceSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int32
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDatabaseV1'
     ServerInfo:
       type: object
       properties:
@@ -321,15 +320,16 @@ components:
         defaultServer:
           type: boolean
           example: false
-    ErrorMessage:
+    DataSourceSearchResult:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDatabaseV1'
   securitySchemes:
     RMS_Auth:
       type: apiKey

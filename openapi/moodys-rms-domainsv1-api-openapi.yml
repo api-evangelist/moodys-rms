@@ -583,6 +583,63 @@ paths:
       - DomainsV1
 components:
   schemas:
+    DomainResult:
+      type: object
+      properties:
+        attributesTotalMatch:
+          type: integer
+          format: int64
+        domainItems:
+          $ref: '#/components/schemas/DomainItem'
+    DomainItem:
+      type: object
+      properties:
+        domainName:
+          type: string
+        tableSpace:
+          type: string
+        tableName:
+          type: string
+        dataOwnedBy:
+          type: string
+        domainSchema:
+          $ref: '#/components/schemas/DomainSchema'
+        isActive:
+          type: boolean
+    DomainReference:
+      type: object
+      properties:
+        name:
+          type: string
+        uri:
+          type: string
+          format: uri
+    EntityMeta:
+      type: object
+      properties:
+        meta:
+          type: string
+          format: uri
+        values:
+          type: string
+          format: uri
+    SecondaryModifierItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     Field:
       type: object
       properties:
@@ -598,33 +655,14 @@ components:
           type: object
           additionalProperties:
             type: object
-    SecondaryModifierItem:
+    EntityResult:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-    SecondaryModifierResult:
-      type: object
-      properties:
-        secondaryModifiersTotalMatch:
+        entitiesTotalMatch:
           type: integer
           format: int64
-        secondaryModifierItem:
-          type: array
-          items:
-            $ref: '#/components/schemas/SecondaryModifierItem'
-    KeyValueStore:
-      type: object
-      properties:
-        rows:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
+        entityItems:
+          $ref: '#/components/schemas/EntityItem'
     EntityItem:
       type: object
       properties:
@@ -644,48 +682,15 @@ components:
               type: object
         isActive:
           type: boolean
-    ErrorMessage:
+    KeyValueStore:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    DomainResult:
-      type: object
-      properties:
-        attributesTotalMatch:
-          type: integer
-          format: int64
-        domainItems:
-          $ref: '#/components/schemas/DomainItem'
-    DomainReference:
-      type: object
-      properties:
-        name:
-          type: string
-        uri:
-          type: string
-          format: uri
-    EntityMeta:
-      type: object
-      properties:
-        meta:
-          type: string
-          format: uri
-        values:
-          type: string
-          format: uri
-    EntityResult:
-      type: object
-      properties:
-        entitiesTotalMatch:
-          type: integer
-          format: int64
-        entityItems:
-          $ref: '#/components/schemas/EntityItem'
+        rows:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
     DomainSchema:
       type: object
       properties:
@@ -695,21 +700,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Field'
-    DomainItem:
+    SecondaryModifierResult:
       type: object
       properties:
-        domainName:
-          type: string
-        tableSpace:
-          type: string
-        tableName:
-          type: string
-        dataOwnedBy:
-          type: string
-        domainSchema:
-          $ref: '#/components/schemas/DomainSchema'
-        isActive:
-          type: boolean
+        secondaryModifiersTotalMatch:
+          type: integer
+          format: int64
+        secondaryModifierItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecondaryModifierItem'
   securitySchemes:
     RMS_Auth:
       type: apiKey

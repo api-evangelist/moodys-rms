@@ -55,34 +55,6 @@ paths:
       - Policy ConditionV1
 components:
   schemas:
-    PolicyConditionCriteria:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        logic:
-          type: string
-        openPar:
-          type: string
-        field:
-          type: string
-        operator:
-          type: string
-        value:
-          type: string
-        closePar:
-          type: string
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
     PolicyCondition:
       type: object
       properties:
@@ -116,6 +88,34 @@ components:
           format: double
         isFranchiseDeductible:
           $ref: '#/components/schemas/ExposureValue'
+    PolicyConditionCriteria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        logic:
+          type: string
+        openPar:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        closePar:
+          type: string
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
     ErrorMessage:
       type: object
       properties:

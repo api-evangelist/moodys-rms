@@ -208,14 +208,6 @@ paths:
           description: Success
 components:
   schemas:
-    RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse:
-      type: object
-      properties:
-        uploadId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.CompleteUploadRequest:
       type: object
       properties:
@@ -229,6 +221,14 @@ components:
           - 'null'
           additionalProperties:
             type: string
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.InitUploadResponse:
+      type: object
+      properties:
+        uploadId:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
   securitySchemes:
     RMS_Auth:

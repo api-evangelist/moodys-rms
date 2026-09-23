@@ -186,6 +186,34 @@ paths:
           description: Internal Server Error. If the problem persists you may want to contact the Administrator.
 components:
   schemas:
+    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
+      type: object
+      properties:
+        groupAction:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
+        groupId:
+          description: ID of group.
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
+      type: object
+      properties:
+        filteredResult:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group'
+        count:
+          type: integer
+          format: int32
+        isFirst:
+          type: boolean
+        isLast:
+          type: boolean
+      additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.SqlInstance:
       type: object
       properties:
@@ -264,34 +292,6 @@ components:
       - 1
       type: integer
       format: int32
-    RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
-      type: object
-      properties:
-        filteredResult:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group'
-        count:
-          type: integer
-          format: int32
-        isFirst:
-          type: boolean
-        isLast:
-          type: boolean
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
-      type: object
-      properties:
-        groupAction:
-          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
-        groupId:
-          description: ID of group.
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
   securitySchemes:
     RMS_Auth:
       type: apiKey

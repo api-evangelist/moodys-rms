@@ -198,33 +198,15 @@ paths:
           description: Internal Server Error. If the problem persists you may want to contact the Administrator.
 components:
   schemas:
-    RMS.EnterpriseIntegrationHub.Contracts.Login:
+    RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest:
+      required:
+      - password
       type: object
       properties:
-        name:
-          type:
-          - string
-          - 'null'
-        role:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - string
-          - 'null'
-        owner:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse:
-      type: object
-      properties:
-        jobId:
-          type:
-          - string
-          - 'null'
+        password:
+          maxLength: 128
+          minLength: 0
+          type: string
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest:
       required:
@@ -244,15 +226,33 @@ components:
         role:
           type: string
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest:
-      required:
-      - password
+    RMS.EnterpriseIntegrationHub.Contracts.DeleteLoginResponse:
       type: object
       properties:
-        password:
-          maxLength: 128
-          minLength: 0
-          type: string
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.Login:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        role:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        owner:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse:
       type: object

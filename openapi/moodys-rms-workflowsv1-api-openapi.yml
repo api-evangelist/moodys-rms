@@ -227,101 +227,16 @@ paths:
       - WorkflowsV1
 components:
   schemas:
-    RegionPerilSimulation:
+    WorkflowSearchResult:
       type: object
       properties:
-        perilCode:
-          type: string
-        modelVersion:
-          type: string
-        eventRateSchemeId:
+        totalMatchCount:
           type: integer
           format: int32
-        regionCode:
-          type: string
-        simulationSetId:
-          type: integer
-          format: int64
-        simulationPeriods:
-          type: integer
-          format: int64
-        modelRegionCode:
-          type: string
-        eltAnalysisId:
-          type: integer
-          format: int64
-        engineVersion:
-          type: string
-      required:
-      - simulationPeriods
-      - simulationSetId
-    GeoHazInput:
-      type: object
-      properties:
-        datasource:
-          type: string
-        id:
-          type: string
-        layers:
+        workflows:
           type: array
           items:
-            $ref: '#/components/schemas/LayerInfo'
-      required:
-      - datasource
-      - layers
-    ProcessOperationV1:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/OperationV1'
-      - type: object
-        properties:
-          input:
-            $ref: '#/components/schemas/WorkflowPlanProcessInput'
-      required:
-      - input
-      - label
-      - operation
-    WorkflowPlanProcessInput:
-      type: object
-      properties:
-        id:
-          type: string
-        exposureType:
-          type: string
-          enum:
-          - PORTFOLIO
-          - ACCOUNT
-          - LOCATION
-          - POLICY
-          - STEP_POLICY
-          - TREATY
-          - AGGPORTFOLIO
-        edm:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-        modelProfileId:
-          type: integer
-          format: int32
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        treaties:
-          type: array
-          items:
-            type: integer
-            format: int32
-        jobName:
-          type: string
-          maxLength: 64
-          minLength: 0
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        outputProfileId:
-          type: integer
-          format: int32
-      required:
-      - currency
-      - edm
+            $ref: '#/components/schemas/Workflow'
     GroupingInput:
       type: object
       properties:
@@ -379,44 +294,34 @@ components:
       - numOfSimulations
       - propagateDetailedLosses
       - simulateToPLT
-    Job:
+    RegionPerilSimulation:
       type: object
       properties:
-        id:
+        perilCode:
           type: string
-          format: uuid
-        taskId:
+        modelVersion:
+          type: string
+        eventRateSchemeId:
           type: integer
           format: int32
-        workflowId:
+        regionCode:
+          type: string
+        simulationSetId:
           type: integer
           format: int64
-        status:
-          type: string
-        submitTime:
-          type: string
-        createdAt:
-          type: string
-        name:
-          type: string
-        input:
-          type: object
-          additionalProperties:
-            type: object
-        output:
-          type: object
-          additionalProperties:
-            type: object
-        priorJobs:
-          type: array
-          items:
-            type: string
-            format: uuid
-        percentComplete:
+        simulationPeriods:
           type: integer
-          format: int32
-        continueOnFailure:
-          type: boolean
+          format: int64
+        modelRegionCode:
+          type: string
+        eltAnalysisId:
+          type: integer
+          format: int64
+        engineVersion:
+          type: string
+      required:
+      - simulationPeriods
+      - simulationSetId
     OperationV2:
       type: object
       allOf:
@@ -432,13 +337,18 @@ components:
       - input
       - label
       - operation
-    JobMessage:
+    ProcessOperationV1:
       type: object
-      properties:
-        message:
-          type: string
-        type:
-          type: string
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/WorkflowPlanProcessInput'
+      required:
+      - input
+      - label
+      - operation
     GeohazOperationV1:
       type: object
       allOf:
@@ -451,60 +361,33 @@ components:
       - input
       - label
       - operation
-    ErrorMessage:
+    UserDefinedWorkflow:
       type: object
       properties:
-        code:
+        type:
+          description: '`PortfolioWorkflow` or `AccountWorkflow`. Required if workflow operations are identified by keyword (e.g. `geohaz`, `group`, `batch`). May be omitted if operations are identfied by path.
+
+            '
           type: string
-        message:
+          example: PortfolioWorkflow
+        name:
+          description: Name of user-defined workflow.
           type: string
-        logId:
-          type: string
-    OperationV1:
-      description: List containing sub-jobs of the batch workflow
-      type: object
-      properties:
-        label:
-          description: The unique name of the operation.
-          type: string
-          maxLength: 16
-          minLength: 2
-          pattern: '[a-zA-Z]+[a-zA-Z0-9_]*'
-        operation:
-          description: The `operation` attribute identifies the operation model type and API to be invoked. It can be one of `geohaz`, `process` or `group`
-          type: string
-        input:
-          type: object
-          additionalProperties:
-            type: object
-        dependsOn:
+          example: Batch_Workflow
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        operations:
+          description: 'Array of operation objects. Each object is defined by four attributes: `label`, `operation`, `dependsOn`, `input`.
+
+            '
           type: array
           items:
-            type: string
-          uniqueItems: true
-        continueOnFailure:
-          type: boolean
-      anyOf:
-      - $ref: '#/components/schemas/GeohazOperationV1'
-      - $ref: '#/components/schemas/ProcessOperationV1'
-      - $ref: '#/components/schemas/GroupOperationV1'
-      - $ref: '#/components/schemas/OperationV2'
-      discriminator:
-        propertyName: operation
+            $ref: '#/components/schemas/OperationV1'
+          maxItems: 2147483647
+          minItems: 1
       required:
-      - input
-      - label
-      - operation
-    WorkflowSearchResult:
-      type: object
-      properties:
-        totalMatchCount:
-          type: integer
-          format: int32
-        workflows:
-          type: array
-          items:
-            $ref: '#/components/schemas/Workflow'
+      - name
     LayerInfo:
       type: object
       properties:
@@ -532,6 +415,32 @@ components:
       - name
       - type
       - version
+    GroupOperationV1:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/GroupingInput'
+      required:
+      - input
+      - label
+      - operation
+    GeoHazInput:
+      type: object
+      properties:
+        datasource:
+          type: string
+        id:
+          type: string
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LayerInfo'
+      required:
+      - datasource
+      - layers
     Workflow:
       type: object
       properties:
@@ -582,18 +491,63 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/JobMessage'
-    GroupOperationV1:
+    ErrorMessage:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/OperationV1'
-      - type: object
-        properties:
-          input:
-            $ref: '#/components/schemas/GroupingInput'
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    JobMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        type:
+          type: string
+    WorkflowPlanProcessInput:
+      type: object
+      properties:
+        id:
+          type: string
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        edm:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        modelProfileId:
+          type: integer
+          format: int32
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        treaties:
+          type: array
+          items:
+            type: integer
+            format: int32
+        jobName:
+          type: string
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        outputProfileId:
+          type: integer
+          format: int32
       required:
-      - input
-      - label
-      - operation
+      - currency
+      - edm
     Currency:
       type: object
       properties:
@@ -610,33 +564,79 @@ components:
       - code
       - scheme
       - vintage
-    UserDefinedWorkflow:
+    OperationV1:
+      description: List containing sub-jobs of the batch workflow
       type: object
       properties:
-        type:
-          description: '`PortfolioWorkflow` or `AccountWorkflow`. Required if workflow operations are identified by keyword (e.g. `geohaz`, `group`, `batch`). May be omitted if operations are identfied by path.
-
-            '
+        label:
+          description: The unique name of the operation.
           type: string
-          example: PortfolioWorkflow
-        name:
-          description: Name of user-defined workflow.
+          maxLength: 16
+          minLength: 2
+          pattern: '[a-zA-Z]+[a-zA-Z0-9_]*'
+        operation:
+          description: The `operation` attribute identifies the operation model type and API to be invoked. It can be one of `geohaz`, `process` or `group`
           type: string
-          example: Batch_Workflow
-          maxLength: 64
-          minLength: 0
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        operations:
-          description: 'Array of operation objects. Each object is defined by four attributes: `label`, `operation`, `dependsOn`, `input`.
-
-            '
+        input:
+          type: object
+          additionalProperties:
+            type: object
+        dependsOn:
           type: array
           items:
-            $ref: '#/components/schemas/OperationV1'
-          maxItems: 2147483647
-          minItems: 1
+            type: string
+          uniqueItems: true
+        continueOnFailure:
+          type: boolean
+      anyOf:
+      - $ref: '#/components/schemas/GeohazOperationV1'
+      - $ref: '#/components/schemas/ProcessOperationV1'
+      - $ref: '#/components/schemas/GroupOperationV1'
+      - $ref: '#/components/schemas/OperationV2'
+      discriminator:
+        propertyName: operation
       required:
-      - name
+      - input
+      - label
+      - operation
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        taskId:
+          type: integer
+          format: int32
+        workflowId:
+          type: integer
+          format: int64
+        status:
+          type: string
+        submitTime:
+          type: string
+        createdAt:
+          type: string
+        name:
+          type: string
+        input:
+          type: object
+          additionalProperties:
+            type: object
+        output:
+          type: object
+          additionalProperties:
+            type: object
+        priorJobs:
+          type: array
+          items:
+            type: string
+            format: uuid
+        percentComplete:
+          type: integer
+          format: int32
+        continueOnFailure:
+          type: boolean
   securitySchemes:
     RMS_Auth:
       type: apiKey

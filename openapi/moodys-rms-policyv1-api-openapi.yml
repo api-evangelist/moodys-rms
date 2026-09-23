@@ -1336,13 +1336,6 @@ paths:
       - PolicyV1
 components:
   schemas:
-    FacReinsurer:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     PolicyConditionCriteria:
       type: object
       properties:
@@ -1361,46 +1354,88 @@ components:
           type: string
         closePar:
           type: string
-    PolicyCoverage:
+    LossOccurrence:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        peril:
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
           $ref: '#/components/schemas/ExposureValue'
-        lossType:
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    PolicyCondition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
           type: string
-          enum:
-          - Building
-          - Contents
-          - BI
-          - CombinedCvg
-        premium:
-          type: number
-          format: double
+        isPredefined:
+          type: boolean
         limit:
           type: number
           format: double
         deductible:
           type: number
           format: double
-        label:
+        deductibleType:
           $ref: '#/components/schemas/ExposureValue'
-        accumulation:
-          type: integer
-          format: int32
-        isValid:
-          type: boolean
+        conditionType:
+          $ref: '#/components/schemas/ExposureValue'
+        parentCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        policyNumber:
+          type: string
+        policyConditionCriterias:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyConditionCriteria'
         percentOfLossDeductibleAmount:
           type: number
           format: double
         isFranchiseDeductible:
           $ref: '#/components/schemas/ExposureValue'
-      required:
-      - label
-      - lossType
-      - peril
+    CopyPolicyInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+    PolicySearchResult:
+      type: object
+      properties:
+        matchCount:
+          type: integer
+          format: int64
+        policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Policy'
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
     Treaty:
       description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
 
@@ -1504,6 +1539,119 @@ components:
       - cedant
       - treatyNumber
       - treatyType
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    LocationCondition:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        conditionId:
+          type: integer
+          format: int32
+        isIncluded:
+          type: string
+          enum:
+          - NotIncluded
+          - Included
+          - UserIncluded
+    PolicyCoverage:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        peril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossType:
+          type: string
+          enum:
+          - Building
+          - Contents
+          - BI
+          - CombinedCvg
+        premium:
+          type: number
+          format: double
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        label:
+          $ref: '#/components/schemas/ExposureValue'
+        accumulation:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+        percentOfLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - label
+      - lossType
+      - peril
+    FacReinsurer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
     Policy:
       required:
       - number
@@ -1650,154 +1798,6 @@ components:
           format: int32
         isValid:
           type: boolean
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
-    PolicyCondition:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isPredefined:
-          type: boolean
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        deductibleType:
-          $ref: '#/components/schemas/ExposureValue'
-        conditionType:
-          $ref: '#/components/schemas/ExposureValue'
-        parentCondition:
-          $ref: '#/components/schemas/ExposureValue'
-        policyNumber:
-          type: string
-        policyConditionCriterias:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyConditionCriteria'
-        percentOfLossDeductibleAmount:
-          type: number
-          format: double
-        isFranchiseDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-    LossOccurrence:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - treatyId
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    CopyPolicyInfo:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    LocationCondition:
-      type: object
-      properties:
-        locationId:
-          type: integer
-          format: int32
-        conditionId:
-          type: integer
-          format: int32
-        isIncluded:
-          type: string
-          enum:
-          - NotIncluded
-          - Included
-          - UserIncluded
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    PolicySearchResult:
-      type: object
-      properties:
-        matchCount:
-          type: integer
-          format: int64
-        policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Policy'
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
   securitySchemes:
     RMS_Auth:
       type: apiKey

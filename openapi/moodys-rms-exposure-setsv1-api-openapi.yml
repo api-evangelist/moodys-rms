@@ -163,6 +163,27 @@ components:
           type: string
         name:
           type: string
+    ExposureSetSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExposureSet'
+    ExposureSet:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupDetail'
     PatchExposureSetReq:
       type: object
       properties:
@@ -186,17 +207,6 @@ components:
       - operation
       - targetProperty
       - value
-    ExposureSet:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        groups:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupDetail'
     ErrorMessage:
       type: object
       properties:
@@ -206,16 +216,6 @@ components:
           type: string
         logId:
           type: string
-    ExposureSetSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int32
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExposureSet'
   securitySchemes:
     RMS_Auth:
       type: apiKey

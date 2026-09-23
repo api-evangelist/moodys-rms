@@ -450,20 +450,36 @@ paths:
           description: Internal Server Error. If the problem persists you may want to contact the Administrator.
 components:
   schemas:
-    RMS.EnterpriseIntegrationHub.Enums.ImportFromType:
-      enum:
-      - 0
-      - 1
-      - 2
-      type: integer
-      format: int32
-    RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse:
+    RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse:
+      type: object
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
       type: object
       properties:
-        jobId:
+        groupAction:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
+        groupId:
+          description: ID of group.
           type:
           - string
           - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
+      type: object
+      properties:
+        filteredResult:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group'
+        count:
+          type: integer
+          format: int32
+        isFirst:
+          type: boolean
+        isLast:
+          type: boolean
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.PinOrUnpinRequest:
       required:
@@ -477,26 +493,6 @@ components:
           - string
           - 'null'
           format: date-time
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse:
-      type: object
-      properties:
-        jobId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.Group:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.Database:
       type: object
@@ -542,39 +538,43 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.GroupAction:
-      description: Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.
+    RMS.EnterpriseIntegrationHub.Contracts.ImportDatabaseResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Enums.ExportToType:
       enum:
       - 0
       - 1
+      - 2
       type: integer
       format: int32
-    RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest:
+    RMS.EnterpriseIntegrationHub.Enums.ImportFromType:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      format: int32
+    RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseResponse:
       type: object
       properties:
-        groupOperations:
+        jobId:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
-      type: object
-      properties:
-        filteredResult:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.Group'
-        count:
-          type: integer
-          format: int32
-        isFirst:
-          type: boolean
-        isLast:
-          type: boolean
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.CreateDatabaseRequest:
       required:
@@ -599,35 +599,35 @@ components:
           items:
             type: string
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.ImportDatabasePrepareResponse:
-      type: object
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
+    RMS.EnterpriseIntegrationHub.Contracts.Group:
       type: object
       properties:
-        groupAction:
-          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
-        groupId:
-          description: ID of group.
+        id:
+          type:
+          - string
+          - 'null'
+        name:
           type:
           - string
           - 'null'
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.ExportDatabaseResponse:
-      type: object
-      properties:
-        jobId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Enums.ExportToType:
+    RMS.EnterpriseIntegrationHub.Contracts.GroupAction:
+      description: Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.
       enum:
       - 0
       - 1
-      - 2
       type: integer
       format: int32
+    RMS.EnterpriseIntegrationHub.Contracts.PatchDatabaseOperationRequest:
+      type: object
+      properties:
+        groupOperations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation'
+      additionalProperties: false
   securitySchemes:
     RMS_Auth:
       type: apiKey

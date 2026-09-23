@@ -281,16 +281,15 @@ paths:
       - CedantV1
 components:
   schemas:
-    CedantSearchResult:
+    ErrorMessage:
       type: object
       properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cedant'
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     Cedant:
       description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
@@ -306,15 +305,16 @@ components:
           minLength: 0
       required:
       - name
-    ErrorMessage:
+    CedantSearchResult:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cedant'
   securitySchemes:
     RMS_Auth:
       type: apiKey

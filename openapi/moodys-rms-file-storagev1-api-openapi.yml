@@ -409,6 +409,32 @@ paths:
       - File StorageV1
 components:
   schemas:
+    ErrorBody:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        category:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    S3Bucket:
+      type: object
+      properties:
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        sessionToken:
+          type: string
+        s3Path:
+          type: string
+        s3Region:
+          type: string
     Link:
       type: object
       properties:
@@ -422,6 +448,15 @@ components:
       - href
       - method
       - rel
+    AlmErrorMessage:
+      type: object
+      properties:
+        row:
+          type: string
+        column:
+          type: string
+        text:
+          type: string
     ErrorMessage:
       type: object
       properties:
@@ -430,46 +465,6 @@ components:
         message:
           type: string
         logId:
-          type: string
-    S3UploadHelper:
-      type: object
-      properties:
-        bucketPrefix:
-          type: string
-        awsRegion:
-          type: string
-        uploadId:
-          type: string
-        uploadKey1:
-          type: string
-        uploadKey2:
-          type: string
-        uploadKey3:
-          type: string
-    EdmImportInput:
-      type: object
-      properties:
-        share:
-          description: Indicates if the exposure set is shared with other groups.
-          type: boolean
-        groups:
-          description: List of groups that may access the exposure set.
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-    S3Bucket:
-      type: object
-      properties:
-        accessKeyId:
-          type: string
-        secretAccessKey:
-          type: string
-        sessionToken:
-          type: string
-        s3Path:
-          type: string
-        s3Region:
           type: string
     FileInput:
       type: object
@@ -489,19 +484,6 @@ components:
       required:
       - fileName
       - fileType
-    ErrorBody:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        category:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
     RDMImportInput:
       type: object
       properties:
@@ -558,15 +540,6 @@ components:
       required:
       - rdmName
       - uploadId
-    AlmErrorMessage:
-      type: object
-      properties:
-        row:
-          type: string
-        column:
-          type: string
-        text:
-          type: string
     AggregatePortfolioFlatFileMapping:
       type: object
       properties:
@@ -623,6 +596,33 @@ components:
           type: string
         dependencyResolution:
           type: string
+    S3UploadHelper:
+      type: object
+      properties:
+        bucketPrefix:
+          type: string
+        awsRegion:
+          type: string
+        uploadId:
+          type: string
+        uploadKey1:
+          type: string
+        uploadKey2:
+          type: string
+        uploadKey3:
+          type: string
+    EdmImportInput:
+      type: object
+      properties:
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
   securitySchemes:
     RMS_Auth:
       type: apiKey

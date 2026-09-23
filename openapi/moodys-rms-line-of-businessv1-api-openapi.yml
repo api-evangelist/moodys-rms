@@ -275,16 +275,6 @@ paths:
       - Line of BusinessV1
 components:
   schemas:
-    LineOfBusinessSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineOfBusiness'
     LineOfBusiness:
       type: object
       properties:
@@ -297,6 +287,16 @@ components:
           minLength: 0
       required:
       - name
+    LineOfBusinessSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineOfBusiness'
     ErrorMessage:
       type: object
       properties:

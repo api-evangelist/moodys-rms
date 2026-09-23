@@ -50,6 +50,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGeocode180
+      x-operation-id-source: derived
   /geocode/18.1:
     post:
       tags:
@@ -81,6 +83,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGeocode181
+      x-operation-id-source: derived
   /geocode/21.0:
     post:
       tags:
@@ -112,6 +116,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGeocode210
+      x-operation-id-source: derived
   /geocode/22.0:
     post:
       tags:
@@ -143,6 +149,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGeocode220
+      x-operation-id-source: derived
   /geocode/latest:
     post:
       tags:
@@ -174,6 +182,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGeocodeLatest
+      x-operation-id-source: derived
   /geocode/18.0/admin1:
     get:
       tags:
@@ -221,6 +231,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin1
+      x-operation-id-source: derived
   /geocode/18.1/admin1:
     get:
       tags:
@@ -268,6 +280,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin1
+      x-operation-id-source: derived
   /geocode/20.0/admin1:
     get:
       tags:
@@ -315,6 +329,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin1
+      x-operation-id-source: derived
   /geocode/21.0/admin1:
     get:
       tags:
@@ -362,6 +378,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin1
+      x-operation-id-source: derived
   /geocode/22.0/admin1:
     get:
       tags:
@@ -409,6 +427,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin1
+      x-operation-id-source: derived
   /geocode/latest/admin1:
     get:
       tags:
@@ -456,6 +476,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin1
+      x-operation-id-source: derived
   /geocode/18.0/admin1/{id}:
     get:
       tags:
@@ -484,6 +506,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin1ById
+      x-operation-id-source: derived
   /geocode/18.1/admin1/{id}:
     get:
       tags:
@@ -512,6 +536,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin1ById
+      x-operation-id-source: derived
   /geocode/20.0/admin1/{id}:
     get:
       tags:
@@ -540,6 +566,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin1ById
+      x-operation-id-source: derived
   /geocode/21.0/admin1/{id}:
     get:
       tags:
@@ -568,6 +596,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin1ById
+      x-operation-id-source: derived
   /geocode/22.0/admin1/{id}:
     get:
       tags:
@@ -596,6 +626,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin1ById
+      x-operation-id-source: derived
   /geocode/latest/admin1/{id}:
     get:
       tags:
@@ -624,6 +656,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin1ById
+      x-operation-id-source: derived
   /geocode/18.0/admin2:
     get:
       tags:
@@ -676,6 +710,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin2
+      x-operation-id-source: derived
   /geocode/18.1/admin2:
     $ref: '#/paths/~1geocode~118.0~1admin2'
     get:
@@ -729,6 +765,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin2
+      x-operation-id-source: derived
   /geocode/20.0/admin2:
     get:
       tags:
@@ -781,6 +819,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin2
+      x-operation-id-source: derived
   /geocode/21.0/admin2:
     get:
       tags:
@@ -833,6 +873,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin2
+      x-operation-id-source: derived
   /geocode/22.0/admin2:
     get:
       tags:
@@ -885,6 +927,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin2
+      x-operation-id-source: derived
   /geocode/latest/admin2:
     get:
       tags:
@@ -937,6 +981,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin2
+      x-operation-id-source: derived
   /geocode/18.0/admin2/{id}:
     get:
       tags:
@@ -965,6 +1011,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin2ById
+      x-operation-id-source: derived
   /geocode/18.1/admin2/{id}:
     get:
       tags:
@@ -993,6 +1041,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin2ById
+      x-operation-id-source: derived
   /geocode/20.0/admin2/{id}:
     get:
       tags:
@@ -1021,6 +1071,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin2ById
+      x-operation-id-source: derived
   /geocode/21.0/admin2/{id}:
     get:
       tags:
@@ -1049,6 +1101,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin2ById
+      x-operation-id-source: derived
   /geocode/22.0/admin2/{id}:
     get:
       tags:
@@ -1077,6 +1131,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin2ById
+      x-operation-id-source: derived
   /geocode/latest/admin2/{id}:
     get:
       tags:
@@ -1105,6 +1161,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin2ById
+      x-operation-id-source: derived
   /geocode/18.0/admin3:
     get:
       tags:
@@ -1162,6 +1220,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin3
+      x-operation-id-source: derived
   /geocode/18.1/admin3:
     get:
       tags:
@@ -1219,6 +1279,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin3
+      x-operation-id-source: derived
   /geocode/20.0/admin3:
     get:
       tags:
@@ -1276,6 +1338,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin3
+      x-operation-id-source: derived
   /geocode/21.0/admin3:
     get:
       tags:
@@ -1333,6 +1397,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin3
+      x-operation-id-source: derived
   /geocode/22.0/admin3:
     get:
       tags:
@@ -1390,6 +1456,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin3
+      x-operation-id-source: derived
   /geocode/latest/admin3:
     get:
       tags:
@@ -1447,6 +1515,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin3
+      x-operation-id-source: derived
   /geocode/18.0/admin3/{id}:
     get:
       tags:
@@ -1475,6 +1545,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin3ById
+      x-operation-id-source: derived
   /geocode/18.1/admin3/{id}:
     get:
       tags:
@@ -1503,6 +1575,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin3ById
+      x-operation-id-source: derived
   /geocode/20.0/admin3/{id}:
     get:
       tags:
@@ -1531,6 +1605,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin3ById
+      x-operation-id-source: derived
   /geocode/21.0/admin3/{id}:
     get:
       tags:
@@ -1559,6 +1635,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin3ById
+      x-operation-id-source: derived
   /geocode/22.0/admin3/{id}:
     get:
       tags:
@@ -1587,6 +1665,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin3ById
+      x-operation-id-source: derived
   /geocode/latest/admin3/{id}:
     get:
       tags:
@@ -1615,6 +1695,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin3ById
+      x-operation-id-source: derived
   /geocode/18.0/admin4:
     get:
       tags:
@@ -1672,6 +1754,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin4
+      x-operation-id-source: derived
   /geocode/18.1/admin4:
     get:
       tags:
@@ -1729,6 +1813,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin4
+      x-operation-id-source: derived
   /geocode/20.0/admin4:
     get:
       tags:
@@ -1786,6 +1872,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin4
+      x-operation-id-source: derived
   /geocode/21.0/admin4:
     get:
       tags:
@@ -1843,6 +1931,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin4
+      x-operation-id-source: derived
   /geocode/22.0/admin4:
     get:
       tags:
@@ -1900,6 +1990,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin4
+      x-operation-id-source: derived
   /geocode/latest/admin4:
     get:
       tags:
@@ -1957,6 +2049,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin4
+      x-operation-id-source: derived
   /geocode/18.0/admin4/{id}:
     get:
       tags:
@@ -1985,6 +2079,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Admin4ById
+      x-operation-id-source: derived
   /geocode/18.1/admin4/{id}:
     get:
       tags:
@@ -2013,6 +2109,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Admin4ById
+      x-operation-id-source: derived
   /geocode/20.0/admin4/{id}:
     get:
       tags:
@@ -2041,6 +2139,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Admin4ById
+      x-operation-id-source: derived
   /geocode/21.0/admin4/{id}:
     get:
       tags:
@@ -2069,6 +2169,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Admin4ById
+      x-operation-id-source: derived
   /geocode/22.0/admin4/{id}:
     get:
       tags:
@@ -2097,6 +2199,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Admin4ById
+      x-operation-id-source: derived
   /geocode/latest/admin4/{id}:
     get:
       tags:
@@ -2125,6 +2229,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestAdmin4ById
+      x-operation-id-source: derived
   /geocode/18.0/city:
     get:
       tags:
@@ -2182,6 +2288,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180City
+      x-operation-id-source: derived
   /geocode/18.1/city:
     get:
       tags:
@@ -2239,6 +2347,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181City
+      x-operation-id-source: derived
   /geocode/20.0/city:
     get:
       tags:
@@ -2296,6 +2406,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200City
+      x-operation-id-source: derived
   /geocode/21.0/city:
     get:
       tags:
@@ -2353,6 +2465,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210City
+      x-operation-id-source: derived
   /geocode/22.0/city:
     get:
       tags:
@@ -2410,6 +2524,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220City
+      x-operation-id-source: derived
   /geocode/latest/city:
     get:
       tags:
@@ -2467,6 +2583,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestCity
+      x-operation-id-source: derived
   /geocode/18.0/city/{id}:
     get:
       tags:
@@ -2495,6 +2613,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180CityById
+      x-operation-id-source: derived
   /geocode/18.1/city/{id}:
     get:
       tags:
@@ -2523,6 +2643,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181CityById
+      x-operation-id-source: derived
   /geocode/20.0/city/{id}:
     get:
       tags:
@@ -2551,6 +2673,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200CityById
+      x-operation-id-source: derived
   /geocode/21.0/city/{id}:
     get:
       tags:
@@ -2579,6 +2703,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210CityById
+      x-operation-id-source: derived
   /geocode/22.0/city/{id}:
     get:
       tags:
@@ -2607,6 +2733,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220CityById
+      x-operation-id-source: derived
   /geocode/latest/city/{id}:
     get:
       tags:
@@ -2635,6 +2763,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestCityById
+      x-operation-id-source: derived
   /geocode/18.0/country:
     get:
       tags:
@@ -2677,6 +2807,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Country
+      x-operation-id-source: derived
   /geocode/18.1/country:
     get:
       tags:
@@ -2719,6 +2851,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Country
+      x-operation-id-source: derived
   /geocode/20.0/country:
     get:
       tags:
@@ -2761,6 +2895,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Country
+      x-operation-id-source: derived
   /geocode/21.0/country:
     get:
       tags:
@@ -2803,6 +2939,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Country
+      x-operation-id-source: derived
   /geocode/22.0/country:
     get:
       tags:
@@ -2845,6 +2983,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Country
+      x-operation-id-source: derived
   /geocode/latest/country:
     get:
       tags:
@@ -2887,6 +3027,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestCountry
+      x-operation-id-source: derived
   /geocode/18.0/country/{id}:
     get:
       tags:
@@ -2915,6 +3057,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180CountryById
+      x-operation-id-source: derived
   /geocode/18.1/country/{id}:
     get:
       tags:
@@ -2943,6 +3087,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181CountryById
+      x-operation-id-source: derived
   /geocode/20.0/country/{id}:
     get:
       tags:
@@ -2971,6 +3117,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200CountryById
+      x-operation-id-source: derived
   /geocode/21.0/country/{id}:
     get:
       tags:
@@ -2999,6 +3147,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210CountryById
+      x-operation-id-source: derived
   /geocode/22.0/country/{id}:
     get:
       tags:
@@ -3027,6 +3177,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220CountryById
+      x-operation-id-source: derived
   /geocode/latest/country/{id}:
     get:
       tags:
@@ -3055,6 +3207,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestCountryById
+      x-operation-id-source: derived
   /geocode/18.0/locationCode:
     get:
       tags:
@@ -3107,6 +3261,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180LocationCode
+      x-operation-id-source: derived
   /geocode/18.1/locationCode:
     get:
       tags:
@@ -3159,6 +3315,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181LocationCode
+      x-operation-id-source: derived
   /geocode/20.0/locationCode:
     get:
       tags:
@@ -3211,6 +3369,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200LocationCode
+      x-operation-id-source: derived
   /geocode/21.0/locationCode:
     get:
       tags:
@@ -3263,6 +3423,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210LocationCode
+      x-operation-id-source: derived
   /geocode/22.0/locationCode:
     get:
       tags:
@@ -3315,6 +3477,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220LocationCode
+      x-operation-id-source: derived
   /geocode/latest/locationCode:
     get:
       tags:
@@ -3367,6 +3531,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestLocationCode
+      x-operation-id-source: derived
   /geocode/18.0/locationCode/{id}:
     get:
       tags:
@@ -3395,6 +3561,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180LocationCodeById
+      x-operation-id-source: derived
   /geocode/18.1/locationCode/{id}:
     get:
       tags:
@@ -3423,6 +3591,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181LocationCodeById
+      x-operation-id-source: derived
   /geocode/20.0/locationCode/{id}:
     get:
       tags:
@@ -3451,6 +3621,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200LocationCodeById
+      x-operation-id-source: derived
   /geocode/21.0/locationCode/{id}:
     get:
       tags:
@@ -3479,6 +3651,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210LocationCodeById
+      x-operation-id-source: derived
   /geocode/22.0/locationCode/{id}:
     get:
       tags:
@@ -3507,6 +3681,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220LocationCodeById
+      x-operation-id-source: derived
   /geocode/latest/locationCode/{id}:
     get:
       tags:
@@ -3535,6 +3711,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestLocationCodeById
+      x-operation-id-source: derived
   /geocode/18.0/postalCode:
     get:
       tags:
@@ -3587,6 +3765,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180PostalCode
+      x-operation-id-source: derived
   /geocode/18.1/postalCode:
     get:
       tags:
@@ -3639,6 +3819,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181PostalCode
+      x-operation-id-source: derived
   /geocode/20.0/postalCode:
     get:
       tags:
@@ -3691,6 +3873,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200PostalCode
+      x-operation-id-source: derived
   /geocode/21.0/postalCode:
     get:
       tags:
@@ -3743,6 +3927,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210PostalCode
+      x-operation-id-source: derived
   /geocode/22.0/postalCode:
     get:
       tags:
@@ -3795,6 +3981,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220PostalCode
+      x-operation-id-source: derived
   /geocode/latest/postalCode:
     get:
       tags:
@@ -3847,6 +4035,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestPostalCode
+      x-operation-id-source: derived
   /geocode/18.0/postalCode/{id}:
     get:
       tags:
@@ -3875,6 +4065,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180PostalCodeById
+      x-operation-id-source: derived
   /geocode/18.1/postalCode/{id}:
     get:
       tags:
@@ -3903,6 +4095,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181PostalCodeById
+      x-operation-id-source: derived
   /geocode/20.0/postalCode/{id}:
     get:
       tags:
@@ -3931,6 +4125,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200PostalCodeById
+      x-operation-id-source: derived
   /geocode/21.0/postalCode/{id}:
     get:
       tags:
@@ -3959,6 +4155,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210PostalCodeById
+      x-operation-id-source: derived
   /geocode/22.0/postalCode/{id}:
     get:
       tags:
@@ -3987,6 +4185,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220PostalCodeById
+      x-operation-id-source: derived
   /geocode/latest/postalCode/{id}:
     get:
       tags:
@@ -4015,6 +4215,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestPostalCodeById
+      x-operation-id-source: derived
   /geocode/18.0/zone1:
     get:
       tags:
@@ -4057,6 +4259,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Zone1
+      x-operation-id-source: derived
   /geocode/18.1/zone1:
     get:
       tags:
@@ -4099,6 +4303,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Zone1
+      x-operation-id-source: derived
   /geocode/20.0/zone1:
     get:
       tags:
@@ -4141,6 +4347,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Zone1
+      x-operation-id-source: derived
   /geocode/21.0/zone1:
     get:
       tags:
@@ -4183,6 +4391,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Zone1
+      x-operation-id-source: derived
   /geocode/22.0/zone1:
     get:
       tags:
@@ -4225,6 +4435,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Zone1
+      x-operation-id-source: derived
   /geocode/latest/zone1:
     get:
       tags:
@@ -4267,6 +4479,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestZone1
+      x-operation-id-source: derived
   /geocode/18.0/zone1/{id}:
     get:
       tags:
@@ -4295,6 +4509,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Zone1ById
+      x-operation-id-source: derived
   /geocode/18.1/zone1/{id}:
     get:
       tags:
@@ -4323,6 +4539,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Zone1ById
+      x-operation-id-source: derived
   /geocode/20.0/zone1/{id}:
     get:
       tags:
@@ -4351,6 +4569,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Zone1ById
+      x-operation-id-source: derived
   /geocode/21.0/zone1/{id}:
     get:
       tags:
@@ -4379,6 +4599,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Zone1ById
+      x-operation-id-source: derived
   /geocode/22.0/zone1/{id}:
     get:
       tags:
@@ -4407,6 +4629,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Zone1ById
+      x-operation-id-source: derived
   /geocode/latest/zone1/{id}:
     get:
       tags:
@@ -4435,6 +4659,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestZone1ById
+      x-operation-id-source: derived
   /geocode/18.0/zone3:
     get:
       tags:
@@ -4477,6 +4703,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Zone3
+      x-operation-id-source: derived
   /geocode/18.1/zone3:
     get:
       tags:
@@ -4519,6 +4747,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Zone3
+      x-operation-id-source: derived
   /geocode/20.0/zone3:
     get:
       tags:
@@ -4561,6 +4791,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Zone3
+      x-operation-id-source: derived
   /geocode/21.0/zone3:
     get:
       tags:
@@ -4603,6 +4835,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Zone3
+      x-operation-id-source: derived
   /geocode/22.0/zone3:
     get:
       tags:
@@ -4645,6 +4879,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Zone3
+      x-operation-id-source: derived
   /geocode/latest/zone3:
     get:
       tags:
@@ -4687,6 +4923,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestZone3
+      x-operation-id-source: derived
   /geocode/18.0/zone3/{id}:
     get:
       tags:
@@ -4715,6 +4953,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Zone3ById
+      x-operation-id-source: derived
   /geocode/18.1/zone3/{id}:
     get:
       tags:
@@ -4743,6 +4983,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Zone3ById
+      x-operation-id-source: derived
   /geocode/20.0/zone3/{id}:
     get:
       tags:
@@ -4771,6 +5013,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Zone3ById
+      x-operation-id-source: derived
   /geocode/21.0/zone3/{id}:
     get:
       tags:
@@ -4799,6 +5043,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Zone3ById
+      x-operation-id-source: derived
   /geocode/22.0/zone3/{id}:
     get:
       tags:
@@ -4827,6 +5073,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Zone3ById
+      x-operation-id-source: derived
   /geocode/latest/zone3/{id}:
     get:
       tags:
@@ -4855,6 +5103,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestZone3ById
+      x-operation-id-source: derived
   /geocode/18.0/zone4:
     get:
       tags:
@@ -4897,6 +5147,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Zone4
+      x-operation-id-source: derived
   /geocode/18.1/zone4:
     get:
       tags:
@@ -4939,6 +5191,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Zone4
+      x-operation-id-source: derived
   /geocode/20.0/zone4:
     get:
       tags:
@@ -4981,6 +5235,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Zone4
+      x-operation-id-source: derived
   /geocode/21.0/zone4:
     get:
       tags:
@@ -5023,6 +5279,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Zone4
+      x-operation-id-source: derived
   /geocode/22.0/zone4:
     get:
       tags:
@@ -5065,6 +5323,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Zone4
+      x-operation-id-source: derived
   /geocode/latest/zone4:
     get:
       tags:
@@ -5107,6 +5367,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestZone4
+      x-operation-id-source: derived
   /geocode/18.0/zone4/{id}:
     get:
       tags:
@@ -5135,6 +5397,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode180Zone4ById
+      x-operation-id-source: derived
   /geocode/18.1/zone4/{id}:
     get:
       tags:
@@ -5163,6 +5427,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode181Zone4ById
+      x-operation-id-source: derived
   /geocode/20.0/zone4/{id}:
     get:
       tags:
@@ -5191,6 +5457,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode200Zone4ById
+      x-operation-id-source: derived
   /geocode/21.0/zone4/{id}:
     get:
       tags:
@@ -5219,6 +5487,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode210Zone4ById
+      x-operation-id-source: derived
   /geocode/22.0/zone4/{id}:
     get:
       tags:
@@ -5247,6 +5517,8 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocode220Zone4ById
+      x-operation-id-source: derived
   /geocode/latest/zone4/{id}:
     get:
       tags:
@@ -5275,8 +5547,375 @@ paths:
           $ref: '#/components/responses/404Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: getGeocodeLatestZone4ById
+      x-operation-id-source: derived
 components:
   schemas:
+    ReferenceTableAdmin1ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableAdmin1Output'
+    ReferenceTableCityListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableCityOutput'
+    ReferenceTablePostalCodeListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTablePostalCodeOutput'
+    ReferenceTableAdmin3Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: AE
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: AE
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: AE
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United Arab Emirates
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 784
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: ''
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: Dubai
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 2347111
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: ''
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: Dubai
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 61762805
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents smaller geographic divisions than Admin2, such as municipality.
+          example: ''
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: Umm Suqeim Second
+          maxLength: 256
+        admin3GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 3. Admin3 represents smaller geographic divisions than Admin2, such as municipality.
+          example: 61762880
+    ReferenceTableZone3ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableZone3Output'
+    ReferenceTableZone4ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableZone4Output'
+    ReferenceTableAdmin2ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableAdmin2Output'
+    ReferenceTableCityOutput:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: AG
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: AC
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: CB
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: Antigua and Barbuda
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 28
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: '200'
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: Barbuda
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 60375118
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '200'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: Barbuda
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 2344541
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: '28200001'
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: AG001
+          maxLength: 256
+        admin3GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: 60372390
+        cityCode:
+          type: string
+          description: Code for City/Town
+          example: '282001'
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: The Caves
+          maxLength: 256
+        cityGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for City/Town
+          example: 56228
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ReferenceTableAdmin4ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableAdmin4Output'
+    ReferenceTableAdmin4Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: PE
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: PE
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: PE
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: Peru
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 604
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: '15'
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: Lima
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 2346482
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '1501'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: Lima
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 64079965
+        cityCode:
+          type: string
+          description: Code for city or town.
+          example: '335570'
+          maxLength: 16
+        cityName:
+          type: string
+          description: Name of city
+          example: Lima CBD
+          maxLength: 256
+        cityGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for city or town.
+          example: 30335570
+        admin4Code:
+          type: string
+          description: Code for administrative level 4. Admin4 represents smaller geographic divisions than Admin3, such as neighborhood/district.
+          example: '71043'
+          maxLength: 16
+        admin4Name:
+          type: string
+          description: Name of administrative level 4
+          example: Lima San Isidro CBD
+          maxLength: 256
+        admin4GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 4. Admin4 represents smaller geographic divisions than Admin3, such as neighborhood/district.
+          example: 71071043
+    ReferenceTableAdmin1Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: US
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: US
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 840
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 99999106
+    ReferenceTableZone4Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: CZ
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: EZ
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: CZ
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: Czech Republic
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 203
+        zone4Name:
+          type: string
+          description: Name of CRESTA zone
+          example: CZE_68742
+          maxLength: 256
+        zone4GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for CRESTA zones.
+          example: 64048047
     ErrorItem:
       type: object
       properties:
@@ -5349,6 +5988,67 @@ components:
         message:
           type: string
           example: Error message
+    ReferenceTableLocationCodeListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableLocationCodeOutput'
+    ReferenceTableAdmin2Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: US
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: US
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 840
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 99999106
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 99999206001
     ReferenceTablePostalCodeOutput:
       type: object
       properties:
@@ -5441,6 +6141,102 @@ components:
           format: int64
           description: Globally unique ID for postal code
           example: 99999494560
+    ReferenceTableLocationCodeOutput:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: GB
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: UK
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: GB
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United Kingdom
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 826
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: '103'
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: England
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 24554868
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '103'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: Dudley
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 30277299
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: E07CR0
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: Dudley
+          maxLength: 256
+        admin3GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: 12695865
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: Halesowen
+          maxLength: 256
+        cityGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for City/Town
+          example: 22165
+        locationCode:
+          type: string
+          description: Location Code
+          example: B62 2
+          maxLength: 16
+        locationCodeGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for postal code
+          example: 60550885
+    ReferenceTableZone1ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableZone1Output'
     GeocodeInput:
       type: object
       required:
@@ -5545,120 +6341,10 @@ components:
           description: Supplemental text captured for the address
           example: ''
           maxLength: 512
-    ReferenceTableCityListOutput:
+    ReferenceTableCountryListOutput:
       type: array
       items:
-        $ref: '#/components/schemas/ReferenceTableCityOutput'
-    ReferenceTableZone4Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: CZ
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: EZ
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: CZ
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: Czech Republic
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 203
-        zone4Name:
-          type: string
-          description: Name of CRESTA zone
-          example: CZE_68742
-          maxLength: 256
-        zone4GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for CRESTA zones.
-          example: 64048047
-    ReferenceTableAdmin2Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: US
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: US
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 840
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 99999106
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '001'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: ALAMEDA COUNTY
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 99999206001
-    ReferenceTableAdmin1ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableAdmin1Output'
-    ReferenceTableLocationCodeListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableLocationCodeOutput'
-    ReferenceTableZone1ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableZone1Output'
-    ReferenceTableAdmin4ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableAdmin4Output'
+        $ref: '#/components/schemas/ReferenceTableCountryOutput'
     GeocodeOutput:
       type: object
       allOf:
@@ -5810,93 +6496,33 @@ components:
             description: Data version
             example: xx.x.xxxx.x
             maxLength: 20
-    ReferenceTableAdmin4Output:
+    ReferenceTableCountryOutput:
       type: object
       properties:
         countryIso2a:
           type: string
           description: Country ISO2A code
-          example: PE
+          example: US
           maxLength: 2
         countryFips:
           type: string
           description: Country FIPS code
-          example: PE
+          example: US
           maxLength: 4
         countryRmsCode:
           type: string
           description: RMS code for Country
-          example: PE
+          example: US
           maxLength: 4
         countryName:
           type: string
           description: Name of Country
-          example: Peru
+          example: United States
           maxLength: 512
         countryGeoId:
           type: integer
           description: Globally unique ID for Country
-          example: 604
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: '15'
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: Lima
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 2346482
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '1501'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: Lima
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 64079965
-        cityCode:
-          type: string
-          description: Code for city or town.
-          example: '335570'
-          maxLength: 16
-        cityName:
-          type: string
-          description: Name of city
-          example: Lima CBD
-          maxLength: 256
-        cityGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for city or town.
-          example: 30335570
-        admin4Code:
-          type: string
-          description: Code for administrative level 4. Admin4 represents smaller geographic divisions than Admin3, such as neighborhood/district.
-          example: '71043'
-          maxLength: 16
-        admin4Name:
-          type: string
-          description: Name of administrative level 4
-          example: Lima San Isidro CBD
-          maxLength: 256
-        admin4GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 4. Admin4 represents smaller geographic divisions than Admin3, such as neighborhood/district.
-          example: 71071043
+          example: 840
     ReferenceTableZone3Output:
       type: object
       properties:
@@ -5934,121 +6560,10 @@ components:
           format: int64
           description: Globally unique ID for Low-resolution CRESTA Zone.
           example: 64021802
-    ReferenceTableCityOutput:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: AG
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: AC
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: CB
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: Antigua and Barbuda
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 28
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: '200'
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: Barbuda
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 60375118
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '200'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: Barbuda
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 2344541
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: '28200001'
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: AG001
-          maxLength: 256
-        admin3GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: 60372390
-        cityCode:
-          type: string
-          description: Code for City/Town
-          example: '282001'
-        cityName:
-          type: string
-          description: Name of City/Town
-          example: The Caves
-          maxLength: 256
-        cityGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for City/Town
-          example: 56228
-    ErrorOutput:
-      type: object
-      properties:
-        contextId:
-          type: string
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        additionalInfo:
-          type: string
-          example: ''
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    ReferenceTableAdmin2ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableAdmin2Output'
-    ReferenceTableZone4ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableZone4Output'
     ReferenceTableAdmin3ListOutput:
       type: array
       items:
         $ref: '#/components/schemas/ReferenceTableAdmin3Output'
-    ReferenceTableZone3ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableZone3Output'
     ReferenceTableZone1Output:
       type: object
       properties:
@@ -6086,256 +6601,9 @@ components:
           format: int64
           description: Globally unique ID for CRESTA zones.
           example: 60344626
-    ReferenceTablePostalCodeListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTablePostalCodeOutput'
-    ReferenceTableLocationCodeOutput:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: GB
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: UK
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: GB
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United Kingdom
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 826
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: '103'
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: England
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 24554868
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '103'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: Dudley
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 30277299
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: E07CR0
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: Dudley
-          maxLength: 256
-        admin3GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: 12695865
-        cityName:
-          type: string
-          description: Name of City/Town
-          example: Halesowen
-          maxLength: 256
-        cityGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for City/Town
-          example: 22165
-        locationCode:
-          type: string
-          description: Location Code
-          example: B62 2
-          maxLength: 16
-        locationCodeGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for postal code
-          example: 60550885
-    ReferenceTableCountryOutput:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: US
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: US
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 840
-    ReferenceTableAdmin3Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: AE
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: AE
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: AE
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United Arab Emirates
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 784
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: ''
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: Dubai
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 2347111
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: ''
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: Dubai
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 61762805
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents smaller geographic divisions than Admin2, such as municipality.
-          example: ''
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: Umm Suqeim Second
-          maxLength: 256
-        admin3GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 3. Admin3 represents smaller geographic divisions than Admin2, such as municipality.
-          example: 61762880
-    ReferenceTableAdmin1Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: US
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: US
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 840
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 99999106
-    ReferenceTableCountryListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableCountryOutput'
   responses:
     404Response:
       description: Not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorOutput'
-    401Response:
-      description: No valid API key provided.
       content:
         application/json:
           schema:
@@ -6348,6 +6616,12 @@ components:
             $ref: '#/components/schemas/ErrorOutput'
     400Response:
       description: The request was unacceptable, likely due to missing a required input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    401Response:
+      description: No valid API key provided.
       content:
         application/json:
           schema:

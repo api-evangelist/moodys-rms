@@ -1,9 +1,9 @@
 {
   "provider": "moodys-rms",
   "sources": [
-    "moodys-rms-data-bridge-openapi.json",
-    "moodys-rms-location-intelligence-openapi.yaml",
-    "moodys-rms-risk-modeler-openapi.yml"
+    "_original/moodys-rms-data-bridge-openapi.json",
+    "_original/moodys-rms-location-intelligence-openapi.yaml",
+    "_original/moodys-rms-risk-modeler-openapi.yml"
   ],
   "outputs": [
     "moodys-rms-client-ip-api-openapi.yml",
@@ -55,13 +55,12 @@
     "moodys-rms-workflowsv1-api-openapi.yml"
   ],
   "archived": [
-    "archived openapi/moodys-rms-data-bridge-openapi.json",
-    "archived openapi/moodys-rms-location-intelligence-openapi.yaml",
-    "archived openapi/moodys-rms-risk-modeler-openapi.yml"
+    "deleted 2 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "moodys-rms-data-bridge-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "moodys-rms-data-bridge-openapi.json: declared missing tag: Client IP",
     "moodys-rms-data-bridge-openapi.json: declared missing tag: Cluster",
@@ -109,7 +108,56 @@
     "moodys-rms-risk-modeler-openapi.yml: declared missing tag: UnderwriterV1",
     "moodys-rms-risk-modeler-openapi.yml: declared missing tag: UtilityV1",
     "moodys-rms-risk-modeler-openapi.yml: declared missing tag: WorkflowsV1",
-    "apis.yml register: written (+47 apis, 50 total)"
+    "superseded outputs removed: moodys-rms-account-v2-api-openapi.yml, moodys-rms-metrics-v1-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 50 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "moodys-rms-account-v2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-accountv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-aggregate-portfoliov1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-aggregate-portfoliov2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-analysis-groupsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-analysis-groupsv2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-branchv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-cedantv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-client-ip-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-cluster-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-composite-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-databases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-datasourcesv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-datasourcesv2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-datastorev1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-datastorev2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-domainsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-earthquake-hazard-lookup-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-exportsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-exportsv2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-exposure-batchv3-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-exposure-setsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-file-storagev1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-geocoding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-import-upload-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-importsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-line-of-businessv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-locationv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-logins-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-metrics-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-metricsv2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-patev1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-policy-conditionv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-policyv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-portfoliov1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-portfoliov2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-producerv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-reportsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-risk-lookups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-server-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-step-policyv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-treatyv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-underwriterv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-utilityv1-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-windstorm-hazard-lookup-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moodys-rms-workflowsv1-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

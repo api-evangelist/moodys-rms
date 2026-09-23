@@ -137,6 +137,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuEqLossCost181
+      x-operation-id-source: derived
   /au_eq_loss_cost/latest:
     post:
       tags:
@@ -212,6 +214,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuEqLossCostLatest
+      x-operation-id-source: derived
   /au_eq_risk_score/18.1:
     post:
       tags:
@@ -261,6 +265,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuEqRiskScore181
+      x-operation-id-source: derived
   /au_eq_risk_score/latest:
     post:
       tags:
@@ -310,6 +316,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuEqRiskScoreLatest
+      x-operation-id-source: derived
   /au_ws_loss_cost/18.1:
     post:
       tags:
@@ -394,6 +402,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuWsLossCost181
+      x-operation-id-source: derived
   /au_ws_loss_cost/latest:
     post:
       tags:
@@ -478,6 +488,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuWsLossCostLatest
+      x-operation-id-source: derived
   /au_ws_risk_score/18.1:
     post:
       tags:
@@ -539,6 +551,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuWsRiskScore181
+      x-operation-id-source: derived
   /au_ws_risk_score/latest:
     post:
       tags:
@@ -600,6 +614,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postAuWsRiskScoreLatest
+      x-operation-id-source: derived
   /ca_cs_loss_cost/18.0:
     post:
       tags:
@@ -675,6 +691,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaCsLossCost180
+      x-operation-id-source: derived
   /ca_cs_loss_cost/latest:
     post:
       tags:
@@ -750,6 +768,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaCsLossCostLatest
+      x-operation-id-source: derived
   /ca_cs_risk_score/18.0:
     post:
       tags:
@@ -800,6 +820,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaCsRiskScore180
+      x-operation-id-source: derived
   /ca_cs_risk_score/latest:
     post:
       tags:
@@ -850,6 +872,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaCsRiskScoreLatest
+      x-operation-id-source: derived
   /ca_mmi/18.1:
     post:
       tags:
@@ -899,6 +923,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaMmi181
+      x-operation-id-source: derived
   /ca_mmi/Latest:
     post:
       tags:
@@ -948,6 +974,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaMmiLatest
+      x-operation-id-source: derived
   /ca_eq_loss_cost/18.0:
     post:
       tags:
@@ -1024,6 +1052,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaEqLossCost180
+      x-operation-id-source: derived
   /ca_eq_loss_cost/latest:
     post:
       tags:
@@ -1100,6 +1130,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaEqLossCostLatest
+      x-operation-id-source: derived
   /ca_eq_risk_score/18.0:
     post:
       tags:
@@ -1150,6 +1182,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaEqRiskScore180
+      x-operation-id-source: derived
   /ca_eq_risk_score/latest:
     post:
       tags:
@@ -1200,6 +1234,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaEqRiskScoreLatest
+      x-operation-id-source: derived
   /ca_wf_model_hazard/1.0:
     post:
       tags:
@@ -1244,6 +1280,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaWfModelHazard10
+      x-operation-id-source: derived
   /ca_wf_model_hazard/latest:
     post:
       tags:
@@ -1288,6 +1326,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaWfModelHazardLatest
+      x-operation-id-source: derived
   /ca_wt_loss_cost/18.0:
     post:
       tags:
@@ -1363,6 +1403,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaWtLossCost180
+      x-operation-id-source: derived
   /ca_wt_loss_cost/latest:
     post:
       tags:
@@ -1438,6 +1480,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaWtLossCostLatest
+      x-operation-id-source: derived
   /ca_wt_risk_score/18.0:
     post:
       tags:
@@ -1488,6 +1532,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaWtRiskScore180
+      x-operation-id-source: derived
   /ca_wt_risk_score/latest:
     post:
       tags:
@@ -1538,6 +1584,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCaWtRiskScoreLatest
+      x-operation-id-source: derived
   /cb_eq_loss_cost/18.1:
     post:
       tags:
@@ -1615,6 +1663,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbEqLossCost181
+      x-operation-id-source: derived
   /cb_eq_loss_cost/latest:
     post:
       tags:
@@ -1691,6 +1741,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbEqLossCostLatest
+      x-operation-id-source: derived
   /cb_eq_risk_score/18.1:
     post:
       tags:
@@ -1741,6 +1793,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbEqRiskScore181
+      x-operation-id-source: derived
   /cb_eq_risk_score/latest:
     post:
       tags:
@@ -1791,6 +1845,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbEqRiskScoreLatest
+      x-operation-id-source: derived
   /cb_ws_loss_cost/18.1:
     post:
       tags:
@@ -1867,6 +1923,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbWsLossCost181
+      x-operation-id-source: derived
   /cb_ws_loss_cost/21.0:
     post:
       tags:
@@ -1991,6 +2049,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbWsLossCost210
+      x-operation-id-source: derived
   /cb_ws_loss_cost/latest:
     post:
       tags:
@@ -2115,6 +2175,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbWsLossCostLatest
+      x-operation-id-source: derived
   /cb_ws_risk_score/18.1:
     post:
       tags:
@@ -2165,6 +2227,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbWsRiskScore181
+      x-operation-id-source: derived
   /cb_ws_risk_score/21.0:
     post:
       tags:
@@ -2266,6 +2330,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbWsRiskScore210
+      x-operation-id-source: derived
   /cb_ws_risk_score/latest:
     post:
       tags:
@@ -2367,6 +2433,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCbWsRiskScoreLatest
+      x-operation-id-source: derived
   /cn_eq_loss_cost/18.1:
     post:
       tags:
@@ -2416,6 +2484,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnEqLossCost181
+      x-operation-id-source: derived
   /cn_eq_loss_cost/latest:
     post:
       tags:
@@ -2464,6 +2534,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnEqLossCostLatest
+      x-operation-id-source: derived
   /cn_eq_risk_score/18.1:
     post:
       tags:
@@ -2513,6 +2585,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnEqRiskScore181
+      x-operation-id-source: derived
   /cn_eq_risk_score/latest:
     post:
       tags:
@@ -2562,6 +2636,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnEqRiskScoreLatest
+      x-operation-id-source: derived
   /cn_ws_loss_cost/18.1:
     post:
       tags:
@@ -2610,6 +2686,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnWsLossCost181
+      x-operation-id-source: derived
   /cn_ws_loss_cost/latest:
     post:
       tags:
@@ -2658,6 +2736,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnWsLossCostLatest
+      x-operation-id-source: derived
   /cn_ws_risk_score/18.1:
     post:
       tags:
@@ -2707,6 +2787,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnWsRiskScore181
+      x-operation-id-source: derived
   /cn_ws_risk_score/latest:
     post:
       tags:
@@ -2756,6 +2838,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postCnWsRiskScoreLatest
+      x-operation-id-source: derived
   /eu_eq_loss_cost/18.0:
     post:
       tags:
@@ -2833,6 +2917,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuEqLossCost180
+      x-operation-id-source: derived
   /eu_eq_loss_cost/latest:
     post:
       tags:
@@ -2909,6 +2995,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuEqLossCostLatest
+      x-operation-id-source: derived
   /eu_mmi/18.0:
     post:
       tags:
@@ -2958,6 +3046,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuMmi180
+      x-operation-id-source: derived
   /eu_mmi/latest:
     post:
       tags:
@@ -3007,6 +3097,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuMmiLatest
+      x-operation-id-source: derived
   /eu_eq_risk_score/18.0:
     post:
       tags:
@@ -3056,6 +3148,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuEqRiskScore180
+      x-operation-id-source: derived
   /eu_eq_risk_score/latest:
     post:
       tags:
@@ -3105,6 +3199,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuEqRiskScoreLatest
+      x-operation-id-source: derived
   /eu_fl_depth/1.0:
     post:
       tags:
@@ -3195,6 +3291,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlDepth10
+      x-operation-id-source: derived
   /eu_fl_depth/2.0:
     post:
       tags:
@@ -3285,6 +3383,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlDepth20
+      x-operation-id-source: derived
   /eu_fl_depth/latest:
     post:
       tags:
@@ -3375,6 +3475,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlDepthLatest
+      x-operation-id-source: derived
   /eu_fl_loss_cost/2.0:
     post:
       tags:
@@ -3441,6 +3543,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlLossCost20
+      x-operation-id-source: derived
   /eu_fl_loss_cost/latest:
     post:
       tags:
@@ -3507,6 +3611,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlLossCostLatest
+      x-operation-id-source: derived
   /eu_fl_risk_score/2.0:
     post:
       tags:
@@ -3557,6 +3663,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlRiskScore20
+      x-operation-id-source: derived
   /eu_fl_risk_score/latest:
     post:
       tags:
@@ -3607,6 +3715,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuFlRiskScoreLatest
+      x-operation-id-source: derived
   /eu_ws_loss_cost/18.0:
     post:
       tags:
@@ -3692,6 +3802,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuWsLossCost180
+      x-operation-id-source: derived
   /eu_ws_loss_cost/latest:
     post:
       tags:
@@ -3777,6 +3889,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuWsLossCostLatest
+      x-operation-id-source: derived
   /eu_ws_risk_score/18.0:
     post:
       tags:
@@ -3826,6 +3940,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuWsRiskScore180
+      x-operation-id-source: derived
   /eu_ws_risk_score/latest:
     post:
       tags:
@@ -3875,6 +3991,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postEuWsRiskScoreLatest
+      x-operation-id-source: derived
   /global_distance_to_nuclear_plant/1.0:
     post:
       tags:
@@ -3918,6 +4036,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGlobalDistanceToNuclearPlant10
+      x-operation-id-source: derived
   /global_distance_to_nuclear_plant/latest:
     post:
       tags:
@@ -3961,6 +4081,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGlobalDistanceToNuclearPlantLatest
+      x-operation-id-source: derived
   /global_distance_to_volcano/1.0:
     post:
       tags:
@@ -4004,6 +4126,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGlobalDistanceToVolcano10
+      x-operation-id-source: derived
   /global_distance_to_volcano/latest:
     post:
       tags:
@@ -4047,6 +4171,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGlobalDistanceToVolcanoLatest
+      x-operation-id-source: derived
   /global_fl_depth/1.0:
     post:
       tags:
@@ -4140,6 +4266,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGlobalFlDepth10
+      x-operation-id-source: derived
   /global_fl_depth/latest:
     post:
       tags:
@@ -4233,6 +4361,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGlobalFlDepthLatest
+      x-operation-id-source: derived
   /gu_eq_loss_cost/18.1:
     post:
       tags:
@@ -4281,6 +4411,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuEqLossCost181
+      x-operation-id-source: derived
   /gu_eq_loss_cost/latest:
     post:
       tags:
@@ -4329,6 +4461,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuEqLossCostLatest
+      x-operation-id-source: derived
   /gu_eq_risk_score/18.1:
     post:
       tags:
@@ -4378,6 +4512,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuEqRiskScore181
+      x-operation-id-source: derived
   /gu_eq_risk_score/latest:
     post:
       tags:
@@ -4427,6 +4563,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuEqRiskScoreLatest
+      x-operation-id-source: derived
   /gu_ws_loss_cost/18.1:
     post:
       tags:
@@ -4475,6 +4613,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuWsLossCost181
+      x-operation-id-source: derived
   /gu_ws_loss_cost/latest:
     post:
       tags:
@@ -4523,6 +4663,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuWsLossCostLatest
+      x-operation-id-source: derived
   /gu_ws_risk_score/18.1:
     post:
       tags:
@@ -4572,6 +4714,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuWsRiskScore181
+      x-operation-id-source: derived
   /gu_ws_risk_score/latest:
     post:
       tags:
@@ -4621,6 +4765,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postGuWsRiskScoreLatest
+      x-operation-id-source: derived
   /in_eq_loss_cost/18.1:
     post:
       tags:
@@ -4670,6 +4816,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInEqLossCost181
+      x-operation-id-source: derived
   /in_eq_loss_cost/latest:
     post:
       tags:
@@ -4719,6 +4867,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInEqLossCostLatest
+      x-operation-id-source: derived
   /in_eq_risk_score/18.1:
     post:
       tags:
@@ -4769,6 +4919,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInEqRiskScore181
+      x-operation-id-source: derived
   /in_eq_risk_score/latest:
     post:
       tags:
@@ -4819,6 +4971,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInEqRiskScoreLatest
+      x-operation-id-source: derived
   /in_fl_loss_cost/18.1:
     post:
       tags:
@@ -4868,6 +5022,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInFlLossCost181
+      x-operation-id-source: derived
   /in_fl_loss_cost/latest:
     post:
       tags:
@@ -4917,6 +5073,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInFlLossCostLatest
+      x-operation-id-source: derived
   /in_fl_risk_score/18.1:
     post:
       tags:
@@ -4967,6 +5125,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInFlRiskScore181
+      x-operation-id-source: derived
   /in_fl_risk_score/latest:
     post:
       tags:
@@ -5017,6 +5177,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postInFlRiskScoreLatest
+      x-operation-id-source: derived
   /kr_eq_loss_cost/18.1:
     post:
       tags:
@@ -5065,6 +5227,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrEqLossCost181
+      x-operation-id-source: derived
   /kr_eq_loss_cost/latest:
     post:
       tags:
@@ -5113,6 +5277,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrEqLossCostLatest
+      x-operation-id-source: derived
   /kr_eq_risk_score/18.1:
     post:
       tags:
@@ -5162,6 +5328,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrEqRiskScore181
+      x-operation-id-source: derived
   /kr_eq_risk_score/latest:
     post:
       tags:
@@ -5211,6 +5379,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrEqRiskScoreLatest
+      x-operation-id-source: derived
   /kr_ws_loss_cost/18.1:
     post:
       tags:
@@ -5259,6 +5429,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrWsLossCost181
+      x-operation-id-source: derived
   /kr_ws_loss_cost/latest:
     post:
       tags:
@@ -5307,6 +5479,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrWsLossCostLatest
+      x-operation-id-source: derived
   /kr_ws_risk_score/18.1:
     post:
       tags:
@@ -5356,6 +5530,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrWsRiskScore181
+      x-operation-id-source: derived
   /kr_ws_risk_score/latest:
     post:
       tags:
@@ -5405,6 +5581,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postKrWsRiskScoreLatest
+      x-operation-id-source: derived
   /mx_mmi/18.1:
     post:
       tags:
@@ -5454,6 +5632,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postMxMmi181
+      x-operation-id-source: derived
   /mx_mmi/latest:
     post:
       tags:
@@ -5503,6 +5683,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postMxMmiLatest
+      x-operation-id-source: derived
   /nz_fl_depth/1.0:
     post:
       tags:
@@ -5593,6 +5775,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postNzFlDepth10
+      x-operation-id-source: derived
   /nz_fl_depth/latest:
     post:
       tags:
@@ -5683,6 +5867,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postNzFlDepthLatest
+      x-operation-id-source: derived
   /nz_mmi/18.0:
     post:
       tags:
@@ -5732,6 +5918,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postNzMmi180
+      x-operation-id-source: derived
   /nz_mmi/latest:
     post:
       tags:
@@ -5781,6 +5969,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postNzMmiLatest
+      x-operation-id-source: derived
   /ph_ws_loss_cost/18.1:
     post:
       tags:
@@ -5829,6 +6019,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postPhWsLossCost181
+      x-operation-id-source: derived
   /ph_ws_loss_cost/latest:
     post:
       tags:
@@ -5877,6 +6069,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postPhWsLossCostLatest
+      x-operation-id-source: derived
   /ph_ws_risk_score/18.1:
     post:
       tags:
@@ -5926,6 +6120,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postPhWsRiskScore181
+      x-operation-id-source: derived
   /ph_ws_risk_score/latest:
     post:
       tags:
@@ -5975,6 +6171,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postPhWsRiskScoreLatest
+      x-operation-id-source: derived
   /sea_eq_loss_cost/18.1:
     post:
       tags:
@@ -6023,6 +6221,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postSeaEqLossCost181
+      x-operation-id-source: derived
   /sea_eq_loss_cost/latest:
     post:
       tags:
@@ -6071,6 +6271,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postSeaEqLossCostLatest
+      x-operation-id-source: derived
   /sea_eq_risk_score/18.1:
     post:
       tags:
@@ -6120,6 +6322,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postSeaEqRiskScore181
+      x-operation-id-source: derived
   /sea_eq_risk_score/latest:
     post:
       tags:
@@ -6169,6 +6373,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postSeaEqRiskScoreLatest
+      x-operation-id-source: derived
   /tw_eq_loss_cost/18.1:
     post:
       tags:
@@ -6217,6 +6423,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwEqLossCost181
+      x-operation-id-source: derived
   /tw_eq_loss_cost/latest:
     post:
       tags:
@@ -6265,6 +6473,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwEqLossCostLatest
+      x-operation-id-source: derived
   /tw_eq_risk_score/18.1:
     post:
       tags:
@@ -6314,6 +6524,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwEqRiskScore181
+      x-operation-id-source: derived
   /tw_eq_risk_score/latest:
     post:
       tags:
@@ -6363,6 +6575,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwEqRiskScoreLatest
+      x-operation-id-source: derived
   /tw_ws_loss_cost/18.1:
     post:
       tags:
@@ -6411,6 +6625,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwWsLossCost181
+      x-operation-id-source: derived
   /tw_ws_loss_cost/latest:
     post:
       tags:
@@ -6459,6 +6675,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwWsLossCostLatest
+      x-operation-id-source: derived
   /tw_ws_risk_score/18.1:
     post:
       tags:
@@ -6508,6 +6726,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwWsRiskScore181
+      x-operation-id-source: derived
   /tw_ws_risk_score/latest:
     post:
       tags:
@@ -6557,6 +6777,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postTwWsRiskScoreLatest
+      x-operation-id-source: derived
   /us_cs_loss_cost/18.0:
     post:
       tags:
@@ -6632,6 +6854,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsCsLossCost180
+      x-operation-id-source: derived
   /us_cs_loss_cost/latest:
     post:
       tags:
@@ -6707,6 +6931,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsCsLossCostLatest
+      x-operation-id-source: derived
   /us_cs_risk_score/18.0:
     post:
       tags:
@@ -6757,6 +6983,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsCsRiskScore180
+      x-operation-id-source: derived
   /us_cs_risk_score/latest:
     post:
       tags:
@@ -6807,6 +7035,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsCsRiskScoreLatest
+      x-operation-id-source: derived
   /us_distance_to_fault/17.0:
     post:
       tags:
@@ -6864,6 +7094,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToFault170
+      x-operation-id-source: derived
   /us_distance_to_fault/latest:
     post:
       tags:
@@ -6921,6 +7153,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToFaultLatest
+      x-operation-id-source: derived
   /us_distance_to_fire_station/1.0:
     post:
       tags:
@@ -6964,6 +7198,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToFireStation10
+      x-operation-id-source: derived
   /us_distance_to_fire_station/latest:
     post:
       tags:
@@ -7007,6 +7243,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToFireStationLatest
+      x-operation-id-source: derived
   /us_distance_to_inner_coast/1.0:
     post:
       tags:
@@ -7051,6 +7289,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToInnerCoast10
+      x-operation-id-source: derived
   /us_distance_to_inner_coast/latest:
     post:
       tags:
@@ -7095,6 +7335,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToInnerCoastLatest
+      x-operation-id-source: derived
   /us_distance_to_landfill/1.0:
     post:
       tags:
@@ -7138,6 +7380,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToLandfill10
+      x-operation-id-source: derived
   /us_distance_to_landfill/latest:
     post:
       tags:
@@ -7181,6 +7425,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsDistanceToLandfillLatest
+      x-operation-id-source: derived
   /us_eq_loss_cost/18.0:
     post:
       tags:
@@ -7257,6 +7503,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEqLossCost180
+      x-operation-id-source: derived
   /us_eq_loss_cost/latest:
     post:
       tags:
@@ -7333,6 +7581,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEqLossCostLatest
+      x-operation-id-source: derived
   /us_eq_risk_score/18.0:
     post:
       tags:
@@ -7383,6 +7633,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEqRiskScore180
+      x-operation-id-source: derived
   /us_eq_risk_score/latest:
     post:
       tags:
@@ -7433,6 +7685,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEqRiskScoreLatest
+      x-operation-id-source: derived
   /us_esdb_building_attributes/7.1:
     post:
       tags:
@@ -7492,6 +7746,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEsdbBuildingAttributes71
+      x-operation-id-source: derived
   /us_esdb_building_attributes/7.2:
     post:
       tags:
@@ -7551,6 +7807,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEsdbBuildingAttributes72
+      x-operation-id-source: derived
   /us_esdb_building_attributes/8.0:
     post:
       tags:
@@ -7610,6 +7868,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEsdbBuildingAttributes80
+      x-operation-id-source: derived
   /us_esdb_building_attributes/latest:
     post:
       tags:
@@ -7669,6 +7929,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsEsdbBuildingAttributesLatest
+      x-operation-id-source: derived
   /us_fema_firm/1.0:
     post:
       tags:
@@ -7735,6 +7997,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFemaFirm10
+      x-operation-id-source: derived
   /us_fema_firm/latest:
     post:
       tags:
@@ -7801,6 +8065,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFemaFirmLatest
+      x-operation-id-source: derived
   /us_fl_depth/1.0:
     post:
       tags:
@@ -7889,6 +8155,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlDepth10
+      x-operation-id-source: derived
   /us_fl_loss_cost/1.0:
     post:
       tags:
@@ -7961,6 +8229,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlLossCost10
+      x-operation-id-source: derived
   /us_fl_loss_cost/latest:
     post:
       tags:
@@ -8033,6 +8303,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlLossCostLatest
+      x-operation-id-source: derived
   /us_fl_risk_score/1.0:
     post:
       tags:
@@ -8085,6 +8357,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlRiskScore10
+      x-operation-id-source: derived
   /us_fl_risk_score/latest:
     post:
       tags:
@@ -8137,6 +8411,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlRiskScoreLatest
+      x-operation-id-source: derived
   /us_fl_susceptibility/1.0:
     post:
       tags:
@@ -8188,6 +8464,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlSusceptibility10
+      x-operation-id-source: derived
   /us_fl_susceptibility/latest:
     post:
       tags:
@@ -8239,6 +8517,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsFlSusceptibilityLatest
+      x-operation-id-source: derived
   /us_mmi/18.0:
     post:
       tags:
@@ -8288,6 +8568,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsMmi180
+      x-operation-id-source: derived
   /us_mmi/latest:
     post:
       tags:
@@ -8337,6 +8619,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsMmiLatest
+      x-operation-id-source: derived
   /us_subsidence/18.0:
     post:
       tags:
@@ -8400,6 +8684,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsSubsidence180
+      x-operation-id-source: derived
   /us_subsidence/latest:
     post:
       tags:
@@ -8463,6 +8749,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsSubsidenceLatest
+      x-operation-id-source: derived
   /us_tr_distance_to_target/1.0:
     post:
       tags:
@@ -8525,6 +8813,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsTrDistanceToTarget10
+      x-operation-id-source: derived
   /us_tr_distance_to_target/latest:
     post:
       tags:
@@ -8587,6 +8877,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsTrDistanceToTargetLatest
+      x-operation-id-source: derived
   /us_tr_loss_cost/18.0:
     post:
       tags:
@@ -8648,6 +8940,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsTrLossCost180
+      x-operation-id-source: derived
   /us_tr_loss_cost/latest:
     post:
       tags:
@@ -8709,6 +9003,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsTrLossCostLatest
+      x-operation-id-source: derived
   /us_tr_risk_score/18.0:
     post:
       tags:
@@ -8770,6 +9066,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsTrRiskScore180
+      x-operation-id-source: derived
   /us_tr_risk_score/latest:
     post:
       tags:
@@ -8831,6 +9129,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsTrRiskScoreLatest
+      x-operation-id-source: derived
   /us_wf_loss_cost/1.0:
     post:
       tags:
@@ -8923,6 +9223,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfLossCost10
+      x-operation-id-source: derived
   /us_wf_loss_cost/latest:
     post:
       tags:
@@ -9015,6 +9317,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfLossCostLatest
+      x-operation-id-source: derived
   /us_wf_model_hazard/1.0:
     post:
       tags:
@@ -9059,6 +9363,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfModelHazard10
+      x-operation-id-source: derived
   /us_wf_model_hazard/latest:
     post:
       tags:
@@ -9103,6 +9409,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfModelHazardLatest
+      x-operation-id-source: derived
   /us_wf_risk_score/1.0:
     post:
       tags:
@@ -9173,6 +9481,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfRiskScore10
+      x-operation-id-source: derived
   /us_wf_risk_score/latest:
     post:
       tags:
@@ -9243,6 +9553,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfRiskScoreLatest
+      x-operation-id-source: derived
   /us_wf_supplemental_hazard/1.0:
     post:
       tags:
@@ -9289,6 +9601,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfSupplementalHazard10
+      x-operation-id-source: derived
   /us_wf_supplemental_hazard/latest:
     post:
       tags:
@@ -9335,6 +9649,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWfSupplementalHazardLatest
+      x-operation-id-source: derived
   /us_ws_asce_windspeed/7.1:
     post:
       tags:
@@ -9379,6 +9695,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsAsceWindspeed71
+      x-operation-id-source: derived
   /us_ws_asce_windspeed/latest:
     post:
       tags:
@@ -9423,6 +9741,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsAsceWindspeedLatest
+      x-operation-id-source: derived
   /us_ws_loss_cost/18.0:
     post:
       tags:
@@ -9533,6 +9853,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsLossCost180
+      x-operation-id-source: derived
   /us_ws_loss_cost/18.1:
     post:
       tags:
@@ -9666,6 +9988,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsLossCost181
+      x-operation-id-source: derived
   /us_ws_loss_cost/21.0:
     post:
       tags:
@@ -9799,6 +10123,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsLossCost210
+      x-operation-id-source: derived
   /us_ws_loss_cost/latest:
     post:
       tags:
@@ -9932,6 +10258,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsLossCostLatest
+      x-operation-id-source: derived
   /us_ws_risk_score/18.0:
     post:
       tags:
@@ -10042,6 +10370,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsRiskScore180
+      x-operation-id-source: derived
   /us_ws_risk_score/18.1:
     post:
       tags:
@@ -10152,6 +10482,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsRiskScore181
+      x-operation-id-source: derived
   /us_ws_risk_score/21.0:
     post:
       tags:
@@ -10262,6 +10594,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsRiskScore210
+      x-operation-id-source: derived
   /us_ws_risk_score/latest:
     post:
       tags:
@@ -10372,6 +10706,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWsRiskScoreLatest
+      x-operation-id-source: derived
   /us_wt_loss_cost/18.0:
     post:
       tags:
@@ -10447,6 +10783,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWtLossCost180
+      x-operation-id-source: derived
   /us_wt_loss_cost/latest:
     post:
       tags:
@@ -10522,6 +10860,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWtLossCostLatest
+      x-operation-id-source: derived
   /us_wt_risk_score/18.0:
     post:
       tags:
@@ -10572,6 +10912,8 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWtRiskScore180
+      x-operation-id-source: derived
   /us_wt_risk_score/latest:
     post:
       tags:
@@ -10622,298 +10964,267 @@ paths:
           $ref: '#/components/responses/401Response'
         '500':
           $ref: '#/components/responses/500Response'
+      operationId: postUsWtRiskScoreLatest
+      x-operation-id-source: derived
 components:
-  examples:
-    CaCsAddress:
-      value:
-        countryCode: CA
-        countryScheme: ISO2A
-        countryRmsCode: CA
-        admin1Code: QC
-        latitude: 51.25
-        longitude: -63.25
-        rmsGeoModelResolutionCode: 1
-        postalCodeGeoId: 23803454
-        admin1GeoId: 2344924
-    DrAddress:
-      value:
-        countryCode: DR
-        countryFips: DR
-        countryScheme: FIPS
-        countryRmsCode: CB
-        latitude: 18.9833
-        longitude: -69.3833
-        rmsGeoModelResolutionCode: 1
-        admin3GeoId: 60375492
-        cityGeoId: 74125
-    UsLandfillD2LAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        latitude: 38.619671
-        longitude: -96.78517
-        rmsGeoModelResolutionCode: 1
-    CharacteristicsFlood:
-      value:
-        construction: ATC16
-        occupancy: ATC37
-        yearBuilt: 1964
-        numOfStories: 1
-        firstFloorHeightAboveGround: 1
-        basement: 'YES'
-        foundationType: 0
-    AuAddress:
-      value:
-        countryCode: AU
-        countryScheme: ISO2A
-        countryRmsCode: AU
-        latitude: -19.284868
-        longitude: 146.772049
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 2344702
-        postalCodeGeoId: 12708445
-    UsTxAddressEsdb:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: TX
-        postalCode: '78669'
-        rmsGeoModelResolutionCode: 2
-        ugid: USS3194364891900
-        geoMatchCode: K6-99999783726670-K1T1P1A1-K95T100P100A100-T1P1A1-00-AB-TP-X
-        cityName: SPICEWOOD
-        streetAddress: 1900 LAS ENTRADAS
-    CharacteristicsEuBasic:
-      value:
-        construction: ATC0
-        occupancy: RMS1
-        yearBuilt: 1990
-        numOfStories: 0
-    CharacteristicsWF:
-      value:
-        construction: RMS1
-        occupancy: ATC2
-        yearBuilt: 2005
-        numOfStories: 1
-    CharacteristicsBasic:
-      value:
-        construction: ATC1
-        occupancy: ATC1
-        yearBuilt: 1973
-        numOfStories: 3
-    UsTrD2TAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        latitude: 31.810899
-        longitude: -106.53353
-        rmsGeoModelResolutionCode: 1
-    UsFlAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: FL
-        latitude: 28.514108
-        longitude: -81.37189
-        rmsGeoModelResolutionCode: 1
-    CnRiskIndexAddress:
-      value:
-        countryCode: CN
-        countryScheme: ISO2A
-        countryRmsCode: CN
-        latitude: 22.538668
-        longitude: 114.096738
-        rmsGeoModelResolutionCode: 1
-    GuAddress:
-      value:
-        countryCode: GU
-        countryScheme: ISO2A
-        countryRmsCode: GU
-        latitude: 13.495093
-        longitude: 144.780626
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 60073592
-        admin3GeoId: 60073615
-    MxAddress:
-      value:
-        countryCode: MX
-        countryScheme: ISO2A
-        countryRmsCode: MX
-        latitude: 31.304932
-        longitude: -115.669525
-        rmsGeoModelResolutionCode: 1
-    IdAddress:
-      value:
-        countryCode: ID
-        countryScheme: ISO2A
-        countryRmsCode: ID
-        latitude: -8.451797
-        longitude: 118.730615
-        rmsGeoModelResolutionCode: 1
-    NzAddress:
-      value:
-        countryCode: NZ
-        countryScheme: ISO2A
-        countryRmsCode: NZ
-        latitude: -36.84491
-        longitude: 174.7335
-        admin1GeoId: 15021756
-        rmsGeoModelResolutionCode: 1
-    KrAddress:
-      value:
-        countryCode: KR
-        countryScheme: ISO2A
-        countryRmsCode: KR
-        latitude: 37.577013
-        longitude: 126.999299
-        admin2GeoId: 61759072
-        rmsGeoModelResolutionCode: 1
-    PhAddress:
-      value:
-        countryCode: PH
-        countryScheme: ISO2A
-        countryRmsCode: PH
-        latitude: 6.934632
-        longitude: 126.259708
-        rmsGeoModelResolutionCode: 1
-    CharacteristicsEuFl:
-      value:
-        construction: ATC0
-        occupancy: RMS1
-        yearBuilt: 1990
-        numOfStories: 0
-        basement: 'YES'
-    InAddress:
-      value:
-        countryCode: IN
-        countryScheme: ISO2A
-        countryRmsCode: IN
-        latitude: 19.102055
-        longitude: 72.898758
-        postalCode: '400072'
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 2345750
-    UsCaAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: CA
-        latitude: 37.5412
-        longitude: -122.06061
-        admin2GeoId: 99999206001
-        rmsGeoModelResolutionCode: 1
-    UsLandfillD2InnerCoastAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: SC
-        latitude: 32.821745
-        longitude: -79.981808
-        rmsGeoModelResolutionCode: 1
-    UsCsAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: ME
-        latitude: 45.75
-        longitude: -67.25
-        rmsGeoModelResolutionCode: 1
-        postalCodeGeoId: 99999404491
-        admin1GeoId: 99999123
-    UsFlAddressExtended:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: FL
-        latitude: 28.514108
-        longitude: -81.37189
-        rmsGeoModelResolutionCode: 1
-        postalCodeGeoId: 99999432806
-        admin1GeoId: 99999112
-    TwAddress:
-      value:
-        countryCode: TW
-        countryScheme: ISO2A
-        countryRmsCode: TW
-        latitude: 26.223921
-        longitude: 119.998842
-        rmsGeoModelResolutionCode: 1
-    CaAddress:
-      value:
-        countryCode: CA
-        countryScheme: ISO2A
-        countryRmsCode: CA
-        admin1Code: AB
-        latitude: 53.55
-        longitude: -113.35
-        rmsGeoModelResolutionCode: 1
-        postalCode: T8H 0E7
-        locationCode: T8H
-    EuGbAddress:
-      value:
-        countryCode: GB
-        countryScheme: ISO2A
-        countryRmsCode: GB
-        latitude: 54.988537
-        longitude: -2.138128
-        postalCode: NE46 4SJ
-        postalCodeGeoId: 21225450
-        rmsGeoModelResolutionCode: 1
-    CharacteristicsFloorArea:
-      value:
-        construction: ATC1
-        occupancy: ATC1
-        yearBuilt: 1973
-        numOfStories: 3
-        floorArea: 1100
-    CoverageValuesFlood:
-      value:
-        buildingValue: 1093488.618
-        contentsValue: 966388.5339
-        businessInterruptionValue: 44393.0543
-    UsNuclearD2TAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        latitude: 41.285261
-        longitude: -88.445496
-        rmsGeoModelResolutionCode: 1
-    PlAddress:
-      value:
-        countryCode: PL
-        countryScheme: ISO2A
-        countryRmsCode: PL
-        latitude: 53.3610246
-        longitude: 14.31923382
-        rmsGeoModelResolutionCode: 1
-    USSubsidenceAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: CA
-        latitude: 37.272
-        longitude: -91.719
-        rmsGeoModelResolutionCode: 1
-    EuFrAddress:
-      value:
-        countryCode: FR
-        countryScheme: ISO2A
-        countryRmsCode: FR
-        latitude: 45.77006542
-        longitude: 4.828696969
-        postalCodeGeoId: 12726916
-        rmsGeoModelResolutionCode: 1
   schemas:
+    LossCostBaseOutput:
+      type: object
+      description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        buildingAlr:
+          type: number
+          format: double
+          description: Building annualized loss rate
+          example: 0.000863401691354315
+        contentsAlr:
+          type: number
+          format: double
+          description: Contents annualized loss rate
+          example: 0.000358529682823589
+        businessInterruptionAlr:
+          type: number
+          format: double
+          description: Business interruption annualized loss rate
+          example: 0.000559604863156912
+    LossCostUsFlOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostOutput'
+      - type: object
+        properties:
+          contentsAlrFlood:
+            type: number
+            format: double
+            description: Flood contents annualized loss rate
+            example: 0.0005308397
+          contentsAlrSurge:
+            type: number
+            format: double
+            description: Surge contents annualized loss rate
+            example: 0
+          buildingAlrFlood:
+            type: number
+            format: double
+            description: Flood building annualized loss rate
+            example: 0.0003419841
+          buildingAlrSurge:
+            type: number
+            format: double
+            description: Surge building annualized loss rate
+            example: 0
+          businessInterruptionAlrFlood:
+            type: number
+            format: double
+            description: Flood business interruption annualized loss rate
+            example: 0.0003260721
+          businessInterruptionAlrSurge:
+            type: number
+            format: double
+            description: Surge business interruption annualized loss rate
+            example: 0
+    USWildfireOutput:
+      type: object
+      properties:
+        fuelCodeDescription:
+          type: string
+          description: Fuel Type Description
+          example: Short Grass (1 foot)
+          maxLength: 256
+        slopeInPercent:
+          type: number
+          format: integer
+          description: Slope in percent
+          example: 3
+        distanceToVegetationUnit:
+          type: string
+          description: Distance to Vegetation Unit
+          example: feet
+          maxLength: 8
+        distanceToVegetation:
+          type: string
+          description: Distance to Vegetation
+          example: '5'
+          maxLength: 5
+        fuelCode:
+          type: number
+          format: integer
+          description: Fuel Type Code
+          example: 1
+    CharacteristicsInput:
+      type: object
+      properties:
+        construction:
+          type: string
+          description: Construction combines both scheme and class. Construction `scheme` (e.g., ATC) is represented by the letters at the beginning. It is a system used for classifying a building's construction class. Construction `class` is represented by the number(s) following the scheme. It is an attribute referring to the dominant material used in constructing the building frame/structure. Unknown=0.
+          example: ATC1
+          default: ATC0
+          externalDocs:
+            description: List of constructions
+            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Const_Class_Schemes_by_Country.htm
+        occupancy:
+          type: string
+          description: Occupancy combines both scheme and type. Occupancy `scheme` (e.g., ATC) is represented by the letters at the beginning. It is the classification used for identifying a building's occupancy type. Occupancy `type` is represented by the number(s) following the scheme. It is an attribute that describes the typical or dominant use of the building (e.g., residential, or schools, or commercial usage). Unknown=0.
+          example: ATC1
+          default: ATC0
+          externalDocs:
+            description: List of occupancies
+            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Occ_Type_Schemes_by_Country.htm
+        yearBuilt:
+          type: integer
+          description: Attribute describing the year when a structure was constructed. For many RMS peril models, year built is a primary vulnerability attribute.
+          example: 1980
+          default: 0
+        numOfStories:
+          type: integer
+          description: Attribute that represents the number of floors for a structure. It is a single number, such as 6 or 22, not a range of numbers. Structures are classified according to the number of floors they have.
+          default: 0
+          example: 1
+        foundationType:
+          type: integer
+          description: Attribute that captures this differentiating factor for flood risk. This attribute is used to infer the height of the first floor during hazard retrieval.
+          default: 0
+          example: 0
+        firstFloorHeightAboveGround:
+          type: integer
+          description: First floor height above ground
+          example: 5
+          default: 0
+        basement:
+          type: string
+          description: Indicates whether there is a basement or not
+          example: 'YES'
+          default: DEFAULT
+          enum:
+          - DEFAULT
+          - 'YES'
+          - 'NO'
+        floorArea:
+          type: integer
+          description: Floor area is a primary building characteristic that represents a building's total living area, across all floors. It excludes garages, porches, decks, sunrooms, and basements.
+          example: 1452
+          default: 0
+    CoverageValuesInput:
+      type: object
+      properties:
+        buildingValue:
+          type: number
+          format: double
+          description: Building value
+          default: 0
+          example: 1000000
+        contentsValue:
+          type: number
+          format: double
+          description: Contents value
+          default: 0
+          example: 100000
+        businessInterruptionValue:
+          type: number
+          format: double
+          description: Business interruption value
+          default: 0
+          example: 50000
+    UsEqFaultOutput:
+      type: object
+      properties:
+        faults:
+          type: array
+          description: Nearest 5 faults
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: fault name
+                example: NM NMSZ USGS West Full
+                maxLength: 80
+              distance:
+                type: number
+                description: Distance to fault
+                example: 3.61
+              returnPeriodM60:
+                type: number
+                description: Return Period for Magnitude 6.0+
+                example: 27013
+              returnPeriodM65:
+                type: number
+                description: Return Period for Magnitude 6.5+
+                example: 108050
+              returnPeriodM70:
+                type: number
+                description: Return Period for Magnitude 7.0+
+                example: 120056
+        backgroundRates:
+          type: array
+          description: Background return period of magnitude 6.0+ earthquakes for 8 neighboring cells and, in the array's fifth position, the address's cell.
+          items:
+            type: number
+          example:
+          - 310
+          - 720
+          - 950
+          - 1085
+          - 2120
+          - 4340
+          - 3500
+          - 7690
+          - 11605
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    WarningOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/WarningItem'
+    RiskScoreBaseOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score100yr:
+          type: integer
+          description: 100-year score
+          example: 1
+        score250yr:
+          type: integer
+          description: 250-year score
+          example: 1
+        score500yr:
+          type: integer
+          description: 500-year score
+          example: 3
+        scoreOverall:
+          type: integer
+          description: Overall score
+          example: 3
+    GuGrLossCostOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostOutput'
+      - type: object
+        properties:
+          grossLoss2:
+            type: number
+            format: double
+            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
+            example: 769.26
+          grossLoss3:
+            type: number
+            format: double
+            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
+            example: 817.11
     GeocodeInput:
       type: object
       required:
@@ -11018,64 +11329,42 @@ components:
           description: Supplemental text captured for the address
           example: ''
           maxLength: 512
-    LossCostUsFlOutput:
+    MmiBaseOutput:
       type: object
-      allOf:
-      - $ref: '#/components/schemas/LossCostOutput'
-      - type: object
-        properties:
-          contentsAlrFlood:
-            type: number
-            format: double
-            description: Flood contents annualized loss rate
-            example: 0.0005308397
-          contentsAlrSurge:
-            type: number
-            format: double
-            description: Surge contents annualized loss rate
-            example: 0
-          buildingAlrFlood:
-            type: number
-            format: double
-            description: Flood building annualized loss rate
-            example: 0.0003419841
-          buildingAlrSurge:
-            type: number
-            format: double
-            description: Surge building annualized loss rate
-            example: 0
-          businessInterruptionAlrFlood:
-            type: number
-            format: double
-            description: Flood business interruption annualized loss rate
-            example: 0.0003260721
-          businessInterruptionAlrSurge:
-            type: number
-            format: double
-            description: Surge business interruption annualized loss rate
-            example: 0
-    LocationInput:
-      type: object
-      required:
-      - address
+      description: The Modified Mercalli Intensity (MMI) is a subjective scale used to describe the observed local shaking intensity and related effects of an earthquake. The scale ranges from 1 (barely felt) to 12 (total destruction), with slight damage beginning at 6.
       properties:
-        address:
-          $ref: '#/components/schemas/GeocodeOutput'
-        characteristics:
-          $ref: '#/components/schemas/CharacteristicsInput'
-        coverageValues:
-          $ref: '#/components/schemas/CoverageValuesInput'
-    RiskScoreEuOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/RiskScoreBaseOutput'
-      - type: object
-        properties:
-          percentileCountry:
-            type: number
-            format: double
-            description: Riskiness compared to other locations in the Country
-            example: 0.0085084662
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        mmi100yr:
+          type: number
+          format: double
+          description: 100-year MMI score
+          example: 0
+        mmi200yr:
+          type: number
+          format: double
+          description: 200-year MMI score
+          example: 0
+        mmi250yr:
+          type: number
+          format: double
+          description: 250-year MMI score
+          example: 4.1
+        mmi475yr:
+          type: number
+          format: double
+          description: 475-year MMI score
+          example: 6.3
+        mmi500yr:
+          type: number
+          format: double
+          description: 500-year MMI score
+          example: 6.5
+        mmi1000yr:
+          type: number
+          format: double
+          description: 1000-year MMI score
+          example: 8.0
     GeocodeOutput:
       type: object
       allOf:
@@ -11227,6 +11516,28 @@ components:
             description: Data version
             example: xx.x.xxxx.x
             maxLength: 20
+    RiskScoreUsOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/RiskScoreBaseOutput'
+      - type: object
+        properties:
+          percentileAdmin1:
+            type: number
+            format: double
+            description: Riskiness compared to other locations in the Admin1
+            example: 0.0085084662
+    LossCostGuOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostBaseOutput'
+      - type: object
+        properties:
+          groundUpLoss:
+            type: number
+            format: double
+            description: Total loss to the exposure, independent of any insurance or reinsurance terms
+            example: 901.43
     FlDepthBaseOutput:
       type: object
       description: results for `wetOrDry` lookup
@@ -11240,98 +11551,601 @@ components:
           - NOT FLOODED
           - FLOODED
           example: FLOODED
-    WarningOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/WarningItem'
-    USWildfireSupplementalOutput:
+    CsRiskScoreOutput:
       type: object
+      description: results
       properties:
-        distanceToWuiInterface:
-          type: string
-          description: Distance to Wildlands Interface in meters
-          example: '5745'
-          maxLength: 8
-        distanceToWuiIntermix:
-          type: string
-          description: Distance to Wildlands Intermix in meters
-          example: '3523'
-          maxLength: 8
-        distanceToWuiUnit:
-          type: string
-          description: Distance to Wildlands Unit of Measure
-          example: meters
-          maxLength: 8
-        distanceToCalfireVeryHigh:
-          type: string
-          description: Distance to CalFIRE Very High Risk Zone in meters
-          example: '1600'
-          maxLength: 8
-        distanceToCalfireHigh:
-          type: string
-          description: Distance to CalFIRE High Risk Zone in meters
-          example: '800'
-          maxLength: 8
-        distanceToCalfireMedium:
-          type: string
-          description: Distance to CalFIRE Medium Risk Zone in meters
-          example: '500'
-          maxLength: 8
-        distanceToCalfireUnit:
-          type: string
-          description: Distance to CalFIRE Unit of Measure
-          example: meters
-          maxLength: 8
-        histFireYearCount250M:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score50yr:
           type: number
           format: integer
-          description: Count of years with historical fires at this location
+          description: The combined Risk Score at the 1 in 50 return period
           example: 1
-        histFireYearCount2Km:
+        score100yr:
           type: number
           format: integer
-          description: Count of years with historical fires within 2 kilometers of this location
-          example: 2
-        histFireYearCount5Km:
+          description: The combined Risk Score at the 1 in 100 return period
+          example: 1
+        score250yr:
           type: number
           format: integer
-          description: Count of years with historical fires within 5 kilometers of this location
-          example: 3
-        histFireYearCount10Km:
+          description: The combined Risk Score at the 1 in 250 return period
+          example: 1
+        scoreOverall:
           type: number
           format: integer
-          description: Count of years with historical fires within 10 kilometers of this location
-          example: 4
-        histFireYearCount20Km:
-          type: number
-          format: integer
-          description: Count of years with historical fires within 20 kilometers of this location
-          example: 8
-        yearLastHistFire250M:
-          type: number
-          format: integer
-          description: Year of last historical fire at this location
-          example: 2015
-        stochasticBurnProb:
+          description: The combined Risk Score at the 1 in 100 return period
+          example: 1
+        dominantSubperil:
           type: number
           format: double
-          description: Likelihood of burn from 50,000 year simulations, expressed between 0 - 100
-          example: 0.15
-        urbanConflagrationScore:
+          description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Hail, 2=Tornado, 3=Wind, 0=no dominant peril (because 2 or 3 perils have the same value - very unlikely, but to handle this eventuality for completeness)
+          example: 1.1
+        percentileAdmin1:
+          type: number
+          format: double
+          description: Percentile in State
+          example: 1.1
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    UsWindSpeedOutput:
+      type: object
+      properties:
+        gust3Pct50Yr:
+          type: string
+          description: 3 second gust 3% probability of exceedance in 50 years for Exposure C category
+          example: 120-130
+          maxLength: 10
+        gust7Pct50Yr:
+          type: string
+          description: 3 second gust 7% probability of exceedance in 50 years for Exposure C category
+          example: '>=110'
+          maxLength: 10
+        gust15Pct50Yr:
+          type: string
+          description: 3 second gust 15% probability of exceedance in 50 years for Exposure C category
+          example: 130-140
+          maxLength: 10
+        windspeedUnit:
+          type: string
+          description: 'Constant value: MPH as in Miles Per Hour'
+          example: MPH
+          maxLength: 3
+    CAWildfireOutput:
+      type: object
+      properties:
+        fuelCodeDescription:
+          type: string
+          description: Fuel Type Description
+          example: Shrubs - Brush
+          maxLength: 256
+        slopeInPercent:
           type: number
           format: integer
-          description: Bin Score of Urban Conflagration incidents in simulated 50,000 year period, expressed between 0 - 4
+          description: Slope in percent
+          example: 3
+        distanceToVegetationUnit:
+          type: string
+          description: Distance to Vegetation Unit
+          example: feet
+          maxLength: 8
+        distanceToVegetation:
+          type: string
+          description: Distance to Vegetation
+          example: '5'
+          maxLength: 5
+        fuelCode:
+          type: number
+          format: integer
+          description: Fuel Type Code
           example: 1
-    RiskScoreUsOutput:
+    GlobalNuclearD2TOutput:
+      type: object
+      properties:
+        nuclearPowerPlant:
+          type: array
+          description: Nearest nuclear power plant within 30 km of the given point
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Nuclear plant name
+                example: Dresden Generating Station
+                maxLength: 256
+              capacity:
+                type: number
+                description: Nuclear plant capacity
+                example: 2018.6
+              country:
+                type: string
+                description: Nuclear plant country
+                example: United States of America
+                maxLength: 256
+              longitude:
+                type: number
+                description: Nuclear plant longitude
+                example: -88.27
+              latitude:
+                type: number
+                description: Nuclear plant latitude
+                example: 41.39
+              distance:
+                type: number
+                description: Distance from the nuclear power plant
+                example: 18737.69
+        distanceUnit:
+          type: string
+          enum:
+          - meters
+          description: Distance unit
+          example: meters
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    LocationInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
+        characteristics:
+          $ref: '#/components/schemas/CharacteristicsInput'
+        coverageValues:
+          $ref: '#/components/schemas/CoverageValuesInput'
+    UsD2InnerCoastOutput:
+      type: object
+      properties:
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        distance:
+          type: string
+          description: Distance to Coastal Line. If the location is more than 10 miles inland, distance will return as >10 miles
+          example: '0.41'
+          maxLength: 10
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    FlSusceptibilityOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        dtmElevation:
+          type: number
+          format: double
+          description: DTM elevation
+          example: 108.07087
+        firstFloorHeightAboveGround:
+          type: number
+          description: Captures the height of first finished floor above ground in feet
+          example: 2
+        percentBasement:
+          type: number
+          format: double
+          description: Basement likelihood for a location is a percentage. The presence of basement floors in a building can significantly increase flood losses, particularly in high-rise commercial buildings, which can have high contents value in basements.
+          example: 0.05
+    FlDepthInlandSurgeProximityOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/FlDepthInlandProximityOutput'
+      - type: object
+      description: results for `proximity` lookup
+      properties:
+        dominantFloodSource:
+          type: string
+          description: Dominant flood source
+          enum:
+          - INLAND
+          - SURGE
+          example: INLAND
+    FlDepthInlandSurgeOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/FlDepthInlandOutput'
+      - type: object
+      description: results for `floodDepth` lookup
+      properties:
+        depthSurgeUndef30yr:
+          type: integer
+          description: Depth surge undefended 30-year
+          example: 0
+        depthSurgeDef30yr:
+          type: integer
+          description: Depth surge defended 30-year
+          example: 0
+        depthSurgeUndef50yr:
+          type: integer
+          description: Depth surge undefended 50-year
+          example: 0
+        depthSurgeDef50yr:
+          type: integer
+          description: Depth surge defended 50-year
+          example: 0
+        depthSurgeUndef100yr:
+          type: integer
+          description: Depth surge undefended 100-year
+          example: 0
+        depthSurgeDef100yr:
+          type: integer
+          description: Depth surge defended 100-year
+          example: 0
+        depthSurgeUndef200yr:
+          type: integer
+          description: Depth surge undefended 200-year
+          example: 0
+        depthSurgeDef200yr:
+          type: integer
+          description: Depth surge defended 200-year
+          example: 0
+        depthSurgeUndef250yr:
+          type: integer
+          description: Depth surge undefended 250-year
+          example: 0
+        depthSurgeDef250yr:
+          type: integer
+          description: Depth surge defended 250-year
+          example: 0
+        depthSurgeUndef500yr:
+          type: integer
+          description: Depth surge undefended 500-year
+          example: 0
+        depthSurgeDef500yr:
+          type: integer
+          description: Depth surge defended 500-year
+          example: 0
+        depthSurgeUndef1000yr:
+          type: integer
+          description: Depth surge undefended 1000-year
+          example: 0
+        depthSurgeDef1000yr:
+          type: integer
+          description: Depth surge defended 1000-year
+          example: 0
+        depthCombinedUndef30yr:
+          type: integer
+          description: Depth combined undefended 30-year
+          example: 4
+        depthCombinedDef30yr:
+          type: integer
+          description: Depth combined defended 30-year
+          example: 3
+        depthCombinedUndef50yr:
+          type: integer
+          description: Depth combined undefended 50-year
+          example: 5
+        depthCombinedDef50yr:
+          type: integer
+          description: Depth combined defended 50-year
+          example: 3
+        depthCombinedUndef100yr:
+          type: integer
+          description: Depth combined undefended 100-year
+          example: 5
+        depthCombinedDef100yr:
+          type: integer
+          description: Depth combined defended 100-year
+          example: 5
+        depthCombinedUndef200yr:
+          type: integer
+          description: Depth combined undefended 200-year
+          example: 6
+        depthCombinedDef200yr:
+          type: integer
+          description: Depth combined defended 200-year
+          example: 6
+        depthCombinedUndef250yr:
+          type: integer
+          description: Depth combined undefended 250-year
+          example: 6
+        depthCombinedDef250yr:
+          type: integer
+          description: Depth combined defended 250-year
+          example: 6
+        depthCombinedUndef500yr:
+          type: integer
+          description: Depth combined undefended 500-year
+          example: 6
+        depthCombinedDef500yr:
+          type: integer
+          description: Depth combined defended 500-year
+          example: 6
+        depthCombinedUndef1000yr:
+          type: integer
+          description: Depth combined undefended 1000-year
+          example: 6
+        depthCombinedDef1000yr:
+          type: integer
+          description: Depth combined defended 1000-year
+          example: 6
+    UsTrD2TOutput:
+      type: object
+      properties:
+        targets:
+          type: array
+          description: Nearest 5 terrorism targets
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: Target Id
+                example: 23840
+              name:
+                type: string
+                description: Target name
+                example: FBI El Paso Field Office
+                maxLength: 80
+              city:
+                type: string
+                description: City
+                example: El Paso
+                maxLength: 256
+              admin1Code:
+                type: string
+                description: Target State
+                example: TX
+                maxLength: 16
+              category:
+                type: string
+                description: Target category
+                example: Government Building
+                maxLength: 80
+              score:
+                type: string
+                description: Target score. Range of scores is from a to f.
+                example: f
+                maxLength: 1
+              distance:
+                type: number
+                description: Distance from target
+                example: 1988.17
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    USSubsidenceOutput:
+      type: object
+      properties:
+        mines:
+          type: array
+          description: Nearest 5 mines
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Mine name
+                example: Lambert Mine
+                maxLength: 80
+              mineType:
+                type: string
+                description: Mine Type
+                example: Unknown
+                maxLength: 80
+              status:
+                type: string
+                description: Mine status
+                example: Active
+                maxLength: 32
+              area:
+                type: number
+                format: double
+                description: Area of mine in square footage
+                example: 45.38
+              distance:
+                type: number
+                description: Distance from mine
+                example: 3.61
+        sinkholes:
+          type: array
+          description: Nearest 5 sinkholes
+          items:
+            type: object
+            properties:
+              area:
+                type: number
+                format: double
+                description: Area of sinkhole in square footage
+                example: 58.34
+              distance:
+                type: number
+                description: Distance from Sinkhole
+                example: 3.61
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    LossCostOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostBaseOutput'
+      - type: object
+        properties:
+          grossLoss:
+            type: number
+            format: double
+            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
+            example: 750.16
+          groundUpLoss:
+            type: number
+            format: double
+            description: Total loss to the exposure, independent of any insurance or reinsurance terms
+            example: 901.43
+    CsLossCostOutput:
+      type: object
+      description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
+      allOf:
+      - $ref: '#/components/schemas/GuGrLossCostOutput'
+      - type: object
+        properties:
+          buildingAlrHail:
+            type: number
+            format: double
+            description: The annualized loss rate for Buildings coverage for hail
+            example: 1.1
+          contentsAlrHail:
+            type: number
+            format: double
+            description: The annualized loss rate for Contents coverage for hail
+            example: 1.1
+          businessInterruptionAlrHail:
+            type: number
+            format: double
+            description: The annualized loss rate for BI coverage for hail
+            example: 1.1
+          buildingAlrTornado:
+            type: number
+            format: double
+            description: The annualized loss rate for Buildings coverage for tornado
+            example: 1.1
+          contentsAlrTornado:
+            type: number
+            format: double
+            description: The annualized loss rate for Contents coverage for tornado
+            example: 1.1
+          businessInterruptionAlrTornado:
+            type: number
+            format: double
+            description: The annualized loss rate for BI coverage for tornado
+            example: 1.1
+          buildingAlrWind:
+            type: number
+            format: double
+            description: The annualized loss rate for Buildings coverage for wind
+            example: 1.1
+          businessInterruptionAlrWind:
+            type: number
+            format: double
+            description: The annualized loss rate for BI coverage for wind
+            example: 1.1
+          contentsAlrWind:
+            type: number
+            format: double
+            description: The annualized loss rate for Contents coverage for wind
+            example: 1.1
+    WarningItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: FLG_XXXX
+          description: 'Warning codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | FLG_4001 | Layer option was skipped. Response based on its default value. |
+
+            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
+
+            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
+
+            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
+
+            | FLG_4103 | No additional options can be provided to this lookup. |
+
+            | FLG_4201 | Location not matched in ESDB building attributes database. |
+
+            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
+
+            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
+
+            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
+
+            | FLG_4205 | The geocoding version used is not recommended for this layer. |
+
+            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
+
+            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
+
+            | FLG_4208 | Insufficient geocoding information to look up requested data. |
+
+            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
+
+            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
+
+            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
+
+            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
+
+            | FLG_4306 | Missing required field to perform gross loss calculations. |
+
+            | FLG_4307 | Gross losses can only be calculated for reference view. |
+
+            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
+
+            | FLG_4401 | No data found for this location. |
+
+            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
+
+            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
+
+            | FLG_4403 | The location entered is outside of supported region, Response based on default value
+
+            '
+        message:
+          type: string
+          example: Warning message
+    UsWfRiskScoreOutput:
+      type: object
+      description: US Wild fire risk score output
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        percentileAdmin1:
+          type: number
+          format: double
+          description: Percentile in Admin1 (State for US) for the reference return period
+          example: 0.002893825
+        scoreOverall:
+          type: integer
+          description: The Risk Score based on the composite ALR
+          example: 3
+    RiskScoreEuOutput:
       type: object
       allOf:
       - $ref: '#/components/schemas/RiskScoreBaseOutput'
       - type: object
         properties:
-          percentileAdmin1:
+          percentileCountry:
             type: number
             format: double
-            description: Riskiness compared to other locations in the Admin1
+            description: Riskiness compared to other locations in the Country
             example: 0.0085084662
     GlobalVolcanoD2TOutput:
       type: object
@@ -11415,74 +12229,422 @@ components:
           example: meters
         warnings:
           $ref: '#/components/schemas/WarningOutput'
-    CsLossCostOutput:
+    USWildfireSupplementalOutput:
       type: object
-      description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
-      allOf:
-      - $ref: '#/components/schemas/GuGrLossCostOutput'
-      - type: object
-        properties:
-          buildingAlrHail:
-            type: number
-            format: double
-            description: The annualized loss rate for Buildings coverage for hail
-            example: 1.1
-          contentsAlrHail:
-            type: number
-            format: double
-            description: The annualized loss rate for Contents coverage for hail
-            example: 1.1
-          businessInterruptionAlrHail:
-            type: number
-            format: double
-            description: The annualized loss rate for BI coverage for hail
-            example: 1.1
-          buildingAlrTornado:
-            type: number
-            format: double
-            description: The annualized loss rate for Buildings coverage for tornado
-            example: 1.1
-          contentsAlrTornado:
-            type: number
-            format: double
-            description: The annualized loss rate for Contents coverage for tornado
-            example: 1.1
-          businessInterruptionAlrTornado:
-            type: number
-            format: double
-            description: The annualized loss rate for BI coverage for tornado
-            example: 1.1
-          buildingAlrWind:
-            type: number
-            format: double
-            description: The annualized loss rate for Buildings coverage for wind
-            example: 1.1
-          businessInterruptionAlrWind:
-            type: number
-            format: double
-            description: The annualized loss rate for BI coverage for wind
-            example: 1.1
-          contentsAlrWind:
-            type: number
-            format: double
-            description: The annualized loss rate for Contents coverage for wind
-            example: 1.1
-    GuGrLossCostOutput:
+      properties:
+        distanceToWuiInterface:
+          type: string
+          description: Distance to Wildlands Interface in meters
+          example: '5745'
+          maxLength: 8
+        distanceToWuiIntermix:
+          type: string
+          description: Distance to Wildlands Intermix in meters
+          example: '3523'
+          maxLength: 8
+        distanceToWuiUnit:
+          type: string
+          description: Distance to Wildlands Unit of Measure
+          example: meters
+          maxLength: 8
+        distanceToCalfireVeryHigh:
+          type: string
+          description: Distance to CalFIRE Very High Risk Zone in meters
+          example: '1600'
+          maxLength: 8
+        distanceToCalfireHigh:
+          type: string
+          description: Distance to CalFIRE High Risk Zone in meters
+          example: '800'
+          maxLength: 8
+        distanceToCalfireMedium:
+          type: string
+          description: Distance to CalFIRE Medium Risk Zone in meters
+          example: '500'
+          maxLength: 8
+        distanceToCalfireUnit:
+          type: string
+          description: Distance to CalFIRE Unit of Measure
+          example: meters
+          maxLength: 8
+        histFireYearCount250M:
+          type: number
+          format: integer
+          description: Count of years with historical fires at this location
+          example: 1
+        histFireYearCount2Km:
+          type: number
+          format: integer
+          description: Count of years with historical fires within 2 kilometers of this location
+          example: 2
+        histFireYearCount5Km:
+          type: number
+          format: integer
+          description: Count of years with historical fires within 5 kilometers of this location
+          example: 3
+        histFireYearCount10Km:
+          type: number
+          format: integer
+          description: Count of years with historical fires within 10 kilometers of this location
+          example: 4
+        histFireYearCount20Km:
+          type: number
+          format: integer
+          description: Count of years with historical fires within 20 kilometers of this location
+          example: 8
+        yearLastHistFire250M:
+          type: number
+          format: integer
+          description: Year of last historical fire at this location
+          example: 2015
+        stochasticBurnProb:
+          type: number
+          format: double
+          description: Likelihood of burn from 50,000 year simulations, expressed between 0 - 100
+          example: 0.15
+        urbanConflagrationScore:
+          type: number
+          format: integer
+          description: Bin Score of Urban Conflagration incidents in simulated 50,000 year period, expressed between 0 - 4
+          example: 1
+    AuRiskScoreOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score100yr:
+          type: number
+          format: integer
+          description: 100-year score
+          example: 1
+        score200yr:
+          type: number
+          format: integer
+          description: 200-year score
+          example: 2
+        score500yr:
+          type: number
+          format: integer
+          description: 500-year score
+          example: 3
+        scoreOverall:
+          type: number
+          format: integer
+          description: The combined Risk Score at the 1 in 500 return period
+          example: 3
+    FemaOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        panel:
+          type: string
+          description: Numeric designation used to identify the FIRM Map associated with a given area. First six digits are the FEMA community number.
+          example: 12095C0265F
+          maxLength: 12
+        community:
+          type: string
+          description: Political entity with the authority to adopt and enforce floodplain ordinances for the area under its jurisdiction. Community number is a unique six-digit number assigned by FEMA and used for identity in computer databases.
+          example: '120186'
+          maxLength: 6
+        floodZone:
+          type: string
+          description: FEMA issues Flood Insurance Rate Maps (FIRMs) with official flood zone designations for the purpose of rating flood policies.
+          example: X
+          maxLength: 6
+        sfha:
+          type: string
+          description: 'Special Flood Hazard Area (SFHA) is an area at high risk for flooding as determined by FEMA Flood Insurance Rate Maps (FIRMs). This is an area with a 1% annual chance of flooding. '
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+        panelDate:
+          type: string
+          format: date
+          description: Panel date is the date recorded in the FEMA FMSIS database, which is associated with the given panel number.
+          example: '2009-09-25'
+          maxLength: 10
+        bfe:
+          type: integer
+          description: Base Flood Elevation is defined by FEMA as the height of the base (100-year) flood in relation to a specified datum, usually the National Geodetic Vertical Datum of 1929 (NGVD 29) or North American Vertical Datum of 1988 (NAVD 88), in feet.
+          example: -999
+          default: -999
+        annualProbability:
+          type: string
+          description: Annual probability
+          example: Less than 0.2%
+          maxLength: 256
+        levees:
+          type: string
+          description: Flood defenses can flood walls, levees, dykes, and embankments—typically designed to protect against a flood of a certain return period.
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+        otherZones:
+          type: string
+          description: Other zones (within proximity distance)
+          example: ''
+          maxLength: 256
+        flMatch:
+          type: string
+          description: Fl match
+          example: '1'
+          maxLength: 2
+        floodway:
+          type: string
+          description: Any land area susceptible to being inundated by floodwaters from any source.
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+        cobra:
+          type: string
+          description: The Coastal Barrier Resources Act of 1982 (COBRA) designated certain portions of the Gulf and East Coasts as undeveloped coastal barriers.
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+    AddressInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
+    GlobalFlDepthInlandOutput:
       type: object
       allOf:
-      - $ref: '#/components/schemas/LossCostOutput'
+      - $ref: '#/components/schemas/FlDepthBaseOutput'
       - type: object
-        properties:
-          grossLoss2:
-            type: number
-            format: double
-            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
-            example: 769.26
-          grossLoss3:
-            type: number
-            format: double
-            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
-            example: 817.11
+      description: results for `global floodDepth` lookup
+      properties:
+        depthInlandUndef30yr:
+          type: integer
+          description: Depth inland undefended 30-year
+          example: 4
+        depthInlandUndef50yr:
+          type: integer
+          description: Depth inland undefended 50-year
+          example: 5
+        depthInlandUndef100yr:
+          type: integer
+          description: Depth inland undefended 100-year
+          example: 5
+        depthInlandUndef200yr:
+          type: integer
+          description: Depth inland undefended 200-year
+          example: 6
+        depthInlandUndef250yr:
+          type: integer
+          description: Depth inland undefended 250-year
+          example: 6
+        depthInlandUndef500yr:
+          type: integer
+          description: Depth inland undefended 500-year
+          example: 6
+        depthInlandUndef1000yr:
+          type: integer
+          description: Depth inland undefended 1000-year
+          example: 6
+    GenericOutput:
+      type: object
+      description: results
+      additionalProperties:
+        type: string
+    FlDepthInlandProximityOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/FlDepthBaseOutput'
+      - type: object
+      description: results for `proximity` lookup
+      properties:
+        maxDepthWithinRadius:
+          type: integer
+          description: Max depth within radius
+          example: 1
+    UsD2FireStationOutput:
+      type: object
+      properties:
+        fireStations:
+          type: array
+          description: Nearest 3 fire stations
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Fire Station name
+                example: MAZON COMMUNITY FIRE DEPARTMENT
+                maxLength: 256
+              address:
+                type: string
+                description: Fire Station address
+                example: 700 PARK STREET
+                maxLength: 256
+              city:
+                type: string
+                description: Fire Station City
+                example: MAZON
+                maxLength: 256
+              admin1Code:
+                type: string
+                description: Fire Station State
+                example: IL
+                maxLength: 16
+              postalCode:
+                type: string
+                description: Fire Station zip code
+                example: '60444'
+                maxLength: 16
+              admin2Name:
+                type: string
+                description: Fire Station County
+                example: GRUNDY
+                maxLength: 256
+              level:
+                type: string
+                description: Fire Station category
+                example: ''
+                maxLength: 256
+              fireStationType:
+                type: string
+                description: Fire Station type
+                example: VOLUNTEER
+                maxLength: 80
+              ems:
+                type: string
+                description: Fire Station Emergency Medical Services presence
+                example: Y
+                maxLength: 1
+              longitude:
+                type: number
+                description: Fire Station longitude
+                example: -88.27
+              latitude:
+                type: number
+                description: Fire Station latitude
+                example: 41.39
+              distance:
+                type: number
+                description: Distance from fire station
+                example: 1988.17
+        distanceUnit:
+          type: string
+          enum:
+          - miles
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    TrRiskScoreOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score10000yr:
+          type: integer
+          description: 10000-year score
+          example: 3
+        scoreOverall:
+          type: integer
+          description: Overall score
+          example: 3
+        percentileAdmin1:
+          type: number
+          format: double
+          description: Percentile in State
+          example: 1.1
+    ErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ERR_XXXX
+          description: 'Error codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | ERR_4000 | No details found for requested layer. |
+
+            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
+
+            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
+
+            | ERR_4003 | Location is in a region that is not supported by this layer. |
+
+            | ERR_4005 | Insufficient information to look up requested data. |
+
+            | ERR_4041 | Invalid input. |
+
+            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
+
+            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
+
+            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
+
+            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
+
+            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
+
+            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
+
+            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
+
+            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
+
+            | ERR_4400 | General error for the layer. |
+
+            | ERR_4401 | Invalid address input. Incorrect field. |
+
+            | ERR_4010 | Forbidden. |
+
+            | ERR_4030 | Unauthorized. |
+
+            | ERR_4040 | Not found. |
+
+            | ERR_4050 | Method not allowed. |
+
+            | ERR_4060 | Not acceptable. |
+
+            | ERR_4080 | Request timeout. |
+
+            | ERR_4130 | Request too large. |
+
+            | ERR_4150 | Unsupported media type. |
+
+            | ERR_4220 | Unprocessable entity. |
+
+            | ERR_4290 | Quota exceeded. |
+
+            | ERR_5000 | Internal server error. |
+
+            | ERR_5040 | Gateway timeout. |
+
+            '
+        message:
+          type: string
+          example: Error message
+    GenericInput:
+      type: object
+      required:
+      - location
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationInput'
+        layerOptions:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+              description: For result fields, see the individual layer documentation
     EsdbOutput:
       type: object
       description: results
@@ -11662,194 +12824,6 @@ components:
           format: double
           description: ESDB version id
           example: 0
-    ErrorItem:
-      type: object
-      properties:
-        code:
-          type: string
-          example: ERR_XXXX
-          description: 'Error codes:
-
-            |   Code   | Description |
-
-            |----------|-------------|
-
-            | ERR_4000 | No details found for requested layer. |
-
-            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
-
-            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
-
-            | ERR_4003 | Location is in a region that is not supported by this layer. |
-
-            | ERR_4005 | Insufficient information to look up requested data. |
-
-            | ERR_4041 | Invalid input. |
-
-            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
-
-            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
-
-            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
-
-            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
-
-            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
-
-            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
-
-            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
-
-            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
-
-            | ERR_4400 | General error for the layer. |
-
-            | ERR_4401 | Invalid address input. Incorrect field. |
-
-            | ERR_4010 | Forbidden. |
-
-            | ERR_4030 | Unauthorized. |
-
-            | ERR_4040 | Not found. |
-
-            | ERR_4050 | Method not allowed. |
-
-            | ERR_4060 | Not acceptable. |
-
-            | ERR_4080 | Request timeout. |
-
-            | ERR_4130 | Request too large. |
-
-            | ERR_4150 | Unsupported media type. |
-
-            | ERR_4220 | Unprocessable entity. |
-
-            | ERR_4290 | Quota exceeded. |
-
-            | ERR_5000 | Internal server error. |
-
-            | ERR_5040 | Gateway timeout. |
-
-            '
-        message:
-          type: string
-          example: Error message
-    LossCostBaseOutput:
-      type: object
-      description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        buildingAlr:
-          type: number
-          format: double
-          description: Building annualized loss rate
-          example: 0.000863401691354315
-        contentsAlr:
-          type: number
-          format: double
-          description: Contents annualized loss rate
-          example: 0.000358529682823589
-        businessInterruptionAlr:
-          type: number
-          format: double
-          description: Business interruption annualized loss rate
-          example: 0.000559604863156912
-    CsRiskScoreOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score50yr:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 50 return period
-          example: 1
-        score100yr:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 100 return period
-          example: 1
-        score250yr:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 250 return period
-          example: 1
-        scoreOverall:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 100 return period
-          example: 1
-        dominantSubperil:
-          type: number
-          format: double
-          description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Hail, 2=Tornado, 3=Wind, 0=no dominant peril (because 2 or 3 perils have the same value - very unlikely, but to handle this eventuality for completeness)
-          example: 1.1
-        percentileAdmin1:
-          type: number
-          format: double
-          description: Percentile in State
-          example: 1.1
-    USSubsidenceOutput:
-      type: object
-      properties:
-        mines:
-          type: array
-          description: Nearest 5 mines
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Mine name
-                example: Lambert Mine
-                maxLength: 80
-              mineType:
-                type: string
-                description: Mine Type
-                example: Unknown
-                maxLength: 80
-              status:
-                type: string
-                description: Mine status
-                example: Active
-                maxLength: 32
-              area:
-                type: number
-                format: double
-                description: Area of mine in square footage
-                example: 45.38
-              distance:
-                type: number
-                description: Distance from mine
-                example: 3.61
-        sinkholes:
-          type: array
-          description: Nearest 5 sinkholes
-          items:
-            type: object
-            properties:
-              area:
-                type: number
-                format: double
-                description: Area of sinkhole in square footage
-                example: 58.34
-              distance:
-                type: number
-                description: Distance from Sinkhole
-                example: 3.61
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
     FlDepthInlandOutput:
       type: object
       allOf:
@@ -11913,309 +12887,7 @@ components:
           type: integer
           description: Depth inland defended 1000-year
           example: 6
-    GenericInput:
-      type: object
-      required:
-      - location
-      properties:
-        location:
-          $ref: '#/components/schemas/LocationInput'
-        layerOptions:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: object
-              description: For result fields, see the individual layer documentation
-    FlDepthInlandProximityOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthBaseOutput'
-      - type: object
-      description: results for `proximity` lookup
-      properties:
-        maxDepthWithinRadius:
-          type: integer
-          description: Max depth within radius
-          example: 1
-    FlDepthInlandSurgeProximityOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthInlandProximityOutput'
-      - type: object
-      description: results for `proximity` lookup
-      properties:
-        dominantFloodSource:
-          type: string
-          description: Dominant flood source
-          enum:
-          - INLAND
-          - SURGE
-          example: INLAND
-    FemaOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        panel:
-          type: string
-          description: Numeric designation used to identify the FIRM Map associated with a given area. First six digits are the FEMA community number.
-          example: 12095C0265F
-          maxLength: 12
-        community:
-          type: string
-          description: Political entity with the authority to adopt and enforce floodplain ordinances for the area under its jurisdiction. Community number is a unique six-digit number assigned by FEMA and used for identity in computer databases.
-          example: '120186'
-          maxLength: 6
-        floodZone:
-          type: string
-          description: FEMA issues Flood Insurance Rate Maps (FIRMs) with official flood zone designations for the purpose of rating flood policies.
-          example: X
-          maxLength: 6
-        sfha:
-          type: string
-          description: 'Special Flood Hazard Area (SFHA) is an area at high risk for flooding as determined by FEMA Flood Insurance Rate Maps (FIRMs). This is an area with a 1% annual chance of flooding. '
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-        panelDate:
-          type: string
-          format: date
-          description: Panel date is the date recorded in the FEMA FMSIS database, which is associated with the given panel number.
-          example: '2009-09-25'
-          maxLength: 10
-        bfe:
-          type: integer
-          description: Base Flood Elevation is defined by FEMA as the height of the base (100-year) flood in relation to a specified datum, usually the National Geodetic Vertical Datum of 1929 (NGVD 29) or North American Vertical Datum of 1988 (NAVD 88), in feet.
-          example: -999
-          default: -999
-        annualProbability:
-          type: string
-          description: Annual probability
-          example: Less than 0.2%
-          maxLength: 256
-        levees:
-          type: string
-          description: Flood defenses can flood walls, levees, dykes, and embankments—typically designed to protect against a flood of a certain return period.
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-        otherZones:
-          type: string
-          description: Other zones (within proximity distance)
-          example: ''
-          maxLength: 256
-        flMatch:
-          type: string
-          description: Fl match
-          example: '1'
-          maxLength: 2
-        floodway:
-          type: string
-          description: Any land area susceptible to being inundated by floodwaters from any source.
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-        cobra:
-          type: string
-          description: The Coastal Barrier Resources Act of 1982 (COBRA) designated certain portions of the Gulf and East Coasts as undeveloped coastal barriers.
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-    FlSusceptibilityOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        dtmElevation:
-          type: number
-          format: double
-          description: DTM elevation
-          example: 108.07087
-        firstFloorHeightAboveGround:
-          type: number
-          description: Captures the height of first finished floor above ground in feet
-          example: 2
-        percentBasement:
-          type: number
-          format: double
-          description: Basement likelihood for a location is a percentage. The presence of basement floors in a building can significantly increase flood losses, particularly in high-rise commercial buildings, which can have high contents value in basements.
-          example: 0.05
-    LossCostOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/LossCostBaseOutput'
-      - type: object
-        properties:
-          grossLoss:
-            type: number
-            format: double
-            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
-            example: 750.16
-          groundUpLoss:
-            type: number
-            format: double
-            description: Total loss to the exposure, independent of any insurance or reinsurance terms
-            example: 901.43
-    CoverageValuesInput:
-      type: object
-      properties:
-        buildingValue:
-          type: number
-          format: double
-          description: Building value
-          default: 0
-          example: 1000000
-        contentsValue:
-          type: number
-          format: double
-          description: Contents value
-          default: 0
-          example: 100000
-        businessInterruptionValue:
-          type: number
-          format: double
-          description: Business interruption value
-          default: 0
-          example: 50000
-    UsD2InnerCoastOutput:
-      type: object
-      properties:
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        distance:
-          type: string
-          description: Distance to Coastal Line. If the location is more than 10 miles inland, distance will return as >10 miles
-          example: '0.41'
-          maxLength: 10
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    CAWildfireOutput:
-      type: object
-      properties:
-        fuelCodeDescription:
-          type: string
-          description: Fuel Type Description
-          example: Shrubs - Brush
-          maxLength: 256
-        slopeInPercent:
-          type: number
-          format: integer
-          description: Slope in percent
-          example: 3
-        distanceToVegetationUnit:
-          type: string
-          description: Distance to Vegetation Unit
-          example: feet
-          maxLength: 8
-        distanceToVegetation:
-          type: string
-          description: Distance to Vegetation
-          example: '5'
-          maxLength: 5
-        fuelCode:
-          type: number
-          format: integer
-          description: Fuel Type Code
-          example: 1
-    ErrorOutput:
-      type: object
-      properties:
-        contextId:
-          type: string
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        additionalInfo:
-          type: string
-          example: ''
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    USWildfireOutput:
-      type: object
-      properties:
-        fuelCodeDescription:
-          type: string
-          description: Fuel Type Description
-          example: Short Grass (1 foot)
-          maxLength: 256
-        slopeInPercent:
-          type: number
-          format: integer
-          description: Slope in percent
-          example: 3
-        distanceToVegetationUnit:
-          type: string
-          description: Distance to Vegetation Unit
-          example: feet
-          maxLength: 8
-        distanceToVegetation:
-          type: string
-          description: Distance to Vegetation
-          example: '5'
-          maxLength: 5
-        fuelCode:
-          type: number
-          format: integer
-          description: Fuel Type Code
-          example: 1
-    GlobalNuclearD2TOutput:
-      type: object
-      properties:
-        nuclearPowerPlant:
-          type: array
-          description: Nearest nuclear power plant within 30 km of the given point
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Nuclear plant name
-                example: Dresden Generating Station
-                maxLength: 256
-              capacity:
-                type: number
-                description: Nuclear plant capacity
-                example: 2018.6
-              country:
-                type: string
-                description: Nuclear plant country
-                example: United States of America
-                maxLength: 256
-              longitude:
-                type: number
-                description: Nuclear plant longitude
-                example: -88.27
-              latitude:
-                type: number
-                description: Nuclear plant latitude
-                example: 41.39
-              distance:
-                type: number
-                description: Distance from the nuclear power plant
-                example: 18737.69
-        distanceUnit:
-          type: string
-          enum:
-          - meters
-          description: Distance unit
-          example: meters
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    MmiBaseOutput:
+    MmiOutput:
       type: object
       description: The Modified Mercalli Intensity (MMI) is a subjective scale used to describe the observed local shaking intensity and related effects of an earthquake. The scale ranges from 1 (barely felt) to 12 (total destruction), with slight damage beginning at 6.
       properties:
@@ -12250,261 +12922,12 @@ components:
           type: number
           format: double
           description: 1000-year MMI score
-          example: 8.0
-    AuRiskScoreOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score100yr:
-          type: number
-          format: integer
-          description: 100-year score
-          example: 1
-        score200yr:
-          type: number
-          format: integer
-          description: 200-year score
-          example: 2
-        score500yr:
-          type: number
-          format: integer
-          description: 500-year score
-          example: 3
-        scoreOverall:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 500 return period
-          example: 3
-    FlDepthInlandSurgeOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthInlandOutput'
-      - type: object
-      description: results for `floodDepth` lookup
-      properties:
-        depthSurgeUndef30yr:
-          type: integer
-          description: Depth surge undefended 30-year
-          example: 0
-        depthSurgeDef30yr:
-          type: integer
-          description: Depth surge defended 30-year
-          example: 0
-        depthSurgeUndef50yr:
-          type: integer
-          description: Depth surge undefended 50-year
-          example: 0
-        depthSurgeDef50yr:
-          type: integer
-          description: Depth surge defended 50-year
-          example: 0
-        depthSurgeUndef100yr:
-          type: integer
-          description: Depth surge undefended 100-year
-          example: 0
-        depthSurgeDef100yr:
-          type: integer
-          description: Depth surge defended 100-year
-          example: 0
-        depthSurgeUndef200yr:
-          type: integer
-          description: Depth surge undefended 200-year
-          example: 0
-        depthSurgeDef200yr:
-          type: integer
-          description: Depth surge defended 200-year
-          example: 0
-        depthSurgeUndef250yr:
-          type: integer
-          description: Depth surge undefended 250-year
-          example: 0
-        depthSurgeDef250yr:
-          type: integer
-          description: Depth surge defended 250-year
-          example: 0
-        depthSurgeUndef500yr:
-          type: integer
-          description: Depth surge undefended 500-year
-          example: 0
-        depthSurgeDef500yr:
-          type: integer
-          description: Depth surge defended 500-year
-          example: 0
-        depthSurgeUndef1000yr:
-          type: integer
-          description: Depth surge undefended 1000-year
-          example: 0
-        depthSurgeDef1000yr:
-          type: integer
-          description: Depth surge defended 1000-year
-          example: 0
-        depthCombinedUndef30yr:
-          type: integer
-          description: Depth combined undefended 30-year
-          example: 4
-        depthCombinedDef30yr:
-          type: integer
-          description: Depth combined defended 30-year
-          example: 3
-        depthCombinedUndef50yr:
-          type: integer
-          description: Depth combined undefended 50-year
-          example: 5
-        depthCombinedDef50yr:
-          type: integer
-          description: Depth combined defended 50-year
-          example: 3
-        depthCombinedUndef100yr:
-          type: integer
-          description: Depth combined undefended 100-year
-          example: 5
-        depthCombinedDef100yr:
-          type: integer
-          description: Depth combined defended 100-year
-          example: 5
-        depthCombinedUndef200yr:
-          type: integer
-          description: Depth combined undefended 200-year
-          example: 6
-        depthCombinedDef200yr:
-          type: integer
-          description: Depth combined defended 200-year
-          example: 6
-        depthCombinedUndef250yr:
-          type: integer
-          description: Depth combined undefended 250-year
-          example: 6
-        depthCombinedDef250yr:
-          type: integer
-          description: Depth combined defended 250-year
-          example: 6
-        depthCombinedUndef500yr:
-          type: integer
-          description: Depth combined undefended 500-year
-          example: 6
-        depthCombinedDef500yr:
-          type: integer
-          description: Depth combined defended 500-year
-          example: 6
-        depthCombinedUndef1000yr:
-          type: integer
-          description: Depth combined undefended 1000-year
-          example: 6
-        depthCombinedDef1000yr:
-          type: integer
-          description: Depth combined defended 1000-year
-          example: 6
-    WarningItem:
-      type: object
-      properties:
-        code:
-          type: string
-          example: FLG_XXXX
-          description: 'Warning codes:
-
-            |   Code   | Description |
-
-            |----------|-------------|
-
-            | FLG_4001 | Layer option was skipped. Response based on its default value. |
-
-            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
-
-            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
-
-            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
-
-            | FLG_4103 | No additional options can be provided to this lookup. |
-
-            | FLG_4201 | Location not matched in ESDB building attributes database. |
-
-            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
-
-            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
-
-            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
-
-            | FLG_4205 | The geocoding version used is not recommended for this layer. |
-
-            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
-
-            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
-
-            | FLG_4208 | Insufficient geocoding information to look up requested data. |
-
-            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
-
-            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
-
-            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
-
-            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
-
-            | FLG_4306 | Missing required field to perform gross loss calculations. |
-
-            | FLG_4307 | Gross losses can only be calculated for reference view. |
-
-            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
-
-            | FLG_4401 | No data found for this location. |
-
-            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
-
-            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
-
-            | FLG_4403 | The location entered is outside of supported region, Response based on default value
-
-            '
-        message:
-          type: string
-          example: Warning message
-    LossCostGuOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/LossCostBaseOutput'
-      - type: object
-        properties:
-          groundUpLoss:
-            type: number
-            format: double
-            description: Total loss to the exposure, independent of any insurance or reinsurance terms
-            example: 901.43
-    UsWfRiskScoreOutput:
-      type: object
-      description: US Wild fire risk score output
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        percentileAdmin1:
+          example: 8
+        mmi1500yr:
           type: number
           format: double
-          description: Percentile in Admin1 (State for US) for the reference return period
-          example: 0.002893825
-        scoreOverall:
-          type: integer
-          description: The Risk Score based on the composite ALR
-          example: 3
-    TrRiskScoreOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score10000yr:
-          type: integer
-          description: 10000-year score
-          example: 3
-        scoreOverall:
-          type: integer
-          description: Overall score
-          example: 3
-        percentileAdmin1:
-          type: number
-          format: double
-          description: Percentile in State
-          example: 1.1
+          description: 1500-year MMI score
+          example: 8.5
     UsD2LandfillOutput:
       type: object
       properties:
@@ -12554,301 +12977,6 @@ components:
           example: miles
         warnings:
           $ref: '#/components/schemas/WarningOutput'
-    UsWindSpeedOutput:
-      type: object
-      properties:
-        gust3Pct50Yr:
-          type: string
-          description: 3 second gust 3% probability of exceedance in 50 years for Exposure C category
-          example: 120-130
-          maxLength: 10
-        gust7Pct50Yr:
-          type: string
-          description: 3 second gust 7% probability of exceedance in 50 years for Exposure C category
-          example: '>=110'
-          maxLength: 10
-        gust15Pct50Yr:
-          type: string
-          description: 3 second gust 15% probability of exceedance in 50 years for Exposure C category
-          example: 130-140
-          maxLength: 10
-        windspeedUnit:
-          type: string
-          description: 'Constant value: MPH as in Miles Per Hour'
-          example: MPH
-          maxLength: 3
-    AddressInput:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          $ref: '#/components/schemas/GeocodeOutput'
-    MmiOutput:
-      type: object
-      description: The Modified Mercalli Intensity (MMI) is a subjective scale used to describe the observed local shaking intensity and related effects of an earthquake. The scale ranges from 1 (barely felt) to 12 (total destruction), with slight damage beginning at 6.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        mmi100yr:
-          type: number
-          format: double
-          description: 100-year MMI score
-          example: 0
-        mmi200yr:
-          type: number
-          format: double
-          description: 200-year MMI score
-          example: 0
-        mmi250yr:
-          type: number
-          format: double
-          description: 250-year MMI score
-          example: 4.1
-        mmi475yr:
-          type: number
-          format: double
-          description: 475-year MMI score
-          example: 6.3
-        mmi500yr:
-          type: number
-          format: double
-          description: 500-year MMI score
-          example: 6.5
-        mmi1000yr:
-          type: number
-          format: double
-          description: 1000-year MMI score
-          example: 8
-        mmi1500yr:
-          type: number
-          format: double
-          description: 1500-year MMI score
-          example: 8.5
-    GlobalFlDepthInlandOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthBaseOutput'
-      - type: object
-      description: results for `global floodDepth` lookup
-      properties:
-        depthInlandUndef30yr:
-          type: integer
-          description: Depth inland undefended 30-year
-          example: 4
-        depthInlandUndef50yr:
-          type: integer
-          description: Depth inland undefended 50-year
-          example: 5
-        depthInlandUndef100yr:
-          type: integer
-          description: Depth inland undefended 100-year
-          example: 5
-        depthInlandUndef200yr:
-          type: integer
-          description: Depth inland undefended 200-year
-          example: 6
-        depthInlandUndef250yr:
-          type: integer
-          description: Depth inland undefended 250-year
-          example: 6
-        depthInlandUndef500yr:
-          type: integer
-          description: Depth inland undefended 500-year
-          example: 6
-        depthInlandUndef1000yr:
-          type: integer
-          description: Depth inland undefended 1000-year
-          example: 6
-    UsTrD2TOutput:
-      type: object
-      properties:
-        targets:
-          type: array
-          description: Nearest 5 terrorism targets
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-                description: Target Id
-                example: 23840
-              name:
-                type: string
-                description: Target name
-                example: FBI El Paso Field Office
-                maxLength: 80
-              city:
-                type: string
-                description: City
-                example: El Paso
-                maxLength: 256
-              admin1Code:
-                type: string
-                description: Target State
-                example: TX
-                maxLength: 16
-              category:
-                type: string
-                description: Target category
-                example: Government Building
-                maxLength: 80
-              score:
-                type: string
-                description: Target score. Range of scores is from a to f.
-                example: f
-                maxLength: 1
-              distance:
-                type: number
-                description: Distance from target
-                example: 1988.17
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    RiskScoreBaseOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score100yr:
-          type: integer
-          description: 100-year score
-          example: 1
-        score250yr:
-          type: integer
-          description: 250-year score
-          example: 1
-        score500yr:
-          type: integer
-          description: 500-year score
-          example: 3
-        scoreOverall:
-          type: integer
-          description: Overall score
-          example: 3
-    UsEqFaultOutput:
-      type: object
-      properties:
-        faults:
-          type: array
-          description: Nearest 5 faults
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: fault name
-                example: NM NMSZ USGS West Full
-                maxLength: 80
-              distance:
-                type: number
-                description: Distance to fault
-                example: 3.61
-              returnPeriodM60:
-                type: number
-                description: Return Period for Magnitude 6.0+
-                example: 27013
-              returnPeriodM65:
-                type: number
-                description: Return Period for Magnitude 6.5+
-                example: 108050
-              returnPeriodM70:
-                type: number
-                description: Return Period for Magnitude 7.0+
-                example: 120056
-        backgroundRates:
-          type: array
-          description: Background return period of magnitude 6.0+ earthquakes for 8 neighboring cells and, in the array's fifth position, the address's cell.
-          items:
-            type: number
-          example:
-          - 310
-          - 720
-          - 950
-          - 1085
-          - 2120
-          - 4340
-          - 3500
-          - 7690
-          - 11605
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    CharacteristicsInput:
-      type: object
-      properties:
-        construction:
-          type: string
-          description: Construction combines both scheme and class. Construction `scheme` (e.g., ATC) is represented by the letters at the beginning. It is a system used for classifying a building's construction class. Construction `class` is represented by the number(s) following the scheme. It is an attribute referring to the dominant material used in constructing the building frame/structure. Unknown=0.
-          example: ATC1
-          default: ATC0
-          externalDocs:
-            description: List of constructions
-            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Const_Class_Schemes_by_Country.htm
-        occupancy:
-          type: string
-          description: Occupancy combines both scheme and type. Occupancy `scheme` (e.g., ATC) is represented by the letters at the beginning. It is the classification used for identifying a building's occupancy type. Occupancy `type` is represented by the number(s) following the scheme. It is an attribute that describes the typical or dominant use of the building (e.g., residential, or schools, or commercial usage). Unknown=0.
-          example: ATC1
-          default: ATC0
-          externalDocs:
-            description: List of occupancies
-            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Occ_Type_Schemes_by_Country.htm
-        yearBuilt:
-          type: integer
-          description: Attribute describing the year when a structure was constructed. For many RMS peril models, year built is a primary vulnerability attribute.
-          example: 1980
-          default: 0
-        numOfStories:
-          type: integer
-          description: Attribute that represents the number of floors for a structure. It is a single number, such as 6 or 22, not a range of numbers. Structures are classified according to the number of floors they have.
-          default: 0
-          example: 1
-        foundationType:
-          type: integer
-          description: Attribute that captures this differentiating factor for flood risk. This attribute is used to infer the height of the first floor during hazard retrieval.
-          default: 0
-          example: 0
-        firstFloorHeightAboveGround:
-          type: integer
-          description: First floor height above ground
-          example: 5
-          default: 0
-        basement:
-          type: string
-          description: Indicates whether there is a basement or not
-          example: 'YES'
-          default: DEFAULT
-          enum:
-          - DEFAULT
-          - 'YES'
-          - 'NO'
-        floorArea:
-          type: integer
-          description: Floor area is a primary building characteristic that represents a building's total living area, across all floors. It excludes garages, porches, decks, sunrooms, and basements.
-          example: 1452
-          default: 0
-    GenericOutput:
-      type: object
-      description: results
-      additionalProperties:
-        type: string
     WtRiskScoreOutput:
       type: object
       allOf:
@@ -12860,89 +12988,9 @@ components:
             format: integer
             description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Wind, 2=Snow, 3=Freeze, 4=Ice, 0=no dominant peril (all sub-perils have the same value - exceptionally unlikely, but to handle this for completeness)
             example: 2
-    UsD2FireStationOutput:
-      type: object
-      properties:
-        fireStations:
-          type: array
-          description: Nearest 3 fire stations
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Fire Station name
-                example: MAZON COMMUNITY FIRE DEPARTMENT
-                maxLength: 256
-              address:
-                type: string
-                description: Fire Station address
-                example: 700 PARK STREET
-                maxLength: 256
-              city:
-                type: string
-                description: Fire Station City
-                example: MAZON
-                maxLength: 256
-              admin1Code:
-                type: string
-                description: Fire Station State
-                example: IL
-                maxLength: 16
-              postalCode:
-                type: string
-                description: Fire Station zip code
-                example: '60444'
-                maxLength: 16
-              admin2Name:
-                type: string
-                description: Fire Station County
-                example: GRUNDY
-                maxLength: 256
-              level:
-                type: string
-                description: Fire Station category
-                example: ''
-                maxLength: 256
-              fireStationType:
-                type: string
-                description: Fire Station type
-                example: VOLUNTEER
-                maxLength: 80
-              ems:
-                type: string
-                description: Fire Station Emergency Medical Services presence
-                example: Y
-                maxLength: 1
-              longitude:
-                type: number
-                description: Fire Station longitude
-                example: -88.27
-              latitude:
-                type: number
-                description: Fire Station latitude
-                example: 41.39
-              distance:
-                type: number
-                description: Distance from fire station
-                example: 1988.17
-        distanceUnit:
-          type: string
-          enum:
-          - miles
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
   responses:
     500Response:
       description: Something went wrong on our end (this happens rarely)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorOutput'
-    400Response:
-      description: The request was unacceptable, likely due to missing a required input.
       content:
         application/json:
           schema:
@@ -12959,6 +13007,302 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorOutput'
+    400Response:
+      description: The request was unacceptable, likely due to missing a required input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+  examples:
+    CaCsAddress:
+      value:
+        countryCode: CA
+        countryScheme: ISO2A
+        countryRmsCode: CA
+        admin1Code: QC
+        latitude: 51.25
+        longitude: -63.25
+        rmsGeoModelResolutionCode: 1
+        postalCodeGeoId: 23803454
+        admin1GeoId: 2344924
+    PlAddress:
+      value:
+        countryCode: PL
+        countryScheme: ISO2A
+        countryRmsCode: PL
+        latitude: 53.3610246
+        longitude: 14.31923382
+        rmsGeoModelResolutionCode: 1
+    CharacteristicsEuBasic:
+      value:
+        construction: ATC0
+        occupancy: RMS1
+        yearBuilt: 1990
+        numOfStories: 0
+    UsCaAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: CA
+        latitude: 37.5412
+        longitude: -122.06061
+        admin2GeoId: 99999206001
+        rmsGeoModelResolutionCode: 1
+    UsTxAddressEsdb:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: TX
+        postalCode: '78669'
+        rmsGeoModelResolutionCode: 2
+        ugid: USS3194364891900
+        geoMatchCode: K6-99999783726670-K1T1P1A1-K95T100P100A100-T1P1A1-00-AB-TP-X
+        cityName: SPICEWOOD
+        streetAddress: 1900 LAS ENTRADAS
+    CharacteristicsWF:
+      value:
+        construction: RMS1
+        occupancy: ATC2
+        yearBuilt: 2005
+        numOfStories: 1
+    InAddress:
+      value:
+        countryCode: IN
+        countryScheme: ISO2A
+        countryRmsCode: IN
+        latitude: 19.102055
+        longitude: 72.898758
+        postalCode: '400072'
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 2345750
+    MxAddress:
+      value:
+        countryCode: MX
+        countryScheme: ISO2A
+        countryRmsCode: MX
+        latitude: 31.304932
+        longitude: -115.669525
+        rmsGeoModelResolutionCode: 1
+    UsTrD2TAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        latitude: 31.810899
+        longitude: -106.53353
+        rmsGeoModelResolutionCode: 1
+    CoverageValuesFlood:
+      value:
+        buildingValue: 1093488.618
+        contentsValue: 966388.5339
+        businessInterruptionValue: 44393.0543
+    AuAddress:
+      value:
+        countryCode: AU
+        countryScheme: ISO2A
+        countryRmsCode: AU
+        latitude: -19.284868
+        longitude: 146.772049
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 2344702
+        postalCodeGeoId: 12708445
+    UsLandfillD2LAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        latitude: 38.619671
+        longitude: -96.78517
+        rmsGeoModelResolutionCode: 1
+    UsNuclearD2TAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        latitude: 41.285261
+        longitude: -88.445496
+        rmsGeoModelResolutionCode: 1
+    EuFrAddress:
+      value:
+        countryCode: FR
+        countryScheme: ISO2A
+        countryRmsCode: FR
+        latitude: 45.77006542
+        longitude: 4.828696969
+        postalCodeGeoId: 12726916
+        rmsGeoModelResolutionCode: 1
+    NzAddress:
+      value:
+        countryCode: NZ
+        countryScheme: ISO2A
+        countryRmsCode: NZ
+        latitude: -36.84491
+        longitude: 174.7335
+        admin1GeoId: 15021756
+        rmsGeoModelResolutionCode: 1
+    KrAddress:
+      value:
+        countryCode: KR
+        countryScheme: ISO2A
+        countryRmsCode: KR
+        latitude: 37.577013
+        longitude: 126.999299
+        admin2GeoId: 61759072
+        rmsGeoModelResolutionCode: 1
+    CharacteristicsFlood:
+      value:
+        construction: ATC16
+        occupancy: ATC37
+        yearBuilt: 1964
+        numOfStories: 1
+        firstFloorHeightAboveGround: 1
+        basement: 'YES'
+        foundationType: 0
+    UsLandfillD2InnerCoastAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: SC
+        latitude: 32.821745
+        longitude: -79.981808
+        rmsGeoModelResolutionCode: 1
+    TwAddress:
+      value:
+        countryCode: TW
+        countryScheme: ISO2A
+        countryRmsCode: TW
+        latitude: 26.223921
+        longitude: 119.998842
+        rmsGeoModelResolutionCode: 1
+    CaAddress:
+      value:
+        countryCode: CA
+        countryScheme: ISO2A
+        countryRmsCode: CA
+        admin1Code: AB
+        latitude: 53.55
+        longitude: -113.35
+        rmsGeoModelResolutionCode: 1
+        postalCode: T8H 0E7
+        locationCode: T8H
+    DrAddress:
+      value:
+        countryCode: DR
+        countryFips: DR
+        countryScheme: FIPS
+        countryRmsCode: CB
+        latitude: 18.9833
+        longitude: -69.3833
+        rmsGeoModelResolutionCode: 1
+        admin3GeoId: 60375492
+        cityGeoId: 74125
+    PhAddress:
+      value:
+        countryCode: PH
+        countryScheme: ISO2A
+        countryRmsCode: PH
+        latitude: 6.934632
+        longitude: 126.259708
+        rmsGeoModelResolutionCode: 1
+    CnRiskIndexAddress:
+      value:
+        countryCode: CN
+        countryScheme: ISO2A
+        countryRmsCode: CN
+        latitude: 22.538668
+        longitude: 114.096738
+        rmsGeoModelResolutionCode: 1
+    UsCsAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: ME
+        latitude: 45.75
+        longitude: -67.25
+        rmsGeoModelResolutionCode: 1
+        postalCodeGeoId: 99999404491
+        admin1GeoId: 99999123
+    USSubsidenceAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: CA
+        latitude: 37.272
+        longitude: -91.719
+        rmsGeoModelResolutionCode: 1
+    UsFlAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: FL
+        latitude: 28.514108
+        longitude: -81.37189
+        rmsGeoModelResolutionCode: 1
+    CharacteristicsEuFl:
+      value:
+        construction: ATC0
+        occupancy: RMS1
+        yearBuilt: 1990
+        numOfStories: 0
+        basement: 'YES'
+    CharacteristicsBasic:
+      value:
+        construction: ATC1
+        occupancy: ATC1
+        yearBuilt: 1973
+        numOfStories: 3
+    CharacteristicsFloorArea:
+      value:
+        construction: ATC1
+        occupancy: ATC1
+        yearBuilt: 1973
+        numOfStories: 3
+        floorArea: 1100
+    UsFlAddressExtended:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: FL
+        latitude: 28.514108
+        longitude: -81.37189
+        rmsGeoModelResolutionCode: 1
+        postalCodeGeoId: 99999432806
+        admin1GeoId: 99999112
+    GuAddress:
+      value:
+        countryCode: GU
+        countryScheme: ISO2A
+        countryRmsCode: GU
+        latitude: 13.495093
+        longitude: 144.780626
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 60073592
+        admin3GeoId: 60073615
+    IdAddress:
+      value:
+        countryCode: ID
+        countryScheme: ISO2A
+        countryRmsCode: ID
+        latitude: -8.451797
+        longitude: 118.730615
+        rmsGeoModelResolutionCode: 1
+    EuGbAddress:
+      value:
+        countryCode: GB
+        countryScheme: ISO2A
+        countryRmsCode: GB
+        latitude: 54.988537
+        longitude: -2.138128
+        postalCode: NE46 4SJ
+        postalCodeGeoId: 21225450
+        rmsGeoModelResolutionCode: 1
   securitySchemes:
     RMS_Auth:
       type: apiKey

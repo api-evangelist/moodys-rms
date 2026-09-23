@@ -1128,6 +1128,48 @@ paths:
       - TreatyV1
 components:
   schemas:
+    CopyTreatyInfo:
+      type: object
+      properties:
+        newNumber:
+          type: string
+        newName:
+          type: string
+      required:
+      - newNumber
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    TreatySearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingTreatyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Treaty'
     Treaty:
       description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
 
@@ -1231,16 +1273,6 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    TreatySearchResult:
-      type: object
-      properties:
-        totalMatchCount:
-          type: integer
-          format: int64
-        searchMatchingTreatyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Treaty'
     ExposureValue:
       type: object
       properties:
@@ -1251,29 +1283,21 @@ components:
           type: string
         name:
           type: string
-    LossOccurrence:
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
       properties:
         id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
       required:
-      - treatyId
+      - name
     ErrorMessage:
       type: object
       properties:
@@ -1283,36 +1307,6 @@ components:
           type: string
         logId:
           type: string
-    BatchRequest:
-      type: object
-      properties:
-        method:
-          type: string
-        path:
-          type: string
-        body:
-          type: string
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    CopyTreatyInfo:
-      type: object
-      properties:
-        newNumber:
-          type: string
-        newName:
-          type: string
-      required:
-      - newNumber
     Producer:
       description: Agent or brokerage firm that produced a policy.
       type: object
@@ -1328,6 +1322,27 @@ components:
           minLength: 0
       required:
       - name
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    BatchRequest:
+      type: object
+      properties:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
     Currency:
       type: object
       properties:
@@ -1344,21 +1359,6 @@ components:
       - code
       - scheme
       - vintage
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
   securitySchemes:
     RMS_Auth:
       type: apiKey

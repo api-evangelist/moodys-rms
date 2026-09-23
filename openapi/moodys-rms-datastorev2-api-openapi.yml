@@ -190,6 +190,25 @@ components:
           type: array
           items:
             type: string
+    DataBridgeDatabaseSearchResult:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          format: int32
+        dataBridgeDatabases:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataBridgeDatabase'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     DataBridgeRegisterInput:
       type: object
       properties:
@@ -215,25 +234,6 @@ components:
           uniqueItems: true
       required:
       - datasourceName
-    DataBridgeDatabaseSearchResult:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-          format: int32
-        dataBridgeDatabases:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataBridgeDatabase'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

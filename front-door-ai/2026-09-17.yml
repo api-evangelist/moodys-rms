@@ -1,0 +1,33 @@
+# Front Door AI Index — moodys-rms — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: moodys-rms
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.moodys.com
+  final_host: www.moodys.com
+  ownership: unresolved
+  owner: null
+  shares_host_with:
+  - cortera
+  - moodys-corporation
+  inherited_from: null
+  verdict: scored
+  score: null
+  host_score: 8
+  density: null
+  words: 1199
+  tiers:
+    agentic: 2
+    core: 6
+    model: 0
+  ambiguous: 3
+  top_terms:
+    AI: 4
+    agent: 2
+    agentic: 1
+    artificial intelligence: 1
+    gen ai: 1
+    intelligence: 1
+    prompts: 1
