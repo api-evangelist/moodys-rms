@@ -1128,15 +1128,16 @@ paths:
       - TreatyV1
 components:
   schemas:
-    CopyTreatyInfo:
+    TreatySearchResult:
       type: object
       properties:
-        newNumber:
-          type: string
-        newName:
-          type: string
-      required:
-      - newNumber
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingTreatyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Treaty'
     LossOccurrence:
       type: object
       properties:
@@ -1160,16 +1161,92 @@ components:
           $ref: '#/components/schemas/ExposureValue'
       required:
       - treatyId
-    TreatySearchResult:
+    Currency:
       type: object
       properties:
-        totalMatchCount:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    CopyTreatyInfo:
+      type: object
+      properties:
+        newNumber:
+          type: string
+        newName:
+          type: string
+      required:
+      - newNumber
+    ExposureValue:
+      type: object
+      properties:
+        id:
           type: integer
-          format: int64
-        searchMatchingTreatyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Treaty'
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
     Treaty:
       description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
 
@@ -1273,67 +1350,6 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
     BatchRequest:
       type: object
       properties:
@@ -1343,22 +1359,6 @@ components:
           type: string
         body:
           type: string
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
   securitySchemes:
     RMS_Auth:
       type: apiKey

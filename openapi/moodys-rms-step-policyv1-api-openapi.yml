@@ -299,6 +299,15 @@ paths:
       - Step PolicyV1
 components:
   schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     CopyStepPolicyInfo:
       type: object
       properties:
@@ -371,15 +380,6 @@ components:
         code:
           type: string
         name:
-          type: string
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
           type: string
     StepPolicySearchResult:
       type: object

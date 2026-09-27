@@ -409,6 +409,33 @@ paths:
       - File StorageV1
 components:
   schemas:
+    FileInput:
+      type: object
+      properties:
+        fileInputType:
+          type: string
+          enum:
+          - MRI
+          - ALM
+        fileType:
+          type: string
+        fileSize:
+          type: integer
+          format: int64
+        fileName:
+          type: string
+      required:
+      - fileName
+      - fileType
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     ErrorBody:
       type: object
       properties:
@@ -435,6 +462,32 @@ components:
           type: string
         s3Region:
           type: string
+    AggregatePortfolioFlatFileMapping:
+      type: object
+      properties:
+        resolutionConversionFrom:
+          type: string
+        resolutionConversionTo:
+          type: string
+        columnMapping:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        dataRowStart:
+          type: integer
+          format: int32
+          minimum: 1
+        countryCode:
+          type: string
+        resolution:
+          type: string
+        dependencyResolution:
+          type: string
+      required:
+      - columnMapping
+      - countryCode
+      - resolution
     Link:
       type: object
       properties:
@@ -448,42 +501,36 @@ components:
       - href
       - method
       - rel
-    AlmErrorMessage:
+    AggregateExposuresList:
       type: object
       properties:
-        row:
+        values:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+        lobs:
+          type: array
+          items:
+            type: string
+        resolutionValues:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+        errorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlmErrorMessage'
+        countryCode:
           type: string
-        column:
+        resolution:
           type: string
-        text:
+        dependencyResolution:
           type: string
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    FileInput:
-      type: object
-      properties:
-        fileInputType:
-          type: string
-          enum:
-          - MRI
-          - ALM
-        fileType:
-          type: string
-        fileSize:
-          type: integer
-          format: int64
-        fileName:
-          type: string
-      required:
-      - fileName
-      - fileType
     RDMImportInput:
       type: object
       properties:
@@ -540,62 +587,6 @@ components:
       required:
       - rdmName
       - uploadId
-    AggregatePortfolioFlatFileMapping:
-      type: object
-      properties:
-        resolutionConversionFrom:
-          type: string
-        resolutionConversionTo:
-          type: string
-        columnMapping:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int32
-        dataRowStart:
-          type: integer
-          format: int32
-          minimum: 1
-        countryCode:
-          type: string
-        resolution:
-          type: string
-        dependencyResolution:
-          type: string
-      required:
-      - columnMapping
-      - countryCode
-      - resolution
-    AggregateExposuresList:
-      type: object
-      properties:
-        values:
-          type: array
-          items:
-            type: array
-            items:
-              type: number
-              format: double
-        lobs:
-          type: array
-          items:
-            type: string
-        resolutionValues:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: object
-        errorMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlmErrorMessage'
-        countryCode:
-          type: string
-        resolution:
-          type: string
-        dependencyResolution:
-          type: string
     S3UploadHelper:
       type: object
       properties:
@@ -610,6 +601,15 @@ components:
         uploadKey2:
           type: string
         uploadKey3:
+          type: string
+    AlmErrorMessage:
+      type: object
+      properties:
+        row:
+          type: string
+        column:
+          type: string
+        text:
           type: string
     EdmImportInput:
       type: object

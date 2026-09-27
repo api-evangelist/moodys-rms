@@ -197,6 +197,28 @@ paths:
       - RMS_Auth: []
 components:
   schemas:
+    ReportInfoRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          description: Name of report.
+          type: string
+        notes:
+          description: Descriptive comments on note.
+          maxLength: 500
+          minLength: 0
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     ReportSearchItem:
       type: object
       properties:
@@ -230,29 +252,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReportDetails'
-    ReportListSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportListSearchItem'
-    ReportInfoRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          description: Name of report.
-          type: string
-        notes:
-          description: Descriptive comments on note.
-          maxLength: 500
-          minLength: 0
-          type: string
     ReportListSearchItem:
       type: object
       properties:
@@ -282,15 +281,6 @@ components:
           type: string
         notes:
           type: string
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     ReportDetails:
       type: object
       properties:
@@ -318,6 +308,16 @@ components:
           type: object
           additionalProperties:
             type: object
+    ReportListSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportListSearchItem'
   securitySchemes:
     RMS_Auth:
       type: apiKey

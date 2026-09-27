@@ -312,6 +312,22 @@ paths:
       - ImportsV1
 components:
   schemas:
+    ImportSourceFileItem:
+      type: object
+      properties:
+        source:
+          type: string
+        sourceExample:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     ImportMappingOutput:
       type: object
       properties:
@@ -331,13 +347,31 @@ components:
       - accountItems
       - locationItems
       - reinsuranceItems
-    ImportMappingItem:
+    ImportMappingInput:
       type: object
       properties:
-        source:
+        mapFileName:
           type: string
-        destination:
-          type: string
+          description: Name of the import mapping file.
+        accountItems:
+          type: array
+          description: Array of mappings between <<glossary:account resource file>> columns and EDM columns.
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        locationItems:
+          description: Array of mappings between <<glossary:location resource file>> columns and EDM columns.
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        reinsuranceItems:
+          type: array
+          description: Array of mappings between <<glossary:reinsurance resource file>> columns and EDM columns.
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+      required:
+      - accountItems
+      - locationItems
+      - mapFileName
     AccountFileInput:
       type: object
       properties:
@@ -348,6 +382,13 @@ components:
       required:
       - name
       - number
+    ImportMappingItem:
+      type: object
+      properties:
+        source:
+          type: string
+        destination:
+          type: string
     ImportSourceFileResult:
       type: object
       properties:
@@ -355,22 +396,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ImportSourceFileItem'
-    ImportSourceFileItem:
-      type: object
-      properties:
-        source:
-          type: string
-        sourceExample:
-          type: string
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     SubmittedImportJob:
       type: object
       properties:
@@ -462,31 +487,6 @@ components:
       - bucketId
       - dataSourceName
       - delimiter
-    ImportMappingInput:
-      type: object
-      properties:
-        mapFileName:
-          type: string
-          description: Name of the import mapping file.
-        accountItems:
-          type: array
-          description: Array of mappings between <<glossary:account resource file>> columns and EDM columns.
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-        locationItems:
-          description: Array of mappings between <<glossary:location resource file>> columns and EDM columns.
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-        reinsuranceItems:
-          type: array
-          description: Array of mappings between <<glossary:reinsurance resource file>> columns and EDM columns.
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-      required:
-      - accountItems
-      - locationItems
-      - mapFileName
   securitySchemes:
     RMS_Auth:
       type: apiKey

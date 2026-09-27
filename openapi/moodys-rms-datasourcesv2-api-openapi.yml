@@ -239,6 +239,27 @@ paths:
       - DatasourcesV2
 components:
   schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    EdmRequest:
+      type: object
+      properties:
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
     ServerInfo:
       type: object
       properties:
@@ -281,28 +302,6 @@ components:
         defaultServer:
           type: boolean
           example: false
-    EdmRequest:
-      type: object
-      properties:
-        share:
-          description: Indicates if the exposure set is shared with other groups.
-          type: boolean
-        groups:
-          description: List of groups that may access the exposure set.
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-    DataSourceSearchResultV2:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int32
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDatabaseV2'
     UserDatabaseV2:
       type: object
       properties:
@@ -337,15 +336,16 @@ components:
           type: string
         serverName:
           type: string
-    ErrorMessage:
+    DataSourceSearchResultV2:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDatabaseV2'
   securitySchemes:
     RMS_Auth:
       type: apiKey

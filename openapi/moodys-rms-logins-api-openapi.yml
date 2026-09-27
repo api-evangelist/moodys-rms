@@ -198,16 +198,6 @@ paths:
           description: Internal Server Error. If the problem persists you may want to contact the Administrator.
 components:
   schemas:
-    RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest:
-      required:
-      - password
-      type: object
-      properties:
-        password:
-          maxLength: 128
-          minLength: 0
-          type: string
-      additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.CreateLoginRequest:
       required:
       - login
@@ -234,6 +224,24 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse:
+      type: object
+      properties:
+        jobId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.UpdateLoginRequest:
+      required:
+      - password
+      type: object
+      properties:
+        password:
+          maxLength: 128
+          minLength: 0
+          type: string
+      additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.Login:
       type: object
       properties:
@@ -250,14 +258,6 @@ components:
           - string
           - 'null'
         owner:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.CreateLoginResponse:
-      type: object
-      properties:
-        jobId:
           type:
           - string
           - 'null'

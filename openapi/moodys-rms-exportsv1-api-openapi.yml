@@ -102,26 +102,6 @@ paths:
       - ExportsV1
 components:
   schemas:
-    DownloadResultsInput:
-      type: object
-      properties:
-        workflowId:
-          type: string
-        lossDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/LossDetails'
-      required:
-      - workflowId
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     ExportInput:
       type: object
       properties:
@@ -151,6 +131,17 @@ components:
         propertyName: type
       required:
       - exportType
+    DownloadResultsInput:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        lossDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/LossDetails'
+      required:
+      - workflowId
     LossDetails:
       description: List with loss details.
       type: object
@@ -172,6 +163,15 @@ components:
             description: Financial perspectives that should be saved in the result.
             example: '[GU, GR]'
       example: '[LossDetails_STATS, LossDetails_EP, LossDetails_LOSS_TABLE]'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

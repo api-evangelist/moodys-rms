@@ -291,15 +291,6 @@ components:
           minLength: 0
       required:
       - name
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     UnderwriterSearchResult:
       type: object
       properties:
@@ -310,6 +301,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UnderWriter'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

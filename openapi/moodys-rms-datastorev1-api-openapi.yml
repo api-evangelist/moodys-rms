@@ -163,6 +163,25 @@ paths:
       - DatastoreV1
 components:
   schemas:
+    DataBridgeDatabaseSearchResult:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          format: int32
+        dataBridgeDatabases:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataBridgeDatabase'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     DataBridgeDatabase:
       type: object
       properties:
@@ -192,25 +211,6 @@ components:
           type: array
           items:
             type: string
-    DataBridgeDatabaseSearchResult:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-          format: int32
-        dataBridgeDatabases:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataBridgeDatabase'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

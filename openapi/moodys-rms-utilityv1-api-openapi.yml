@@ -482,24 +482,6 @@ paths:
       - UtilityV1
 components:
   schemas:
-    PolicyConditionCriteria:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        logic:
-          type: string
-        openPar:
-          type: string
-        field:
-          type: string
-        operator:
-          type: string
-        value:
-          type: string
-        closePar:
-          type: string
     Facultative:
       type: object
       properties:
@@ -514,6 +496,20 @@ components:
           minLength: 0
       required:
       - name
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    QueryEntity:
+      type: object
+      properties:
+        q:
+          type: string
     FacultativeSearchResult:
       type: object
       properties:
@@ -524,11 +520,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Facultative'
-    QueryEntity:
-      type: object
-      properties:
-        q:
-          type: string
     PortfolioConditionCriteria:
       type: object
       properties:
@@ -547,14 +538,23 @@ components:
           type: string
         closePar:
           type: string
-    ErrorMessage:
+    PolicyConditionCriteria:
       type: object
       properties:
-        code:
+        id:
+          type: integer
+          format: int32
+        logic:
           type: string
-        message:
+        openPar:
           type: string
-        logId:
+        field:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        closePar:
           type: string
   securitySchemes:
     RMS_Auth:

@@ -2890,24 +2890,287 @@ paths:
       - LocationV1
 components:
   schemas:
-    PolicyConditionCriteria:
+    Property:
       type: object
       properties:
+        accountId:
+          type: integer
+          format: int32
+        locationId:
+          type: integer
+          format: int32
+        addressId:
+          type: integer
+          format: int32
+        locationNumber:
+          type: string
+        locationName:
+          type: string
+        userId1:
+          type: string
+        userId2:
+          type: string
+        userText1:
+          type: string
+        userText2:
+          type: string
+        expireDate:
+          type: string
+        inceptDate:
+          type: string
+        yearBuilt:
+          type: string
+        createDate:
+          type: string
+        updateDate:
+          type: string
+        buildingClassScheme:
+          $ref: '#/components/schemas/ExposureValue'
+        buildingClass:
+          $ref: '#/components/schemas/ExposureValue'
+        occupancyTypeScheme:
+          $ref: '#/components/schemas/ExposureValue'
+        occupancyType:
+          $ref: '#/components/schemas/ExposureValue'
+        primaryLocId:
+          type: integer
+          format: int32
+        siteName:
+          $ref: '#/components/schemas/ExposureValue'
+        buildings:
+          type: integer
+          format: int32
+        stories:
+          type: integer
+          format: int32
+        floorOccupancy:
+          type: string
+        floorArea:
+          type: number
+          format: double
+        bldgHeight:
+          type: number
+          format: double
+        heightUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        slope:
+          type: number
+          format: double
+        otherZone:
+          type: string
+        huZone:
+          $ref: '#/components/schemas/ExposureValue'
+        areaUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        bldgValuation:
+          type: number
+          format: double
+        valuationDiffAmt:
+          type: number
+          format: double
+        valuationDiffPercent:
+          type: number
+          format: double
+        floodDefenseElevation:
+          type: number
+          format: double
+        floodDefenseElevationUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        rentalPropertyIdentifier:
+          $ref: '#/components/schemas/ExposureValue'
+        mfdSubcategory:
+          $ref: '#/components/schemas/ExposureValue'
+        dwellTime:
+          type: integer
+          format: int32
+        userGroundElev:
+          type: number
+          format: double
+        userBfe:
+          type: number
+          format: double
+        floodDefHtAboveGrnd:
+          type: number
+          format: double
+        contentLossTrigger:
+          $ref: '#/components/schemas/ExposureValue'
+        isPrimaryBldg:
+          type: boolean
+        useContentValue:
+          $ref: '#/components/schemas/ExposureValue'
+        nship:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+      required:
+      - locationNumber
+    LocationBuildingAttribute:
+      type: object
+      properties:
+        buildingId:
+          type: string
+        buildingNumber:
+          type: string
+        streetPrefix:
+          type: string
+        streetName:
+          type: string
+        streetType:
+          type: string
+        streetSuffix:
+          type: string
+        cityName:
+          type: string
+        stateCode:
+          type: string
+        country:
+          type: string
+        latitude:
+          description: Latitude coordinates.
+          type: number
+          format: double
+        longitude:
+          description: Longitude coordinates.
+          type: number
+          format: double
+        buildingClassScheme:
+          type: string
+          enum:
+          - RMS
+          - ATC
+          - ISO
+          - FIRE
+          - RMS_IND
+          - JPBLDG
+          - EURO
+          - RMS_BR
+          - RMS_OP
+          - USER
+        occupancyTypeScheme:
+          type: string
+          enum:
+          - ATC
+          - SIC
+          - NAICS
+          - NCCI
+          - ISO
+          - IBC
+          - RMS_IND
+          - JPOCC
+          - EURO
+          - RMS_BR
+          - RMS_OP
+          - WOCC
+        derivedStories:
+          type: integer
+          format: int32
+        areaUnit:
+          type: string
+          enum:
+          - SqFeet
+          - SqMeter
+        yearRange:
+          type: integer
+          format: int32
+        exterior:
+          type: string
+        fireproof:
+          type: string
+        esdbBuildingName:
+          type: string
+        esdbBuildingClass:
+          $ref: '#/components/schemas/ExposureValue'
+        esdbOccupancyType:
+          $ref: '#/components/schemas/ExposureValue'
+        esdbBldgHeight:
+          type: number
+          format: double
+        esdbStories:
+          type: integer
+          format: int32
+        esdbSquareFootage:
+          type: number
+          format: double
+        esdbYearBuilt:
+          type: string
+    LocationCoverage:
+      type: object
+      properties:
+        limitExtension:
+          description: Indicates if limit extensions apply each coverage type.
+          type: number
+          format: double
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        waitingPeriod:
+          description: The waiting period deductible (in days) to apply to business interruption coverage.
+          type: number
+          format: double
         id:
           type: integer
           format: int32
-        logic:
+        label:
+          $ref: '#/components/schemas/ExposureValue'
+        eqslModifier:
+          description: The grade of contents covered in case of earthquake sprinkler leakage (EQSL).
+          type: integer
+          format: int32
+        lossType:
+          description: The loss type covered. One of `Building`, `Contents`, `BI`, or `CombinedCvg`.
           type: string
-        openPar:
-          type: string
-        field:
-          type: string
-        operator:
-          type: string
+          enum:
+          - Building
+          - Contents
+          - BI
+          - CombinedCvg
+        percentSprinkler:
+          description: The percentage of buidling contents that are beneath a sprinkler and susceptible to water damage.
+          type: number
+          format: double
         value:
+          description: The full replacement value of covered buildings and contents and the value of one year of income for business interruption coverage.
+          type: number
+          format: double
+        biPoi:
+          description: The business interruption period of indemnity in months.
+          type: number
+          format: double
+        deductible:
+          description: The location coverage deductible.
+          type: number
+          format: double
+        coverageModifier:
+          $ref: '#/components/schemas/ExposureValue'
+        accumulation:
+          description: The accumulation coverage. One of `Building`, `Contents`, `BI`, or `Combined`.
           type: string
-        closePar:
-          type: string
+          enum:
+          - Building
+          - Contents
+          - Bi
+          - Combined
+        limit:
+          type: number
+          format: double
+        peril:
+          description: The perils covered.
+          $ref: '#/components/schemas/ExposureValue'
+        percentageLossDeductibleAmount:
+          description: The percent of loss deductible amount as a percentage. Deductible expressed as a percentage of loss for a given coverage or combination of coverages. As the loss increases, the deductible amount increases.
+          type: number
+          format: double
+        isFranchiseDeductible:
+          description: Indicates if the deductible amount is franchise.
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          description: Indicates if location coverage is valid.
+          type: boolean
     LocationWcDetail:
       type: object
       properties:
@@ -2974,15 +3237,416 @@ components:
           type: boolean
         excessComp:
           $ref: '#/components/schemas/ExposureValue'
-    ExposureValue:
+    LocationFrDetail:
       type: object
       properties:
         id:
           type: integer
           format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        fireDepartmentRatingModifier:
+          $ref: '#/components/schemas/ExposureValue'
+        fireDepartmentRating:
+          $ref: '#/components/schemas/ExposureValue'
+        sprinklerSystem:
+          $ref: '#/components/schemas/ExposureValue'
+        remoteAlarm:
+          $ref: '#/components/schemas/ExposureValue'
+        frPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        frProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        frSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        frSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofCovering:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofGeometry:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofAge:
+          $ref: '#/components/schemas/ExposureValue'
+        frRoofVent:
+          $ref: '#/components/schemas/ExposureValue'
+        frEmberAccumulator:
+          $ref: '#/components/schemas/ExposureValue'
+        frSuppression:
+          $ref: '#/components/schemas/ExposureValue'
+        frPerformance:
+          $ref: '#/components/schemas/ExposureValue'
+        frSetback:
+          $ref: '#/components/schemas/ExposureValue'
+        frExterior:
+          $ref: '#/components/schemas/ExposureValue'
+        frResAppurtenant:
+          $ref: '#/components/schemas/ExposureValue'
+        frComAppurtenant:
+          $ref: '#/components/schemas/ExposureValue'
+        frDeckType:
+          $ref: '#/components/schemas/ExposureValue'
+        frHeatResistance:
+          $ref: '#/components/schemas/ExposureValue'
+        frAccessibilityCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireHazard:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSusceptibility:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireThreat:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireAreaDescription:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSurfaceFuelType:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSpecialConditions:
+          type: string
+        wildFireLocalHistory:
+          type: number
+          format: double
+        wildFireNearbyHistory:
+          type: number
+          format: double
+        wildFireAccessibility:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireMatch:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSlope:
+          type: integer
+          format: int32
+        wildFireSlopeFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireFuel:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireFuelFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireDistanceToVeg:
+          type: integer
+          format: int32
+        wildFireDistanceToVegFlag:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireDistanceToVegUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        wildFireSiteHazVer:
+          type: string
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        percentInGeography:
+          type: number
+          format: double
+        score1:
+          type: integer
+          format: int32
+        scoreOverall:
+          type: integer
+          format: int32
+        distanceToWuiIntermix:
+          type: integer
+          format: int32
+        distanceToWuiInterface:
+          type: integer
+          format: int32
+        stochasticBurnProb:
+          type: number
+          format: double
+        urbanConFlagRationScore:
+          type: integer
+          format: int32
+        distanceToCalFireVeryHigh:
+          type: number
+          format: double
+        distanceToCalFireHigh:
+          type: number
+          format: double
+        distanceToCalFireMedium:
+          type: number
+          format: double
+        yearLastHistFire250m:
+          type: integer
+          format: int32
+        histFireYearCount250m:
+          type: integer
+          format: int32
+        histFireYearCount2km:
+          type: integer
+          format: int32
+        histFireYearCount5km:
+          type: integer
+          format: int32
+        histFireYearCount10km:
+          type: integer
+          format: int32
+        histFireYearCount20km:
+          type: integer
+          format: int32
+        firestationsName1:
+          type: string
+        firestationsLatitude1:
+          type: number
+          format: double
+        firestationsLongitude1:
+          type: number
+          format: double
+        firestationsDistance1:
+          type: number
+          format: double
+        firestationsStreetAddress1:
+          type: string
+        firestationsCityName1:
+          type: string
+        firestationsPostalCode1:
+          type: string
+        firestationsAdmin2name1:
+          type: string
+        firestationsAdmin1code1:
+          type: string
+        firestationsLevel1:
+          type: string
+        firestationsEms1:
+          type: string
+        firestationsFirestationType1:
+          type: string
+        firestationsName2:
+          type: string
+        firestationsLatitude2:
+          type: number
+          format: double
+        firestationsLongitude2:
+          type: number
+          format: double
+        firestationsDistance2:
+          type: number
+          format: double
+        firestationsStreetAddress2:
+          type: string
+        firestationsCityName2:
+          type: string
+        firestationsPostalCode2:
+          type: string
+        firestationsAdmin2name2:
+          type: string
+        firestationsAdmin1code2:
+          type: string
+        firestationsLevel2:
+          type: string
+        firestationsEms2:
+          type: string
+        firestationsFireStationType2:
+          type: string
+        firestationsName3:
+          type: string
+        firestationsLatitude3:
+          type: number
+          format: double
+        firestationsLongitude3:
+          type: number
+          format: double
+        fireStationsDistance3:
+          type: number
+          format: double
+        fireStationsStreetaddress3:
+          type: string
+        fireStationsCityname3:
+          type: string
+        fireStationsPostalcode3:
+          type: string
+        fireStationsAdmin2name3:
+          type: string
+        fireStationsAdmin1code3:
+          type: string
+        fireStationsLevel3:
+          type: string
+        fireStationsEms3:
+          type: string
+        fireStationsFireStationType3:
+          type: string
+        fireStationsName4:
+          type: string
+        fireStationsLatitude4:
+          type: number
+          format: double
+        fireStationsLongitude4:
+          type: number
+          format: double
+        fireStationsDistance4:
+          type: number
+          format: double
+        fireStationsStreetAddress4:
+          type: string
+        fireStationsCityName4:
+          type: string
+        fireStationsPostalCode4:
+          type: string
+        fireStationsAdmin2name4:
+          type: string
+        fireStationsAdmin1code4:
+          type: string
+        fireStationsLevel4:
+          type: string
+        fireStationsEms4:
+          type: string
+        fireStationsFireStationType4:
+          type: string
+        fireStationsName5:
+          type: string
+        fireStationsLatitude5:
+          type: number
+          format: double
+        fireStationsLongitude5:
+          type: number
+          format: double
+        fireStationsDistance5:
+          type: number
+          format: double
+        fireStationsStreetAddress5:
+          type: string
+        fireStationsCityName5:
+          type: string
+        fireStationsPostalcode5:
+          type: string
+        fireStationsAdmin2name5:
+          type: string
+        fireStationsAdmin1code5:
+          type: string
+        fireStationsLevel5:
+          type: string
+        fireStationsEms5:
+          type: string
+        fireStationsFireStationType5:
+          type: string
+        isValid:
+          type: boolean
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    Meta:
+      type: object
+      properties:
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        count:
+          type: integer
+          format: int32
+    ReinsuranceCession:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - POL
+          - LOC
+        type:
+          type: string
+          enum:
+          - None
+          - Facultative
+          - Treaty
+        facReinsurer:
+          $ref: '#/components/schemas/FacReinsurer'
+        treaty:
+          $ref: '#/components/schemas/Treaty'
+        layerNumber:
+          type: integer
+          format: int32
+        layerAmount:
+          type: number
+          format: double
+        excessAmount:
+          type: number
+          format: double
+        percentReinsurance:
+          type: number
+          format: double
+        maolAmount:
+          type: number
+          format: double
+        priority:
+          type: integer
+          format: int32
+        isValid:
+          type: boolean
+    ErrorMessage:
+      type: object
+      properties:
         code:
           type: string
-        name:
+        message:
+          type: string
+        logId:
           type: string
     LocationFlDetail:
       type: object
@@ -3242,1054 +3906,6 @@ components:
         fl1000YRInlandDepthUndef:
           type: integer
           format: int32
-    BatchRequest:
-      type: object
-      properties:
-        method:
-          type: string
-        path:
-          type: string
-        body:
-          type: string
-    Address:
-      type: object
-      properties:
-        addressId:
-          description: ID for address.
-          type: integer
-          format: int32
-        area:
-          $ref: '#/components/schemas/ExposureValue'
-        buildingId:
-          description: ID for building.
-          type: string
-        buildingName:
-          description: Name of building.
-          type: string
-        addressType:
-          $ref: '#/components/schemas/ExposureValue'
-        country:
-          $ref: '#/components/schemas/ExposureValue'
-        countryScheme:
-          description: Standard for user-supplied country code, e.g. `ISO2A`
-          type: string
-        countryGeoId:
-          type: integer
-          format: int32
-        countryRmsCode:
-          description: Internal RMS code for country.
-          type: string
-        latitude:
-          description: Latitude coordinates.
-          type: number
-          format: double
-        longitude:
-          description: Longitude coordinates.
-          type: number
-          format: double
-        addressText:
-          description: Supplemental text captured for address.
-          type: string
-        streetAddress:
-          description: Address containing number, street name, street type, etc.
-          type: string
-        cityCode:
-          description: Code for city/town.
-          type: string
-        cityName:
-          description: Name of city/town.
-          type: string
-        cityGeoId:
-          description: Globally unique ID of city/town.
-          type: integer
-          format: int64
-        postalCode:
-          description: Postal code.
-          type: string
-        postalGeoId:
-          description: Globally unique ID for postal code.
-          type: integer
-          format: int64
-        block:
-          description: ID of block.
-          type: string
-        blockGroup:
-          description: ID of block group.
-          type: string
-        locationCode:
-          description: Census track number / Sonpro / Sector / Short post code.
-          type: string
-        locationCodeGeoId:
-          type: integer
-          format: int64
-        parcelNumber:
-          description: ID of parcel.
-          type: string
-        subLocality:
-          description: Name of sub-locality (neighborhood).
-          type: string
-        geoResolutionConfidence:
-          description: Geocode confidence percentage.
-          type: number
-          format: double
-        geoAccuracyBuffer:
-          description: Geocode accuracy buffer.
-          type: number
-          format: double
-        geoProductVersion:
-          type: string
-        geoLocationCode:
-          description: Accuracy of assigned geocode for US high resolution geocoding.
-          type: string
-        geoMatchCode:
-          description: 'Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
-
-            '
-          type: string
-        geoDataSourceId:
-          description: Geocode data source ID.
-          type: integer
-          format: int32
-        geoResolutionCode:
-          $ref: '#/components/schemas/ExposureValue'
-        geoDataSourceVersionId:
-          type: integer
-          format: int32
-        geoDateTime:
-          type: string
-        createDateTime:
-          description: Date and time address record was created.
-          type: string
-        updateDateTime:
-          description: Date and time address record was updated.
-          type: string
-        admin1Code:
-          description: 'Code for administrative level 1. Admin1 represents large geographic divisions, such as states or provinces.
-
-            '
-          type: string
-        admin1GeoId:
-          description: 'Globally unique RMS ID for administrative level 1.
-
-            '
-          type: integer
-          format: int64
-        admin1Name:
-          description: 'Name of administrative level 1.
-
-            '
-          type: string
-        admin2Code:
-          description: 'Code for administrative level 2. Admin2 represents smaller geographic divisions, such as counties.
-
-            '
-          type: string
-        admin2GeoId:
-          description: 'Globally unique RMS ID for administrative level 2.
-
-            '
-          type: integer
-          format: int64
-        admin2Name:
-          description: 'Name of administrative level 2.
-
-            '
-          type: string
-        admin3Code:
-          description: 'Code for administrative level 3. Admin3 represents smaller geographic divisions, such as districts.
-
-            '
-          type: string
-        admin3GeoId:
-          description: 'Globally unique RMS ID for administrative level 3.
-
-            '
-          type: integer
-          format: int64
-        admin3Name:
-          description: 'Name of administrative level 3.
-
-            '
-          type: string
-        admin4Code:
-          description: 'Code for administrative level 4.
-
-            '
-          type: string
-        admin4GeoId:
-          description: 'Globally unique RMS ID for administrative level 4.
-
-            '
-          type: integer
-          format: int64
-        admin4Name:
-          type: string
-          description: 'Name of administrative level 4.
-
-            '
-        admin5Code:
-          description: 'Code for administrative level 5.
-
-            '
-          type: string
-        admin5GeoId:
-          description: 'Globally unique RMS ID for administrative level 5.
-
-            '
-          type: integer
-          format: int64
-        admin5Name:
-          description: Name of administrative level 5.
-          type: string
-        zone1GeoId:
-          description: Zone level 1 GeoID.
-          type: integer
-          format: int64
-        zone2GeoId:
-          description: Zone level 2 GeoID.
-          type: integer
-          format: int64
-        zone3GeoId:
-          description: Zone level 3 GeoID.
-          type: integer
-          format: int64
-        zone4GeoId:
-          description: Zone level 4 GeoID.
-          type: integer
-          format: int64
-        zone5GeoId:
-          description: Zone level 5 GeoID.
-          type: integer
-          format: int64
-        zone1:
-          description: 'CRESTA zone ID
-
-            '
-          type: string
-        zone2:
-          description: 'For finer zone definitions.
-
-            '
-          type: string
-        zone3:
-          description: 'For further finer zone definitions.
-
-            '
-          type: string
-        zone3Name:
-          type: string
-        zone4Name:
-          type: string
-        zone5Name:
-          type: string
-        zone3Code:
-          type: string
-        zone4Code:
-          type: string
-        zone5Code:
-          type: string
-        ugid:
-          description: Unique global identifier.
-          type: string
-    Property:
-      type: object
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        locationId:
-          type: integer
-          format: int32
-        addressId:
-          type: integer
-          format: int32
-        locationNumber:
-          type: string
-        locationName:
-          type: string
-        userId1:
-          type: string
-        userId2:
-          type: string
-        userText1:
-          type: string
-        userText2:
-          type: string
-        expireDate:
-          type: string
-        inceptDate:
-          type: string
-        yearBuilt:
-          type: string
-        createDate:
-          type: string
-        updateDate:
-          type: string
-        buildingClassScheme:
-          $ref: '#/components/schemas/ExposureValue'
-        buildingClass:
-          $ref: '#/components/schemas/ExposureValue'
-        occupancyTypeScheme:
-          $ref: '#/components/schemas/ExposureValue'
-        occupancyType:
-          $ref: '#/components/schemas/ExposureValue'
-        primaryLocId:
-          type: integer
-          format: int32
-        siteName:
-          $ref: '#/components/schemas/ExposureValue'
-        buildings:
-          type: integer
-          format: int32
-        stories:
-          type: integer
-          format: int32
-        floorOccupancy:
-          type: string
-        floorArea:
-          type: number
-          format: double
-        bldgHeight:
-          type: number
-          format: double
-        heightUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        slope:
-          type: number
-          format: double
-        otherZone:
-          type: string
-        huZone:
-          $ref: '#/components/schemas/ExposureValue'
-        areaUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        bldgValuation:
-          type: number
-          format: double
-        valuationDiffAmt:
-          type: number
-          format: double
-        valuationDiffPercent:
-          type: number
-          format: double
-        floodDefenseElevation:
-          type: number
-          format: double
-        floodDefenseElevationUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        rentalPropertyIdentifier:
-          $ref: '#/components/schemas/ExposureValue'
-        mfdSubcategory:
-          $ref: '#/components/schemas/ExposureValue'
-        dwellTime:
-          type: integer
-          format: int32
-        userGroundElev:
-          type: number
-          format: double
-        userBfe:
-          type: number
-          format: double
-        floodDefHtAboveGrnd:
-          type: number
-          format: double
-        contentLossTrigger:
-          $ref: '#/components/schemas/ExposureValue'
-        isPrimaryBldg:
-          type: boolean
-        useContentValue:
-          $ref: '#/components/schemas/ExposureValue'
-        nship:
-          type: integer
-          format: int32
-        isValid:
-          type: boolean
-      required:
-      - locationNumber
-    LossOccurrence:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - treatyId
-    PolicyCondition:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        isPredefined:
-          type: boolean
-        limit:
-          type: number
-          format: double
-        deductible:
-          type: number
-          format: double
-        deductibleType:
-          $ref: '#/components/schemas/ExposureValue'
-        conditionType:
-          $ref: '#/components/schemas/ExposureValue'
-        parentCondition:
-          $ref: '#/components/schemas/ExposureValue'
-        policyNumber:
-          type: string
-        policyConditionCriterias:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyConditionCriteria'
-        percentOfLossDeductibleAmount:
-          type: number
-          format: double
-        isFranchiseDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-    LocationBuildingAttribute:
-      type: object
-      properties:
-        buildingId:
-          type: string
-        buildingNumber:
-          type: string
-        streetPrefix:
-          type: string
-        streetName:
-          type: string
-        streetType:
-          type: string
-        streetSuffix:
-          type: string
-        cityName:
-          type: string
-        stateCode:
-          type: string
-        country:
-          type: string
-        latitude:
-          description: Latitude coordinates.
-          type: number
-          format: double
-        longitude:
-          description: Longitude coordinates.
-          type: number
-          format: double
-        buildingClassScheme:
-          type: string
-          enum:
-          - RMS
-          - ATC
-          - ISO
-          - FIRE
-          - RMS_IND
-          - JPBLDG
-          - EURO
-          - RMS_BR
-          - RMS_OP
-          - USER
-        occupancyTypeScheme:
-          type: string
-          enum:
-          - ATC
-          - SIC
-          - NAICS
-          - NCCI
-          - ISO
-          - IBC
-          - RMS_IND
-          - JPOCC
-          - EURO
-          - RMS_BR
-          - RMS_OP
-          - WOCC
-        derivedStories:
-          type: integer
-          format: int32
-        areaUnit:
-          type: string
-          enum:
-          - SqFeet
-          - SqMeter
-        yearRange:
-          type: integer
-          format: int32
-        exterior:
-          type: string
-        fireproof:
-          type: string
-        esdbBuildingName:
-          type: string
-        esdbBuildingClass:
-          $ref: '#/components/schemas/ExposureValue'
-        esdbOccupancyType:
-          $ref: '#/components/schemas/ExposureValue'
-        esdbBldgHeight:
-          type: number
-          format: double
-        esdbStories:
-          type: integer
-          format: int32
-        esdbSquareFootage:
-          type: number
-          format: double
-        esdbYearBuilt:
-          type: string
-    LocationCondition:
-      type: object
-      properties:
-        locationId:
-          type: integer
-          format: int32
-        conditionId:
-          type: integer
-          format: int32
-        isIncluded:
-          type: string
-          enum:
-          - NotIncluded
-          - Included
-          - UserIncluded
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        method:
-          type: string
-      required:
-      - href
-      - method
-      - rel
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    LocationTrDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        siteLimit:
-          type: number
-          format: double
-        siteDeduct:
-          type: number
-          format: double
-        combinedLimit:
-          type: number
-          format: double
-        combinedDeduct:
-          type: number
-          format: double
-        yearUpgrade:
-          type: string
-        startDate:
-          type: string
-        completionDate:
-          type: string
-        percentComplete:
-          type: number
-          format: double
-        percentageSiteLossDeductibleAmount:
-          type: number
-          format: double
-        percentageCombinedLossDeductibleAmount:
-          type: number
-          format: double
-        isFranchiseSiteDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-        isFranchiseCombinedDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-        isValid:
-          type: boolean
-        trPackage:
-          $ref: '#/components/schemas/ExposureValue'
-        trProtect:
-          $ref: '#/components/schemas/ExposureValue'
-        trSalvage:
-          $ref: '#/components/schemas/ExposureValue'
-        trSpecieStorage:
-          $ref: '#/components/schemas/ExposureValue'
-        operationType:
-          type: string
-          readOnly: true
-          enum:
-          - INSERT
-          - UPDATE
-          - DELETE
-        score1:
-          type: integer
-          format: int32
-        scoreOverall:
-          type: integer
-          format: int32
-        targetsName1:
-          type: string
-        targetsId1:
-          type: integer
-          format: int32
-        targetsScore1:
-          type: number
-          format: double
-        targetsDistance1:
-          type: number
-          format: double
-        targetsCategory1:
-          type: number
-          format: double
-        targetsCityName1:
-          type: string
-        targetsAdmin1code1:
-          type: string
-        targetsName2:
-          type: string
-        targetsId2:
-          type: integer
-          format: int32
-        targetsScore2:
-          type: number
-          format: double
-        targetsDistance2:
-          type: number
-          format: double
-        targetsCategory2:
-          type: number
-          format: double
-        targetsCityName2:
-          type: string
-        targetsAdmin1code2:
-          type: string
-        targetsName3:
-          type: string
-        targetsId3:
-          type: integer
-          format: int32
-        targetsScore3:
-          type: number
-          format: double
-        targetsDistance3:
-          type: number
-          format: double
-        targetsCategory3:
-          type: number
-          format: double
-        targetsCityName3:
-          type: string
-        targetsAdmin1code3:
-          type: string
-        targetsName4:
-          type: string
-        targetsId4:
-          type: integer
-          format: int32
-        targetsScore4:
-          type: number
-          format: double
-        targetsDistance4:
-          type: number
-          format: double
-        targetsCategory4:
-          type: number
-          format: double
-        targetsCityName4:
-          type: string
-        targetsAdmin1code4:
-          type: string
-        targetsName5:
-          type: string
-        targetsId5:
-          type: integer
-          format: int32
-        targetsScore5:
-          type: number
-          format: double
-        targetsDistance5:
-          type: number
-          format: double
-        targetsCategory5:
-          type: number
-          format: double
-        targetsCityName5:
-          type: string
-        targetsAdmin1code5:
-          type: string
-        dominantSubperilCS:
-          type: integer
-          format: int64
-        percentInGeographyCS:
-          type: number
-          format: double
-        score1CS:
-          type: integer
-          format: int32
-        score2CS:
-          type: integer
-          format: int32
-        score3CS:
-          type: integer
-          format: int32
-        scoreOverallCS:
-          type: integer
-          format: int32
-        dominantSubperilWT:
-          type: integer
-          format: int64
-        percentInGeographyWT:
-          type: number
-          format: double
-        score1WT:
-          type: integer
-          format: int32
-        score2WT:
-          type: integer
-          format: int32
-        score3WT:
-          type: integer
-          format: int32
-        scoreOverallWT:
-          type: integer
-          format: int32
-    MetaLinks:
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-        meta:
-          $ref: '#/components/schemas/Meta'
-      required:
-      - links
-      - meta
-    LocationToDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        siteLimit:
-          type: number
-          format: double
-        siteDeduct:
-          type: number
-          format: double
-        combinedLimit:
-          type: number
-          format: double
-        combinedDeduct:
-          type: number
-          format: double
-        yearUpgrade:
-          type: string
-        percentComplete:
-          type: number
-          format: double
-        fireClass:
-          type: string
-        rmsClass:
-          type: string
-        userClass:
-          type: string
-        atcOccupancy:
-          type: string
-        isoOccupancy:
-          type: string
-        userOccupancy:
-          type: string
-        percentageSiteLossDeductibleAmount:
-          type: number
-          format: double
-        percentageCombinedLossDeductibleAmount:
-          type: number
-          format: double
-        isFranchiseSiteDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-        isFranchiseCombinedDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-        isValid:
-          type: boolean
-        architecture:
-          $ref: '#/components/schemas/ExposureValue'
-        cladRate:
-          $ref: '#/components/schemas/ExposureValue'
-        cladType:
-          $ref: '#/components/schemas/ExposureValue'
-        constructQuality:
-          $ref: '#/components/schemas/ExposureValue'
-        designCode:
-          $ref: '#/components/schemas/ExposureValue'
-        doorOpenings:
-          $ref: '#/components/schemas/ExposureValue'
-        externalOrnament:
-          $ref: '#/components/schemas/ExposureValue'
-        floodVulnerability:
-          $ref: '#/components/schemas/ExposureValue'
-        foundation:
-          $ref: '#/components/schemas/ExposureValue'
-        maintenance:
-          $ref: '#/components/schemas/ExposureValue'
-        mechElecSide:
-          $ref: '#/components/schemas/ExposureValue'
-        otherOpenings:
-          $ref: '#/components/schemas/ExposureValue'
-        roofAge:
-          $ref: '#/components/schemas/ExposureValue'
-        roofAnchor:
-          $ref: '#/components/schemas/ExposureValue'
-        roofEquipment:
-          $ref: '#/components/schemas/ExposureValue'
-        roofFrame:
-          $ref: '#/components/schemas/ExposureValue'
-        roofGeometry:
-          $ref: '#/components/schemas/ExposureValue'
-        roofParpet:
-          $ref: '#/components/schemas/ExposureValue'
-        roofSystem:
-          $ref: '#/components/schemas/ExposureValue'
-        windMissile:
-          $ref: '#/components/schemas/ExposureValue'
-        windVulnerability:
-          $ref: '#/components/schemas/ExposureValue'
-        basement:
-          $ref: '#/components/schemas/ExposureValue'
-        mechElecGround:
-          $ref: '#/components/schemas/ExposureValue'
-        floodMissiles:
-          $ref: '#/components/schemas/ExposureValue'
-        floodProtection:
-          $ref: '#/components/schemas/ExposureValue'
-        iceDamProtection:
-          $ref: '#/components/schemas/ExposureValue'
-        plumbingInsulation:
-          $ref: '#/components/schemas/ExposureValue'
-        atticInsulation:
-          $ref: '#/components/schemas/ExposureValue'
-        roofVentilation:
-          $ref: '#/components/schemas/ExposureValue'
-        snowGuards:
-          $ref: '#/components/schemas/ExposureValue'
-        treeDensity:
-          $ref: '#/components/schemas/ExposureValue'
-        garaging:
-          $ref: '#/components/schemas/ExposureValue'
-        toPackage:
-          $ref: '#/components/schemas/ExposureValue'
-        toProtect:
-          $ref: '#/components/schemas/ExposureValue'
-        toSalvage:
-          $ref: '#/components/schemas/ExposureValue'
-        toSpecieStorage:
-          $ref: '#/components/schemas/ExposureValue'
-        operationType:
-          type: string
-          readOnly: true
-          enum:
-          - INSERT
-          - UPDATE
-          - DELETE
-        dominantSubperilCS:
-          type: integer
-          format: int64
-        percentInGeographyCS:
-          type: number
-          format: double
-        score1CS:
-          type: integer
-          format: int32
-        score2CS:
-          type: integer
-          format: int32
-        score3CS:
-          type: integer
-          format: int32
-        scoreOverallCS:
-          type: integer
-          format: int32
-        dominantSubperilWT:
-          type: integer
-          format: int64
-        percentInGeographyWT:
-          type: number
-          format: double
-        score1WT:
-          type: integer
-          format: int32
-        score2WT:
-          type: integer
-          format: int32
-        score3WT:
-          type: integer
-          format: int32
-        scoreOverallWT:
-          type: integer
-          format: int32
-    Treaty:
-      description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
-
-        '
-      type: object
-      properties:
-        treatyId:
-          type: integer
-          format: int32
-        treatyNumber:
-          type: string
-          maxLength: 20
-          minLength: 0
-        treatyName:
-          type: string
-          maxLength: 40
-          minLength: 0
-        cedant:
-          $ref: '#/components/schemas/Cedant'
-        producer:
-          $ref: '#/components/schemas/Producer'
-        treatyType:
-          description: The treaty type.
-          $ref: '#/components/schemas/ExposureValue'
-        currency:
-          description: Indicates treaty currency. All monetary fields for a single treaty are considered to be in the same currency. However, treaties can be in a different currency than the exposures to which they are being attached. During analysis, Risk Modeler converts all currencies to the analysis currency..
-          $ref: '#/components/schemas/ExposureValue'
-        attachBasis:
-          $ref: '#/components/schemas/ExposureValue'
-        attachLevel:
-          $ref: '#/components/schemas/ExposureValue'
-        premium:
-          type: number
-          format: double
-        occurLimit:
-          description: Maximum amount that a treaty pays out for all locations for any event.
-          type: number
-          format: double
-        attachPt:
-          description: Value at which the treaty takes effect.
-          type: number
-          format: double
-        riskLimit:
-          type: number
-          format: double
-        retentAmt:
-          type: number
-          format: double
-        pcntPlaced:
-          type: number
-          format: double
-        effectDate:
-          type: string
-        expireDate:
-          type: string
-        pcntRetent:
-          description: Percentage of the reinsurer's share of the treaty losses that are not covered by retrocessions. Determines the losses for the reinsurance net loss financial perspective and the net premium that a reinsurer receives for a treaty. Calculated as reinsurance gross loss multiplied by the percentage retention by treaty.
-          type: number
-          format: double
-        pcntRiShare:
-          type: number
-          format: double
-        pcntCovered:
-          description: Percentage of loss greater than the attachment point covered by a treaty. Not applicable to Surplus Share treaties.
-          type: number
-          format: double
-        priority:
-          type: integer
-          format: int32
-        numOfReinst:
-          type: integer
-          format: int32
-        reinstCharge:
-          type: number
-          format: double
-        maolAmount:
-          type: number
-          format: double
-        isValid:
-          type: boolean
-        userId1:
-          type: string
-        userId2:
-          type: string
-        lobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/LineOfBusiness'
-        aggregateDeductible:
-          type: number
-          format: double
-        aggregateLimit:
-          type: number
-          format: double
-        lossOccurrences:
-          type: array
-          items:
-            $ref: '#/components/schemas/LossOccurrence'
-      required:
-      - attachLevel
-      - cedant
-      - treatyNumber
-      - treatyType
-    LocationSearchItem:
-      type: object
-      properties:
-        propertyReference:
-          type: string
-        location:
-          $ref: '#/components/schemas/Location'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    LocationBiDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        redundancy:
-          $ref: '#/components/schemas/ExposureValue'
-        siWaitingPeriod:
-          type: number
-          format: double
-        siLimit:
-          type: number
-          format: double
-        preparedness:
-          $ref: '#/components/schemas/ExposureValue'
-        serviceInterruption:
-          $ref: '#/components/schemas/ExposureValue'
-        isValid:
-          type: boolean
     LocationWsDetail:
       type: object
       properties:
@@ -4609,79 +4225,85 @@ components:
         ws10000YrRpSurgeDef:
           type: number
           format: double
-    BuildingAttribute:
+    PolicyConditionCriteria:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        yearBuilt:
+        logic:
           type: string
+        openPar:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        closePar:
+          type: string
+    LocationSearchItem:
+      type: object
+      properties:
+        propertyReference:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+    LocationCondition:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        conditionId:
+          type: integer
+          format: int32
+        isIncluded:
+          type: string
+          enum:
+          - NotIncluded
+          - Included
+          - UserIncluded
+    BatchRequest:
+      type: object
+      properties:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
+    LocationBiDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        redundancy:
+          $ref: '#/components/schemas/ExposureValue'
+        siWaitingPeriod:
+          type: number
+          format: double
+        siLimit:
+          type: number
+          format: double
+        preparedness:
+          $ref: '#/components/schemas/ExposureValue'
+        serviceInterruption:
+          $ref: '#/components/schemas/ExposureValue'
         isValid:
           type: boolean
-        roofDeckType:
-          $ref: '#/components/schemas/ExposureValue'
-        roofDeckResistanceField:
-          type: number
-          format: double
-        windowGlassdoorProtectionType:
-          $ref: '#/components/schemas/ExposureValue'
-        windowGlassdoorThickness:
-          $ref: '#/components/schemas/ExposureValue'
-        windowGlassdoorDoublepane:
-          $ref: '#/components/schemas/ExposureValue'
-        windowGlassdoorProtectionAdequacy:
-          $ref: '#/components/schemas/ExposureValue'
-        roofCoverType:
-          $ref: '#/components/schemas/ExposureValue'
-        rooftopEquipment:
-          $ref: '#/components/schemas/ExposureValue'
-        skylightAreaPercent:
-          type: number
-          format: double
-        dockDoorAreaPercent:
-          type: number
-          format: double
-        dockDoorPressureResistance:
-          type: number
-          format: double
-        skylightImpactResistance:
-          $ref: '#/components/schemas/ExposureValue'
-        roofCoverResistanceCorner:
-          type: number
-          format: double
-        roofSlope:
-          $ref: '#/components/schemas/ExposureValue'
-        flashingPulloutResistance:
-          type: number
-          format: double
-        missileExposure:
-          $ref: '#/components/schemas/ExposureValue'
-        roofCoverResistancePerimeter:
-          type: number
-          format: double
-        roofDeckResistancePerimeter:
-          type: number
-          format: double
-        claddingPressureResistance:
-          type: number
-          format: double
-        windowGlassdoorGlassType:
-          $ref: '#/components/schemas/ExposureValue'
-        claddingType:
-          $ref: '#/components/schemas/ExposureValue'
-        windowGlassdoorAreaPercent:
-          type: number
-          format: double
-        roofDeckResistanceCorner:
-          type: number
-          format: double
-        roofCoverResistanceField:
-          type: number
-          format: double
-        roofArea:
-          type: number
-          format: double
+    LocationSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationSearchItem'
     Cedant:
       description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
@@ -4697,383 +4319,21 @@ components:
           minLength: 0
       required:
       - name
-    LocationFrDetail:
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
       type: object
       properties:
         id:
-          type: integer
-          format: int32
-        siteLimit:
-          type: number
-          format: double
-        siteDeduct:
-          type: number
-          format: double
-        combinedLimit:
-          type: number
-          format: double
-        combinedDeduct:
-          type: number
-          format: double
-        yearUpgrade:
           type: string
-        startDate:
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
           type: string
-        completionDate:
-          type: string
-        percentComplete:
-          type: number
-          format: double
-        fireDepartmentRatingModifier:
-          $ref: '#/components/schemas/ExposureValue'
-        fireDepartmentRating:
-          $ref: '#/components/schemas/ExposureValue'
-        sprinklerSystem:
-          $ref: '#/components/schemas/ExposureValue'
-        remoteAlarm:
-          $ref: '#/components/schemas/ExposureValue'
-        frPackage:
-          $ref: '#/components/schemas/ExposureValue'
-        frProtect:
-          $ref: '#/components/schemas/ExposureValue'
-        frSalvage:
-          $ref: '#/components/schemas/ExposureValue'
-        frSpecieStorage:
-          $ref: '#/components/schemas/ExposureValue'
-        frRoofCovering:
-          $ref: '#/components/schemas/ExposureValue'
-        frRoofGeometry:
-          $ref: '#/components/schemas/ExposureValue'
-        frRoofAge:
-          $ref: '#/components/schemas/ExposureValue'
-        frRoofVent:
-          $ref: '#/components/schemas/ExposureValue'
-        frEmberAccumulator:
-          $ref: '#/components/schemas/ExposureValue'
-        frSuppression:
-          $ref: '#/components/schemas/ExposureValue'
-        frPerformance:
-          $ref: '#/components/schemas/ExposureValue'
-        frSetback:
-          $ref: '#/components/schemas/ExposureValue'
-        frExterior:
-          $ref: '#/components/schemas/ExposureValue'
-        frResAppurtenant:
-          $ref: '#/components/schemas/ExposureValue'
-        frComAppurtenant:
-          $ref: '#/components/schemas/ExposureValue'
-        frDeckType:
-          $ref: '#/components/schemas/ExposureValue'
-        frHeatResistance:
-          $ref: '#/components/schemas/ExposureValue'
-        frAccessibilityCondition:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireHazard:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireSusceptibility:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireThreat:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireAreaDescription:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireSurfaceFuelType:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireSpecialConditions:
-          type: string
-        wildFireLocalHistory:
-          type: number
-          format: double
-        wildFireNearbyHistory:
-          type: number
-          format: double
-        wildFireAccessibility:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireMatch:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireSlope:
-          type: integer
-          format: int32
-        wildFireSlopeFlag:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireFuel:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireFuelFlag:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireDistanceToVeg:
-          type: integer
-          format: int32
-        wildFireDistanceToVegFlag:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireDistanceToVegUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        wildFireSiteHazVer:
-          type: string
-        percentageSiteLossDeductibleAmount:
-          type: number
-          format: double
-        percentageCombinedLossDeductibleAmount:
-          type: number
-          format: double
-        isFranchiseSiteDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-        isFranchiseCombinedDeductible:
-          $ref: '#/components/schemas/ExposureValue'
-        operationType:
-          type: string
-          readOnly: true
-          enum:
-          - INSERT
-          - UPDATE
-          - DELETE
-        percentInGeography:
-          type: number
-          format: double
-        score1:
-          type: integer
-          format: int32
-        scoreOverall:
-          type: integer
-          format: int32
-        distanceToWuiIntermix:
-          type: integer
-          format: int32
-        distanceToWuiInterface:
-          type: integer
-          format: int32
-        stochasticBurnProb:
-          type: number
-          format: double
-        urbanConFlagRationScore:
-          type: integer
-          format: int32
-        distanceToCalFireVeryHigh:
-          type: number
-          format: double
-        distanceToCalFireHigh:
-          type: number
-          format: double
-        distanceToCalFireMedium:
-          type: number
-          format: double
-        yearLastHistFire250m:
-          type: integer
-          format: int32
-        histFireYearCount250m:
-          type: integer
-          format: int32
-        histFireYearCount2km:
-          type: integer
-          format: int32
-        histFireYearCount5km:
-          type: integer
-          format: int32
-        histFireYearCount10km:
-          type: integer
-          format: int32
-        histFireYearCount20km:
-          type: integer
-          format: int32
-        firestationsName1:
-          type: string
-        firestationsLatitude1:
-          type: number
-          format: double
-        firestationsLongitude1:
-          type: number
-          format: double
-        firestationsDistance1:
-          type: number
-          format: double
-        firestationsStreetAddress1:
-          type: string
-        firestationsCityName1:
-          type: string
-        firestationsPostalCode1:
-          type: string
-        firestationsAdmin2name1:
-          type: string
-        firestationsAdmin1code1:
-          type: string
-        firestationsLevel1:
-          type: string
-        firestationsEms1:
-          type: string
-        firestationsFirestationType1:
-          type: string
-        firestationsName2:
-          type: string
-        firestationsLatitude2:
-          type: number
-          format: double
-        firestationsLongitude2:
-          type: number
-          format: double
-        firestationsDistance2:
-          type: number
-          format: double
-        firestationsStreetAddress2:
-          type: string
-        firestationsCityName2:
-          type: string
-        firestationsPostalCode2:
-          type: string
-        firestationsAdmin2name2:
-          type: string
-        firestationsAdmin1code2:
-          type: string
-        firestationsLevel2:
-          type: string
-        firestationsEms2:
-          type: string
-        firestationsFireStationType2:
-          type: string
-        firestationsName3:
-          type: string
-        firestationsLatitude3:
-          type: number
-          format: double
-        firestationsLongitude3:
-          type: number
-          format: double
-        fireStationsDistance3:
-          type: number
-          format: double
-        fireStationsStreetaddress3:
-          type: string
-        fireStationsCityname3:
-          type: string
-        fireStationsPostalcode3:
-          type: string
-        fireStationsAdmin2name3:
-          type: string
-        fireStationsAdmin1code3:
-          type: string
-        fireStationsLevel3:
-          type: string
-        fireStationsEms3:
-          type: string
-        fireStationsFireStationType3:
-          type: string
-        fireStationsName4:
-          type: string
-        fireStationsLatitude4:
-          type: number
-          format: double
-        fireStationsLongitude4:
-          type: number
-          format: double
-        fireStationsDistance4:
-          type: number
-          format: double
-        fireStationsStreetAddress4:
-          type: string
-        fireStationsCityName4:
-          type: string
-        fireStationsPostalCode4:
-          type: string
-        fireStationsAdmin2name4:
-          type: string
-        fireStationsAdmin1code4:
-          type: string
-        fireStationsLevel4:
-          type: string
-        fireStationsEms4:
-          type: string
-        fireStationsFireStationType4:
-          type: string
-        fireStationsName5:
-          type: string
-        fireStationsLatitude5:
-          type: number
-          format: double
-        fireStationsLongitude5:
-          type: number
-          format: double
-        fireStationsDistance5:
-          type: number
-          format: double
-        fireStationsStreetAddress5:
-          type: string
-        fireStationsCityName5:
-          type: string
-        fireStationsPostalcode5:
-          type: string
-        fireStationsAdmin2name5:
-          type: string
-        fireStationsAdmin1code5:
-          type: string
-        fireStationsLevel5:
-          type: string
-        fireStationsEms5:
-          type: string
-        fireStationsFireStationType5:
-          type: string
-        isValid:
-          type: boolean
-    LocationSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationSearchItem'
-    Location:
-      type: object
-      properties:
-        esdbBuildingAttribute:
-          $ref: '#/components/schemas/LocationBuildingAttribute'
-        property:
-          $ref: '#/components/schemas/Property'
-        address:
-          $ref: '#/components/schemas/Address'
-        biDetail:
-          $ref: '#/components/schemas/LocationBiDetail'
-        eqDetail:
-          $ref: '#/components/schemas/LocationEqDetail'
-        wsDetail:
-          $ref: '#/components/schemas/LocationWsDetail'
-        toDetail:
-          $ref: '#/components/schemas/LocationToDetail'
-        flDetail:
-          $ref: '#/components/schemas/LocationFlDetail'
-        frDetail:
-          $ref: '#/components/schemas/LocationFrDetail'
-        trDetail:
-          $ref: '#/components/schemas/LocationTrDetail'
-        buildingAttribute:
-          $ref: '#/components/schemas/BuildingAttribute'
-        coverages:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationCoverage'
-        reinsuranceCessions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReinsuranceCession'
-        wcDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationWcDetail'
-        currency:
-          $ref: '#/components/schemas/ExposureValue'
-        tiv:
-          type: number
-          format: double
-        riskAssessorCurves:
-          type: string
-        locationConditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationCondition'
-        maxCvgBldgValuation:
-          type: number
-          format: double
+          maxLength: 40
+          minLength: 0
       required:
-      - address
-      - property
+      - name
     LocationEqDetail:
       type: object
       properties:
@@ -5583,20 +4843,65 @@ components:
           type: boolean
         eqslInsurance:
           $ref: '#/components/schemas/ExposureValue'
-    FacReinsurer:
+    LineOfBusiness:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          format: int32
         name:
           type: string
-    LocationCoverage:
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    LocationTrDetail:
       type: object
       properties:
-        limitExtension:
-          description: Indicates if limit extensions apply each coverage type.
+        id:
+          type: integer
+          format: int32
+        siteLimit:
           type: number
           format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        startDate:
+          type: string
+        completionDate:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        trPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        trProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        trSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        trSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
         operationType:
           type: string
           readOnly: true
@@ -5604,173 +4909,868 @@ components:
           - INSERT
           - UPDATE
           - DELETE
-        waitingPeriod:
-          description: The waiting period deductible (in days) to apply to business interruption coverage.
-          type: number
-          format: double
-        id:
+        score1:
           type: integer
           format: int32
-        label:
-          $ref: '#/components/schemas/ExposureValue'
-        eqslModifier:
-          description: The grade of contents covered in case of earthquake sprinkler leakage (EQSL).
+        scoreOverall:
           type: integer
           format: int32
-        lossType:
-          description: The loss type covered. One of `Building`, `Contents`, `BI`, or `CombinedCvg`.
+        targetsName1:
           type: string
-          enum:
-          - Building
-          - Contents
-          - BI
-          - CombinedCvg
-        percentSprinkler:
-          description: The percentage of buidling contents that are beneath a sprinkler and susceptible to water damage.
+        targetsId1:
+          type: integer
+          format: int32
+        targetsScore1:
           type: number
           format: double
-        value:
-          description: The full replacement value of covered buildings and contents and the value of one year of income for business interruption coverage.
+        targetsDistance1:
           type: number
           format: double
-        biPoi:
-          description: The business interruption period of indemnity in months.
+        targetsCategory1:
           type: number
           format: double
-        deductible:
-          description: The location coverage deductible.
-          type: number
-          format: double
-        coverageModifier:
-          $ref: '#/components/schemas/ExposureValue'
-        accumulation:
-          description: The accumulation coverage. One of `Building`, `Contents`, `BI`, or `Combined`.
+        targetsCityName1:
           type: string
-          enum:
-          - Building
-          - Contents
-          - Bi
-          - Combined
-        limit:
+        targetsAdmin1code1:
+          type: string
+        targetsName2:
+          type: string
+        targetsId2:
+          type: integer
+          format: int32
+        targetsScore2:
           type: number
           format: double
-        peril:
-          description: The perils covered.
-          $ref: '#/components/schemas/ExposureValue'
-        percentageLossDeductibleAmount:
-          description: The percent of loss deductible amount as a percentage. Deductible expressed as a percentage of loss for a given coverage or combination of coverages. As the loss increases, the deductible amount increases.
+        targetsDistance2:
           type: number
           format: double
-        isFranchiseDeductible:
-          description: Indicates if the deductible amount is franchise.
-          $ref: '#/components/schemas/ExposureValue'
-        isValid:
-          description: Indicates if location coverage is valid.
-          type: boolean
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
+        targetsCategory2:
+          type: number
+          format: double
+        targetsCityName2:
+          type: string
+        targetsAdmin1code2:
+          type: string
+        targetsName3:
+          type: string
+        targetsId3:
+          type: integer
+          format: int32
+        targetsScore3:
+          type: number
+          format: double
+        targetsDistance3:
+          type: number
+          format: double
+        targetsCategory3:
+          type: number
+          format: double
+        targetsCityName3:
+          type: string
+        targetsAdmin1code3:
+          type: string
+        targetsName4:
+          type: string
+        targetsId4:
+          type: integer
+          format: int32
+        targetsScore4:
+          type: number
+          format: double
+        targetsDistance4:
+          type: number
+          format: double
+        targetsCategory4:
+          type: number
+          format: double
+        targetsCityName4:
+          type: string
+        targetsAdmin1code4:
+          type: string
+        targetsName5:
+          type: string
+        targetsId5:
+          type: integer
+          format: int32
+        targetsScore5:
+          type: number
+          format: double
+        targetsDistance5:
+          type: number
+          format: double
+        targetsCategory5:
+          type: number
+          format: double
+        targetsCityName5:
+          type: string
+        targetsAdmin1code5:
+          type: string
+        dominantSubperilCS:
+          type: integer
+          format: int64
+        percentInGeographyCS:
+          type: number
+          format: double
+        score1CS:
+          type: integer
+          format: int32
+        score2CS:
+          type: integer
+          format: int32
+        score3CS:
+          type: integer
+          format: int32
+        scoreOverallCS:
+          type: integer
+          format: int32
+        dominantSubperilWT:
+          type: integer
+          format: int64
+        percentInGeographyWT:
+          type: number
+          format: double
+        score1WT:
+          type: integer
+          format: int32
+        score2WT:
+          type: integer
+          format: int32
+        score3WT:
+          type: integer
+          format: int32
+        scoreOverallWT:
+          type: integer
+          format: int32
+    Treaty:
+      description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
+
+        '
       type: object
       properties:
-        id:
+        treatyId:
+          type: integer
+          format: int32
+        treatyNumber:
           type: string
           maxLength: 20
           minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
+        treatyName:
           type: string
           maxLength: 40
           minLength: 0
-      required:
-      - name
-    LayerInfo:
-      type: object
-      properties:
-        name:
-          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
-          type: string
-        type:
-          description: Name of the job type. One of `geocode` or `hazard`.
-          type: string
-        engineType:
-          description: Name of engine.
-          type: string
-        version:
-          description: Version of the peril model.
-          type: string
-        layerOptions:
-          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
-
-            '
-          type: object
-          additionalProperties:
-            type: string
-      required:
-      - engineType
-      - name
-      - type
-      - version
-    Meta:
-      type: object
-      properties:
-        createdBy:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        updatedBy:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-        count:
-          type: integer
-          format: int32
-    ReinsuranceCession:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        exposureId:
-          type: integer
-          format: int32
-        exposureType:
-          type: string
-          enum:
-          - POL
-          - LOC
-        type:
-          type: string
-          enum:
-          - None
-          - Facultative
-          - Treaty
-        facReinsurer:
-          $ref: '#/components/schemas/FacReinsurer'
-        treaty:
-          $ref: '#/components/schemas/Treaty'
-        layerNumber:
-          type: integer
-          format: int32
-        layerAmount:
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        producer:
+          $ref: '#/components/schemas/Producer'
+        treatyType:
+          description: The treaty type.
+          $ref: '#/components/schemas/ExposureValue'
+        currency:
+          description: Indicates treaty currency. All monetary fields for a single treaty are considered to be in the same currency. However, treaties can be in a different currency than the exposures to which they are being attached. During analysis, Risk Modeler converts all currencies to the analysis currency..
+          $ref: '#/components/schemas/ExposureValue'
+        attachBasis:
+          $ref: '#/components/schemas/ExposureValue'
+        attachLevel:
+          $ref: '#/components/schemas/ExposureValue'
+        premium:
           type: number
           format: double
-        excessAmount:
+        occurLimit:
+          description: Maximum amount that a treaty pays out for all locations for any event.
           type: number
           format: double
-        percentReinsurance:
+        attachPt:
+          description: Value at which the treaty takes effect.
           type: number
           format: double
-        maolAmount:
+        riskLimit:
+          type: number
+          format: double
+        retentAmt:
+          type: number
+          format: double
+        pcntPlaced:
+          type: number
+          format: double
+        effectDate:
+          type: string
+        expireDate:
+          type: string
+        pcntRetent:
+          description: Percentage of the reinsurer's share of the treaty losses that are not covered by retrocessions. Determines the losses for the reinsurance net loss financial perspective and the net premium that a reinsurer receives for a treaty. Calculated as reinsurance gross loss multiplied by the percentage retention by treaty.
+          type: number
+          format: double
+        pcntRiShare:
+          type: number
+          format: double
+        pcntCovered:
+          description: Percentage of loss greater than the attachment point covered by a treaty. Not applicable to Surplus Share treaties.
           type: number
           format: double
         priority:
           type: integer
           format: int32
+        numOfReinst:
+          type: integer
+          format: int32
+        reinstCharge:
+          type: number
+          format: double
+        maolAmount:
+          type: number
+          format: double
         isValid:
           type: boolean
+        userId1:
+          type: string
+        userId2:
+          type: string
+        lobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineOfBusiness'
+        aggregateDeductible:
+          type: number
+          format: double
+        aggregateLimit:
+          type: number
+          format: double
+        lossOccurrences:
+          type: array
+          items:
+            $ref: '#/components/schemas/LossOccurrence'
+      required:
+      - attachLevel
+      - cedant
+      - treatyNumber
+      - treatyType
+    FacReinsurer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    PolicyCondition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        isPredefined:
+          type: boolean
+        limit:
+          type: number
+          format: double
+        deductible:
+          type: number
+          format: double
+        deductibleType:
+          $ref: '#/components/schemas/ExposureValue'
+        conditionType:
+          $ref: '#/components/schemas/ExposureValue'
+        parentCondition:
+          $ref: '#/components/schemas/ExposureValue'
+        policyNumber:
+          type: string
+        policyConditionCriterias:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyConditionCriteria'
+        percentOfLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+    BuildingAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        yearBuilt:
+          type: string
+        isValid:
+          type: boolean
+        roofDeckType:
+          $ref: '#/components/schemas/ExposureValue'
+        roofDeckResistanceField:
+          type: number
+          format: double
+        windowGlassdoorProtectionType:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorThickness:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorDoublepane:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorProtectionAdequacy:
+          $ref: '#/components/schemas/ExposureValue'
+        roofCoverType:
+          $ref: '#/components/schemas/ExposureValue'
+        rooftopEquipment:
+          $ref: '#/components/schemas/ExposureValue'
+        skylightAreaPercent:
+          type: number
+          format: double
+        dockDoorAreaPercent:
+          type: number
+          format: double
+        dockDoorPressureResistance:
+          type: number
+          format: double
+        skylightImpactResistance:
+          $ref: '#/components/schemas/ExposureValue'
+        roofCoverResistanceCorner:
+          type: number
+          format: double
+        roofSlope:
+          $ref: '#/components/schemas/ExposureValue'
+        flashingPulloutResistance:
+          type: number
+          format: double
+        missileExposure:
+          $ref: '#/components/schemas/ExposureValue'
+        roofCoverResistancePerimeter:
+          type: number
+          format: double
+        roofDeckResistancePerimeter:
+          type: number
+          format: double
+        claddingPressureResistance:
+          type: number
+          format: double
+        windowGlassdoorGlassType:
+          $ref: '#/components/schemas/ExposureValue'
+        claddingType:
+          $ref: '#/components/schemas/ExposureValue'
+        windowGlassdoorAreaPercent:
+          type: number
+          format: double
+        roofDeckResistanceCorner:
+          type: number
+          format: double
+        roofCoverResistanceField:
+          type: number
+          format: double
+        roofArea:
+          type: number
+          format: double
+    Location:
+      type: object
+      properties:
+        esdbBuildingAttribute:
+          $ref: '#/components/schemas/LocationBuildingAttribute'
+        property:
+          $ref: '#/components/schemas/Property'
+        address:
+          $ref: '#/components/schemas/Address'
+        biDetail:
+          $ref: '#/components/schemas/LocationBiDetail'
+        eqDetail:
+          $ref: '#/components/schemas/LocationEqDetail'
+        wsDetail:
+          $ref: '#/components/schemas/LocationWsDetail'
+        toDetail:
+          $ref: '#/components/schemas/LocationToDetail'
+        flDetail:
+          $ref: '#/components/schemas/LocationFlDetail'
+        frDetail:
+          $ref: '#/components/schemas/LocationFrDetail'
+        trDetail:
+          $ref: '#/components/schemas/LocationTrDetail'
+        buildingAttribute:
+          $ref: '#/components/schemas/BuildingAttribute'
+        coverages:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationCoverage'
+        reinsuranceCessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReinsuranceCession'
+        wcDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationWcDetail'
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        tiv:
+          type: number
+          format: double
+        riskAssessorCurves:
+          type: string
+        locationConditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationCondition'
+        maxCvgBldgValuation:
+          type: number
+          format: double
+      required:
+      - address
+      - property
+    LocationToDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        siteLimit:
+          type: number
+          format: double
+        siteDeduct:
+          type: number
+          format: double
+        combinedLimit:
+          type: number
+          format: double
+        combinedDeduct:
+          type: number
+          format: double
+        yearUpgrade:
+          type: string
+        percentComplete:
+          type: number
+          format: double
+        fireClass:
+          type: string
+        rmsClass:
+          type: string
+        userClass:
+          type: string
+        atcOccupancy:
+          type: string
+        isoOccupancy:
+          type: string
+        userOccupancy:
+          type: string
+        percentageSiteLossDeductibleAmount:
+          type: number
+          format: double
+        percentageCombinedLossDeductibleAmount:
+          type: number
+          format: double
+        isFranchiseSiteDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isFranchiseCombinedDeductible:
+          $ref: '#/components/schemas/ExposureValue'
+        isValid:
+          type: boolean
+        architecture:
+          $ref: '#/components/schemas/ExposureValue'
+        cladRate:
+          $ref: '#/components/schemas/ExposureValue'
+        cladType:
+          $ref: '#/components/schemas/ExposureValue'
+        constructQuality:
+          $ref: '#/components/schemas/ExposureValue'
+        designCode:
+          $ref: '#/components/schemas/ExposureValue'
+        doorOpenings:
+          $ref: '#/components/schemas/ExposureValue'
+        externalOrnament:
+          $ref: '#/components/schemas/ExposureValue'
+        floodVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        foundation:
+          $ref: '#/components/schemas/ExposureValue'
+        maintenance:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecSide:
+          $ref: '#/components/schemas/ExposureValue'
+        otherOpenings:
+          $ref: '#/components/schemas/ExposureValue'
+        roofAge:
+          $ref: '#/components/schemas/ExposureValue'
+        roofAnchor:
+          $ref: '#/components/schemas/ExposureValue'
+        roofEquipment:
+          $ref: '#/components/schemas/ExposureValue'
+        roofFrame:
+          $ref: '#/components/schemas/ExposureValue'
+        roofGeometry:
+          $ref: '#/components/schemas/ExposureValue'
+        roofParpet:
+          $ref: '#/components/schemas/ExposureValue'
+        roofSystem:
+          $ref: '#/components/schemas/ExposureValue'
+        windMissile:
+          $ref: '#/components/schemas/ExposureValue'
+        windVulnerability:
+          $ref: '#/components/schemas/ExposureValue'
+        basement:
+          $ref: '#/components/schemas/ExposureValue'
+        mechElecGround:
+          $ref: '#/components/schemas/ExposureValue'
+        floodMissiles:
+          $ref: '#/components/schemas/ExposureValue'
+        floodProtection:
+          $ref: '#/components/schemas/ExposureValue'
+        iceDamProtection:
+          $ref: '#/components/schemas/ExposureValue'
+        plumbingInsulation:
+          $ref: '#/components/schemas/ExposureValue'
+        atticInsulation:
+          $ref: '#/components/schemas/ExposureValue'
+        roofVentilation:
+          $ref: '#/components/schemas/ExposureValue'
+        snowGuards:
+          $ref: '#/components/schemas/ExposureValue'
+        treeDensity:
+          $ref: '#/components/schemas/ExposureValue'
+        garaging:
+          $ref: '#/components/schemas/ExposureValue'
+        toPackage:
+          $ref: '#/components/schemas/ExposureValue'
+        toProtect:
+          $ref: '#/components/schemas/ExposureValue'
+        toSalvage:
+          $ref: '#/components/schemas/ExposureValue'
+        toSpecieStorage:
+          $ref: '#/components/schemas/ExposureValue'
+        operationType:
+          type: string
+          readOnly: true
+          enum:
+          - INSERT
+          - UPDATE
+          - DELETE
+        dominantSubperilCS:
+          type: integer
+          format: int64
+        percentInGeographyCS:
+          type: number
+          format: double
+        score1CS:
+          type: integer
+          format: int32
+        score2CS:
+          type: integer
+          format: int32
+        score3CS:
+          type: integer
+          format: int32
+        scoreOverallCS:
+          type: integer
+          format: int32
+        dominantSubperilWT:
+          type: integer
+          format: int64
+        percentInGeographyWT:
+          type: number
+          format: double
+        score1WT:
+          type: integer
+          format: int32
+        score2WT:
+          type: integer
+          format: int32
+        score3WT:
+          type: integer
+          format: int32
+        scoreOverallWT:
+          type: integer
+          format: int32
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        method:
+          type: string
+      required:
+      - href
+      - method
+      - rel
+    MetaLinks:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - links
+      - meta
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    Address:
+      type: object
+      properties:
+        addressId:
+          description: ID for address.
+          type: integer
+          format: int32
+        area:
+          $ref: '#/components/schemas/ExposureValue'
+        buildingId:
+          description: ID for building.
+          type: string
+        buildingName:
+          description: Name of building.
+          type: string
+        addressType:
+          $ref: '#/components/schemas/ExposureValue'
+        country:
+          $ref: '#/components/schemas/ExposureValue'
+        countryScheme:
+          description: Standard for user-supplied country code, e.g. `ISO2A`
+          type: string
+        countryGeoId:
+          type: integer
+          format: int32
+        countryRmsCode:
+          description: Internal RMS code for country.
+          type: string
+        latitude:
+          description: Latitude coordinates.
+          type: number
+          format: double
+        longitude:
+          description: Longitude coordinates.
+          type: number
+          format: double
+        addressText:
+          description: Supplemental text captured for address.
+          type: string
+        streetAddress:
+          description: Address containing number, street name, street type, etc.
+          type: string
+        cityCode:
+          description: Code for city/town.
+          type: string
+        cityName:
+          description: Name of city/town.
+          type: string
+        cityGeoId:
+          description: Globally unique ID of city/town.
+          type: integer
+          format: int64
+        postalCode:
+          description: Postal code.
+          type: string
+        postalGeoId:
+          description: Globally unique ID for postal code.
+          type: integer
+          format: int64
+        block:
+          description: ID of block.
+          type: string
+        blockGroup:
+          description: ID of block group.
+          type: string
+        locationCode:
+          description: Census track number / Sonpro / Sector / Short post code.
+          type: string
+        locationCodeGeoId:
+          type: integer
+          format: int64
+        parcelNumber:
+          description: ID of parcel.
+          type: string
+        subLocality:
+          description: Name of sub-locality (neighborhood).
+          type: string
+        geoResolutionConfidence:
+          description: Geocode confidence percentage.
+          type: number
+          format: double
+        geoAccuracyBuffer:
+          description: Geocode accuracy buffer.
+          type: number
+          format: double
+        geoProductVersion:
+          type: string
+        geoLocationCode:
+          description: Accuracy of assigned geocode for US high resolution geocoding.
+          type: string
+        geoMatchCode:
+          description: 'Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
+
+            '
+          type: string
+        geoDataSourceId:
+          description: Geocode data source ID.
+          type: integer
+          format: int32
+        geoResolutionCode:
+          $ref: '#/components/schemas/ExposureValue'
+        geoDataSourceVersionId:
+          type: integer
+          format: int32
+        geoDateTime:
+          type: string
+        createDateTime:
+          description: Date and time address record was created.
+          type: string
+        updateDateTime:
+          description: Date and time address record was updated.
+          type: string
+        admin1Code:
+          description: 'Code for administrative level 1. Admin1 represents large geographic divisions, such as states or provinces.
+
+            '
+          type: string
+        admin1GeoId:
+          description: 'Globally unique RMS ID for administrative level 1.
+
+            '
+          type: integer
+          format: int64
+        admin1Name:
+          description: 'Name of administrative level 1.
+
+            '
+          type: string
+        admin2Code:
+          description: 'Code for administrative level 2. Admin2 represents smaller geographic divisions, such as counties.
+
+            '
+          type: string
+        admin2GeoId:
+          description: 'Globally unique RMS ID for administrative level 2.
+
+            '
+          type: integer
+          format: int64
+        admin2Name:
+          description: 'Name of administrative level 2.
+
+            '
+          type: string
+        admin3Code:
+          description: 'Code for administrative level 3. Admin3 represents smaller geographic divisions, such as districts.
+
+            '
+          type: string
+        admin3GeoId:
+          description: 'Globally unique RMS ID for administrative level 3.
+
+            '
+          type: integer
+          format: int64
+        admin3Name:
+          description: 'Name of administrative level 3.
+
+            '
+          type: string
+        admin4Code:
+          description: 'Code for administrative level 4.
+
+            '
+          type: string
+        admin4GeoId:
+          description: 'Globally unique RMS ID for administrative level 4.
+
+            '
+          type: integer
+          format: int64
+        admin4Name:
+          type: string
+          description: 'Name of administrative level 4.
+
+            '
+        admin5Code:
+          description: 'Code for administrative level 5.
+
+            '
+          type: string
+        admin5GeoId:
+          description: 'Globally unique RMS ID for administrative level 5.
+
+            '
+          type: integer
+          format: int64
+        admin5Name:
+          description: Name of administrative level 5.
+          type: string
+        zone1GeoId:
+          description: Zone level 1 GeoID.
+          type: integer
+          format: int64
+        zone2GeoId:
+          description: Zone level 2 GeoID.
+          type: integer
+          format: int64
+        zone3GeoId:
+          description: Zone level 3 GeoID.
+          type: integer
+          format: int64
+        zone4GeoId:
+          description: Zone level 4 GeoID.
+          type: integer
+          format: int64
+        zone5GeoId:
+          description: Zone level 5 GeoID.
+          type: integer
+          format: int64
+        zone1:
+          description: 'CRESTA zone ID
+
+            '
+          type: string
+        zone2:
+          description: 'For finer zone definitions.
+
+            '
+          type: string
+        zone3:
+          description: 'For further finer zone definitions.
+
+            '
+          type: string
+        zone3Name:
+          type: string
+        zone4Name:
+          type: string
+        zone5Name:
+          type: string
+        zone3Code:
+          type: string
+        zone4Code:
+          type: string
+        zone5Code:
+          type: string
+        ugid:
+          description: Unique global identifier.
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

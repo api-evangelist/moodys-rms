@@ -1244,6 +1244,43 @@ paths:
       - AccountV1
 components:
   schemas:
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    AnalysisSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysesItem'
     Band:
       type: object
       properties:
@@ -1257,15 +1294,216 @@ components:
           maximum: 10000
       required:
       - greaterThanOrEqualTo
-    ExposureValue:
+    Account:
+      type: object
+      properties:
+        id:
+          description: ID number of the account.
+          type: integer
+          format: int32
+        name:
+          description: Name of the account.
+          type: string
+        number:
+          description: Number of the account.
+          type: string
+        status:
+          type: string
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        producer:
+          $ref: '#/components/schemas/Producer'
+        underwriter:
+          $ref: '#/components/schemas/UnderWriter'
+        branch:
+          $ref: '#/components/schemas/Branch'
+        userId1:
+          description: User-defined attribute 1
+          type: string
+        userId2:
+          description: User-defined attribute 2
+          type: string
+        userId3:
+          description: User-defined attribute 3
+          type: string
+        userId4:
+          description: User-defined attribute 4
+          type: string
+        userText1:
+          description: User text 1
+          type: string
+        userText2:
+          description: User text 2
+          type: string
+        createDate:
+          description: Date and time that account was created.
+          type: string
+        stampDate:
+          type: string
+        state:
+          type: string
+          enum:
+          - InActive
+          - Active
+        linkId:
+          description: ''
+          type: string
+        guid:
+          description: ''
+          type: string
+        isValid:
+          description: Account valid flag.
+          type: boolean
+        CustomData:
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - number
+    UnderWriter:
+      description: "Risk-holding party that transfers risk to a cedant in exchange for some premium. \n"
       type: object
       properties:
         id:
           type: integer
           format: int32
-        code:
+        name:
+          type: string
+          maxLength: 30
+          minLength: 0
+      required:
+      - name
+    CountryMetrics:
+      type: object
+      properties:
+        country:
+          $ref: '#/components/schemas/ExposureValue'
+        locationCount:
+          type: integer
+          format: int32
+    Branch:
+      description: Branch that underwrites the account.
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 30
+          minLength: 0
+      required:
+      - name
+    OutputProfile:
+      type: object
+      properties:
+        name:
+          type: string
+        metricRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricRequest'
+    AccountMetrics:
+      type: object
+      properties:
+        totalLocations:
+          type: integer
+          format: int32
+        totalPolicies:
+          type: integer
+          format: int32
+        totalEmployees:
+          type: number
+          format: double
+        totalInsuredValue:
+          $ref: '#/components/schemas/Amount'
+        perilsExposed:
+          type: string
+        linkedAccount:
+          $ref: '#/components/schemas/Account'
+        linkedDatasource:
           type: string
         name:
+          type: string
+        number:
+          type: string
+        owner:
+          type: string
+        underwriter:
+          type: string
+        producer:
+          type: string
+        branch:
+          type: string
+        cedant:
+          type: string
+        geocodeVersion:
+          type: string
+        hazardVersion:
+          type: string
+        createDate:
+          type: string
+    CustomBand:
+      type: object
+      properties:
+        hazard:
+          type: string
+        bands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Band'
+          maxItems: 10
+          minItems: 1
+      required:
+      - hazard
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    CopyAccountInfo:
+      type: object
+      properties:
+        newNumber:
+          type: string
+        newName:
+          type: string
+        linked:
+          type: boolean
+      required:
+      - newNumber
+    ReportListSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        edmName:
+          type: string
+        createDate:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        userName:
+          type: string
+        notes:
           type: string
     AnalysesItem:
       type: object
@@ -1361,76 +1599,156 @@ components:
           type: string
         riGuid:
           type: string
-    CopyAccountInfo:
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
       properties:
-        newNumber:
+        id:
           type: string
-        newName:
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
           type: string
-        linked:
-          type: boolean
+          maxLength: 40
+          minLength: 0
       required:
-      - newNumber
-    CountryMetrics:
+      - name
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
       type: object
       properties:
-        country:
-          $ref: '#/components/schemas/ExposureValue'
-        locationCount:
-          type: integer
-          format: int32
-    Coordinate:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    ProcessInput:
       type: object
       properties:
-        locationId:
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        edm:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        modelProfileId:
           type: integer
           format: int32
-        locationNumber:
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        treaties:
+          type: array
+          items:
+            type: integer
+            format: int32
+        jobName:
           type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        streetAddress:
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        id:
+          type: integer
+          format: int32
+          minimum: 1
+        outputSetting:
+          $ref: '#/components/schemas/OutputProfile'
+        outputProfile:
           type: string
-        geoResolutionCode:
-          $ref: '#/components/schemas/ExposureValue'
-    LossOccurrence:
+      required:
+      - currency
+      - edm
+      - outputSetting
+    LineOfBusiness:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
       required:
-      - treatyId
-    AnalysisSearchResult:
+      - name
+    AccountSearchItem:
       type: object
       properties:
-        searchTotalMatch:
+        accountId:
           type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalysesItem'
+          format: int32
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        cedantName:
+          type: string
+        producerName:
+          type: string
+        underwriterName:
+          type: string
+        branchName:
+          type: string
+        numLocations:
+          type: integer
+          format: int32
+        userId1:
+          type: string
+        userId2:
+          type: string
+        userId3:
+          type: string
+        userId4:
+          type: string
+        userText1:
+          type: string
+        userText2:
+          type: string
+        geocodeVersion:
+          type: string
+        hazardVersion:
+          type: string
+        ownerName:
+          type: string
+        updatedBy:
+          type: string
+        stampDate:
+          type: string
+        jobStatus:
+          type: string
+        jobStartDate:
+          type: string
+        jobEndDate:
+          type: string
+        resultsCount:
+          type: integer
+          format: int32
+        policyExpirationDate:
+          type: string
+        policyExpirationStatus:
+          type: string
+        totalTIV:
+          type: number
+          format: float
+        reportsCount:
+          type: integer
+          format: int32
+          example: 0
     LocationConditionValidationInfo:
       type: object
       properties:
@@ -1446,87 +1764,6 @@ components:
           type: string
         condition2:
           type: string
-    CustomBand:
-      type: object
-      properties:
-        hazard:
-          type: string
-        bands:
-          type: array
-          items:
-            $ref: '#/components/schemas/Band'
-          maxItems: 10
-          minItems: 1
-      required:
-      - hazard
-    Branch:
-      description: Branch that underwrites the account.
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 30
-          minLength: 0
-      required:
-      - name
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
-    ExposureSummaryReportInput:
-      type: object
-      properties:
-        perilList:
-          type: array
-          items:
-            type: string
-          maxItems: 2147483647
-          minItems: 1
-        reportName:
-          type: string
-        customBands:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomBand'
-      required:
-      - perilList
-    ReportListSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportListSearchItem'
     Treaty:
       description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
 
@@ -1630,7 +1867,15 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    AccountSearchResult:
+    Amount:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        currencyCode:
+          type: string
+    ReportListSearchResult:
       type: object
       properties:
         searchTotalMatch:
@@ -1639,7 +1884,81 @@ components:
         searchItems:
           type: array
           items:
-            $ref: '#/components/schemas/AccountSearchItem'
+            $ref: '#/components/schemas/ReportListSearchItem'
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    Coordinate:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        locationNumber:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        streetAddress:
+          type: string
+        geoResolutionCode:
+          $ref: '#/components/schemas/ExposureValue'
+    ExposureSummaryReportInput:
+      type: object
+      properties:
+        perilList:
+          type: array
+          items:
+            type: string
+          maxItems: 2147483647
+          minItems: 1
+        reportName:
+          type: string
+        customBands:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomBand'
+      required:
+      - perilList
     MetricRequest:
       type: object
       properties:
@@ -1653,345 +1972,26 @@ components:
           type: string
         includeIntermediateSums:
           type: boolean
-    ErrorMessage:
+    ExposureValue:
       type: object
       properties:
+        id:
+          type: integer
+          format: int32
         code:
           type: string
-        message:
-          type: string
-        logId:
-          type: string
-    AccountMetrics:
-      type: object
-      properties:
-        totalLocations:
-          type: integer
-          format: int32
-        totalPolicies:
-          type: integer
-          format: int32
-        totalEmployees:
-          type: number
-          format: double
-        totalInsuredValue:
-          $ref: '#/components/schemas/Amount'
-        perilsExposed:
-          type: string
-        linkedAccount:
-          $ref: '#/components/schemas/Account'
-        linkedDatasource:
-          type: string
         name:
           type: string
-        number:
-          type: string
-        owner:
-          type: string
-        underwriter:
-          type: string
-        producer:
-          type: string
-        branch:
-          type: string
-        cedant:
-          type: string
-        geocodeVersion:
-          type: string
-        hazardVersion:
-          type: string
-        createDate:
-          type: string
-    Account:
+    AccountSearchResult:
       type: object
       properties:
-        id:
-          description: ID number of the account.
-          type: integer
-          format: int32
-        name:
-          description: Name of the account.
-          type: string
-        number:
-          description: Number of the account.
-          type: string
-        status:
-          type: string
-        cedant:
-          $ref: '#/components/schemas/Cedant'
-        producer:
-          $ref: '#/components/schemas/Producer'
-        underwriter:
-          $ref: '#/components/schemas/UnderWriter'
-        branch:
-          $ref: '#/components/schemas/Branch'
-        userId1:
-          description: User-defined attribute 1
-          type: string
-        userId2:
-          description: User-defined attribute 2
-          type: string
-        userId3:
-          description: User-defined attribute 3
-          type: string
-        userId4:
-          description: User-defined attribute 4
-          type: string
-        userText1:
-          description: User text 1
-          type: string
-        userText2:
-          description: User text 2
-          type: string
-        createDate:
-          description: Date and time that account was created.
-          type: string
-        stampDate:
-          type: string
-        state:
-          type: string
-          enum:
-          - InActive
-          - Active
-        linkId:
-          description: ''
-          type: string
-        guid:
-          description: ''
-          type: string
-        isValid:
-          description: Account valid flag.
-          type: boolean
-        CustomData:
-          type: object
-          additionalProperties:
-            type: string
-      required:
-      - number
-    Amount:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        currencyCode:
-          type: string
-    ProcessInput:
-      type: object
-      properties:
-        exposureType:
-          type: string
-          enum:
-          - PORTFOLIO
-          - ACCOUNT
-          - LOCATION
-          - POLICY
-          - STEP_POLICY
-          - TREATY
-          - AGGPORTFOLIO
-        edm:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-        modelProfileId:
-          type: integer
-          format: int32
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        treaties:
-          type: array
-          items:
-            type: integer
-            format: int32
-        jobName:
-          type: string
-          maxLength: 64
-          minLength: 0
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        id:
-          type: integer
-          format: int32
-          minimum: 1
-        outputSetting:
-          $ref: '#/components/schemas/OutputProfile'
-        outputProfile:
-          type: string
-      required:
-      - currency
-      - edm
-      - outputSetting
-    OutputProfile:
-      type: object
-      properties:
-        name:
-          type: string
-        metricRequests:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricRequest'
-    AccountSearchItem:
-      type: object
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        cedantName:
-          type: string
-        producerName:
-          type: string
-        underwriterName:
-          type: string
-        branchName:
-          type: string
-        numLocations:
-          type: integer
-          format: int32
-        userId1:
-          type: string
-        userId2:
-          type: string
-        userId3:
-          type: string
-        userId4:
-          type: string
-        userText1:
-          type: string
-        userText2:
-          type: string
-        geocodeVersion:
-          type: string
-        hazardVersion:
-          type: string
-        ownerName:
-          type: string
-        updatedBy:
-          type: string
-        stampDate:
-          type: string
-        jobStatus:
-          type: string
-        jobStartDate:
-          type: string
-        jobEndDate:
-          type: string
-        resultsCount:
-          type: integer
-          format: int32
-        policyExpirationDate:
-          type: string
-        policyExpirationStatus:
-          type: string
-        totalTIV:
-          type: number
-          format: float
-        reportsCount:
-          type: integer
-          format: int32
-          example: 0
-    UnderWriter:
-      description: "Risk-holding party that transfers risk to a cedant in exchange for some premium. \n"
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 30
-          minLength: 0
-      required:
-      - name
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    ReportListSearchItem:
-      type: object
-      properties:
-        id:
+        searchTotalMatch:
           type: integer
           format: int64
-        name:
-          type: string
-        edmName:
-          type: string
-        createDate:
-          type: string
-        exposureId:
-          type: integer
-          format: int32
-        exposureType:
-          type: string
-          enum:
-          - PORTFOLIO
-          - ACCOUNT
-          - LOCATION
-          - POLICY
-          - STEP_POLICY
-          - TREATY
-          - AGGPORTFOLIO
-        userName:
-          type: string
-        notes:
-          type: string
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    LayerInfo:
-      type: object
-      properties:
-        name:
-          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
-          type: string
-        type:
-          description: Name of the job type. One of `geocode` or `hazard`.
-          type: string
-        engineType:
-          description: Name of engine.
-          type: string
-        version:
-          description: Version of the peril model.
-          type: string
-        layerOptions:
-          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
-
-            '
-          type: object
-          additionalProperties:
-            type: string
-      required:
-      - engineType
-      - name
-      - type
-      - version
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountSearchItem'
   securitySchemes:
     RMS_Auth:
       type: apiKey

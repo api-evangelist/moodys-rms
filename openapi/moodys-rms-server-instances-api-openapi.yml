@@ -186,16 +186,34 @@ paths:
           description: Internal Server Error. If the problem persists you may want to contact the Administrator.
 components:
   schemas:
-    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
+    RMS.EnterpriseIntegrationHub.Contracts.Group:
       type: object
       properties:
-        groupAction:
-          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
-        groupId:
-          description: ID of group.
+        id:
           type:
           - string
           - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupAction:
+      description: Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.
+      enum:
+      - 0
+      - 1
+      type: integer
+      format: int32
+    RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest:
+      type: object
+      properties:
+        groupOperations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation'
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.FilteredGroups:
       type: object
@@ -213,6 +231,17 @@ components:
           type: boolean
         isLast:
           type: boolean
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GroupOperation:
+      type: object
+      properties:
+        groupAction:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupAction'
+        groupId:
+          description: ID of group.
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.SqlInstance:
       type: object
@@ -263,35 +292,6 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.PatchSqlInstanceOperationRequest:
-      type: object
-      properties:
-        groupOperations:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GroupOperation'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.Group:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.GroupAction:
-      description: Grant or revoke group access rights. If `0`, access is revoked. If `1`, access is granted.
-      enum:
-      - 0
-      - 1
-      type: integer
-      format: int32
   securitySchemes:
     RMS_Auth:
       type: apiKey

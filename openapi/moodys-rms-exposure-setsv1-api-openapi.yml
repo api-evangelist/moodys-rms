@@ -156,6 +156,38 @@ paths:
       - Exposure SetsV1
 components:
   schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    PatchExposureSetReq:
+      type: object
+      properties:
+        operation:
+          description: Edit to make to the exposure set. `ADD` or `REMOVE` groups. `UPDATE` names.
+          type: string
+          enum:
+          - ADD
+          - UPDATE
+          - REMOVE
+        targetProperty:
+          description: Exposure set attribute to edit. `GROUPS` if edit is to `ADD` or `REMOVE` groups applied to exposure set. `NAME` if edit is to `UPDATE` the name of the exposure set.
+          type: string
+          enum:
+          - NAME
+          - GROUPS
+        value:
+          description: Value of edited attribute. If `GROUPS`, the ID of a group. If `NAME`, the updated name of the exposure set.
+          type: string
+      required:
+      - operation
+      - targetProperty
+      - value
     GroupDetail:
       type: object
       properties:
@@ -184,38 +216,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GroupDetail'
-    PatchExposureSetReq:
-      type: object
-      properties:
-        operation:
-          description: Edit to make to the exposure set. `ADD` or `REMOVE` groups. `UPDATE` names.
-          type: string
-          enum:
-          - ADD
-          - UPDATE
-          - REMOVE
-        targetProperty:
-          description: Exposure set attribute to edit. `GROUPS` if edit is to `ADD` or `REMOVE` groups applied to exposure set. `NAME` if edit is to `UPDATE` the name of the exposure set.
-          type: string
-          enum:
-          - NAME
-          - GROUPS
-        value:
-          description: Value of edited attribute. If `GROUPS`, the ID of a group. If `NAME`, the updated name of the exposure set.
-          type: string
-      required:
-      - operation
-      - targetProperty
-      - value
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

@@ -279,6 +279,16 @@ paths:
       - ProducerV1
 components:
   schemas:
+    ProducerSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Producer'
     Producer:
       description: Agent or brokerage firm that produced a policy.
       type: object
@@ -303,16 +313,6 @@ components:
           type: string
         logId:
           type: string
-    ProducerSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/Producer'
   securitySchemes:
     RMS_Auth:
       type: apiKey
