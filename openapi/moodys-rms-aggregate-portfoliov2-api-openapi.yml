@@ -772,37 +772,6 @@ paths:
       - Aggregate PortfolioV2
 components:
   schemas:
-    AggregatePortfolio:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        number:
-          type: string
-          maxLength: 20
-          minLength: 0
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-        source:
-          type: string
-          maxLength: 10
-          minLength: 0
-        cedant:
-          $ref: '#/components/schemas/Cedant'
-        currency:
-          $ref: '#/components/schemas/ExposureValue'
-        createDate:
-          type: string
-        peril:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - cedant
-      - name
-      - number
-      - peril
     AnalysisCurrency:
       type: object
       properties:
@@ -821,50 +790,39 @@ components:
       - code
       - scheme
       - vintage
-    AggregatePortfolioMetrics:
+    AggregatePortfolioSearchResult:
       type: object
       properties:
-        totalAggregateExposures:
-          type: integer
-          format: int32
-        perilsExposed:
-          type: string
-        total:
-          type: number
-          format: double
-        name:
-          type: string
-        number:
-          type: string
-        source:
-          type: string
-        currency:
-          type: string
-        createDate:
-          type: string
-        owner:
-          type: string
-        cedant:
-          type: string
-    AggregatePortfolioCountryMetrics:
-      type: object
-      properties:
-        countryMetrics:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    TreatySearchResult:
-      type: object
-      properties:
-        totalMatchCount:
+        searchTotalMatch:
           type: integer
           format: int64
-        searchMatchingTreatyList:
+        searchItems:
           type: array
           items:
-            $ref: '#/components/schemas/Treaty'
+            $ref: '#/components/schemas/AggregatePortfolioSearchItem'
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
     ErrorMessage:
       type: object
       properties:
@@ -874,21 +832,6 @@ components:
           type: string
         logId:
           type: string
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
     Producer:
       description: Agent or brokerage firm that produced a policy.
       type: object
@@ -904,30 +847,51 @@ components:
           minLength: 0
       required:
       - name
-    CopyAggregatePortfolioInfo:
+    AnalysisSearchResultV2:
       type: object
       properties:
-        newNumber:
-          type: string
-          maxLength: 20
-          minLength: 0
-        newName:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - newName
-      - newNumber
-    DefaultAlmProfilesResponse:
-      type: object
-      properties:
-        count:
+        searchTotalMatch:
           type: integer
-          format: int32
-        items:
+          format: int64
+        searchItems:
           type: array
           items:
-            $ref: '#/components/schemas/AlmProfileInfo'
+            $ref: '#/components/schemas/AnalysesItemV2'
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    AlmErrorMessage:
+      type: object
+      properties:
+        row:
+          type: string
+        column:
+          type: string
+        text:
+          type: string
     AlmProcessInput:
       type: object
       properties:
@@ -982,7 +946,7 @@ components:
       - almProfileIds
       - currency
       - edm
-    AnalysisSearchResultV2:
+    AggregateExposuresListSearchResult:
       type: object
       properties:
         searchTotalMatch:
@@ -991,7 +955,73 @@ components:
         searchItems:
           type: array
           items:
-            $ref: '#/components/schemas/AnalysesItemV2'
+            $ref: '#/components/schemas/AggregateExposuresList'
+    AggregatePortfolioSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        number:
+          type: string
+          maxLength: 20
+          minLength: 0
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+        source:
+          type: string
+          maxLength: 10
+          minLength: 0
+        cedant:
+          $ref: '#/components/schemas/Cedant'
+        currency:
+          $ref: '#/components/schemas/ExposureValue'
+        createDate:
+          type: string
+        peril:
+          $ref: '#/components/schemas/ExposureValue'
+        ownerName:
+          type: string
+      required:
+      - cedant
+      - name
+      - number
+      - peril
+    AlmProfileInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        internalId:
+          type: integer
+          format: int32
+        profileName:
+          type: string
+        profileType:
+          type: string
+        country:
+          type: string
+        peril:
+          type: string
+        rmsLob:
+          type: string
+        geoRes:
+          type: string
+        trackingId:
+          type: string
+        descFin:
+          type: string
+        descReg:
+          type: string
+        descInv:
+          type: string
+        dataTab:
+          type: string
+        softwareVersionCode:
+          type: string
     LineOfBusiness:
       type: object
       properties:
@@ -1034,6 +1064,54 @@ components:
           type: string
         dependencyResolution:
           type: string
+    CopyAggregatePortfolioInfo:
+      type: object
+      properties:
+        newNumber:
+          type: string
+          maxLength: 20
+          minLength: 0
+        newName:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - newName
+      - newNumber
+    AggregatePortfolioMetrics:
+      type: object
+      properties:
+        totalAggregateExposures:
+          type: integer
+          format: int32
+        perilsExposed:
+          type: string
+        total:
+          type: number
+          format: double
+        name:
+          type: string
+        number:
+          type: string
+        source:
+          type: string
+        currency:
+          type: string
+        createDate:
+          type: string
+        owner:
+          type: string
+        cedant:
+          type: string
+    AggregatePortfolioCountryMetrics:
+      type: object
+      properties:
+        countryMetrics:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
     Treaty:
       description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
 
@@ -1223,63 +1301,7 @@ components:
           format: int32
         exposureSetId:
           type: string
-    AlmProfileInfo:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        internalId:
-          type: integer
-          format: int32
-        profileName:
-          type: string
-        profileType:
-          type: string
-        country:
-          type: string
-        peril:
-          type: string
-        rmsLob:
-          type: string
-        geoRes:
-          type: string
-        trackingId:
-          type: string
-        descFin:
-          type: string
-        descReg:
-          type: string
-        descInv:
-          type: string
-        dataTab:
-          type: string
-        softwareVersionCode:
-          type: string
-    LossOccurrence:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - treatyId
-    AggregatePortfolioSearchItem:
+    AggregatePortfolio:
       type: object
       properties:
         id:
@@ -1305,68 +1327,46 @@ components:
           type: string
         peril:
           $ref: '#/components/schemas/ExposureValue'
-        ownerName:
-          type: string
       required:
       - cedant
       - name
       - number
       - peril
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
-    ExposureValue:
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
       properties:
         id:
-          type: integer
-          format: int32
-        code:
           type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
         name:
           type: string
-    AggregateExposuresListSearchResult:
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    TreatySearchResult:
       type: object
       properties:
-        searchTotalMatch:
+        totalMatchCount:
           type: integer
           format: int64
-        searchItems:
+        searchMatchingTreatyList:
           type: array
           items:
-            $ref: '#/components/schemas/AggregateExposuresList'
-    AggregatePortfolioSearchResult:
+            $ref: '#/components/schemas/Treaty'
+    DefaultAlmProfilesResponse:
       type: object
       properties:
-        searchTotalMatch:
+        count:
           type: integer
-          format: int64
-        searchItems:
+          format: int32
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/AggregatePortfolioSearchItem'
-    AlmErrorMessage:
-      type: object
-      properties:
-        row:
-          type: string
-        column:
-          type: string
-        text:
-          type: string
+            $ref: '#/components/schemas/AlmProfileInfo'
   securitySchemes:
     RMS_Auth:
       type: apiKey

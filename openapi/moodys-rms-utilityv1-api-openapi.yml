@@ -482,34 +482,6 @@ paths:
       - UtilityV1
 components:
   schemas:
-    Facultative:
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    QueryEntity:
-      type: object
-      properties:
-        q:
-          type: string
     FacultativeSearchResult:
       type: object
       properties:
@@ -538,6 +510,29 @@ components:
           type: string
         closePar:
           type: string
+    Facultative:
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     PolicyConditionCriteria:
       type: object
       properties:
@@ -555,6 +550,11 @@ components:
         value:
           type: string
         closePar:
+          type: string
+    QueryEntity:
+      type: object
+      properties:
+        q:
           type: string
   securitySchemes:
     RMS_Auth:

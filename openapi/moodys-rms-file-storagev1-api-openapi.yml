@@ -409,6 +409,48 @@ paths:
       - File StorageV1
 components:
   schemas:
+    AggregateExposuresList:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+        lobs:
+          type: array
+          items:
+            type: string
+        resolutionValues:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+        errorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlmErrorMessage'
+        countryCode:
+          type: string
+        resolution:
+          type: string
+        dependencyResolution:
+          type: string
+    EdmImportInput:
+      type: object
+      properties:
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
     FileInput:
       type: object
       properties:
@@ -427,14 +469,29 @@ components:
       required:
       - fileName
       - fileType
-    ErrorMessage:
+    AlmErrorMessage:
       type: object
       properties:
-        code:
+        row:
           type: string
-        message:
+        column:
           type: string
-        logId:
+        text:
+          type: string
+    S3UploadHelper:
+      type: object
+      properties:
+        bucketPrefix:
+          type: string
+        awsRegion:
+          type: string
+        uploadId:
+          type: string
+        uploadKey1:
+          type: string
+        uploadKey2:
+          type: string
+        uploadKey3:
           type: string
     ErrorBody:
       type: object
@@ -449,19 +506,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Link'
-    S3Bucket:
-      type: object
-      properties:
-        accessKeyId:
-          type: string
-        secretAccessKey:
-          type: string
-        sessionToken:
-          type: string
-        s3Path:
-          type: string
-        s3Region:
-          type: string
     AggregatePortfolioFlatFileMapping:
       type: object
       properties:
@@ -501,35 +545,27 @@ components:
       - href
       - method
       - rel
-    AggregateExposuresList:
+    ErrorMessage:
       type: object
       properties:
-        values:
-          type: array
-          items:
-            type: array
-            items:
-              type: number
-              format: double
-        lobs:
-          type: array
-          items:
-            type: string
-        resolutionValues:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: object
-        errorMessages:
-          type: array
-          items:
-            $ref: '#/components/schemas/AlmErrorMessage'
-        countryCode:
+        code:
           type: string
-        resolution:
+        message:
           type: string
-        dependencyResolution:
+        logId:
+          type: string
+    S3Bucket:
+      type: object
+      properties:
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        sessionToken:
+          type: string
+        s3Path:
+          type: string
+        s3Region:
           type: string
     RDMImportInput:
       type: object
@@ -587,42 +623,6 @@ components:
       required:
       - rdmName
       - uploadId
-    S3UploadHelper:
-      type: object
-      properties:
-        bucketPrefix:
-          type: string
-        awsRegion:
-          type: string
-        uploadId:
-          type: string
-        uploadKey1:
-          type: string
-        uploadKey2:
-          type: string
-        uploadKey3:
-          type: string
-    AlmErrorMessage:
-      type: object
-      properties:
-        row:
-          type: string
-        column:
-          type: string
-        text:
-          type: string
-    EdmImportInput:
-      type: object
-      properties:
-        share:
-          description: Indicates if the exposure set is shared with other groups.
-          type: boolean
-        groups:
-          description: List of groups that may access the exposure set.
-          type: array
-          items:
-            type: string
-          uniqueItems: true
   securitySchemes:
     RMS_Auth:
       type: apiKey

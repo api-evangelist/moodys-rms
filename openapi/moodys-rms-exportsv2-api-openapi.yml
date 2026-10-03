@@ -63,6 +63,15 @@ paths:
       - ExportsV2
 components:
   schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     ExportInput:
       type: object
       properties:
@@ -92,15 +101,6 @@ components:
         propertyName: type
       required:
       - exportType
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

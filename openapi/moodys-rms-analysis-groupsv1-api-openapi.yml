@@ -279,6 +279,16 @@ paths:
       - Analysis GroupsV1
 components:
   schemas:
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
     TreatyWithAnalysisInfo:
       type: object
       properties:
@@ -378,15 +388,33 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    ErrorMessage:
+    LineOfBusiness:
       type: object
       properties:
-        code:
+        id:
+          type: integer
+          format: int32
+        name:
           type: string
-        message:
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
           type: string
-        logId:
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
           type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
     LossOccurrence:
       type: object
       properties:
@@ -410,28 +438,6 @@ components:
           $ref: '#/components/schemas/ExposureValue'
       required:
       - treatyId
-    EventRateScheme:
-      type: object
-      properties:
-        modelRegionCode:
-          type: string
-          maxLength: 4
-          minLength: 4
-        perilCode:
-          type: string
-          maxLength: 2
-          minLength: 2
-        modelVersion:
-          type: string
-        eventRateSchemeName:
-          type: string
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        isDefault:
-          type: boolean
-        isActive:
-          type: boolean
     AnalysisGroupSearchResult:
       type: object
       properties:
@@ -442,23 +448,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalysisGroup'
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
+    ErrorMessage:
       type: object
       properties:
-        id:
+        code:
           type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
+        message:
           type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
       type: object
       properties:
         id:
@@ -500,28 +500,28 @@ components:
           type: string
       required:
       - name
-    LineOfBusiness:
+    EventRateScheme:
       type: object
       properties:
-        id:
+        modelRegionCode:
+          type: string
+          maxLength: 4
+          minLength: 4
+        perilCode:
+          type: string
+          maxLength: 2
+          minLength: 2
+        modelVersion:
+          type: string
+        eventRateSchemeName:
+          type: string
+        eventRateSchemeId:
           type: integer
           format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
+        isDefault:
+          type: boolean
+        isActive:
+          type: boolean
   securitySchemes:
     RMS_Auth:
       type: apiKey

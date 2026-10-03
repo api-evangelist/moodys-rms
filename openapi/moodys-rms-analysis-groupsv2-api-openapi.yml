@@ -281,57 +281,85 @@ paths:
       - Analysis GroupsV2
 components:
   schemas:
-    RegionPerilSimulation:
+    AnalysisGroupWithSimulation:
       type: object
       properties:
-        perilCode:
-          type: string
-        modelVersion:
-          type: string
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        regionCode:
-          type: string
-        simulationSetId:
+        groupId:
           type: integer
           format: int64
-        simulationPeriods:
+        analysisIds:
+          type: array
+          items:
+            type: integer
+            format: int32
+          maxItems: 2147483647
+          minItems: 1
+          uniqueItems: true
+        reportingWindowStart:
+          type: string
+          maxLength: 2147483647
+          minLength: 1
+        numOfSimulations:
           type: integer
           format: int64
-        modelRegionCode:
+        simulationWindowStart:
           type: string
-        eltAnalysisId:
-          type: integer
-          format: int64
-        engineVersion:
+          maxLength: 2147483647
+          minLength: 1
+        simulationWindowEnd:
           type: string
+          maxLength: 2147483647
+          minLength: 1
+        simulateToPLT:
+          type: boolean
+        propagateDetailedLosses:
+          type: boolean
+        regionPerilSimulationSet:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionPerilSimulation'
+        minimizedRegionPerilSimulationSet:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionPerilSimulation'
+        name:
+          type: string
+          maxLength: 64
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        description:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
       required:
-      - simulationPeriods
-      - simulationSetId
-    LossOccurrence:
+      - analysisIds
+      - currency
+      - name
+      - numOfSimulations
+      - propagateDetailedLosses
+      - simulateToPLT
+    ExposureValue:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        treatyId:
+        code:
+          type: string
+        name:
+          type: string
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
           type: integer
           format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
       required:
-      - treatyId
+      - name
     Currency:
       type: object
       properties:
@@ -465,58 +493,6 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    InconsistentTreaties:
-      type: object
-      properties:
-        treaties:
-          type: array
-          items:
-            $ref: '#/components/schemas/TreatyWithAnalysisInfoV2'
-        inconsistentFields:
-          type: array
-          items:
-            $ref: '#/components/schemas/InconsistentField'
-    EventRateScheme:
-      type: object
-      properties:
-        modelRegionCode:
-          type: string
-          maxLength: 4
-          minLength: 4
-        perilCode:
-          type: string
-          maxLength: 2
-          minLength: 2
-        modelVersion:
-          type: string
-        eventRateSchemeName:
-          type: string
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        isDefault:
-          type: boolean
-        isActive:
-          type: boolean
-    AnalysisGroupSearchResult:
-      type: object
-      properties:
-        totalMatchCount:
-          type: integer
-          format: int64
-        searchMatchingAnalysisGroupList:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalysisGroup'
     InconsistentField:
       type: object
       properties:
@@ -528,8 +504,19 @@ components:
             type: integer
             format: int32
           uniqueItems: true
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
+    InconsistentTreaties:
+      type: object
+      properties:
+        treaties:
+          type: array
+          items:
+            $ref: '#/components/schemas/TreatyWithAnalysisInfoV2'
+        inconsistentFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/InconsistentField'
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
       properties:
         id:
@@ -543,8 +530,78 @@ components:
           minLength: 0
       required:
       - name
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    RegionPerilSimulation:
+      type: object
+      properties:
+        perilCode:
+          type: string
+        modelVersion:
+          type: string
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        regionCode:
+          type: string
+        simulationSetId:
+          type: integer
+          format: int64
+        simulationPeriods:
+          type: integer
+          format: int64
+        modelRegionCode:
+          type: string
+        eltAnalysisId:
+          type: integer
+          format: int64
+        engineVersion:
+          type: string
+      required:
+      - simulationPeriods
+      - simulationSetId
+    AnalysisGroupSearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingAnalysisGroupList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysisGroup'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
       type: object
       properties:
         id:
@@ -586,85 +643,28 @@ components:
           type: string
       required:
       - name
-    AnalysisGroupWithSimulation:
+    EventRateScheme:
       type: object
       properties:
-        groupId:
-          type: integer
-          format: int64
-        analysisIds:
-          type: array
-          items:
-            type: integer
-            format: int32
-          maxItems: 2147483647
-          minItems: 1
-          uniqueItems: true
-        reportingWindowStart:
+        modelRegionCode:
           type: string
-          maxLength: 2147483647
-          minLength: 1
-        numOfSimulations:
-          type: integer
-          format: int64
-        simulationWindowStart:
+          maxLength: 4
+          minLength: 4
+        perilCode:
           type: string
-          maxLength: 2147483647
-          minLength: 1
-        simulationWindowEnd:
+          maxLength: 2
+          minLength: 2
+        modelVersion:
           type: string
-          maxLength: 2147483647
-          minLength: 1
-        simulateToPLT:
-          type: boolean
-        propagateDetailedLosses:
-          type: boolean
-        regionPerilSimulationSet:
-          type: array
-          items:
-            $ref: '#/components/schemas/RegionPerilSimulation'
-        minimizedRegionPerilSimulationSet:
-          type: array
-          items:
-            $ref: '#/components/schemas/RegionPerilSimulation'
-        name:
+        eventRateSchemeName:
           type: string
-          maxLength: 64
-          minLength: 1
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        description:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-      required:
-      - analysisIds
-      - currency
-      - name
-      - numOfSimulations
-      - propagateDetailedLosses
-      - simulateToPLT
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
+        eventRateSchemeId:
           type: integer
           format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
+        isDefault:
+          type: boolean
+        isActive:
+          type: boolean
   securitySchemes:
     RMS_Auth:
       type: apiKey

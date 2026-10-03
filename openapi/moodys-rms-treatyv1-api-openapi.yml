@@ -1128,16 +1128,77 @@ paths:
       - TreatyV1
 components:
   schemas:
-    TreatySearchResult:
+    BatchRequest:
       type: object
       properties:
-        totalMatchCount:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
+    ExposureValue:
+      type: object
+      properties:
+        id:
           type: integer
-          format: int64
-        searchMatchingTreatyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Treaty'
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    CopyTreatyInfo:
+      type: object
+      properties:
+        newNumber:
+          type: string
+        newName:
+          type: string
+      required:
+      - newNumber
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
     LossOccurrence:
       type: object
       properties:
@@ -1161,22 +1222,16 @@ components:
           $ref: '#/components/schemas/ExposureValue'
       required:
       - treatyId
-    Currency:
+    TreatySearchResult:
       type: object
       properties:
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingTreatyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Treaty'
     ErrorMessage:
       type: object
       properties:
@@ -1186,21 +1241,6 @@ components:
           type: string
         logId:
           type: string
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
     Producer:
       description: Agent or brokerage firm that produced a policy.
       type: object
@@ -1213,37 +1253,6 @@ components:
         name:
           type: string
           maxLength: 40
-          minLength: 0
-      required:
-      - name
-    CopyTreatyInfo:
-      type: object
-      properties:
-        newNumber:
-          type: string
-        newName:
-          type: string
-      required:
-      - newNumber
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
           minLength: 0
       required:
       - name
@@ -1350,15 +1359,6 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    BatchRequest:
-      type: object
-      properties:
-        method:
-          type: string
-        path:
-          type: string
-        body:
-          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

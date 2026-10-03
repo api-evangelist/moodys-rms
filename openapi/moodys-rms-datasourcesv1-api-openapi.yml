@@ -231,63 +231,6 @@ paths:
       - DatasourcesV1
 components:
   schemas:
-    UserDatabaseV1:
-      type: object
-      properties:
-        datasourceName:
-          type: string
-        edmName:
-          type: string
-        permissionType:
-          type: integer
-          format: int32
-        isDefault:
-          type: boolean
-        metrics:
-          type: object
-          additionalProperties:
-            type: object
-        serverState:
-          type: string
-          enum:
-          - READY
-          - UPGRADING
-          - UPGRADE_FAILED
-          - LOCK
-        serverNamespace:
-          type: string
-          enum:
-          - RISK_MODELER
-          - DATA_BRIDGE
-        owner:
-          type: string
-        exposureSetId:
-          type: string
-        createDate:
-          example: 2022-10-07 11:35:13
-          type: string
-        datasourceId:
-          type: integer
-          format: int32
-    DataSourceSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int32
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDatabaseV1'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     ServerInfo:
       type: object
       properties:
@@ -330,6 +273,63 @@ components:
         defaultServer:
           type: boolean
           example: false
+    DataSourceSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDatabaseV1'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    UserDatabaseV1:
+      type: object
+      properties:
+        datasourceName:
+          type: string
+        edmName:
+          type: string
+        permissionType:
+          type: integer
+          format: int32
+        isDefault:
+          type: boolean
+        metrics:
+          type: object
+          additionalProperties:
+            type: object
+        serverState:
+          type: string
+          enum:
+          - READY
+          - UPGRADING
+          - UPGRADE_FAILED
+          - LOCK
+        serverNamespace:
+          type: string
+          enum:
+          - RISK_MODELER
+          - DATA_BRIDGE
+        owner:
+          type: string
+        exposureSetId:
+          type: string
+        createDate:
+          example: 2022-10-07 11:35:13
+          type: string
+        datasourceId:
+          type: integer
+          format: int32
   securitySchemes:
     RMS_Auth:
       type: apiKey

@@ -163,38 +163,28 @@ paths:
       - PateV1
 components:
   schemas:
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    LossOccurrence:
+    ExposureValue:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        treatyId:
+        code:
+          type: string
+        name:
+          type: string
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
           type: integer
           format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
       required:
-      - treatyId
+      - name
     Pate:
       type: object
       properties:
@@ -306,21 +296,6 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
     Cedant:
       description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
       type: object
@@ -336,25 +311,50 @@ components:
           minLength: 0
       required:
       - name
-    ExposureValue:
+    LossOccurrence:
       type: object
       properties:
         id:
           type: integer
           format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    ErrorMessage:
+      type: object
+      properties:
         code:
           type: string
-        name:
+        message:
           type: string
-    LineOfBusiness:
+        logId:
+          type: string
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
       type: object
       properties:
         id:
-          type: integer
-          format: int32
-        name:
           type: string
           maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
           minLength: 0
       required:
       - name

@@ -171,31 +171,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataBridgeDatabase'
-    DataBridgeRegisterInput:
-      type: object
-      properties:
-        serverId:
-          type: integer
-          format: int64
-          minimum: 1
-        datasourceName:
-          type: string
-          maxLength: 80
-          minLength: 1
-          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
-        exposureSetId:
-          type: string
-        share:
-          description: Indicates if the exposure set is shared with other groups.
-          type: boolean
-        groups:
-          description: List of groups that may access the exposure set.
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-      required:
-      - datasourceName
     ErrorMessage:
       type: object
       properties:
@@ -234,6 +209,31 @@ components:
           type: array
           items:
             type: string
+    DataBridgeRegisterInput:
+      type: object
+      properties:
+        serverId:
+          type: integer
+          format: int64
+          minimum: 1
+        datasourceName:
+          type: string
+          maxLength: 80
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s-])*\w$|^\w$
+        exposureSetId:
+          type: string
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+      required:
+      - datasourceName
   securitySchemes:
     RMS_Auth:
       type: apiKey

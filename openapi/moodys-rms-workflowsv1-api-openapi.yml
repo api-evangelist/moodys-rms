@@ -227,48 +227,56 @@ paths:
       - WorkflowsV1
 components:
   schemas:
-    RegionPerilSimulation:
+    Workflow:
       type: object
       properties:
-        perilCode:
-          type: string
-        modelVersion:
-          type: string
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        regionCode:
-          type: string
-        simulationSetId:
-          type: integer
-          format: int64
-        simulationPeriods:
-          type: integer
-          format: int64
-        modelRegionCode:
-          type: string
-        eltAnalysisId:
-          type: integer
-          format: int64
-        engineVersion:
-          type: string
-      required:
-      - simulationPeriods
-      - simulationSetId
-    GeoHazInput:
-      type: object
-      properties:
-        datasource:
-          type: string
         id:
+          type: integer
+          format: int64
+        tenantName:
           type: string
-        layers:
+        userName:
+          type: string
+        status:
+          type: string
+          enum:
+          - QUEUED
+          - RUNNING
+          - FINISHED
+          - FAILED
+          - CANCELLED
+          - PENDING
+          - CANCELLING
+          - CANCEL_REQUESTED
+        submitTime:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        jobs:
           type: array
           items:
-            $ref: '#/components/schemas/LayerInfo'
-      required:
-      - datasource
-      - layers
+            $ref: '#/components/schemas/Job'
+        summary:
+          type: object
+          additionalProperties:
+            type: string
+        output:
+          type: object
+          additionalProperties:
+            type: object
+        progress:
+          type: integer
+          format: int32
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobMessage'
     Currency:
       type: object
       properties:
@@ -326,6 +334,100 @@ components:
       required:
       - currency
       - edm
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    RegionPerilSimulation:
+      type: object
+      properties:
+        perilCode:
+          type: string
+        modelVersion:
+          type: string
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        regionCode:
+          type: string
+        simulationSetId:
+          type: integer
+          format: int64
+        simulationPeriods:
+          type: integer
+          format: int64
+        modelRegionCode:
+          type: string
+        eltAnalysisId:
+          type: integer
+          format: int64
+        engineVersion:
+          type: string
+      required:
+      - simulationPeriods
+      - simulationSetId
+    GeohazOperationV1:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/GeoHazInput'
+      required:
+      - input
+      - label
+      - operation
+    OperationV2:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          operation:
+            description: The `operation` attribute identifies the operation API to be invoked.
+            type: string
+          input:
+            type: object
+      required:
+      - input
+      - label
+      - operation
+    ProcessOperationV1:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/OperationV1'
+      - type: object
+        properties:
+          input:
+            $ref: '#/components/schemas/WorkflowPlanProcessInput'
+      required:
+      - input
+      - label
+      - operation
     UserDefinedWorkflow:
       type: object
       properties:
@@ -365,123 +467,58 @@ components:
       - input
       - label
       - operation
-    LayerInfo:
+    GeoHazInput:
       type: object
       properties:
-        name:
-          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+        datasource:
           type: string
-        type:
-          description: Name of the job type. One of `geocode` or `hazard`.
+        id:
           type: string
-        engineType:
-          description: Name of engine.
-          type: string
-        version:
-          description: Version of the peril model.
-          type: string
-        layerOptions:
-          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
-
-            '
-          type: object
-          additionalProperties:
-            type: string
+        layers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LayerInfo'
       required:
-      - engineType
-      - name
-      - type
-      - version
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    JobMessage:
-      type: object
-      properties:
-        message:
-          type: string
-        type:
-          type: string
-    GeohazOperationV1:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/OperationV1'
-      - type: object
-        properties:
-          input:
-            $ref: '#/components/schemas/GeoHazInput'
-      required:
-      - input
-      - label
-      - operation
-    Workflow:
+      - datasource
+      - layers
+    Job:
       type: object
       properties:
         id:
+          type: string
+          format: uuid
+        taskId:
+          type: integer
+          format: int32
+        workflowId:
           type: integer
           format: int64
-        tenantName:
-          type: string
-        userName:
-          type: string
         status:
           type: string
-          enum:
-          - QUEUED
-          - RUNNING
-          - FINISHED
-          - FAILED
-          - CANCELLED
-          - PENDING
-          - CANCELLING
-          - CANCEL_REQUESTED
         submitTime:
           type: string
-        startTime:
-          type: string
-        endTime:
+        createdAt:
           type: string
         name:
           type: string
-        type:
-          type: string
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
-        summary:
+        input:
           type: object
           additionalProperties:
-            type: string
+            type: object
         output:
           type: object
           additionalProperties:
             type: object
-        progress:
-          type: integer
-          format: int32
-        messages:
+        priorJobs:
           type: array
           items:
-            $ref: '#/components/schemas/JobMessage'
-    ProcessOperationV1:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/OperationV1'
-      - type: object
-        properties:
-          input:
-            $ref: '#/components/schemas/WorkflowPlanProcessInput'
-      required:
-      - input
-      - label
-      - operation
+            type: string
+            format: uuid
+        percentComplete:
+          type: integer
+          format: int32
+        continueOnFailure:
+          type: boolean
     GroupingInput:
       type: object
       properties:
@@ -539,44 +576,32 @@ components:
       - numOfSimulations
       - propagateDetailedLosses
       - simulateToPLT
-    Job:
+    ErrorMessage:
       type: object
       properties:
-        id:
+        code:
           type: string
-          format: uuid
-        taskId:
+        message:
+          type: string
+        logId:
+          type: string
+    JobMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        type:
+          type: string
+    WorkflowSearchResult:
+      type: object
+      properties:
+        totalMatchCount:
           type: integer
           format: int32
-        workflowId:
-          type: integer
-          format: int64
-        status:
-          type: string
-        submitTime:
-          type: string
-        createdAt:
-          type: string
-        name:
-          type: string
-        input:
-          type: object
-          additionalProperties:
-            type: object
-        output:
-          type: object
-          additionalProperties:
-            type: object
-        priorJobs:
+        workflows:
           type: array
           items:
-            type: string
-            format: uuid
-        percentComplete:
-          type: integer
-          format: int32
-        continueOnFailure:
-          type: boolean
+            $ref: '#/components/schemas/Workflow'
     OperationV1:
       description: List containing sub-jobs of the batch workflow
       type: object
@@ -612,31 +637,6 @@ components:
       - input
       - label
       - operation
-    OperationV2:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/OperationV1'
-      - type: object
-        properties:
-          operation:
-            description: The `operation` attribute identifies the operation API to be invoked.
-            type: string
-          input:
-            type: object
-      required:
-      - input
-      - label
-      - operation
-    WorkflowSearchResult:
-      type: object
-      properties:
-        totalMatchCount:
-          type: integer
-          format: int32
-        workflows:
-          type: array
-          items:
-            $ref: '#/components/schemas/Workflow'
   securitySchemes:
     RMS_Auth:
       type: apiKey

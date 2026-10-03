@@ -156,15 +156,6 @@ paths:
       - Exposure SetsV1
 components:
   schemas:
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     PatchExposureSetReq:
       type: object
       properties:
@@ -188,13 +179,6 @@ components:
       - operation
       - targetProperty
       - value
-    GroupDetail:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     ExposureSetSearchResult:
       type: object
       properties:
@@ -205,6 +189,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExposureSet'
+    GroupDetail:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
     ExposureSet:
       type: object
       properties:

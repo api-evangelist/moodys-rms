@@ -199,14 +199,6 @@ components:
         comment:
           type: string
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest:
-      required:
-      - cidrEntry
-      type: object
-      properties:
-        cidrEntry:
-          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
-      additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest:
       type: object
       properties:
@@ -224,6 +216,14 @@ components:
           description: Array CIDR blocks identifying IP addresses may no longer access the cluser.
           items:
             type: string
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest:
+      type: object
+      properties:
+        minTlsVersion:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.Cluster:
       type: object
@@ -253,13 +253,13 @@ components:
         allConnectionsEncrypted:
           type: boolean
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest:
+    RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest:
+      required:
+      - cidrEntry
       type: object
       properties:
-        minTlsVersion:
-          type:
-          - string
-          - 'null'
+        cidrEntry:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
       additionalProperties: false
   securitySchemes:
     RMS_Auth:

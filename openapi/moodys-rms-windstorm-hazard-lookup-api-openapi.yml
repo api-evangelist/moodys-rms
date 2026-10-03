@@ -656,18 +656,6 @@ paths:
       x-operation-id-source: derived
 components:
   examples:
-    NaWsAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: DE
-        latitude: 38.9264
-        longitude: -75.4281
-        rmsGeoModelResolutionCode: 1
-        postalCodeGeoId: 99999419963
-        admin1GeoId: 99999110
-        admin2GeoId: 99999210005
     USWindpoolZoneAddress:
       value:
         countryCode: US
@@ -677,26 +665,6 @@ components:
         latitude: 30.905307
         longitude: -88.043782
         rmsGeoModelResolutionCode: 1
-    GuAddress:
-      value:
-        countryCode: GU
-        countryScheme: ISO2A
-        countryRmsCode: GU
-        latitude: 13.495093
-        longitude: 144.780626
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 60073592
-        admin3GeoId: 60073615
-    AuAddress:
-      value:
-        countryCode: AU
-        countryScheme: ISO2A
-        countryRmsCode: AU
-        latitude: -19.284868
-        longitude: 146.772049
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 2344702
-        postalCodeGeoId: 12708445
     HkAddress:
       value:
         countryCode: HK
@@ -709,11 +677,214 @@ components:
         admin2GeoId: 24703143
         zone1GeoId: 60345327
         cityGeoId: 2165358
+    AuAddress:
+      value:
+        countryCode: AU
+        countryScheme: ISO2A
+        countryRmsCode: AU
+        latitude: -19.284868
+        longitude: 146.772049
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 2344702
+        postalCodeGeoId: 12708445
+    NaWsAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: DE
+        latitude: 38.9264
+        longitude: -75.4281
+        rmsGeoModelResolutionCode: 1
+        postalCodeGeoId: 99999419963
+        admin1GeoId: 99999110
+        admin2GeoId: 99999210005
+    GuAddress:
+      value:
+        countryCode: GU
+        countryScheme: ISO2A
+        countryRmsCode: GU
+        latitude: 13.495093
+        longitude: 144.780626
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 60073592
+        admin3GeoId: 60073615
+  responses:
+    401Response:
+      description: No valid API key provided.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    500Response:
+      description: Something went wrong on our end (this happens rarely)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
+    400Response:
+      description: The request was unacceptable, likely due to missing a required input.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorOutput'
   schemas:
-    WarningOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/WarningItem'
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ERR_XXXX
+          description: 'Error codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | ERR_4000 | No details found for requested layer. |
+
+            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
+
+            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
+
+            | ERR_4003 | Location is in a region that is not supported by this layer. |
+
+            | ERR_4005 | Insufficient information to look up requested data. |
+
+            | ERR_4041 | Invalid input. |
+
+            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
+
+            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
+
+            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
+
+            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
+
+            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
+
+            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
+
+            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
+
+            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
+
+            | ERR_4400 | General error for the layer. |
+
+            | ERR_4401 | Invalid address input. Incorrect field. |
+
+            | ERR_4010 | Forbidden. |
+
+            | ERR_4030 | Unauthorized. |
+
+            | ERR_4040 | Not found. |
+
+            | ERR_4050 | Method not allowed. |
+
+            | ERR_4060 | Not acceptable. |
+
+            | ERR_4080 | Request timeout. |
+
+            | ERR_4130 | Request too large. |
+
+            | ERR_4150 | Unsupported media type. |
+
+            | ERR_4220 | Unprocessable entity. |
+
+            | ERR_4290 | Quota exceeded. |
+
+            | ERR_5000 | Internal server error. |
+
+            | ERR_5040 | Gateway timeout. |
+
+            '
+        message:
+          type: string
+          example: Error message
+    WarningItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: FLG_XXXX
+          description: 'Warning codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | FLG_4001 | Layer option was skipped. Response based on its default value. |
+
+            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
+
+            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
+
+            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
+
+            | FLG_4103 | No additional options can be provided to this lookup. |
+
+            | FLG_4201 | Location not matched in ESDB building attributes database. |
+
+            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
+
+            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
+
+            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
+
+            | FLG_4205 | The geocoding version used is not recommended for this layer. |
+
+            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
+
+            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
+
+            | FLG_4208 | Insufficient geocoding information to look up requested data. |
+
+            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
+
+            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
+
+            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
+
+            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
+
+            | FLG_4306 | Missing required field to perform gross loss calculations. |
+
+            | FLG_4307 | Gross losses can only be calculated for reference view. |
+
+            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
+
+            | FLG_4401 | No data found for this location. |
+
+            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
+
+            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
+
+            | FLG_4403 | The location entered is outside of supported region, Response based on default value
+
+            '
+        message:
+          type: string
+          example: Warning message
+    AddressInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
     GeocodeInput:
       type: object
       required:
@@ -855,77 +1026,6 @@ components:
           description: Windpool Zone
           example: Zone 5
           maxLength: 60
-    WarningItem:
-      type: object
-      properties:
-        code:
-          type: string
-          example: FLG_XXXX
-          description: 'Warning codes:
-
-            |   Code   | Description |
-
-            |----------|-------------|
-
-            | FLG_4001 | Layer option was skipped. Response based on its default value. |
-
-            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
-
-            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
-
-            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
-
-            | FLG_4103 | No additional options can be provided to this lookup. |
-
-            | FLG_4201 | Location not matched in ESDB building attributes database. |
-
-            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
-
-            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
-
-            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
-
-            | FLG_4205 | The geocoding version used is not recommended for this layer. |
-
-            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
-
-            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
-
-            | FLG_4208 | Insufficient geocoding information to look up requested data. |
-
-            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
-
-            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
-
-            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
-
-            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
-
-            | FLG_4306 | Missing required field to perform gross loss calculations. |
-
-            | FLG_4307 | Gross losses can only be calculated for reference view. |
-
-            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
-
-            | FLG_4401 | No data found for this location. |
-
-            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
-
-            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
-
-            | FLG_4403 | The location entered is outside of supported region, Response based on default value
-
-            '
-        message:
-          type: string
-          example: Warning message
-    AddressInput:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          $ref: '#/components/schemas/GeocodeOutput'
     GeocodeOutput:
       type: object
       allOf:
@@ -1077,110 +1177,10 @@ components:
             description: Data version
             example: xx.x.xxxx.x
             maxLength: 20
-    ErrorOutput:
-      type: object
-      properties:
-        contextId:
-          type: string
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        additionalInfo:
-          type: string
-          example: ''
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    ErrorItem:
-      type: object
-      properties:
-        code:
-          type: string
-          example: ERR_XXXX
-          description: 'Error codes:
-
-            |   Code   | Description |
-
-            |----------|-------------|
-
-            | ERR_4000 | No details found for requested layer. |
-
-            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
-
-            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
-
-            | ERR_4003 | Location is in a region that is not supported by this layer. |
-
-            | ERR_4005 | Insufficient information to look up requested data. |
-
-            | ERR_4041 | Invalid input. |
-
-            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
-
-            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
-
-            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
-
-            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
-
-            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
-
-            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
-
-            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
-
-            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
-
-            | ERR_4400 | General error for the layer. |
-
-            | ERR_4401 | Invalid address input. Incorrect field. |
-
-            | ERR_4010 | Forbidden. |
-
-            | ERR_4030 | Unauthorized. |
-
-            | ERR_4040 | Not found. |
-
-            | ERR_4050 | Method not allowed. |
-
-            | ERR_4060 | Not acceptable. |
-
-            | ERR_4080 | Request timeout. |
-
-            | ERR_4130 | Request too large. |
-
-            | ERR_4150 | Unsupported media type. |
-
-            | ERR_4220 | Unprocessable entity. |
-
-            | ERR_4290 | Quota exceeded. |
-
-            | ERR_5000 | Internal server error. |
-
-            | ERR_5040 | Gateway timeout. |
-
-            '
-        message:
-          type: string
-          example: Error message
-  responses:
-    500Response:
-      description: Something went wrong on our end (this happens rarely)
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorOutput'
-    401Response:
-      description: No valid API key provided.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorOutput'
-    400Response:
-      description: The request was unacceptable, likely due to missing a required input.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorOutput'
+    WarningOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/WarningItem'
   securitySchemes:
     RMS_Auth:
       type: apiKey
