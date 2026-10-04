@@ -197,6 +197,39 @@ paths:
       - RMS_Auth: []
 components:
   schemas:
+    ReportSearchItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        edmName:
+          type: string
+        createDate:
+          type: string
+        exposureId:
+          type: integer
+          format: int32
+        exposureType:
+          type: string
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        userName:
+          type: string
+        notes:
+          type: string
+        reportDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportDetails'
     ReportListSearchItem:
       type: object
       properties:
@@ -275,39 +308,6 @@ components:
           type: string
         logId:
           type: string
-    ReportSearchItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        edmName:
-          type: string
-        createDate:
-          type: string
-        exposureId:
-          type: integer
-          format: int32
-        exposureType:
-          type: string
-          enum:
-          - PORTFOLIO
-          - ACCOUNT
-          - LOCATION
-          - POLICY
-          - STEP_POLICY
-          - TREATY
-          - AGGPORTFOLIO
-        userName:
-          type: string
-        notes:
-          type: string
-        reportDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportDetails'
     ReportListSearchResult:
       type: object
       properties:

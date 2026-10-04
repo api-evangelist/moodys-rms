@@ -102,6 +102,27 @@ paths:
       - ExportsV1
 components:
   schemas:
+    LossDetails:
+      description: List with loss details.
+      type: object
+      properties:
+        lossType:
+          description: Different type of losses.
+          type: string
+          example: STATS
+        outputLevels:
+          type: array
+          items:
+            type: string
+            description: Output Levels that should be saved in the result.
+            example: '[Admin1, Admin2, Contract, Country]'
+        perspectives:
+          type: array
+          items:
+            type: string
+            description: Financial perspectives that should be saved in the result.
+            example: '[GU, GR]'
+      example: '[LossDetails_STATS, LossDetails_EP, LossDetails_LOSS_TABLE]'
     DownloadResultsInput:
       type: object
       properties:
@@ -151,27 +172,6 @@ components:
         propertyName: type
       required:
       - exportType
-    LossDetails:
-      description: List with loss details.
-      type: object
-      properties:
-        lossType:
-          description: Different type of losses.
-          type: string
-          example: STATS
-        outputLevels:
-          type: array
-          items:
-            type: string
-            description: Output Levels that should be saved in the result.
-            example: '[Admin1, Admin2, Contract, Country]'
-        perspectives:
-          type: array
-          items:
-            type: string
-            description: Financial perspectives that should be saved in the result.
-            example: '[GU, GR]'
-      example: '[LossDetails_STATS, LossDetails_EP, LossDetails_LOSS_TABLE]'
   securitySchemes:
     RMS_Auth:
       type: apiKey

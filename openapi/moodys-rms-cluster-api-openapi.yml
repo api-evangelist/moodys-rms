@@ -187,17 +187,49 @@ paths:
                 $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse'
 components:
   schemas:
-    RMS.EnterpriseIntegrationHub.Contracts.CidrEntry:
-      required:
-      - cidrBlock
-      - comment
+    RMS.EnterpriseIntegrationHub.Contracts.Cluster:
       type: object
       properties:
-        cidrBlock:
-          type: string
-          description: A <a href="https://www.rfc-editor.org/rfc/rfc4632.html" target="_blank">CIDR</a> block specifying a range of IP addresses that may access the cluster.
-        comment:
-          type: string
+        name:
+          type:
+          - string
+          - 'null'
+        state:
+          type:
+          - string
+          - 'null'
+        cidrEntries:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest:
+      type: object
+      properties:
+        minTlsVersion:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse:
+      type: object
+      properties:
+        minTlsVersion:
+          type:
+          - string
+          - 'null'
+        allConnectionsEncrypted:
+          type: boolean
+      additionalProperties: false
+    RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest:
+      required:
+      - cidrEntry
+      type: object
+      properties:
+        cidrEntry:
+          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
       additionalProperties: false
     RMS.EnterpriseIntegrationHub.Contracts.UpdateCidrRequest:
       type: object
@@ -217,49 +249,17 @@ components:
           items:
             type: string
       additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.SetClusterSecurityRequest:
-      type: object
-      properties:
-        minTlsVersion:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.Cluster:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        state:
-          type:
-          - string
-          - 'null'
-        cidrEntries:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.GetClusterSecurityResponse:
-      type: object
-      properties:
-        minTlsVersion:
-          type:
-          - string
-          - 'null'
-        allConnectionsEncrypted:
-          type: boolean
-      additionalProperties: false
-    RMS.EnterpriseIntegrationHub.Contracts.AddCidrRequest:
+    RMS.EnterpriseIntegrationHub.Contracts.CidrEntry:
       required:
-      - cidrEntry
+      - cidrBlock
+      - comment
       type: object
       properties:
-        cidrEntry:
-          $ref: '#/components/schemas/RMS.EnterpriseIntegrationHub.Contracts.CidrEntry'
+        cidrBlock:
+          type: string
+          description: A <a href="https://www.rfc-editor.org/rfc/rfc4632.html" target="_blank">CIDR</a> block specifying a range of IP addresses that may access the cluster.
+        comment:
+          type: string
       additionalProperties: false
   securitySchemes:
     RMS_Auth:

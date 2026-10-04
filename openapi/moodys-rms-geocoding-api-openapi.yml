@@ -5551,160 +5551,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ReferenceTableZone4ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableZone4Output'
     ReferenceTableAdmin3ListOutput:
       type: array
       items:
         $ref: '#/components/schemas/ReferenceTableAdmin3Output'
-    ReferenceTableAdmin4ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableAdmin4Output'
-    ReferenceTableAdmin1Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: US
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: US
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 840
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 99999106
-    GeocodeInput:
-      type: object
-      required:
-      - countryCode
-      - countryScheme
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: User defined id
-          example: 0
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '001'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: ALAMEDA COUNTY
-          maxLength: 256
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: ''
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: ''
-          maxLength: 256
-        admin4Code:
-          type: string
-          description: Code for administrative level 4
-          example: '044230130'
-          maxLength: 16
-        admin4Name:
-          type: string
-          description: Name of administrative level 4
-          example: '044230130'
-          maxLength: 256
-        cityName:
-          type: string
-          description: Name of City/Town
-          example: NEWARK
-          maxLength: 256
-        countryCode:
-          type: string
-          description: Country Code (optional for geocoding if latitude and longitude are provided)
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryScheme:
-          type: string
-          description: Standard for user-supplied country code (optional for geocoding if latitude and longitude are provided)
-          example: ISO2A
-          enum:
-          - ISO2A
-          - ISO3A
-          - ISO3N
-          - FIPS
-        latitude:
-          type: number
-          format: double
-          description: Location Latitude
-          example: 37.54120000000001
-          minimum: -90
-          maximum: 90
-        longitude:
-          type: number
-          format: double
-          description: Location Longitude
-          example: -122.06061000000001
-          minimum: -180
-          maximum: 180
-        postalCode:
-          type: string
-          description: Postal Code
-          example: '94560'
-          maxLength: 16
-        streetAddress:
-          type: string
-          description: Address containing Number, Street Name, Street Type, etc.
-          example: 7575 GATEWAY BLVD
-          maxLength: 256
-        name:
-          type: string
-          description: Supplemental text captured for the address
-          example: ''
-          maxLength: 512
     ReferenceTableAdmin3Output:
       type: object
       properties:
@@ -5777,51 +5631,10 @@ components:
           format: int64
           description: Globally unique ID for administrative level 3. Admin3 represents smaller geographic divisions than Admin2, such as municipality.
           example: 61762880
-    ReferenceTableZone4Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: CZ
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: EZ
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: CZ
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: Czech Republic
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 203
-        zone4Name:
-          type: string
-          description: Name of CRESTA zone
-          example: CZE_68742
-          maxLength: 256
-        zone4GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for CRESTA zones.
-          example: 64048047
-    ReferenceTableZone4ListOutput:
+    ReferenceTableZone3ListOutput:
       type: array
       items:
-        $ref: '#/components/schemas/ReferenceTableZone4Output'
-    ReferenceTableCityListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableCityOutput'
+        $ref: '#/components/schemas/ReferenceTableZone3Output'
     ReferenceTableZone3Output:
       type: object
       properties:
@@ -5859,6 +5672,10 @@ components:
           format: int64
           description: Globally unique ID for Low-resolution CRESTA Zone.
           example: 64021802
+    ReferenceTableCountryListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableCountryOutput'
     ReferenceTableCountryOutput:
       type: object
       properties:
@@ -5886,51 +5703,109 @@ components:
           type: integer
           description: Globally unique ID for Country
           example: 840
-    ReferenceTableAdmin1ListOutput:
+    ReferenceTableCityListOutput:
       type: array
       items:
-        $ref: '#/components/schemas/ReferenceTableAdmin1Output'
-    ReferenceTableAdmin2ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableAdmin2Output'
-    ReferenceTableZone1Output:
+        $ref: '#/components/schemas/ReferenceTableCityOutput'
+    ReferenceTableAdmin1Output:
       type: object
       properties:
         countryIso2a:
           type: string
           description: Country ISO2A code
-          example: DK
+          example: US
           maxLength: 2
         countryFips:
           type: string
           description: Country FIPS code
-          example: DA
+          example: US
           maxLength: 4
         countryRmsCode:
           type: string
           description: RMS code for Country
-          example: DK
+          example: US
           maxLength: 4
         countryName:
           type: string
           description: Name of Country
-          example: Denmark
+          example: United States
           maxLength: 512
         countryGeoId:
           type: integer
           description: Globally unique ID for Country
-          example: 208
-        zone1Name:
+          example: 840
+        admin1Code:
           type: string
-          description: Name of CRESTA zone
-          example: '3'
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
           maxLength: 256
-        zone1GeoId:
+        admin1GeoId:
           type: integer
           format: int64
-          description: Globally unique ID for CRESTA zones.
-          example: 60344626
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 99999106
+    ReferenceTableAdmin2Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: US
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: US
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 840
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 99999106
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 99999206001
     ReferenceTableLocationCodeOutput:
       type: object
       properties:
@@ -6023,6 +5898,242 @@ components:
           format: int64
           description: Globally unique ID for postal code
           example: 60550885
+    ReferenceTableLocationCodeListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableLocationCodeOutput'
+    ReferenceTableZone1ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableZone1Output'
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ReferenceTableZone4Output:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: CZ
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: EZ
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: CZ
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: Czech Republic
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 203
+        zone4Name:
+          type: string
+          description: Name of CRESTA zone
+          example: CZE_68742
+          maxLength: 256
+        zone4GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for CRESTA zones.
+          example: 64048047
+    ReferenceTableCityOutput:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: AG
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: AC
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: CB
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: Antigua and Barbuda
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 28
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: '200'
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: Barbuda
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 60375118
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '200'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: Barbuda
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 2344541
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: '28200001'
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: AG001
+          maxLength: 256
+        admin3GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: 60372390
+        cityCode:
+          type: string
+          description: Code for City/Town
+          example: '282001'
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: The Caves
+          maxLength: 256
+        cityGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for City/Town
+          example: 56228
+    ReferenceTablePostalCodeOutput:
+      type: object
+      properties:
+        countryIso2a:
+          type: string
+          description: Country ISO2A code
+          example: US
+          maxLength: 2
+        countryFips:
+          type: string
+          description: Country FIPS code
+          example: US
+          maxLength: 4
+        countryRmsCode:
+          type: string
+          description: RMS code for Country
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryGeoId:
+          type: integer
+          description: Globally unique ID for Country
+          example: 840
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin1GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: 99999106
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin2GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: 99999206001
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: NE1
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: ''
+          maxLength: 256
+        admin3GeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: 12695859
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: NEWARK
+          maxLength: 256
+        cityGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for City/Town
+          example: 999993061080
+        postalCode:
+          type: string
+          description: Postal Code
+          example: '94560'
+          maxLength: 16
+        postalCodeGeoId:
+          type: integer
+          format: int64
+          description: Globally unique ID for postal code
+          example: 99999494560
     GeocodeOutput:
       type: object
       allOf:
@@ -6174,6 +6285,198 @@ components:
             description: Data version
             example: xx.x.xxxx.x
             maxLength: 20
+    GeocodeInput:
+      type: object
+      required:
+      - countryCode
+      - countryScheme
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: User defined id
+          example: 0
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: ''
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: ''
+          maxLength: 256
+        admin4Code:
+          type: string
+          description: Code for administrative level 4
+          example: '044230130'
+          maxLength: 16
+        admin4Name:
+          type: string
+          description: Name of administrative level 4
+          example: '044230130'
+          maxLength: 256
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: NEWARK
+          maxLength: 256
+        countryCode:
+          type: string
+          description: Country Code (optional for geocoding if latitude and longitude are provided)
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryScheme:
+          type: string
+          description: Standard for user-supplied country code (optional for geocoding if latitude and longitude are provided)
+          example: ISO2A
+          enum:
+          - ISO2A
+          - ISO3A
+          - ISO3N
+          - FIPS
+        latitude:
+          type: number
+          format: double
+          description: Location Latitude
+          example: 37.54120000000001
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: double
+          description: Location Longitude
+          example: -122.06061000000001
+          minimum: -180
+          maximum: 180
+        postalCode:
+          type: string
+          description: Postal Code
+          example: '94560'
+          maxLength: 16
+        streetAddress:
+          type: string
+          description: Address containing Number, Street Name, Street Type, etc.
+          example: 7575 GATEWAY BLVD
+          maxLength: 256
+        name:
+          type: string
+          description: Supplemental text captured for the address
+          example: ''
+          maxLength: 512
+    ReferenceTableAdmin2ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableAdmin2Output'
+    ReferenceTableAdmin1ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableAdmin1Output'
+    ErrorItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: ERR_XXXX
+          description: 'Error codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | ERR_4000 | No details found for requested layer. |
+
+            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
+
+            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
+
+            | ERR_4003 | Location is in a region that is not supported by this layer. |
+
+            | ERR_4005 | Insufficient information to look up requested data. |
+
+            | ERR_4041 | Invalid input. |
+
+            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
+
+            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
+
+            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
+
+            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
+
+            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
+
+            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
+
+            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
+
+            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
+
+            | ERR_4400 | General error for the layer. |
+
+            | ERR_4401 | Invalid address input. Incorrect field. |
+
+            | ERR_4010 | Forbidden. |
+
+            | ERR_4030 | Unauthorized. |
+
+            | ERR_4040 | Not found. |
+
+            | ERR_4050 | Method not allowed. |
+
+            | ERR_4060 | Not acceptable. |
+
+            | ERR_4080 | Request timeout. |
+
+            | ERR_4130 | Request too large. |
+
+            | ERR_4150 | Unsupported media type. |
+
+            | ERR_4220 | Unprocessable entity. |
+
+            | ERR_4290 | Quota exceeded. |
+
+            | ERR_5000 | Internal server error. |
+
+            | ERR_5040 | Gateway timeout. |
+
+            '
+        message:
+          type: string
+          example: Error message
+    ReferenceTableAdmin4ListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTableAdmin4Output'
+    ReferenceTablePostalCodeListOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReferenceTablePostalCodeOutput'
     ReferenceTableAdmin4Output:
       type: object
       properties:
@@ -6261,349 +6564,46 @@ components:
           format: int64
           description: Globally unique ID for administrative level 4. Admin4 represents smaller geographic divisions than Admin3, such as neighborhood/district.
           example: 71071043
-    ReferenceTableZone1ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableZone1Output'
-    ReferenceTableLocationCodeListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableLocationCodeOutput'
-    ErrorOutput:
-      type: object
-      properties:
-        contextId:
-          type: string
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        additionalInfo:
-          type: string
-          example: ''
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    ReferenceTableCountryListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableCountryOutput'
-    ErrorItem:
-      type: object
-      properties:
-        code:
-          type: string
-          example: ERR_XXXX
-          description: 'Error codes:
-
-            |   Code   | Description |
-
-            |----------|-------------|
-
-            | ERR_4000 | No details found for requested layer. |
-
-            | ERR_4001 | Insufficient geocoding information. A required field is missing. |
-
-            | ERR_4002 | Insufficient geocoding resolution to look up requested data. |
-
-            | ERR_4003 | Location is in a region that is not supported by this layer. |
-
-            | ERR_4005 | Insufficient information to look up requested data. |
-
-            | ERR_4041 | Invalid input. |
-
-            | ERR_4100 | Invalid lookupType. Valid lookups are ''wetOrDry'', ''floodDepth'', and ''proximity''. |
-
-            | ERR_4101 | Invalid distanceUnit. Valid distanceUnits are ''meters'' and ''feet''. |
-
-            | ERR_4102 | Invalid returnPeriod. Valid returnPeriods are 30, 50, 100, 200, 250, 500, and 1000. |
-
-            | ERR_4103 | Invalid defended option. Valid defended options are ''true'' and ''false''. |
-
-            | ERR_4104 | Invalid proximityDistance. Valid proximityDistances are positive numbers. |
-
-            | ERR_4105 | Invalid distanceUnit. Valid distanceUnits are ''feet'', ''meters'', ''miles'', and ''km''. |
-
-            | ERR_4106 | Insufficient information to look up requested data. Missing one or both of distanceUnit and proximityDistance. |
-
-            | ERR_4300 | Invalid basement. Valid basements are ''yes'', ''no'', and ''default''. |
-
-            | ERR_4400 | General error for the layer. |
-
-            | ERR_4401 | Invalid address input. Incorrect field. |
-
-            | ERR_4010 | Forbidden. |
-
-            | ERR_4030 | Unauthorized. |
-
-            | ERR_4040 | Not found. |
-
-            | ERR_4050 | Method not allowed. |
-
-            | ERR_4060 | Not acceptable. |
-
-            | ERR_4080 | Request timeout. |
-
-            | ERR_4130 | Request too large. |
-
-            | ERR_4150 | Unsupported media type. |
-
-            | ERR_4220 | Unprocessable entity. |
-
-            | ERR_4290 | Quota exceeded. |
-
-            | ERR_5000 | Internal server error. |
-
-            | ERR_5040 | Gateway timeout. |
-
-            '
-        message:
-          type: string
-          example: Error message
-    ReferenceTablePostalCodeListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTablePostalCodeOutput'
-    ReferenceTableCityOutput:
+    ReferenceTableZone1Output:
       type: object
       properties:
         countryIso2a:
           type: string
           description: Country ISO2A code
-          example: AG
+          example: DK
           maxLength: 2
         countryFips:
           type: string
           description: Country FIPS code
-          example: AC
+          example: DA
           maxLength: 4
         countryRmsCode:
           type: string
           description: RMS code for Country
-          example: CB
+          example: DK
           maxLength: 4
         countryName:
           type: string
           description: Name of Country
-          example: Antigua and Barbuda
+          example: Denmark
           maxLength: 512
         countryGeoId:
           type: integer
           description: Globally unique ID for Country
-          example: 28
-        admin1Code:
+          example: 208
+        zone1Name:
           type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: '200'
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: Barbuda
+          description: Name of CRESTA zone
+          example: '3'
           maxLength: 256
-        admin1GeoId:
+        zone1GeoId:
           type: integer
           format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 60375118
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '200'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: Barbuda
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 2344541
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: '28200001'
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: AG001
-          maxLength: 256
-        admin3GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: 60372390
-        cityCode:
-          type: string
-          description: Code for City/Town
-          example: '282001'
-        cityName:
-          type: string
-          description: Name of City/Town
-          example: The Caves
-          maxLength: 256
-        cityGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for City/Town
-          example: 56228
-    ReferenceTableAdmin2Output:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: US
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: US
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 840
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 99999106
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '001'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: ALAMEDA COUNTY
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 99999206001
-    ReferenceTablePostalCodeOutput:
-      type: object
-      properties:
-        countryIso2a:
-          type: string
-          description: Country ISO2A code
-          example: US
-          maxLength: 2
-        countryFips:
-          type: string
-          description: Country FIPS code
-          example: US
-          maxLength: 4
-        countryRmsCode:
-          type: string
-          description: RMS code for Country
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryGeoId:
-          type: integer
-          description: Globally unique ID for Country
-          example: 840
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin1GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: 99999106
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '001'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: ALAMEDA COUNTY
-          maxLength: 256
-        admin2GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: 99999206001
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: NE1
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: ''
-          maxLength: 256
-        admin3GeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: 12695859
-        cityName:
-          type: string
-          description: Name of City/Town
-          example: NEWARK
-          maxLength: 256
-        cityGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for City/Town
-          example: 999993061080
-        postalCode:
-          type: string
-          description: Postal Code
-          example: '94560'
-          maxLength: 16
-        postalCodeGeoId:
-          type: integer
-          format: int64
-          description: Globally unique ID for postal code
-          example: 99999494560
-    ReferenceTableZone3ListOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/ReferenceTableZone3Output'
+          description: Globally unique ID for CRESTA zones.
+          example: 60344626
   responses:
-    401Response:
-      description: No valid API key provided.
+    500Response:
+      description: Something went wrong on our end (this happens rarely)
       content:
         application/json:
           schema:
@@ -6614,14 +6614,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorOutput'
-    400Response:
-      description: The request was unacceptable, likely due to missing a required input.
+    401Response:
+      description: No valid API key provided.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorOutput'
-    500Response:
-      description: Something went wrong on our end (this happens rarely)
+    400Response:
+      description: The request was unacceptable, likely due to missing a required input.
       content:
         application/json:
           schema:

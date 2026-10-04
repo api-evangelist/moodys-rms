@@ -279,16 +279,56 @@ paths:
       - Analysis GroupsV1
 components:
   schemas:
-    ExposureValue:
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    LossOccurrence:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        code:
-          type: string
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
         name:
           type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
     TreatyWithAnalysisInfo:
       type: object
       properties:
@@ -388,56 +428,6 @@ components:
       - cedant
       - treatyNumber
       - treatyType
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    LossOccurrence:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - treatyId
     AnalysisGroupSearchResult:
       type: object
       properties:
@@ -448,15 +438,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalysisGroup'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
     Producer:
       description: Agent or brokerage firm that produced a policy.
       type: object
@@ -522,6 +503,25 @@ components:
           type: boolean
         isActive:
           type: boolean
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

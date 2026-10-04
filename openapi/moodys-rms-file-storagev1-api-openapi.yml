@@ -409,6 +409,50 @@ paths:
       - File StorageV1
 components:
   schemas:
+    S3Bucket:
+      type: object
+      properties:
+        accessKeyId:
+          type: string
+        secretAccessKey:
+          type: string
+        sessionToken:
+          type: string
+        s3Path:
+          type: string
+        s3Region:
+          type: string
+    ErrorBody:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        category:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+    FileInput:
+      type: object
+      properties:
+        fileInputType:
+          type: string
+          enum:
+          - MRI
+          - ALM
+        fileType:
+          type: string
+        fileSize:
+          type: integer
+          format: int64
+        fileName:
+          type: string
+      required:
+      - fileName
+      - fileType
     AggregateExposuresList:
       type: object
       properties:
@@ -439,6 +483,15 @@ components:
           type: string
         dependencyResolution:
           type: string
+    AlmErrorMessage:
+      type: object
+      properties:
+        row:
+          type: string
+        column:
+          type: string
+        text:
+          type: string
     EdmImportInput:
       type: object
       properties:
@@ -451,122 +504,6 @@ components:
           items:
             type: string
           uniqueItems: true
-    FileInput:
-      type: object
-      properties:
-        fileInputType:
-          type: string
-          enum:
-          - MRI
-          - ALM
-        fileType:
-          type: string
-        fileSize:
-          type: integer
-          format: int64
-        fileName:
-          type: string
-      required:
-      - fileName
-      - fileType
-    AlmErrorMessage:
-      type: object
-      properties:
-        row:
-          type: string
-        column:
-          type: string
-        text:
-          type: string
-    S3UploadHelper:
-      type: object
-      properties:
-        bucketPrefix:
-          type: string
-        awsRegion:
-          type: string
-        uploadId:
-          type: string
-        uploadKey1:
-          type: string
-        uploadKey2:
-          type: string
-        uploadKey3:
-          type: string
-    ErrorBody:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        category:
-          type: string
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-    AggregatePortfolioFlatFileMapping:
-      type: object
-      properties:
-        resolutionConversionFrom:
-          type: string
-        resolutionConversionTo:
-          type: string
-        columnMapping:
-          type: object
-          additionalProperties:
-            type: integer
-            format: int32
-        dataRowStart:
-          type: integer
-          format: int32
-          minimum: 1
-        countryCode:
-          type: string
-        resolution:
-          type: string
-        dependencyResolution:
-          type: string
-      required:
-      - columnMapping
-      - countryCode
-      - resolution
-    Link:
-      type: object
-      properties:
-        rel:
-          type: string
-        href:
-          type: string
-        method:
-          type: string
-      required:
-      - href
-      - method
-      - rel
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    S3Bucket:
-      type: object
-      properties:
-        accessKeyId:
-          type: string
-        secretAccessKey:
-          type: string
-        sessionToken:
-          type: string
-        s3Path:
-          type: string
-        s3Region:
-          type: string
     RDMImportInput:
       type: object
       properties:
@@ -623,6 +560,69 @@ components:
       required:
       - rdmName
       - uploadId
+    S3UploadHelper:
+      type: object
+      properties:
+        bucketPrefix:
+          type: string
+        awsRegion:
+          type: string
+        uploadId:
+          type: string
+        uploadKey1:
+          type: string
+        uploadKey2:
+          type: string
+        uploadKey3:
+          type: string
+    AggregatePortfolioFlatFileMapping:
+      type: object
+      properties:
+        resolutionConversionFrom:
+          type: string
+        resolutionConversionTo:
+          type: string
+        columnMapping:
+          type: object
+          additionalProperties:
+            type: integer
+            format: int32
+        dataRowStart:
+          type: integer
+          format: int32
+          minimum: 1
+        countryCode:
+          type: string
+        resolution:
+          type: string
+        dependencyResolution:
+          type: string
+      required:
+      - columnMapping
+      - countryCode
+      - resolution
+    Link:
+      type: object
+      properties:
+        rel:
+          type: string
+        href:
+          type: string
+        method:
+          type: string
+      required:
+      - href
+      - method
+      - rel
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

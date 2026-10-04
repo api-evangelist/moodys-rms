@@ -278,6 +278,16 @@ paths:
       - BranchV1
 components:
   schemas:
+    BranchSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Branch'
     Branch:
       description: Branch that underwrites the account.
       type: object
@@ -300,16 +310,6 @@ components:
           type: string
         logId:
           type: string
-    BranchSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/Branch'
   securitySchemes:
     RMS_Auth:
       type: apiKey

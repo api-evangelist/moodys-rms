@@ -1128,53 +1128,6 @@ paths:
       - TreatyV1
 components:
   schemas:
-    BatchRequest:
-      type: object
-      properties:
-        method:
-          type: string
-        path:
-          type: string
-        body:
-          type: string
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
-    LineOfBusiness:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
     CopyTreatyInfo:
       type: object
       properties:
@@ -1186,63 +1139,6 @@ components:
       - newNumber
     Cedant:
       description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    LossOccurrence:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - treatyId
-    TreatySearchResult:
-      type: object
-      properties:
-        totalMatchCount:
-          type: integer
-          format: int64
-        searchMatchingTreatyList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Treaty'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
       type: object
       properties:
         id:
@@ -1359,6 +1255,110 @@ components:
       - cedant
       - treatyNumber
       - treatyType
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    TreatySearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingTreatyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Treaty'
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    BatchRequest:
+      type: object
+      properties:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

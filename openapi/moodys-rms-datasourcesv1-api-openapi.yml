@@ -231,48 +231,6 @@ paths:
       - DatasourcesV1
 components:
   schemas:
-    ServerInfo:
-      type: object
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-          enum:
-          - RISK_MODELER
-          - DATA_BRIDGE
-        id:
-          type: integer
-          format: int64
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-        host:
-          type: string
-          writeOnly: true
-        port:
-          type: string
-          writeOnly: true
-        username:
-          type: string
-          writeOnly: true
-        password:
-          type: string
-          writeOnly: true
-        totalDiskSpaceInMb:
-          type: string
-          example: 2096128
-        availableDiskSpaceInMb:
-          type: string
-          example: 1995111
-        usedDiskSpaceInMb:
-          type: string
-          example: 101018
-        defaultServer:
-          type: boolean
-          example: false
     DataSourceSearchResult:
       type: object
       properties:
@@ -330,6 +288,48 @@ components:
         datasourceId:
           type: integer
           format: int32
+    ServerInfo:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+          enum:
+          - RISK_MODELER
+          - DATA_BRIDGE
+        id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+        host:
+          type: string
+          writeOnly: true
+        port:
+          type: string
+          writeOnly: true
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        totalDiskSpaceInMb:
+          type: string
+          example: 2096128
+        availableDiskSpaceInMb:
+          type: string
+          example: 1995111
+        usedDiskSpaceInMb:
+          type: string
+          example: 101018
+        defaultServer:
+          type: boolean
+          example: false
   securitySchemes:
     RMS_Auth:
       type: apiKey

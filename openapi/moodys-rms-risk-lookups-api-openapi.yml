@@ -10968,53 +10968,59 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CsRiskScoreOutput:
+    CharacteristicsInput:
       type: object
-      description: results
       properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score50yr:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 50 return period
+        construction:
+          type: string
+          description: Construction combines both scheme and class. Construction `scheme` (e.g., ATC) is represented by the letters at the beginning. It is a system used for classifying a building's construction class. Construction `class` is represented by the number(s) following the scheme. It is an attribute referring to the dominant material used in constructing the building frame/structure. Unknown=0.
+          example: ATC1
+          default: ATC0
+          externalDocs:
+            description: List of constructions
+            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Const_Class_Schemes_by_Country.htm
+        occupancy:
+          type: string
+          description: Occupancy combines both scheme and type. Occupancy `scheme` (e.g., ATC) is represented by the letters at the beginning. It is the classification used for identifying a building's occupancy type. Occupancy `type` is represented by the number(s) following the scheme. It is an attribute that describes the typical or dominant use of the building (e.g., residential, or schools, or commercial usage). Unknown=0.
+          example: ATC1
+          default: ATC0
+          externalDocs:
+            description: List of occupancies
+            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Occ_Type_Schemes_by_Country.htm
+        yearBuilt:
+          type: integer
+          description: Attribute describing the year when a structure was constructed. For many RMS peril models, year built is a primary vulnerability attribute.
+          example: 1980
+          default: 0
+        numOfStories:
+          type: integer
+          description: Attribute that represents the number of floors for a structure. It is a single number, such as 6 or 22, not a range of numbers. Structures are classified according to the number of floors they have.
+          default: 0
           example: 1
-        score100yr:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 100 return period
-          example: 1
-        score250yr:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 250 return period
-          example: 1
-        scoreOverall:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 100 return period
-          example: 1
-        dominantSubperil:
-          type: number
-          format: double
-          description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Hail, 2=Tornado, 3=Wind, 0=no dominant peril (because 2 or 3 perils have the same value - very unlikely, but to handle this eventuality for completeness)
-          example: 1.1
-        percentileAdmin1:
-          type: number
-          format: double
-          description: Percentile in State
-          example: 1.1
-    RiskScoreUsOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/RiskScoreBaseOutput'
-      - type: object
-        properties:
-          percentileAdmin1:
-            type: number
-            format: double
-            description: Riskiness compared to other locations in the Admin1
-            example: 0.0085084662
+        foundationType:
+          type: integer
+          description: Attribute that captures this differentiating factor for flood risk. This attribute is used to infer the height of the first floor during hazard retrieval.
+          default: 0
+          example: 0
+        firstFloorHeightAboveGround:
+          type: integer
+          description: First floor height above ground
+          example: 5
+          default: 0
+        basement:
+          type: string
+          description: Indicates whether there is a basement or not
+          example: 'YES'
+          default: DEFAULT
+          enum:
+          - DEFAULT
+          - 'YES'
+          - 'NO'
+        floorArea:
+          type: integer
+          description: Floor area is a primary building characteristic that represents a building's total living area, across all floors. It excludes garages, porches, decks, sunrooms, and basements.
+          example: 1452
+          default: 0
     CAWildfireOutput:
       type: object
       properties:
@@ -11043,398 +11049,41 @@ components:
           format: integer
           description: Fuel Type Code
           example: 1
-    FlDepthInlandSurgeOutput:
+    UsD2InnerCoastOutput:
+      type: object
+      properties:
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        distance:
+          type: string
+          description: Distance to Coastal Line. If the location is more than 10 miles inland, distance will return as >10 miles
+          example: '0.41'
+          maxLength: 10
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    GuGrLossCostOutput:
       type: object
       allOf:
-      - $ref: '#/components/schemas/FlDepthInlandOutput'
+      - $ref: '#/components/schemas/LossCostOutput'
       - type: object
-      description: results for `floodDepth` lookup
-      properties:
-        depthSurgeUndef30yr:
-          type: integer
-          description: Depth surge undefended 30-year
-          example: 0
-        depthSurgeDef30yr:
-          type: integer
-          description: Depth surge defended 30-year
-          example: 0
-        depthSurgeUndef50yr:
-          type: integer
-          description: Depth surge undefended 50-year
-          example: 0
-        depthSurgeDef50yr:
-          type: integer
-          description: Depth surge defended 50-year
-          example: 0
-        depthSurgeUndef100yr:
-          type: integer
-          description: Depth surge undefended 100-year
-          example: 0
-        depthSurgeDef100yr:
-          type: integer
-          description: Depth surge defended 100-year
-          example: 0
-        depthSurgeUndef200yr:
-          type: integer
-          description: Depth surge undefended 200-year
-          example: 0
-        depthSurgeDef200yr:
-          type: integer
-          description: Depth surge defended 200-year
-          example: 0
-        depthSurgeUndef250yr:
-          type: integer
-          description: Depth surge undefended 250-year
-          example: 0
-        depthSurgeDef250yr:
-          type: integer
-          description: Depth surge defended 250-year
-          example: 0
-        depthSurgeUndef500yr:
-          type: integer
-          description: Depth surge undefended 500-year
-          example: 0
-        depthSurgeDef500yr:
-          type: integer
-          description: Depth surge defended 500-year
-          example: 0
-        depthSurgeUndef1000yr:
-          type: integer
-          description: Depth surge undefended 1000-year
-          example: 0
-        depthSurgeDef1000yr:
-          type: integer
-          description: Depth surge defended 1000-year
-          example: 0
-        depthCombinedUndef30yr:
-          type: integer
-          description: Depth combined undefended 30-year
-          example: 4
-        depthCombinedDef30yr:
-          type: integer
-          description: Depth combined defended 30-year
-          example: 3
-        depthCombinedUndef50yr:
-          type: integer
-          description: Depth combined undefended 50-year
-          example: 5
-        depthCombinedDef50yr:
-          type: integer
-          description: Depth combined defended 50-year
-          example: 3
-        depthCombinedUndef100yr:
-          type: integer
-          description: Depth combined undefended 100-year
-          example: 5
-        depthCombinedDef100yr:
-          type: integer
-          description: Depth combined defended 100-year
-          example: 5
-        depthCombinedUndef200yr:
-          type: integer
-          description: Depth combined undefended 200-year
-          example: 6
-        depthCombinedDef200yr:
-          type: integer
-          description: Depth combined defended 200-year
-          example: 6
-        depthCombinedUndef250yr:
-          type: integer
-          description: Depth combined undefended 250-year
-          example: 6
-        depthCombinedDef250yr:
-          type: integer
-          description: Depth combined defended 250-year
-          example: 6
-        depthCombinedUndef500yr:
-          type: integer
-          description: Depth combined undefended 500-year
-          example: 6
-        depthCombinedDef500yr:
-          type: integer
-          description: Depth combined defended 500-year
-          example: 6
-        depthCombinedUndef1000yr:
-          type: integer
-          description: Depth combined undefended 1000-year
-          example: 6
-        depthCombinedDef1000yr:
-          type: integer
-          description: Depth combined defended 1000-year
-          example: 6
-    FlDepthInlandOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthBaseOutput'
-      - type: object
-      description: results for `floodDepth` lookup
-      properties:
-        depthInlandUndef30yr:
-          type: integer
-          description: Depth inland undefended 30-year
-          example: 4
-        depthInlandDef30yr:
-          type: integer
-          description: Depth inland defended 30-year
-          example: 3
-        depthInlandUndef50yr:
-          type: integer
-          description: Depth inland undefended 50-year
-          example: 5
-        depthInlandDef50yr:
-          type: integer
-          description: Depth inland defended 50-year
-          example: 3
-        depthInlandUndef100yr:
-          type: integer
-          description: Depth inland undefended 100-year
-          example: 5
-        depthInlandDef100yr:
-          type: integer
-          description: Depth inland defended 100-year
-          example: 5
-        depthInlandUndef200yr:
-          type: integer
-          description: Depth inland undefended 200-year
-          example: 6
-        depthInlandDef200yr:
-          type: integer
-          description: Depth inland defended 200-year
-          example: 6
-        depthInlandUndef250yr:
-          type: integer
-          description: Depth inland undefended 250-year
-          example: 6
-        depthInlandDef250yr:
-          type: integer
-          description: Depth inland defended 250-year
-          example: 6
-        depthInlandUndef500yr:
-          type: integer
-          description: Depth inland undefended 500-year
-          example: 6
-        depthInlandDef500yr:
-          type: integer
-          description: Depth inland defended 500-year
-          example: 6
-        depthInlandUndef1000yr:
-          type: integer
-          description: Depth inland undefended 1000-year
-          example: 6
-        depthInlandDef1000yr:
-          type: integer
-          description: Depth inland defended 1000-year
-          example: 6
-    FlDepthBaseOutput:
-      type: object
-      description: results for `wetOrDry` lookup
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        status:
-          type: string
-          description: Status
-          enum:
-          - NOT FLOODED
-          - FLOODED
-          example: FLOODED
-    FemaOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        panel:
-          type: string
-          description: Numeric designation used to identify the FIRM Map associated with a given area. First six digits are the FEMA community number.
-          example: 12095C0265F
-          maxLength: 12
-        community:
-          type: string
-          description: Political entity with the authority to adopt and enforce floodplain ordinances for the area under its jurisdiction. Community number is a unique six-digit number assigned by FEMA and used for identity in computer databases.
-          example: '120186'
-          maxLength: 6
-        floodZone:
-          type: string
-          description: FEMA issues Flood Insurance Rate Maps (FIRMs) with official flood zone designations for the purpose of rating flood policies.
-          example: X
-          maxLength: 6
-        sfha:
-          type: string
-          description: 'Special Flood Hazard Area (SFHA) is an area at high risk for flooding as determined by FEMA Flood Insurance Rate Maps (FIRMs). This is an area with a 1% annual chance of flooding. '
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-        panelDate:
-          type: string
-          format: date
-          description: Panel date is the date recorded in the FEMA FMSIS database, which is associated with the given panel number.
-          example: '2009-09-25'
-          maxLength: 10
-        bfe:
-          type: integer
-          description: Base Flood Elevation is defined by FEMA as the height of the base (100-year) flood in relation to a specified datum, usually the National Geodetic Vertical Datum of 1929 (NGVD 29) or North American Vertical Datum of 1988 (NAVD 88), in feet.
-          example: -999
-          default: -999
-        annualProbability:
-          type: string
-          description: Annual probability
-          example: Less than 0.2%
-          maxLength: 256
-        levees:
-          type: string
-          description: Flood defenses can flood walls, levees, dykes, and embankments—typically designed to protect against a flood of a certain return period.
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-        otherZones:
-          type: string
-          description: Other zones (within proximity distance)
-          example: ''
-          maxLength: 256
-        flMatch:
-          type: string
-          description: Fl match
-          example: '1'
-          maxLength: 2
-        floodway:
-          type: string
-          description: Any land area susceptible to being inundated by floodwaters from any source.
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-        cobra:
-          type: string
-          description: The Coastal Barrier Resources Act of 1982 (COBRA) designated certain portions of the Gulf and East Coasts as undeveloped coastal barriers.
-          enum:
-          - 'Yes'
-          - 'No'
-          example: 'No'
-    CoverageValuesInput:
-      type: object
-      properties:
-        buildingValue:
-          type: number
-          format: double
-          description: Building value
-          default: 0
-          example: 1000000
-        contentsValue:
-          type: number
-          format: double
-          description: Contents value
-          default: 0
-          example: 100000
-        businessInterruptionValue:
-          type: number
-          format: double
-          description: Business interruption value
-          default: 0
-          example: 50000
-    ErrorOutput:
-      type: object
-      properties:
-        contextId:
-          type: string
-          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        additionalInfo:
-          type: string
-          example: ''
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    AuRiskScoreOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score100yr:
-          type: number
-          format: integer
-          description: 100-year score
-          example: 1
-        score200yr:
-          type: number
-          format: integer
-          description: 200-year score
-          example: 2
-        score500yr:
-          type: number
-          format: integer
-          description: 500-year score
-          example: 3
-        scoreOverall:
-          type: number
-          format: integer
-          description: The combined Risk Score at the 1 in 500 return period
-          example: 3
-    TrRiskScoreOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score10000yr:
-          type: integer
-          description: 10000-year score
-          example: 3
-        scoreOverall:
-          type: integer
-          description: Overall score
-          example: 3
-        percentileAdmin1:
-          type: number
-          format: double
-          description: Percentile in State
-          example: 1.1
-    FlSusceptibilityOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        dtmElevation:
-          type: number
-          format: double
-          description: DTM elevation
-          example: 108.07087
-        firstFloorHeightAboveGround:
-          type: number
-          description: Captures the height of first finished floor above ground in feet
-          example: 2
-        percentBasement:
-          type: number
-          format: double
-          description: Basement likelihood for a location is a percentage. The presence of basement floors in a building can significantly increase flood losses, particularly in high-rise commercial buildings, which can have high contents value in basements.
-          example: 0.05
-    UsWindSpeedOutput:
-      type: object
-      properties:
-        gust3Pct50Yr:
-          type: string
-          description: 3 second gust 3% probability of exceedance in 50 years for Exposure C category
-          example: 120-130
-          maxLength: 10
-        gust7Pct50Yr:
-          type: string
-          description: 3 second gust 7% probability of exceedance in 50 years for Exposure C category
-          example: '>=110'
-          maxLength: 10
-        gust15Pct50Yr:
-          type: string
-          description: 3 second gust 15% probability of exceedance in 50 years for Exposure C category
-          example: 130-140
-          maxLength: 10
-        windspeedUnit:
-          type: string
-          description: 'Constant value: MPH as in Miles Per Hour'
-          example: MPH
-          maxLength: 3
+        properties:
+          grossLoss2:
+            type: number
+            format: double
+            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
+            example: 769.26
+          grossLoss3:
+            type: number
+            format: double
+            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
+            example: 817.11
     UsD2FireStationOutput:
       type: object
       properties:
@@ -11509,107 +11158,258 @@ components:
           example: miles
         warnings:
           $ref: '#/components/schemas/WarningOutput'
-    LossCostUsFlOutput:
+    GlobalFlDepthInlandOutput:
       type: object
       allOf:
-      - $ref: '#/components/schemas/LossCostOutput'
+      - $ref: '#/components/schemas/FlDepthBaseOutput'
+      - type: object
+      description: results for `global floodDepth` lookup
+      properties:
+        depthInlandUndef30yr:
+          type: integer
+          description: Depth inland undefended 30-year
+          example: 4
+        depthInlandUndef50yr:
+          type: integer
+          description: Depth inland undefended 50-year
+          example: 5
+        depthInlandUndef100yr:
+          type: integer
+          description: Depth inland undefended 100-year
+          example: 5
+        depthInlandUndef200yr:
+          type: integer
+          description: Depth inland undefended 200-year
+          example: 6
+        depthInlandUndef250yr:
+          type: integer
+          description: Depth inland undefended 250-year
+          example: 6
+        depthInlandUndef500yr:
+          type: integer
+          description: Depth inland undefended 500-year
+          example: 6
+        depthInlandUndef1000yr:
+          type: integer
+          description: Depth inland undefended 1000-year
+          example: 6
+    GeocodeOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/GeocodeInput'
       - type: object
         properties:
-          contentsAlrFlood:
-            type: number
-            format: double
-            description: Flood contents annualized loss rate
-            example: 0.0005308397
-          contentsAlrSurge:
-            type: number
-            format: double
-            description: Surge contents annualized loss rate
+          admin1GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+            example: 99999106
+          admin2GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+            example: 99999206001
+          admin3GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 3. Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+            example: 12695859
+          admin4GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 4.
+            example: 62219571
+          admin5GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for administrative level 5.
             example: 0
-          buildingAlrFlood:
-            type: number
-            format: double
-            description: Flood building annualized loss rate
-            example: 0.0003419841
-          buildingAlrSurge:
-            type: number
-            format: double
-            description: Surge building annualized loss rate
+          cityGeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for City/Town
+            example: 999993061080
+          countryFips:
+            type: string
+            description: Country FIPS code
+            example: US
+            maxLength: 4
+          countryGeoId:
+            type: integer
+            description: Globally unique ID for Country
+            example: 840
+          countryRmsCode:
+            type: string
+            description: RMS code for Country
+            example: US
+            maxLength: 4
+          geoDataSourceId:
+            type: integer
+            description: Geocode Data Source ID
+            example: 8
+          geoMatchCode:
+            type: string
+            description: Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
+            example: T1-999993061080-T1A1-S0T100A100-S1A1-00-B-A-X
+            maxLength: 255
+          locationCode:
+            type: string
+            description: Census Tract Number / Sonpo / Sector / Short Postal Code
+            example: '060014443.01'
+            maxLength: 16
+          locationCodeGeoId:
+            type: integer
+            format: int64
+            description: Unique identification code for the location
             example: 0
-          businessInterruptionAlrFlood:
-            type: number
-            format: double
-            description: Flood business interruption annualized loss rate
-            example: 0.0003260721
-          businessInterruptionAlrSurge:
-            type: number
-            format: double
-            description: Surge business interruption annualized loss rate
+          parcelId:
+            type: integer
+            format: int64
+            description: Parcel id
             example: 0
-    GlobalNuclearD2TOutput:
+          postalCodeGeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for postal code
+            example: 99999494560
+          rmsGeoModelResolutionCode:
+            type: integer
+            description: 'Address match level: * `0` - None * `1` - Coordinate * `2` - Street / Parcel / Building * `3` - High Resolution Postcode / Other * `4` - Block Group/Census Tract * `5` - Postal code * `6` - Neighborhood * `7` - City * `8` - District / Municipality * `9` - County * `10` - State/Province * `11` - CRESTA * `12` - Multiple * `13` - User Defined * `14` - Country
+
+              '
+            example: 2
+            minimum: 0
+            maximum: 14
+          rmsGeocodingResolutionCode:
+            type: integer
+            description: Indicates the geocoding resolutions that are supported by the ACORD standard
+            example: 31
+          ugid:
+            type: string
+            description: Unique global identifier
+            example: USS3121778167575
+            maxLength: 50
+          zone1Code:
+            type: string
+            description: CRESTA code
+            example: A2
+            maxLength: 16
+          zone2Code:
+            type: string
+            description: zone2 code
+            example: ''
+            maxLength: 16
+          zone3Code:
+            type: string
+            description: zone3 code (Low Resolution CRESTA Zone)
+            example: ''
+            maxLength: 16
+          zone4Code:
+            type: string
+            description: zone4 code (High Resolution CRESTA Zone)
+            example: ''
+            maxLength: 16
+          zone3Name:
+            type: string
+            description: zone3 name (Low Resolution CRESTA Zone)
+            example: ''
+            maxLength: 256
+          zone4Name:
+            type: string
+            description: zone4 name (High Resolution CRESTA Zone)
+            example: ''
+            maxLength: 256
+          zone1GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone1 (CRESTA)
+            example: 999995062
+          zone2GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone2 (CRESTA)
+            example: 0
+          zone3GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone3 (Low Resolution CRESTA Zone)
+            example: 22505979
+          zone4GeoId:
+            type: integer
+            format: int64
+            description: Globally unique ID for Zone4 (High Resolution CRESTA Zone)
+            example: 20235111
+          dataVersion:
+            type: string
+            description: Data version
+            example: xx.x.xxxx.x
+            maxLength: 20
+    LossCostOutput:
       type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostBaseOutput'
+      - type: object
+        properties:
+          grossLoss:
+            type: number
+            format: double
+            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
+            example: 750.16
+          groundUpLoss:
+            type: number
+            format: double
+            description: Total loss to the exposure, independent of any insurance or reinsurance terms
+            example: 901.43
+    LossCostBaseOutput:
+      type: object
+      description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
       properties:
-        nuclearPowerPlant:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        buildingAlr:
+          type: number
+          format: double
+          description: Building annualized loss rate
+          example: 0.000863401691354315
+        contentsAlr:
+          type: number
+          format: double
+          description: Contents annualized loss rate
+          example: 0.000358529682823589
+        businessInterruptionAlr:
+          type: number
+          format: double
+          description: Business interruption annualized loss rate
+          example: 0.000559604863156912
+    RiskScoreUsOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/RiskScoreBaseOutput'
+      - type: object
+        properties:
+          percentileAdmin1:
+            type: number
+            format: double
+            description: Riskiness compared to other locations in the Admin1
+            example: 0.0085084662
+    WarningOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/WarningItem'
+    GenericInput:
+      type: object
+      required:
+      - location
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationInput'
+        layerOptions:
           type: array
-          description: Nearest nuclear power plant within 30 km of the given point
           items:
             type: object
-            properties:
-              name:
-                type: string
-                description: Nuclear plant name
-                example: Dresden Generating Station
-                maxLength: 256
-              capacity:
-                type: number
-                description: Nuclear plant capacity
-                example: 2018.6
-              country:
-                type: string
-                description: Nuclear plant country
-                example: United States of America
-                maxLength: 256
-              longitude:
-                type: number
-                description: Nuclear plant longitude
-                example: -88.27
-              latitude:
-                type: number
-                description: Nuclear plant latitude
-                example: 41.39
-              distance:
-                type: number
-                description: Distance from the nuclear power plant
-                example: 18737.69
-        distanceUnit:
-          type: string
-          enum:
-          - meters
-          description: Distance unit
-          example: meters
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    RiskScoreBaseOutput:
-      type: object
-      description: results
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        score100yr:
-          type: integer
-          description: 100-year score
-          example: 1
-        score250yr:
-          type: integer
-          description: 250-year score
-          example: 1
-        score500yr:
-          type: integer
-          description: 500-year score
-          example: 3
-        scoreOverall:
-          type: integer
-          description: Overall score
-          example: 3
+            additionalProperties:
+              type: object
+              description: For result fields, see the individual layer documentation
     USWildfireSupplementalOutput:
       type: object
       properties:
@@ -11770,63 +11570,6 @@ components:
           example: meters
         warnings:
           $ref: '#/components/schemas/WarningOutput'
-    CharacteristicsInput:
-      type: object
-      properties:
-        construction:
-          type: string
-          description: Construction combines both scheme and class. Construction `scheme` (e.g., ATC) is represented by the letters at the beginning. It is a system used for classifying a building's construction class. Construction `class` is represented by the number(s) following the scheme. It is an attribute referring to the dominant material used in constructing the building frame/structure. Unknown=0.
-          example: ATC1
-          default: ATC0
-          externalDocs:
-            description: List of constructions
-            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Const_Class_Schemes_by_Country.htm
-        occupancy:
-          type: string
-          description: Occupancy combines both scheme and type. Occupancy `scheme` (e.g., ATC) is represented by the letters at the beginning. It is the classification used for identifying a building's occupancy type. Occupancy `type` is represented by the number(s) following the scheme. It is an attribute that describes the typical or dominant use of the building (e.g., residential, or schools, or commercial usage). Unknown=0.
-          example: ATC1
-          default: ATC0
-          externalDocs:
-            description: List of occupancies
-            url: https://support.rms.com/techpub/OLH_Content/RLRB_Online_Library/Index.htm#RL_RB_DLM_Ref/Supported_Occ_Type_Schemes_by_Country.htm
-        yearBuilt:
-          type: integer
-          description: Attribute describing the year when a structure was constructed. For many RMS peril models, year built is a primary vulnerability attribute.
-          example: 1980
-          default: 0
-        numOfStories:
-          type: integer
-          description: Attribute that represents the number of floors for a structure. It is a single number, such as 6 or 22, not a range of numbers. Structures are classified according to the number of floors they have.
-          default: 0
-          example: 1
-        foundationType:
-          type: integer
-          description: Attribute that captures this differentiating factor for flood risk. This attribute is used to infer the height of the first floor during hazard retrieval.
-          default: 0
-          example: 0
-        firstFloorHeightAboveGround:
-          type: integer
-          description: First floor height above ground
-          example: 5
-          default: 0
-        basement:
-          type: string
-          description: Indicates whether there is a basement or not
-          example: 'YES'
-          default: DEFAULT
-          enum:
-          - DEFAULT
-          - 'YES'
-          - 'NO'
-        floorArea:
-          type: integer
-          description: Floor area is a primary building characteristic that represents a building's total living area, across all floors. It excludes garages, porches, decks, sunrooms, and basements.
-          example: 1452
-          default: 0
-    WarningOutput:
-      type: array
-      items:
-        $ref: '#/components/schemas/WarningItem'
     ErrorItem:
       type: object
       properties:
@@ -11899,38 +11642,52 @@ components:
         message:
           type: string
           example: Error message
-    LocationInput:
+    AuRiskScoreOutput:
       type: object
-      required:
-      - address
-      properties:
-        address:
-          $ref: '#/components/schemas/GeocodeOutput'
-        characteristics:
-          $ref: '#/components/schemas/CharacteristicsInput'
-        coverageValues:
-          $ref: '#/components/schemas/CoverageValuesInput'
-    LossCostBaseOutput:
-      type: object
-      description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
+      description: results
       properties:
         warnings:
           $ref: '#/components/schemas/WarningOutput'
-        buildingAlr:
+        score100yr:
+          type: number
+          format: integer
+          description: 100-year score
+          example: 1
+        score200yr:
+          type: number
+          format: integer
+          description: 200-year score
+          example: 2
+        score500yr:
+          type: number
+          format: integer
+          description: 500-year score
+          example: 3
+        scoreOverall:
+          type: number
+          format: integer
+          description: The combined Risk Score at the 1 in 500 return period
+          example: 3
+    FlSusceptibilityOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        dtmElevation:
           type: number
           format: double
-          description: Building annualized loss rate
-          example: 0.000863401691354315
-        contentsAlr:
+          description: DTM elevation
+          example: 108.07087
+        firstFloorHeightAboveGround:
+          type: number
+          description: Captures the height of first finished floor above ground in feet
+          example: 2
+        percentBasement:
           type: number
           format: double
-          description: Contents annualized loss rate
-          example: 0.000358529682823589
-        businessInterruptionAlr:
-          type: number
-          format: double
-          description: Business interruption annualized loss rate
-          example: 0.000559604863156912
+          description: Basement likelihood for a location is a percentage. The presence of basement floors in a building can significantly increase flood losses, particularly in high-rise commercial buildings, which can have high contents value in basements.
+          example: 0.05
     FlDepthInlandProximityOutput:
       type: object
       allOf:
@@ -11942,41 +11699,6 @@ components:
           type: integer
           description: Max depth within radius
           example: 1
-    GlobalFlDepthInlandOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthBaseOutput'
-      - type: object
-      description: results for `global floodDepth` lookup
-      properties:
-        depthInlandUndef30yr:
-          type: integer
-          description: Depth inland undefended 30-year
-          example: 4
-        depthInlandUndef50yr:
-          type: integer
-          description: Depth inland undefended 50-year
-          example: 5
-        depthInlandUndef100yr:
-          type: integer
-          description: Depth inland undefended 100-year
-          example: 5
-        depthInlandUndef200yr:
-          type: integer
-          description: Depth inland undefended 200-year
-          example: 6
-        depthInlandUndef250yr:
-          type: integer
-          description: Depth inland undefended 250-year
-          example: 6
-        depthInlandUndef500yr:
-          type: integer
-          description: Depth inland undefended 500-year
-          example: 6
-        depthInlandUndef1000yr:
-          type: integer
-          description: Depth inland undefended 1000-year
-          example: 6
     UsD2LandfillOutput:
       type: object
       properties:
@@ -12026,550 +11748,27 @@ components:
           example: miles
         warnings:
           $ref: '#/components/schemas/WarningOutput'
-    UsWfRiskScoreOutput:
+    CoverageValuesInput:
       type: object
-      description: US Wild fire risk score output
       properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        percentileAdmin1:
+        buildingValue:
           type: number
           format: double
-          description: Percentile in Admin1 (State for US) for the reference return period
-          example: 0.002893825
-        scoreOverall:
-          type: integer
-          description: The Risk Score based on the composite ALR
-          example: 3
-    UsTrD2TOutput:
-      type: object
-      properties:
-        targets:
-          type: array
-          description: Nearest 5 terrorism targets
-          items:
-            type: object
-            properties:
-              id:
-                type: number
-                description: Target Id
-                example: 23840
-              name:
-                type: string
-                description: Target name
-                example: FBI El Paso Field Office
-                maxLength: 80
-              city:
-                type: string
-                description: City
-                example: El Paso
-                maxLength: 256
-              admin1Code:
-                type: string
-                description: Target State
-                example: TX
-                maxLength: 16
-              category:
-                type: string
-                description: Target category
-                example: Government Building
-                maxLength: 80
-              score:
-                type: string
-                description: Target score. Range of scores is from a to f.
-                example: f
-                maxLength: 1
-              distance:
-                type: number
-                description: Distance from target
-                example: 1988.17
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    USSubsidenceOutput:
-      type: object
-      properties:
-        mines:
-          type: array
-          description: Nearest 5 mines
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: Mine name
-                example: Lambert Mine
-                maxLength: 80
-              mineType:
-                type: string
-                description: Mine Type
-                example: Unknown
-                maxLength: 80
-              status:
-                type: string
-                description: Mine status
-                example: Active
-                maxLength: 32
-              area:
-                type: number
-                format: double
-                description: Area of mine in square footage
-                example: 45.38
-              distance:
-                type: number
-                description: Distance from mine
-                example: 3.61
-        sinkholes:
-          type: array
-          description: Nearest 5 sinkholes
-          items:
-            type: object
-            properties:
-              area:
-                type: number
-                format: double
-                description: Area of sinkhole in square footage
-                example: 58.34
-              distance:
-                type: number
-                description: Distance from Sinkhole
-                example: 3.61
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    WarningItem:
-      type: object
-      properties:
-        code:
-          type: string
-          example: FLG_XXXX
-          description: 'Warning codes:
-
-            |   Code   | Description |
-
-            |----------|-------------|
-
-            | FLG_4001 | Layer option was skipped. Response based on its default value. |
-
-            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
-
-            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
-
-            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
-
-            | FLG_4103 | No additional options can be provided to this lookup. |
-
-            | FLG_4201 | Location not matched in ESDB building attributes database. |
-
-            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
-
-            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
-
-            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
-
-            | FLG_4205 | The geocoding version used is not recommended for this layer. |
-
-            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
-
-            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
-
-            | FLG_4208 | Insufficient geocoding information to look up requested data. |
-
-            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
-
-            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
-
-            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
-
-            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
-
-            | FLG_4306 | Missing required field to perform gross loss calculations. |
-
-            | FLG_4307 | Gross losses can only be calculated for reference view. |
-
-            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
-
-            | FLG_4401 | No data found for this location. |
-
-            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
-
-            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
-
-            | FLG_4403 | The location entered is outside of supported region, Response based on default value
-
-            '
-        message:
-          type: string
-          example: Warning message
-    UsD2InnerCoastOutput:
-      type: object
-      properties:
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        distance:
-          type: string
-          description: Distance to Coastal Line. If the location is more than 10 miles inland, distance will return as >10 miles
-          example: '0.41'
-          maxLength: 10
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    AddressInput:
-      type: object
-      required:
-      - address
-      properties:
-        address:
-          $ref: '#/components/schemas/GeocodeOutput'
-    GenericInput:
-      type: object
-      required:
-      - location
-      properties:
-        location:
-          $ref: '#/components/schemas/LocationInput'
-        layerOptions:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: object
-              description: For result fields, see the individual layer documentation
-    WtRiskScoreOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/RiskScoreUsOutput'
-      - type: object
-        properties:
-          dominantSubperil:
-            type: number
-            format: integer
-            description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Wind, 2=Snow, 3=Freeze, 4=Ice, 0=no dominant peril (all sub-perils have the same value - exceptionally unlikely, but to handle this for completeness)
-            example: 2
-    UsEqFaultOutput:
-      type: object
-      properties:
-        faults:
-          type: array
-          description: Nearest 5 faults
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: fault name
-                example: NM NMSZ USGS West Full
-                maxLength: 80
-              distance:
-                type: number
-                description: Distance to fault
-                example: 3.61
-              returnPeriodM60:
-                type: number
-                description: Return Period for Magnitude 6.0+
-                example: 27013
-              returnPeriodM65:
-                type: number
-                description: Return Period for Magnitude 6.5+
-                example: 108050
-              returnPeriodM70:
-                type: number
-                description: Return Period for Magnitude 7.0+
-                example: 120056
-        backgroundRates:
-          type: array
-          description: Background return period of magnitude 6.0+ earthquakes for 8 neighboring cells and, in the array's fifth position, the address's cell.
-          items:
-            type: number
-          example:
-          - 310
-          - 720
-          - 950
-          - 1085
-          - 2120
-          - 4340
-          - 3500
-          - 7690
-          - 11605
-        distanceUnit:
-          type: string
-          enum:
-          - feet
-          - meters
-          - miles
-          - km
-          description: Distance unit
-          example: miles
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-    GuGrLossCostOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/LossCostOutput'
-      - type: object
-        properties:
-          grossLoss2:
-            type: number
-            format: double
-            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
-            example: 769.26
-          grossLoss3:
-            type: number
-            format: double
-            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
-            example: 817.11
-    RiskScoreEuOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/RiskScoreBaseOutput'
-      - type: object
-        properties:
-          percentileCountry:
-            type: number
-            format: double
-            description: Riskiness compared to other locations in the Country
-            example: 0.0085084662
-    LossCostGuOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/LossCostBaseOutput'
-      - type: object
-        properties:
-          groundUpLoss:
-            type: number
-            format: double
-            description: Total loss to the exposure, independent of any insurance or reinsurance terms
-            example: 901.43
-    GeocodeInput:
-      type: object
-      required:
-      - countryCode
-      - countryScheme
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: User defined id
-          example: 0
-        admin1Code:
-          type: string
-          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-          example: CA
-          maxLength: 16
-        admin1Name:
-          type: string
-          description: Name of administrative level 1
-          example: CALIFORNIA
-          maxLength: 256
-        admin2Code:
-          type: string
-          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-          example: '001'
-          maxLength: 16
-        admin2Name:
-          type: string
-          description: Name of administrative level 2
-          example: ALAMEDA COUNTY
-          maxLength: 256
-        admin3Code:
-          type: string
-          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-          example: ''
-          maxLength: 16
-        admin3Name:
-          type: string
-          description: Name of administrative level 3
-          example: ''
-          maxLength: 256
-        admin4Code:
-          type: string
-          description: Code for administrative level 4
-          example: '044230130'
-          maxLength: 16
-        admin4Name:
-          type: string
-          description: Name of administrative level 4
-          example: '044230130'
-          maxLength: 256
-        cityName:
-          type: string
-          description: Name of City/Town
-          example: NEWARK
-          maxLength: 256
-        countryCode:
-          type: string
-          description: Country Code (optional for geocoding if latitude and longitude are provided)
-          example: US
-          maxLength: 4
-        countryName:
-          type: string
-          description: Name of Country
-          example: United States
-          maxLength: 512
-        countryScheme:
-          type: string
-          description: Standard for user-supplied country code (optional for geocoding if latitude and longitude are provided)
-          example: ISO2A
-          enum:
-          - ISO2A
-          - ISO3A
-          - ISO3N
-          - FIPS
-        latitude:
+          description: Building value
+          default: 0
+          example: 1000000
+        contentsValue:
           type: number
           format: double
-          description: Location Latitude
-          example: 37.54120000000001
-          minimum: -90
-          maximum: 90
-        longitude:
+          description: Contents value
+          default: 0
+          example: 100000
+        businessInterruptionValue:
           type: number
           format: double
-          description: Location Longitude
-          example: -122.06061000000001
-          minimum: -180
-          maximum: 180
-        postalCode:
-          type: string
-          description: Postal Code
-          example: '94560'
-          maxLength: 16
-        streetAddress:
-          type: string
-          description: Address containing Number, Street Name, Street Type, etc.
-          example: 7575 GATEWAY BLVD
-          maxLength: 256
-        name:
-          type: string
-          description: Supplemental text captured for the address
-          example: ''
-          maxLength: 512
-    GenericOutput:
-      type: object
-      description: results
-      additionalProperties:
-        type: string
-    FlDepthInlandSurgeProximityOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/FlDepthInlandProximityOutput'
-      - type: object
-      description: results for `proximity` lookup
-      properties:
-        dominantFloodSource:
-          type: string
-          description: Dominant flood source
-          enum:
-          - INLAND
-          - SURGE
-          example: INLAND
-    USWildfireOutput:
-      type: object
-      properties:
-        fuelCodeDescription:
-          type: string
-          description: Fuel Type Description
-          example: Short Grass (1 foot)
-          maxLength: 256
-        slopeInPercent:
-          type: number
-          format: integer
-          description: Slope in percent
-          example: 3
-        distanceToVegetationUnit:
-          type: string
-          description: Distance to Vegetation Unit
-          example: feet
-          maxLength: 8
-        distanceToVegetation:
-          type: string
-          description: Distance to Vegetation
-          example: '5'
-          maxLength: 5
-        fuelCode:
-          type: number
-          format: integer
-          description: Fuel Type Code
-          example: 1
-    MmiOutput:
-      type: object
-      description: The Modified Mercalli Intensity (MMI) is a subjective scale used to describe the observed local shaking intensity and related effects of an earthquake. The scale ranges from 1 (barely felt) to 12 (total destruction), with slight damage beginning at 6.
-      properties:
-        warnings:
-          $ref: '#/components/schemas/WarningOutput'
-        mmi100yr:
-          type: number
-          format: double
-          description: 100-year MMI score
-          example: 0
-        mmi200yr:
-          type: number
-          format: double
-          description: 200-year MMI score
-          example: 0
-        mmi250yr:
-          type: number
-          format: double
-          description: 250-year MMI score
-          example: 4.1
-        mmi475yr:
-          type: number
-          format: double
-          description: 475-year MMI score
-          example: 6.3
-        mmi500yr:
-          type: number
-          format: double
-          description: 500-year MMI score
-          example: 6.5
-        mmi1000yr:
-          type: number
-          format: double
-          description: 1000-year MMI score
-          example: 8
-        mmi1500yr:
-          type: number
-          format: double
-          description: 1500-year MMI score
-          example: 8.5
-    LossCostOutput:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/LossCostBaseOutput'
-      - type: object
-        properties:
-          grossLoss:
-            type: number
-            format: double
-            description: Loss to the insurer, accounting for the application of all insurance terms but without consideration for any reinsurance recoveries
-            example: 750.16
-          groundUpLoss:
-            type: number
-            format: double
-            description: Total loss to the exposure, independent of any insurance or reinsurance terms
-            example: 901.43
+          description: Business interruption value
+          default: 0
+          example: 50000
     EsdbOutput:
       type: object
       description: results
@@ -12749,6 +11948,408 @@ components:
           format: double
           description: ESDB version id
           example: 0
+    UsTrD2TOutput:
+      type: object
+      properties:
+        targets:
+          type: array
+          description: Nearest 5 terrorism targets
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: Target Id
+                example: 23840
+              name:
+                type: string
+                description: Target name
+                example: FBI El Paso Field Office
+                maxLength: 80
+              city:
+                type: string
+                description: City
+                example: El Paso
+                maxLength: 256
+              admin1Code:
+                type: string
+                description: Target State
+                example: TX
+                maxLength: 16
+              category:
+                type: string
+                description: Target category
+                example: Government Building
+                maxLength: 80
+              score:
+                type: string
+                description: Target score. Range of scores is from a to f.
+                example: f
+                maxLength: 1
+              distance:
+                type: number
+                description: Distance from target
+                example: 1988.17
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    FlDepthInlandOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/FlDepthBaseOutput'
+      - type: object
+      description: results for `floodDepth` lookup
+      properties:
+        depthInlandUndef30yr:
+          type: integer
+          description: Depth inland undefended 30-year
+          example: 4
+        depthInlandDef30yr:
+          type: integer
+          description: Depth inland defended 30-year
+          example: 3
+        depthInlandUndef50yr:
+          type: integer
+          description: Depth inland undefended 50-year
+          example: 5
+        depthInlandDef50yr:
+          type: integer
+          description: Depth inland defended 50-year
+          example: 3
+        depthInlandUndef100yr:
+          type: integer
+          description: Depth inland undefended 100-year
+          example: 5
+        depthInlandDef100yr:
+          type: integer
+          description: Depth inland defended 100-year
+          example: 5
+        depthInlandUndef200yr:
+          type: integer
+          description: Depth inland undefended 200-year
+          example: 6
+        depthInlandDef200yr:
+          type: integer
+          description: Depth inland defended 200-year
+          example: 6
+        depthInlandUndef250yr:
+          type: integer
+          description: Depth inland undefended 250-year
+          example: 6
+        depthInlandDef250yr:
+          type: integer
+          description: Depth inland defended 250-year
+          example: 6
+        depthInlandUndef500yr:
+          type: integer
+          description: Depth inland undefended 500-year
+          example: 6
+        depthInlandDef500yr:
+          type: integer
+          description: Depth inland defended 500-year
+          example: 6
+        depthInlandUndef1000yr:
+          type: integer
+          description: Depth inland undefended 1000-year
+          example: 6
+        depthInlandDef1000yr:
+          type: integer
+          description: Depth inland defended 1000-year
+          example: 6
+    UsWfRiskScoreOutput:
+      type: object
+      description: US Wild fire risk score output
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        percentileAdmin1:
+          type: number
+          format: double
+          description: Percentile in Admin1 (State for US) for the reference return period
+          example: 0.002893825
+        scoreOverall:
+          type: integer
+          description: The Risk Score based on the composite ALR
+          example: 3
+    AddressInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
+    TrRiskScoreOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score10000yr:
+          type: integer
+          description: 10000-year score
+          example: 3
+        scoreOverall:
+          type: integer
+          description: Overall score
+          example: 3
+        percentileAdmin1:
+          type: number
+          format: double
+          description: Percentile in State
+          example: 1.1
+    LossCostUsFlOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostOutput'
+      - type: object
+        properties:
+          contentsAlrFlood:
+            type: number
+            format: double
+            description: Flood contents annualized loss rate
+            example: 0.0005308397
+          contentsAlrSurge:
+            type: number
+            format: double
+            description: Surge contents annualized loss rate
+            example: 0
+          buildingAlrFlood:
+            type: number
+            format: double
+            description: Flood building annualized loss rate
+            example: 0.0003419841
+          buildingAlrSurge:
+            type: number
+            format: double
+            description: Surge building annualized loss rate
+            example: 0
+          businessInterruptionAlrFlood:
+            type: number
+            format: double
+            description: Flood business interruption annualized loss rate
+            example: 0.0003260721
+          businessInterruptionAlrSurge:
+            type: number
+            format: double
+            description: Surge business interruption annualized loss rate
+            example: 0
+    USWildfireOutput:
+      type: object
+      properties:
+        fuelCodeDescription:
+          type: string
+          description: Fuel Type Description
+          example: Short Grass (1 foot)
+          maxLength: 256
+        slopeInPercent:
+          type: number
+          format: integer
+          description: Slope in percent
+          example: 3
+        distanceToVegetationUnit:
+          type: string
+          description: Distance to Vegetation Unit
+          example: feet
+          maxLength: 8
+        distanceToVegetation:
+          type: string
+          description: Distance to Vegetation
+          example: '5'
+          maxLength: 5
+        fuelCode:
+          type: number
+          format: integer
+          description: Fuel Type Code
+          example: 1
+    GenericOutput:
+      type: object
+      description: results
+      additionalProperties:
+        type: string
+    WtRiskScoreOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/RiskScoreUsOutput'
+      - type: object
+        properties:
+          dominantSubperil:
+            type: number
+            format: integer
+            description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Wind, 2=Snow, 3=Freeze, 4=Ice, 0=no dominant peril (all sub-perils have the same value - exceptionally unlikely, but to handle this for completeness)
+            example: 2
+    MmiOutput:
+      type: object
+      description: The Modified Mercalli Intensity (MMI) is a subjective scale used to describe the observed local shaking intensity and related effects of an earthquake. The scale ranges from 1 (barely felt) to 12 (total destruction), with slight damage beginning at 6.
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        mmi100yr:
+          type: number
+          format: double
+          description: 100-year MMI score
+          example: 0
+        mmi200yr:
+          type: number
+          format: double
+          description: 200-year MMI score
+          example: 0
+        mmi250yr:
+          type: number
+          format: double
+          description: 250-year MMI score
+          example: 4.1
+        mmi475yr:
+          type: number
+          format: double
+          description: 475-year MMI score
+          example: 6.3
+        mmi500yr:
+          type: number
+          format: double
+          description: 500-year MMI score
+          example: 6.5
+        mmi1000yr:
+          type: number
+          format: double
+          description: 1000-year MMI score
+          example: 8
+        mmi1500yr:
+          type: number
+          format: double
+          description: 1500-year MMI score
+          example: 8.5
+    LocationInput:
+      type: object
+      required:
+      - address
+      properties:
+        address:
+          $ref: '#/components/schemas/GeocodeOutput'
+        characteristics:
+          $ref: '#/components/schemas/CharacteristicsInput'
+        coverageValues:
+          $ref: '#/components/schemas/CoverageValuesInput'
+    CsRiskScoreOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score50yr:
+          type: number
+          format: integer
+          description: The combined Risk Score at the 1 in 50 return period
+          example: 1
+        score100yr:
+          type: number
+          format: integer
+          description: The combined Risk Score at the 1 in 100 return period
+          example: 1
+        score250yr:
+          type: number
+          format: integer
+          description: The combined Risk Score at the 1 in 250 return period
+          example: 1
+        scoreOverall:
+          type: number
+          format: integer
+          description: The combined Risk Score at the 1 in 100 return period
+          example: 1
+        dominantSubperil:
+          type: number
+          format: double
+          description: The dominant sub-peril driving the combined Risk Score at the 1 in 100 return period - 1=Hail, 2=Tornado, 3=Wind, 0=no dominant peril (because 2 or 3 perils have the same value - very unlikely, but to handle this eventuality for completeness)
+          example: 1.1
+        percentileAdmin1:
+          type: number
+          format: double
+          description: Percentile in State
+          example: 1.1
+    FlDepthBaseOutput:
+      type: object
+      description: results for `wetOrDry` lookup
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        status:
+          type: string
+          description: Status
+          enum:
+          - NOT FLOODED
+          - FLOODED
+          example: FLOODED
+    WarningItem:
+      type: object
+      properties:
+        code:
+          type: string
+          example: FLG_XXXX
+          description: 'Warning codes:
+
+            |   Code   | Description |
+
+            |----------|-------------|
+
+            | FLG_4001 | Layer option was skipped. Response based on its default value. |
+
+            | FLG_4002 | Layer option was skipped. Response based on its maximum value. |
+
+            | FLG_4101 | Hazard values are calculated based on default floodDepth. |
+
+            | FLG_4102 | Hazard values are calculated based on maximum proximityDistance. |
+
+            | FLG_4103 | No additional options can be provided to this lookup. |
+
+            | FLG_4201 | Location not matched in ESDB building attributes database. |
+
+            | FLG_4202 | Location is not eligible for ESDB building attribute return. Client input occupancy does not match ESDB occupancy. |
+
+            | FLG_4203 | Location matched in ESDB building attributes database. Where values are not populated, they are not available in database. |
+
+            | FLG_4204 | Insufficient geocoding information. Lookup will proceed with the default value for the missing field. |
+
+            | FLG_4205 | The geocoding version used is not recommended for this layer. |
+
+            | FLG_4206 | Input address has poor geocoding resolution. Response might have limited precision. |
+
+            | FLG_4207 | The geocoding version used is not recommended for this layer at coarse geocoding resolutions (5 or higher). |
+
+            | FLG_4208 | Insufficient geocoding information to look up requested data. |
+
+            | FLG_4301 | No coverage values provided. Ground-up and gross loss cannot be calculated. |
+
+            | FLG_4302 | One or more grossLoss values were not calculated due to invalid/missing deductibleAmount. |
+
+            | FLG_4304 | Invalid/missing deductibleType. Valid deductibleTypes are 1 to 5. |
+
+            | FLG_4305 | Deductible amount is treated as currency amount instead of percentage. |
+
+            | FLG_4306 | Missing required field to perform gross loss calculations. |
+
+            | FLG_4307 | Gross losses can only be calculated for reference view. |
+
+            | FLG_4400 | [User input] is not a valid value for this layer option. Response based on default value. |
+
+            | FLG_4401 | No data found for this location. |
+
+            | FLG_4500 | The combination of input characteristics has not been found, no results have been provided. |
+
+            | FLG_4402 | [LayerOption] is only valid for version 21 and has been ignored |
+
+            | FLG_4403 | The location entered is outside of supported region, Response based on default value
+
+            '
+        message:
+          type: string
+          example: Warning message
     MmiBaseOutput:
       type: object
       description: The Modified Mercalli Intensity (MMI) is a subjective scale used to describe the observed local shaking intensity and related effects of an earthquake. The scale ranges from 1 (barely felt) to 12 (total destruction), with slight damage beginning at 6.
@@ -12785,6 +12386,545 @@ components:
           format: double
           description: 1000-year MMI score
           example: 8.0
+    FemaOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        panel:
+          type: string
+          description: Numeric designation used to identify the FIRM Map associated with a given area. First six digits are the FEMA community number.
+          example: 12095C0265F
+          maxLength: 12
+        community:
+          type: string
+          description: Political entity with the authority to adopt and enforce floodplain ordinances for the area under its jurisdiction. Community number is a unique six-digit number assigned by FEMA and used for identity in computer databases.
+          example: '120186'
+          maxLength: 6
+        floodZone:
+          type: string
+          description: FEMA issues Flood Insurance Rate Maps (FIRMs) with official flood zone designations for the purpose of rating flood policies.
+          example: X
+          maxLength: 6
+        sfha:
+          type: string
+          description: 'Special Flood Hazard Area (SFHA) is an area at high risk for flooding as determined by FEMA Flood Insurance Rate Maps (FIRMs). This is an area with a 1% annual chance of flooding. '
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+        panelDate:
+          type: string
+          format: date
+          description: Panel date is the date recorded in the FEMA FMSIS database, which is associated with the given panel number.
+          example: '2009-09-25'
+          maxLength: 10
+        bfe:
+          type: integer
+          description: Base Flood Elevation is defined by FEMA as the height of the base (100-year) flood in relation to a specified datum, usually the National Geodetic Vertical Datum of 1929 (NGVD 29) or North American Vertical Datum of 1988 (NAVD 88), in feet.
+          example: -999
+          default: -999
+        annualProbability:
+          type: string
+          description: Annual probability
+          example: Less than 0.2%
+          maxLength: 256
+        levees:
+          type: string
+          description: Flood defenses can flood walls, levees, dykes, and embankments—typically designed to protect against a flood of a certain return period.
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+        otherZones:
+          type: string
+          description: Other zones (within proximity distance)
+          example: ''
+          maxLength: 256
+        flMatch:
+          type: string
+          description: Fl match
+          example: '1'
+          maxLength: 2
+        floodway:
+          type: string
+          description: Any land area susceptible to being inundated by floodwaters from any source.
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+        cobra:
+          type: string
+          description: The Coastal Barrier Resources Act of 1982 (COBRA) designated certain portions of the Gulf and East Coasts as undeveloped coastal barriers.
+          enum:
+          - 'Yes'
+          - 'No'
+          example: 'No'
+    GlobalNuclearD2TOutput:
+      type: object
+      properties:
+        nuclearPowerPlant:
+          type: array
+          description: Nearest nuclear power plant within 30 km of the given point
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Nuclear plant name
+                example: Dresden Generating Station
+                maxLength: 256
+              capacity:
+                type: number
+                description: Nuclear plant capacity
+                example: 2018.6
+              country:
+                type: string
+                description: Nuclear plant country
+                example: United States of America
+                maxLength: 256
+              longitude:
+                type: number
+                description: Nuclear plant longitude
+                example: -88.27
+              latitude:
+                type: number
+                description: Nuclear plant latitude
+                example: 41.39
+              distance:
+                type: number
+                description: Distance from the nuclear power plant
+                example: 18737.69
+        distanceUnit:
+          type: string
+          enum:
+          - meters
+          description: Distance unit
+          example: meters
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    FlDepthInlandSurgeOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/FlDepthInlandOutput'
+      - type: object
+      description: results for `floodDepth` lookup
+      properties:
+        depthSurgeUndef30yr:
+          type: integer
+          description: Depth surge undefended 30-year
+          example: 0
+        depthSurgeDef30yr:
+          type: integer
+          description: Depth surge defended 30-year
+          example: 0
+        depthSurgeUndef50yr:
+          type: integer
+          description: Depth surge undefended 50-year
+          example: 0
+        depthSurgeDef50yr:
+          type: integer
+          description: Depth surge defended 50-year
+          example: 0
+        depthSurgeUndef100yr:
+          type: integer
+          description: Depth surge undefended 100-year
+          example: 0
+        depthSurgeDef100yr:
+          type: integer
+          description: Depth surge defended 100-year
+          example: 0
+        depthSurgeUndef200yr:
+          type: integer
+          description: Depth surge undefended 200-year
+          example: 0
+        depthSurgeDef200yr:
+          type: integer
+          description: Depth surge defended 200-year
+          example: 0
+        depthSurgeUndef250yr:
+          type: integer
+          description: Depth surge undefended 250-year
+          example: 0
+        depthSurgeDef250yr:
+          type: integer
+          description: Depth surge defended 250-year
+          example: 0
+        depthSurgeUndef500yr:
+          type: integer
+          description: Depth surge undefended 500-year
+          example: 0
+        depthSurgeDef500yr:
+          type: integer
+          description: Depth surge defended 500-year
+          example: 0
+        depthSurgeUndef1000yr:
+          type: integer
+          description: Depth surge undefended 1000-year
+          example: 0
+        depthSurgeDef1000yr:
+          type: integer
+          description: Depth surge defended 1000-year
+          example: 0
+        depthCombinedUndef30yr:
+          type: integer
+          description: Depth combined undefended 30-year
+          example: 4
+        depthCombinedDef30yr:
+          type: integer
+          description: Depth combined defended 30-year
+          example: 3
+        depthCombinedUndef50yr:
+          type: integer
+          description: Depth combined undefended 50-year
+          example: 5
+        depthCombinedDef50yr:
+          type: integer
+          description: Depth combined defended 50-year
+          example: 3
+        depthCombinedUndef100yr:
+          type: integer
+          description: Depth combined undefended 100-year
+          example: 5
+        depthCombinedDef100yr:
+          type: integer
+          description: Depth combined defended 100-year
+          example: 5
+        depthCombinedUndef200yr:
+          type: integer
+          description: Depth combined undefended 200-year
+          example: 6
+        depthCombinedDef200yr:
+          type: integer
+          description: Depth combined defended 200-year
+          example: 6
+        depthCombinedUndef250yr:
+          type: integer
+          description: Depth combined undefended 250-year
+          example: 6
+        depthCombinedDef250yr:
+          type: integer
+          description: Depth combined defended 250-year
+          example: 6
+        depthCombinedUndef500yr:
+          type: integer
+          description: Depth combined undefended 500-year
+          example: 6
+        depthCombinedDef500yr:
+          type: integer
+          description: Depth combined defended 500-year
+          example: 6
+        depthCombinedUndef1000yr:
+          type: integer
+          description: Depth combined undefended 1000-year
+          example: 6
+        depthCombinedDef1000yr:
+          type: integer
+          description: Depth combined defended 1000-year
+          example: 6
+    FlDepthInlandSurgeProximityOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/FlDepthInlandProximityOutput'
+      - type: object
+      description: results for `proximity` lookup
+      properties:
+        dominantFloodSource:
+          type: string
+          description: Dominant flood source
+          enum:
+          - INLAND
+          - SURGE
+          example: INLAND
+    RiskScoreBaseOutput:
+      type: object
+      description: results
+      properties:
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+        score100yr:
+          type: integer
+          description: 100-year score
+          example: 1
+        score250yr:
+          type: integer
+          description: 250-year score
+          example: 1
+        score500yr:
+          type: integer
+          description: 500-year score
+          example: 3
+        scoreOverall:
+          type: integer
+          description: Overall score
+          example: 3
+    ErrorOutput:
+      type: object
+      properties:
+        contextId:
+          type: string
+          example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        additionalInfo:
+          type: string
+          example: ''
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    USSubsidenceOutput:
+      type: object
+      properties:
+        mines:
+          type: array
+          description: Nearest 5 mines
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Mine name
+                example: Lambert Mine
+                maxLength: 80
+              mineType:
+                type: string
+                description: Mine Type
+                example: Unknown
+                maxLength: 80
+              status:
+                type: string
+                description: Mine status
+                example: Active
+                maxLength: 32
+              area:
+                type: number
+                format: double
+                description: Area of mine in square footage
+                example: 45.38
+              distance:
+                type: number
+                description: Distance from mine
+                example: 3.61
+        sinkholes:
+          type: array
+          description: Nearest 5 sinkholes
+          items:
+            type: object
+            properties:
+              area:
+                type: number
+                format: double
+                description: Area of sinkhole in square footage
+                example: 58.34
+              distance:
+                type: number
+                description: Distance from Sinkhole
+                example: 3.61
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    LossCostGuOutput:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/LossCostBaseOutput'
+      - type: object
+        properties:
+          groundUpLoss:
+            type: number
+            format: double
+            description: Total loss to the exposure, independent of any insurance or reinsurance terms
+            example: 901.43
+    UsWindSpeedOutput:
+      type: object
+      properties:
+        gust3Pct50Yr:
+          type: string
+          description: 3 second gust 3% probability of exceedance in 50 years for Exposure C category
+          example: 120-130
+          maxLength: 10
+        gust7Pct50Yr:
+          type: string
+          description: 3 second gust 7% probability of exceedance in 50 years for Exposure C category
+          example: '>=110'
+          maxLength: 10
+        gust15Pct50Yr:
+          type: string
+          description: 3 second gust 15% probability of exceedance in 50 years for Exposure C category
+          example: 130-140
+          maxLength: 10
+        windspeedUnit:
+          type: string
+          description: 'Constant value: MPH as in Miles Per Hour'
+          example: MPH
+          maxLength: 3
+    UsEqFaultOutput:
+      type: object
+      properties:
+        faults:
+          type: array
+          description: Nearest 5 faults
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: fault name
+                example: NM NMSZ USGS West Full
+                maxLength: 80
+              distance:
+                type: number
+                description: Distance to fault
+                example: 3.61
+              returnPeriodM60:
+                type: number
+                description: Return Period for Magnitude 6.0+
+                example: 27013
+              returnPeriodM65:
+                type: number
+                description: Return Period for Magnitude 6.5+
+                example: 108050
+              returnPeriodM70:
+                type: number
+                description: Return Period for Magnitude 7.0+
+                example: 120056
+        backgroundRates:
+          type: array
+          description: Background return period of magnitude 6.0+ earthquakes for 8 neighboring cells and, in the array's fifth position, the address's cell.
+          items:
+            type: number
+          example:
+          - 310
+          - 720
+          - 950
+          - 1085
+          - 2120
+          - 4340
+          - 3500
+          - 7690
+          - 11605
+        distanceUnit:
+          type: string
+          enum:
+          - feet
+          - meters
+          - miles
+          - km
+          description: Distance unit
+          example: miles
+        warnings:
+          $ref: '#/components/schemas/WarningOutput'
+    GeocodeInput:
+      type: object
+      required:
+      - countryCode
+      - countryScheme
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: User defined id
+          example: 0
+        admin1Code:
+          type: string
+          description: Code for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
+          example: CA
+          maxLength: 16
+        admin1Name:
+          type: string
+          description: Name of administrative level 1
+          example: CALIFORNIA
+          maxLength: 256
+        admin2Code:
+          type: string
+          description: Code for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
+          example: '001'
+          maxLength: 16
+        admin2Name:
+          type: string
+          description: Name of administrative level 2
+          example: ALAMEDA COUNTY
+          maxLength: 256
+        admin3Code:
+          type: string
+          description: Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
+          example: ''
+          maxLength: 16
+        admin3Name:
+          type: string
+          description: Name of administrative level 3
+          example: ''
+          maxLength: 256
+        admin4Code:
+          type: string
+          description: Code for administrative level 4
+          example: '044230130'
+          maxLength: 16
+        admin4Name:
+          type: string
+          description: Name of administrative level 4
+          example: '044230130'
+          maxLength: 256
+        cityName:
+          type: string
+          description: Name of City/Town
+          example: NEWARK
+          maxLength: 256
+        countryCode:
+          type: string
+          description: Country Code (optional for geocoding if latitude and longitude are provided)
+          example: US
+          maxLength: 4
+        countryName:
+          type: string
+          description: Name of Country
+          example: United States
+          maxLength: 512
+        countryScheme:
+          type: string
+          description: Standard for user-supplied country code (optional for geocoding if latitude and longitude are provided)
+          example: ISO2A
+          enum:
+          - ISO2A
+          - ISO3A
+          - ISO3N
+          - FIPS
+        latitude:
+          type: number
+          format: double
+          description: Location Latitude
+          example: 37.54120000000001
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: double
+          description: Location Longitude
+          example: -122.06061000000001
+          minimum: -180
+          maximum: 180
+        postalCode:
+          type: string
+          description: Postal Code
+          example: '94560'
+          maxLength: 16
+        streetAddress:
+          type: string
+          description: Address containing Number, Street Name, Street Type, etc.
+          example: 7575 GATEWAY BLVD
+          maxLength: 256
+        name:
+          type: string
+          description: Supplemental text captured for the address
+          example: ''
+          maxLength: 512
     CsLossCostOutput:
       type: object
       description: '`Loss cost`, also known as average annual loss (AAL), is derived using RMS models and account for hazard and vulnerability from detailed loss modeling of the peril region. To produce an annualized loss, losses from every event affecting each location are multiplied by the annual rate (probability) of the hazards causing that loss. The sum of the annualized losses at each location produces the AAL for that location, which is normalized by the exposure to yield the `annualized loss rate` (ALR). This calculation is performed for buildings, contents, and business interruption coverages. Total insured values (TIVs) for the relevant coverage are then applied to give the loss cost for each coverage.'
@@ -12837,172 +12977,98 @@ components:
             format: double
             description: The annualized loss rate for Contents coverage for wind
             example: 1.1
-    GeocodeOutput:
+    RiskScoreEuOutput:
       type: object
       allOf:
-      - $ref: '#/components/schemas/GeocodeInput'
+      - $ref: '#/components/schemas/RiskScoreBaseOutput'
       - type: object
         properties:
-          admin1GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for administrative level 1. Admin1 represents large geographic divisions, such as states and provinces.
-            example: 99999106
-          admin2GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for administrative level 2. Admin2 represents smaller geographic divisions than Admin1, such as counties.
-            example: 99999206001
-          admin3GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for administrative level 3. Code for administrative level 3. Admin3 represents even smaller geographic divisions than Admin2, such as districts.
-            example: 12695859
-          admin4GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for administrative level 4.
-            example: 62219571
-          admin5GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for administrative level 5.
-            example: 0
-          cityGeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for City/Town
-            example: 999993061080
-          countryFips:
-            type: string
-            description: Country FIPS code
-            example: US
-            maxLength: 4
-          countryGeoId:
-            type: integer
-            description: Globally unique ID for Country
-            example: 840
-          countryRmsCode:
-            type: string
-            description: RMS code for Country
-            example: US
-            maxLength: 4
-          geoDataSourceId:
-            type: integer
-            description: Geocode Data Source ID
-            example: 8
-          geoMatchCode:
-            type: string
-            description: Code for portions of the input address that matched, did not match, or were modified during the geocoding process.
-            example: T1-999993061080-T1A1-S0T100A100-S1A1-00-B-A-X
-            maxLength: 255
-          locationCode:
-            type: string
-            description: Census Tract Number / Sonpo / Sector / Short Postal Code
-            example: '060014443.01'
-            maxLength: 16
-          locationCodeGeoId:
-            type: integer
-            format: int64
-            description: Unique identification code for the location
-            example: 0
-          parcelId:
-            type: integer
-            format: int64
-            description: Parcel id
-            example: 0
-          postalCodeGeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for postal code
-            example: 99999494560
-          rmsGeoModelResolutionCode:
-            type: integer
-            description: 'Address match level: * `0` - None * `1` - Coordinate * `2` - Street / Parcel / Building * `3` - High Resolution Postcode / Other * `4` - Block Group/Census Tract * `5` - Postal code * `6` - Neighborhood * `7` - City * `8` - District / Municipality * `9` - County * `10` - State/Province * `11` - CRESTA * `12` - Multiple * `13` - User Defined * `14` - Country
-
-              '
-            example: 2
-            minimum: 0
-            maximum: 14
-          rmsGeocodingResolutionCode:
-            type: integer
-            description: Indicates the geocoding resolutions that are supported by the ACORD standard
-            example: 31
-          ugid:
-            type: string
-            description: Unique global identifier
-            example: USS3121778167575
-            maxLength: 50
-          zone1Code:
-            type: string
-            description: CRESTA code
-            example: A2
-            maxLength: 16
-          zone2Code:
-            type: string
-            description: zone2 code
-            example: ''
-            maxLength: 16
-          zone3Code:
-            type: string
-            description: zone3 code (Low Resolution CRESTA Zone)
-            example: ''
-            maxLength: 16
-          zone4Code:
-            type: string
-            description: zone4 code (High Resolution CRESTA Zone)
-            example: ''
-            maxLength: 16
-          zone3Name:
-            type: string
-            description: zone3 name (Low Resolution CRESTA Zone)
-            example: ''
-            maxLength: 256
-          zone4Name:
-            type: string
-            description: zone4 name (High Resolution CRESTA Zone)
-            example: ''
-            maxLength: 256
-          zone1GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for Zone1 (CRESTA)
-            example: 999995062
-          zone2GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for Zone2 (CRESTA)
-            example: 0
-          zone3GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for Zone3 (Low Resolution CRESTA Zone)
-            example: 22505979
-          zone4GeoId:
-            type: integer
-            format: int64
-            description: Globally unique ID for Zone4 (High Resolution CRESTA Zone)
-            example: 20235111
-          dataVersion:
-            type: string
-            description: Data version
-            example: xx.x.xxxx.x
-            maxLength: 20
+          percentileCountry:
+            type: number
+            format: double
+            description: Riskiness compared to other locations in the Country
+            example: 0.0085084662
   examples:
-    TwAddress:
+    UsNuclearD2TAddress:
       value:
-        countryCode: TW
+        countryCode: US
         countryScheme: ISO2A
-        countryRmsCode: TW
-        latitude: 26.223921
-        longitude: 119.998842
+        countryRmsCode: US
+        latitude: 41.285261
+        longitude: -88.445496
         rmsGeoModelResolutionCode: 1
-    CharacteristicsWF:
+    CoverageValuesFlood:
       value:
-        construction: RMS1
-        occupancy: ATC2
-        yearBuilt: 2005
+        buildingValue: 1093488.618
+        contentsValue: 966388.5339
+        businessInterruptionValue: 44393.0543
+    UsLandfillD2LAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        latitude: 38.619671
+        longitude: -96.78517
+        rmsGeoModelResolutionCode: 1
+    UsLandfillD2InnerCoastAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: SC
+        latitude: 32.821745
+        longitude: -79.981808
+        rmsGeoModelResolutionCode: 1
+    CnRiskIndexAddress:
+      value:
+        countryCode: CN
+        countryScheme: ISO2A
+        countryRmsCode: CN
+        latitude: 22.538668
+        longitude: 114.096738
+        rmsGeoModelResolutionCode: 1
+    DrAddress:
+      value:
+        countryCode: DR
+        countryFips: DR
+        countryScheme: FIPS
+        countryRmsCode: CB
+        latitude: 18.9833
+        longitude: -69.3833
+        rmsGeoModelResolutionCode: 1
+        admin3GeoId: 60375492
+        cityGeoId: 74125
+    CaAddress:
+      value:
+        countryCode: CA
+        countryScheme: ISO2A
+        countryRmsCode: CA
+        admin1Code: AB
+        latitude: 53.55
+        longitude: -113.35
+        rmsGeoModelResolutionCode: 1
+        postalCode: T8H 0E7
+        locationCode: T8H
+    CharacteristicsFlood:
+      value:
+        construction: ATC16
+        occupancy: ATC37
+        yearBuilt: 1964
         numOfStories: 1
+        firstFloorHeightAboveGround: 1
+        basement: 'YES'
+        foundationType: 0
+    UsCsAddress:
+      value:
+        countryCode: US
+        countryScheme: ISO2A
+        countryRmsCode: US
+        admin1Code: ME
+        latitude: 45.75
+        longitude: -67.25
+        rmsGeoModelResolutionCode: 1
+        postalCodeGeoId: 99999404491
+        admin1GeoId: 99999123
     KrAddress:
       value:
         countryCode: KR
@@ -13012,30 +13078,44 @@ components:
         longitude: 126.999299
         admin2GeoId: 61759072
         rmsGeoModelResolutionCode: 1
-    CaCsAddress:
+    CharacteristicsFloorArea:
       value:
-        countryCode: CA
+        construction: ATC1
+        occupancy: ATC1
+        yearBuilt: 1973
+        numOfStories: 3
+        floorArea: 1100
+    MxAddress:
+      value:
+        countryCode: MX
         countryScheme: ISO2A
-        countryRmsCode: CA
-        admin1Code: QC
-        latitude: 51.25
-        longitude: -63.25
+        countryRmsCode: MX
+        latitude: 31.304932
+        longitude: -115.669525
         rmsGeoModelResolutionCode: 1
-        postalCodeGeoId: 23803454
-        admin1GeoId: 2344924
-    UsTrD2TAddress:
+    CharacteristicsWF:
       value:
-        countryCode: US
+        construction: RMS1
+        occupancy: ATC2
+        yearBuilt: 2005
+        numOfStories: 1
+    PlAddress:
+      value:
+        countryCode: PL
         countryScheme: ISO2A
-        countryRmsCode: US
-        latitude: 31.810899
-        longitude: -106.53353
+        countryRmsCode: PL
+        latitude: 53.3610246
+        longitude: 14.31923382
         rmsGeoModelResolutionCode: 1
-    CoverageValuesFlood:
+    NzAddress:
       value:
-        buildingValue: 1093488.618
-        contentsValue: 966388.5339
-        businessInterruptionValue: 44393.0543
+        countryCode: NZ
+        countryScheme: ISO2A
+        countryRmsCode: NZ
+        latitude: -36.84491
+        longitude: 174.7335
+        admin1GeoId: 15021756
+        rmsGeoModelResolutionCode: 1
     UsTxAddressEsdb:
       value:
         countryCode: US
@@ -13048,30 +13128,26 @@ components:
         geoMatchCode: K6-99999783726670-K1T1P1A1-K95T100P100A100-T1P1A1-00-AB-TP-X
         cityName: SPICEWOOD
         streetAddress: 1900 LAS ENTRADAS
-    CharacteristicsFlood:
+    CaCsAddress:
       value:
-        construction: ATC16
-        occupancy: ATC37
-        yearBuilt: 1964
-        numOfStories: 1
-        firstFloorHeightAboveGround: 1
-        basement: 'YES'
-        foundationType: 0
-    UsLandfillD2LAddress:
-      value:
-        countryCode: US
+        countryCode: CA
         countryScheme: ISO2A
-        countryRmsCode: US
-        latitude: 38.619671
-        longitude: -96.78517
+        countryRmsCode: CA
+        admin1Code: QC
+        latitude: 51.25
+        longitude: -63.25
         rmsGeoModelResolutionCode: 1
-    MxAddress:
+        postalCodeGeoId: 23803454
+        admin1GeoId: 2344924
+    EuGbAddress:
       value:
-        countryCode: MX
+        countryCode: GB
         countryScheme: ISO2A
-        countryRmsCode: MX
-        latitude: 31.304932
-        longitude: -115.669525
+        countryRmsCode: GB
+        latitude: 54.988537
+        longitude: -2.138128
+        postalCode: NE46 4SJ
+        postalCodeGeoId: 21225450
         rmsGeoModelResolutionCode: 1
     EuFrAddress:
       value:
@@ -13082,42 +13158,38 @@ components:
         longitude: 4.828696969
         postalCodeGeoId: 12726916
         rmsGeoModelResolutionCode: 1
-    UsCaAddress:
+    AuAddress:
+      value:
+        countryCode: AU
+        countryScheme: ISO2A
+        countryRmsCode: AU
+        latitude: -19.284868
+        longitude: 146.772049
+        rmsGeoModelResolutionCode: 1
+        admin1GeoId: 2344702
+        postalCodeGeoId: 12708445
+    UsFlAddress:
       value:
         countryCode: US
         countryScheme: ISO2A
         countryRmsCode: US
-        admin1Code: CA
-        latitude: 37.5412
-        longitude: -122.06061
-        admin2GeoId: 99999206001
+        admin1Code: FL
+        latitude: 28.514108
+        longitude: -81.37189
         rmsGeoModelResolutionCode: 1
-    InAddress:
+    CharacteristicsEuBasic:
       value:
-        countryCode: IN
+        construction: ATC0
+        occupancy: RMS1
+        yearBuilt: 1990
+        numOfStories: 0
+    UsTrD2TAddress:
+      value:
+        countryCode: US
         countryScheme: ISO2A
-        countryRmsCode: IN
-        latitude: 19.102055
-        longitude: 72.898758
-        postalCode: '400072'
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 2345750
-    CharacteristicsFloorArea:
-      value:
-        construction: ATC1
-        occupancy: ATC1
-        yearBuilt: 1973
-        numOfStories: 3
-        floorArea: 1100
-    EuGbAddress:
-      value:
-        countryCode: GB
-        countryScheme: ISO2A
-        countryRmsCode: GB
-        latitude: 54.988537
-        longitude: -2.138128
-        postalCode: NE46 4SJ
-        postalCodeGeoId: 21225450
+        countryRmsCode: US
+        latitude: 31.810899
+        longitude: -106.53353
         rmsGeoModelResolutionCode: 1
     UsFlAddressExtended:
       value:
@@ -13130,23 +13202,6 @@ components:
         rmsGeoModelResolutionCode: 1
         postalCodeGeoId: 99999432806
         admin1GeoId: 99999112
-    CharacteristicsEuBasic:
-      value:
-        construction: ATC0
-        occupancy: RMS1
-        yearBuilt: 1990
-        numOfStories: 0
-    DrAddress:
-      value:
-        countryCode: DR
-        countryFips: DR
-        countryScheme: FIPS
-        countryRmsCode: CB
-        latitude: 18.9833
-        longitude: -69.3833
-        rmsGeoModelResolutionCode: 1
-        admin3GeoId: 60375492
-        cityGeoId: 74125
     IdAddress:
       value:
         countryCode: ID
@@ -13155,47 +13210,6 @@ components:
         latitude: -8.451797
         longitude: 118.730615
         rmsGeoModelResolutionCode: 1
-    USSubsidenceAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: CA
-        latitude: 37.272
-        longitude: -91.719
-        rmsGeoModelResolutionCode: 1
-    PhAddress:
-      value:
-        countryCode: PH
-        countryScheme: ISO2A
-        countryRmsCode: PH
-        latitude: 6.934632
-        longitude: 126.259708
-        rmsGeoModelResolutionCode: 1
-    CharacteristicsBasic:
-      value:
-        construction: ATC1
-        occupancy: ATC1
-        yearBuilt: 1973
-        numOfStories: 3
-    UsCsAddress:
-      value:
-        countryCode: US
-        countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: ME
-        latitude: 45.75
-        longitude: -67.25
-        rmsGeoModelResolutionCode: 1
-        postalCodeGeoId: 99999404491
-        admin1GeoId: 99999123
-    CharacteristicsEuFl:
-      value:
-        construction: ATC0
-        occupancy: RMS1
-        yearBuilt: 1990
-        numOfStories: 0
-        basement: 'YES'
     GuAddress:
       value:
         countryCode: GU
@@ -13206,87 +13220,73 @@ components:
         rmsGeoModelResolutionCode: 1
         admin1GeoId: 60073592
         admin3GeoId: 60073615
-    AuAddress:
-      value:
-        countryCode: AU
-        countryScheme: ISO2A
-        countryRmsCode: AU
-        latitude: -19.284868
-        longitude: 146.772049
-        rmsGeoModelResolutionCode: 1
-        admin1GeoId: 2344702
-        postalCodeGeoId: 12708445
-    UsNuclearD2TAddress:
+    UsCaAddress:
       value:
         countryCode: US
         countryScheme: ISO2A
         countryRmsCode: US
-        latitude: 41.285261
-        longitude: -88.445496
+        admin1Code: CA
+        latitude: 37.5412
+        longitude: -122.06061
+        admin2GeoId: 99999206001
         rmsGeoModelResolutionCode: 1
-    CnRiskIndexAddress:
-      value:
-        countryCode: CN
-        countryScheme: ISO2A
-        countryRmsCode: CN
-        latitude: 22.538668
-        longitude: 114.096738
-        rmsGeoModelResolutionCode: 1
-    CaAddress:
-      value:
-        countryCode: CA
-        countryScheme: ISO2A
-        countryRmsCode: CA
-        admin1Code: AB
-        latitude: 53.55
-        longitude: -113.35
-        rmsGeoModelResolutionCode: 1
-        postalCode: T8H 0E7
-        locationCode: T8H
-    UsFlAddress:
+    USSubsidenceAddress:
       value:
         countryCode: US
         countryScheme: ISO2A
         countryRmsCode: US
-        admin1Code: FL
-        latitude: 28.514108
-        longitude: -81.37189
+        admin1Code: CA
+        latitude: 37.272
+        longitude: -91.719
         rmsGeoModelResolutionCode: 1
-    UsLandfillD2InnerCoastAddress:
+    CharacteristicsEuFl:
       value:
-        countryCode: US
+        construction: ATC0
+        occupancy: RMS1
+        yearBuilt: 1990
+        numOfStories: 0
+        basement: 'YES'
+    InAddress:
+      value:
+        countryCode: IN
         countryScheme: ISO2A
-        countryRmsCode: US
-        admin1Code: SC
-        latitude: 32.821745
-        longitude: -79.981808
+        countryRmsCode: IN
+        latitude: 19.102055
+        longitude: 72.898758
+        postalCode: '400072'
         rmsGeoModelResolutionCode: 1
-    NzAddress:
+        admin1GeoId: 2345750
+    CharacteristicsBasic:
       value:
-        countryCode: NZ
+        construction: ATC1
+        occupancy: ATC1
+        yearBuilt: 1973
+        numOfStories: 3
+    TwAddress:
+      value:
+        countryCode: TW
         countryScheme: ISO2A
-        countryRmsCode: NZ
-        latitude: -36.84491
-        longitude: 174.7335
-        admin1GeoId: 15021756
+        countryRmsCode: TW
+        latitude: 26.223921
+        longitude: 119.998842
         rmsGeoModelResolutionCode: 1
-    PlAddress:
+    PhAddress:
       value:
-        countryCode: PL
+        countryCode: PH
         countryScheme: ISO2A
-        countryRmsCode: PL
-        latitude: 53.3610246
-        longitude: 14.31923382
+        countryRmsCode: PH
+        latitude: 6.934632
+        longitude: 126.259708
         rmsGeoModelResolutionCode: 1
   responses:
-    404Response:
-      description: Not found.
+    400Response:
+      description: The request was unacceptable, likely due to missing a required input.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorOutput'
-    400Response:
-      description: The request was unacceptable, likely due to missing a required input.
+    404Response:
+      description: Not found.
       content:
         application/json:
           schema:

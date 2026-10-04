@@ -1088,15 +1088,16 @@ paths:
       - PortfolioV2
 components:
   schemas:
-    BatchRequest:
+    AnalysisSearchResultV2:
       type: object
       properties:
-        method:
-          type: string
-        path:
-          type: string
-        body:
-          type: string
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysesItemV2'
     GlobalAnalysisSettings:
       type: object
       properties:
@@ -1118,68 +1119,33 @@ components:
       - minLossThreshold
       - numMaxLossEvent
       - treatConstructionOccupancyAsUnknown
-    Band:
+    Coordinate:
       type: object
       properties:
-        greaterThanOrEqualTo:
-          type: number
-          format: double
-          minimum: 0
-        lessThan:
-          type: number
-          format: double
-          maximum: 10000
-      required:
-      - greaterThanOrEqualTo
-    AnalysisCurrency:
-      type: object
-      properties:
-        name:
-          type: string
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
-    PortfolioSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
+        locationId:
           type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/PortfolioSearchItem'
-    PortfolioAccountsInput:
+          format: int32
+        locationNumber:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        streetAddress:
+          type: string
+        geoResolutionCode:
+          $ref: '#/components/schemas/ExposureValue'
+    ExposureValue:
       type: object
       properties:
-        accountsToAdd:
-          type: array
-          items:
-            type: integer
-            format: int32
-        accountsToRemove:
-          type: array
-          items:
-            type: integer
-            format: int32
-    ErrorMessage:
-      type: object
-      properties:
+        id:
+          type: integer
+          format: int32
         code:
           type: string
-        message:
-          type: string
-        logId:
+        name:
           type: string
     CustomBand:
       type: object
@@ -1194,16 +1160,23 @@ components:
           minItems: 1
       required:
       - hazard
-    AnalysisSearchResultV2:
+    CopyPortfolioInfo:
       type: object
       properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalysesItemV2'
+        deep:
+          type: boolean
+        newName:
+          type: string
+        newNumber:
+          type: string
+        newDescription:
+          type: string
+        isDeep:
+          type: boolean
+      required:
+      - newDescription
+      - newName
+      - newNumber
     ReportListSearchItem:
       type: object
       properties:
@@ -1233,16 +1206,23 @@ components:
           type: string
         notes:
           type: string
-    ExposureValue:
+    ExposureSummaryReportInput:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        code:
+        perilList:
+          type: array
+          items:
+            type: string
+          maxItems: 2147483647
+          minItems: 1
+        reportName:
           type: string
-        name:
-          type: string
+        customBands:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomBand'
+      required:
+      - perilList
     Currency:
       type: object
       properties:
@@ -1259,6 +1239,63 @@ components:
       - code
       - scheme
       - vintage
+    Portfolio:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        number:
+          type: string
+        description:
+          type: string
+        createDate:
+          type: string
+        stampDate:
+          type: string
+      required:
+      - description
+      - name
+      - number
+    LayerInfo:
+      type: object
+      properties:
+        name:
+          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+          type: string
+        type:
+          description: Name of the job type. One of `geocode` or `hazard`.
+          type: string
+        engineType:
+          description: Name of engine.
+          type: string
+        version:
+          description: Version of the peril model.
+          type: string
+        layerOptions:
+          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+      required:
+      - engineType
+      - name
+      - type
+      - version
+    PortfolioSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/PortfolioSearchItem'
     PortfolioMetrics:
       type: object
       properties:
@@ -1287,69 +1324,6 @@ components:
           type: string
         hazardVersion:
           type: string
-    AccountSearchItem:
-      type: object
-      properties:
-        accountId:
-          type: integer
-          format: int32
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        cedantName:
-          type: string
-        producerName:
-          type: string
-        underwriterName:
-          type: string
-        branchName:
-          type: string
-        numLocations:
-          type: integer
-          format: int32
-        userId1:
-          type: string
-        userId2:
-          type: string
-        userId3:
-          type: string
-        userId4:
-          type: string
-        userText1:
-          type: string
-        userText2:
-          type: string
-        geocodeVersion:
-          type: string
-        hazardVersion:
-          type: string
-        ownerName:
-          type: string
-        updatedBy:
-          type: string
-        stampDate:
-          type: string
-        jobStatus:
-          type: string
-        jobStartDate:
-          type: string
-        jobEndDate:
-          type: string
-        resultsCount:
-          type: integer
-          format: int32
-        policyExpirationDate:
-          type: string
-        policyExpirationStatus:
-          type: string
-        totalTIV:
-          type: number
-          format: float
-        reportsCount:
-          type: integer
-          format: int32
-          example: 0
     PortfolioFilteredAccountsInput:
       type: object
       properties:
@@ -1364,148 +1338,24 @@ components:
             format: int32
         manageExistingAccounts:
           type: boolean
-    ExposureSummaryReportInput:
+    AnalysisCurrency:
       type: object
       properties:
-        perilList:
-          type: array
-          items:
-            type: string
-          maxItems: 2147483647
-          minItems: 1
-        reportName:
-          type: string
-        customBands:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomBand'
-      required:
-      - perilList
-    Portfolio:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
         name:
           type: string
-        number:
+        code:
           type: string
-        description:
+        scheme:
           type: string
-        createDate:
+        asOfDate:
           type: string
-        stampDate:
+        vintage:
           type: string
       required:
-      - description
-      - name
-      - number
-    Coordinate:
-      type: object
-      properties:
-        locationId:
-          type: integer
-          format: int32
-        locationNumber:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
-        streetAddress:
-          type: string
-        geoResolutionCode:
-          $ref: '#/components/schemas/ExposureValue'
-    AccountSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountSearchItem'
-    ProcessInputV2:
-      type: object
-      properties:
-        exposureType:
-          type: string
-          enum:
-          - PORTFOLIO
-          - ACCOUNT
-          - LOCATION
-          - POLICY
-          - STEP_POLICY
-          - TREATY
-          - AGGPORTFOLIO
-        edm:
-          type: string
-        currency:
-          $ref: '#/components/schemas/Currency'
-        modelProfileId:
-          type: integer
-          format: int32
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        treaties:
-          type: array
-          items:
-            type: integer
-            format: int32
-        jobName:
-          type: string
-          maxLength: 64
-          minLength: 0
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        id:
-          type: integer
-          format: int32
-          minimum: 1
-        outputProfileId:
-          type: integer
-          format: int32
-        globalAnalysisSettings:
-          $ref: '#/components/schemas/GlobalAnalysisSettings'
-        climateChangeVariationId:
-          type: integer
-          format: int32
-          maximum: 68
-          minimum: 0
-      required:
-      - currency
-      - edm
-    CopyPortfolioInfo:
-      type: object
-      properties:
-        deep:
-          type: boolean
-        newName:
-          type: string
-        newNumber:
-          type: string
-        newDescription:
-          type: string
-        isDeep:
-          type: boolean
-      required:
-      - newDescription
-      - newName
-      - newNumber
-    ReportListSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportListSearchItem'
+      - asOfDate
+      - code
+      - scheme
+      - vintage
     AnalysesItemV2:
       type: object
       properties:
@@ -1592,33 +1442,139 @@ components:
           format: int32
         exposureSetId:
           type: string
-    LayerInfo:
+    ReportListSearchResult:
       type: object
       properties:
-        name:
-          description: Name of a peril model that estimates losses for natural or man-made hazards, such as earthquakes, floods, hurricanes, or acts of terrorism.
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportListSearchItem'
+    ProcessInputV2:
+      type: object
+      properties:
+        exposureType:
           type: string
-        type:
-          description: Name of the job type. One of `geocode` or `hazard`.
+          enum:
+          - PORTFOLIO
+          - ACCOUNT
+          - LOCATION
+          - POLICY
+          - STEP_POLICY
+          - TREATY
+          - AGGPORTFOLIO
+        edm:
           type: string
-        engineType:
-          description: Name of engine.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        modelProfileId:
+          type: integer
+          format: int32
+        eventRateSchemeId:
+          type: integer
+          format: int32
+        treaties:
+          type: array
+          items:
+            type: integer
+            format: int32
+        jobName:
           type: string
-        version:
-          description: Version of the peril model.
-          type: string
-        layerOptions:
-          description: 'Options that apply to the layer. For example,  `aggregateTriggerEnabled`, `geoLicenseType`, `overrideUserDef`, `skipPrevGeocoded`, `skipPrevHazard`.
-
-            '
-          type: object
-          additionalProperties:
-            type: string
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        id:
+          type: integer
+          format: int32
+          minimum: 1
+        outputProfileId:
+          type: integer
+          format: int32
+        globalAnalysisSettings:
+          $ref: '#/components/schemas/GlobalAnalysisSettings'
+        climateChangeVariationId:
+          type: integer
+          format: int32
+          maximum: 68
+          minimum: 0
       required:
-      - engineType
-      - name
-      - type
-      - version
+      - currency
+      - edm
+    AccountSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountSearchItem'
+    AccountSearchItem:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int32
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        cedantName:
+          type: string
+        producerName:
+          type: string
+        underwriterName:
+          type: string
+        branchName:
+          type: string
+        numLocations:
+          type: integer
+          format: int32
+        userId1:
+          type: string
+        userId2:
+          type: string
+        userId3:
+          type: string
+        userId4:
+          type: string
+        userText1:
+          type: string
+        userText2:
+          type: string
+        geocodeVersion:
+          type: string
+        hazardVersion:
+          type: string
+        ownerName:
+          type: string
+        updatedBy:
+          type: string
+        stampDate:
+          type: string
+        jobStatus:
+          type: string
+        jobStartDate:
+          type: string
+        jobEndDate:
+          type: string
+        resultsCount:
+          type: integer
+          format: int32
+        policyExpirationDate:
+          type: string
+        policyExpirationStatus:
+          type: string
+        totalTIV:
+          type: number
+          format: float
+        reportsCount:
+          type: integer
+          format: int32
+          example: 0
     PortfolioSearchItem:
       type: object
       properties:
@@ -1653,6 +1609,50 @@ components:
       - description
       - name
       - number
+    BatchRequest:
+      type: object
+      properties:
+        method:
+          type: string
+        path:
+          type: string
+        body:
+          type: string
+    Band:
+      type: object
+      properties:
+        greaterThanOrEqualTo:
+          type: number
+          format: double
+          minimum: 0
+        lessThan:
+          type: number
+          format: double
+          maximum: 10000
+      required:
+      - greaterThanOrEqualTo
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    PortfolioAccountsInput:
+      type: object
+      properties:
+        accountsToAdd:
+          type: array
+          items:
+            type: integer
+            format: int32
+        accountsToRemove:
+          type: array
+          items:
+            type: integer
+            format: int32
   securitySchemes:
     RMS_Auth:
       type: apiKey

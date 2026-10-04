@@ -3111,436 +3111,6 @@ paths:
       - Metrics V1
 components:
   schemas:
-    RegionItem:
-      type: object
-      properties:
-        region:
-          type: string
-        subRegion:
-          type: string
-        peril:
-          type: string
-        rateschemeid:
-          type: integer
-          format: int32
-    MarginalImpactInput:
-      type: object
-      properties:
-        marginalImpactAnalysisIds:
-          description: ID of an account-level analysis result. Only one ID is supported in current release.
-          type: array
-          items:
-            type: integer
-            format: int32
-          maxItems: 1
-          minItems: 1
-        currency:
-          $ref: '#/components/schemas/Currency'
-        outputType:
-          description: Granularity of the report. If `Account`, the report returns projected losses for all policies and locations grouped by peril. If `Policy` the report returns projected losses for all analyses grouped by policy.
-          type: string
-          enum:
-          - POLICY
-          - ACCOUNT
-        jobName:
-          description: Unique name for the job.
-          type: string
-          maxLength: 64
-          minLength: 1
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        rateSchemes:
-          description: Array of event rate scheme IDs to be used in metric calculations. If specified, overrides the event rate schemes used in the original analysis results.
-          type: array
-          items:
-            $ref: '#/components/schemas/EventRateScheme'
-      required:
-      - currency
-      - jobName
-      - outputType
-    PateInput:
-      type: object
-      properties:
-        insert:
-          type: array
-          description: An array of PATE treaty adjustments to add.
-          items:
-            $ref: '#/components/schemas/Pate'
-        update:
-          type: array
-          description: An array of PATE treaty adjustments to update.
-          items:
-            $ref: '#/components/schemas/Pate'
-        delete:
-          description: An array of PATE treaty adjustments to delete.
-          items:
-            $ref: '#/components/schemas/Pate'
-          type: array
-    RenameAnalysisInput:
-      type: object
-      properties:
-        newAnalysisName:
-          type: string
-          description: Name may consist of `0`-`9`, `A`-`Z`, `a`-`z`, and `_` (underscores), `-` (hyphens), `:` (colons), and blank spaces. Maximum length is 64 characters.
-    KeyLossItem:
-      type: object
-      properties:
-        eventid:
-          type: integer
-          format: int32
-        stddev:
-          type: number
-          format: double
-        meanloss:
-          type: number
-          format: double
-        cv:
-          type: number
-          format: double
-    LossOccurrence:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        treatyId:
-          type: integer
-          format: int32
-        regionPeril:
-          $ref: '#/components/schemas/ExposureValue'
-        lossOccurrenceTime:
-          type: integer
-          format: int32
-        lossOccurrenceRadius:
-          type: integer
-          format: int32
-        radiusUnit:
-          $ref: '#/components/schemas/ExposureValue'
-        multiLossOccurrence:
-          $ref: '#/components/schemas/ExposureValue'
-      required:
-      - treatyId
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    Producer:
-      description: Agent or brokerage firm that produced a policy.
-      type: object
-      properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    SimulateELTToPLTInput:
-      type: object
-      properties:
-        regionCode:
-          type: string
-        perilCode:
-          type: string
-        engineVersion:
-          type: string
-        eventRateSchemeId:
-          description: 'ID of the <<glossary:event rate scheme>> used to calculate a PLT analysis. The PLT Engine substitutes the specified event rate scheme for the event rate scheme used in the ELT-based reference analysis.
-
-            '
-          type: integer
-          format: int32
-        simulationSetId:
-          description: 'ID of a period event quantile table (PEQT).
-
-            '
-          type: integer
-          format: int32
-        simulationSetName:
-          description: 'Name of a period event quantile table (PEQT).
-
-            '
-          type: string
-        simulationPeriods:
-          description: 'Number of <<glossary:simulation period>>s used to generate the PLT.
-
-            '
-          type: integer
-          format: int64
-      required:
-      - simulationPeriods
-      - simulationSetId
-    ConvertEventInput:
-      type: object
-      properties:
-        analysisName:
-          description: 'The name for the analysis with converted rates and/or losses. Valid characters: `0`-`9`, `A`-`Z`, `a`-`z`, `_` (underscore), `-` (hyphen), and '''' '''' (blank space).  String cannot start or end with a hyphen (`-`), colon (`:`), or blank space and cannot include multiple consecutive hyphens (`--`).
-
-            '
-          type: string
-          example: NewAnalysisName
-          maxLength: 64
-          minLength: 0
-          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
-        eventRateSchemeIds:
-          description: 'Array of <<glossary:event rate scheme>>s identified by ID number.
-
-            '
-          type: array
-          items:
-            type: integer
-            format: int32
-        eventLossAdjustmentSchemeIds:
-          description: 'Array of <<glossary:event loss adjustment scheme>>s identified by ID number.
-
-            '
-          type: array
-          items:
-            type: integer
-            format: int32
-    EventRateScheme:
-      type: object
-      properties:
-        modelRegionCode:
-          type: string
-          maxLength: 4
-          minLength: 4
-        perilCode:
-          type: string
-          maxLength: 2
-          minLength: 2
-        modelVersion:
-          type: string
-        eventRateSchemeName:
-          type: string
-        eventRateSchemeId:
-          type: integer
-          format: int32
-        isDefault:
-          type: boolean
-        isActive:
-          type: boolean
-    MetricsResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int32
-        metricType:
-          type: string
-          enum:
-          - STATS
-          - ELT
-          - EP
-        granularities:
-          type: array
-          items:
-            type: string
-            enum:
-            - POLICY
-        metrics:
-          type: array
-          items:
-            type: object
-    MetricsOutput:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 8
-        workflowId:
-          type: integer
-          format: int64
-          example: 9064540
-        structure:
-          type: string
-        position:
-          type: string
-          example: GU
-        portfolioId:
-          type: integer
-          format: int32
-          example: 8
-        variationId:
-          type: integer
-          format: int32
-          example: 0
-        dimensions:
-          type: array
-          items:
-            type: string
-        metricName:
-          type: string
-          example: AEP
-        metricMetadata:
-          $ref: '#/components/schemas/MetricMetadata'
-        modelSettings:
-          $ref: '#/components/schemas/ModelSettings'
-        metricValue:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricValue'
-        exposureNumber:
-          type: string
-    LocationAAL:
-      type: object
-      properties:
-        locationId:
-          type: integer
-          format: int32
-        locationName:
-          type: string
-        locationNumber:
-          type: string
-        aal:
-          type: number
-          format: double
-        standardDeviation:
-          type: number
-          format: double
-        coefficientOfVariation:
-          type: number
-          format: double
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
-    AnalysisSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalysesItem'
-    Currency:
-      type: object
-      properties:
-        code:
-          type: string
-        scheme:
-          type: string
-        asOfDate:
-          type: string
-        vintage:
-          type: string
-      required:
-      - asOfDate
-      - code
-      - scheme
-      - vintage
-    MetricValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          example: 0
-        value:
-          $ref: '#/components/schemas/Value'
-        bucket:
-          $ref: '#/components/schemas/Bucket'
-    Bucket:
-      type: object
-    EntityResult:
-      type: object
-      properties:
-        entitiesTotalMatch:
-          type: integer
-          format: int64
-        entityItems:
-          $ref: '#/components/schemas/EntityItem'
-    MetricMetadata:
-      type: object
-      properties:
-        eventWeightId:
-          type: integer
-          format: int32
-        parameters:
-          items:
-            type: string
-          type: array
-    StatisticsItem:
-      type: object
-      properties:
-        anlsid:
-          type: integer
-          format: int64
-        id:
-          type: integer
-          format: int64
-        perspcode:
-          type: string
-        eptype:
-          type: string
-        purepremium:
-          type: number
-          format: double
-        totalstddev:
-          type: number
-          format: double
-        netpurepremium:
-          type: number
-          format: double
-        activation:
-          type: number
-          format: double
-        exhaustion:
-          type: number
-          format: double
-        totlossratio:
-          type: number
-          format: double
-        limit:
-          type: number
-          format: double
-        premium:
-          type: number
-          format: double
-        netstddev:
-          type: number
-          format: double
-        exhaustallreinstatements:
-          type: number
-          format: double
-        exposurenumber:
-          type: string
-    EntityItem:
-      type: object
-      properties:
-        domainName:
-          type: string
-        tableSpace:
-          type: string
-        tableName:
-          type: string
-        dataOwnedBy:
-          type: string
-        values:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: object
-        isActive:
-          type: boolean
     MapPerspectiveInput:
       type: object
       properties:
@@ -3578,18 +3148,64 @@ components:
       - mapPerspectiveOption
       - newPerspective
       - sourcePerspective
-    LineOfBusiness:
+    MetricsResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int32
+        metricType:
+          type: string
+          enum:
+          - STATS
+          - ELT
+          - EP
+        granularities:
+          type: array
+          items:
+            type: string
+            enum:
+            - POLICY
+        metrics:
+          type: array
+          items:
+            type: object
+    Bucket:
+      type: object
+    ExposureValue:
       type: object
       properties:
         id:
           type: integer
           format: int32
+        code:
+          type: string
         name:
           type: string
-          maxLength: 20
-          minLength: 0
-      required:
-      - name
+    ModelSettings:
+      type: object
+      properties:
+        modelProfileId:
+          type: integer
+          format: int32
+        currency:
+          $ref: '#/components/schemas/Currency'
+        minLossThreshold:
+          type: number
+          format: float
+        numPeriods:
+          type: integer
+          format: int32
+    MetricMetadata:
+      type: object
+      properties:
+        eventWeightId:
+          type: integer
+          format: int32
+        parameters:
+          items:
+            type: string
+          type: array
     AnalysisRegionSearchResult:
       type: object
       properties:
@@ -3600,126 +3216,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RegionItem'
-    ConvertResultCurrencyInput:
-      type: object
-      properties:
-        currency:
-          $ref: '#/components/schemas/Currency'
-    Value:
-      type: object
-      properties:
-        returnPeriods:
-          type: array
-          items:
-            type: number
-            format: double
-          example:
-          - 1.0
-          - 2.0
-          - 3.0
-        positionValues:
-          type: array
-          items:
-            type: number
-            format: double
-          example:
-          - 1.4336826286215238
-          - 1.4336826286215238
-          - 1.4336826286215238
-    AnalysesItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        runDate:
-          type: string
-        description:
-          type: string
-        currency:
-          type: string
-        type:
-          type: integer
-          format: int32
-        exposureType:
-          type: integer
-          format: int32
-        peril:
-          type: string
-        status:
-          type: integer
-          format: int32
-        region:
-          type: string
-        engineVersion:
-          type: string
-        groupType:
-          type: string
-        cedant:
-          type: string
-        lob:
-          type: string
-        engineType:
-          type: integer
-          format: int32
-        subperil:
-          type: integer
-          format: int32
-        exposureId:
-          type: integer
-          format: int32
-        dataSource:
-          type: string
-        jobId:
-          type: integer
-          format: int64
-        jobUUID:
-          type: string
-        isGroup:
-          type: boolean
-        engineName:
-          type: string
-        statusName:
-          type: string
-        typeName:
-          type: string
-        subperilName:
-          type: string
-        rdmName:
-          type: string
-        regroup:
-          type: integer
-          format: int32
-        currencyName:
-          type: string
-        perilName:
-          type: string
-        regionName:
-          type: string
-        lossAmplification:
-          type: integer
-          format: int32
-        lossAmplificationName:
-          type: string
-        mode:
-          type: integer
-          format: int32
-        modeName:
-          type: string
-        insuranceType:
-          type: integer
-          format: int32
-        insuranceTypeName:
-          type: string
-        vulnerabilityCurve:
-          type: integer
-          format: int32
-        vulnerabilityCurveName:
-          type: string
-        riGuid:
-          type: string
     Treaty:
       description: 'A reinsurance contract between an underwriter and a primary insurer that applies to a collection of related exposures. Under the terms of the treaty, the primary insurer (for example, a cedant) transfers risk to the underwriter in exchange for a premium and the reinsurer assumes financial responsibility for that risk.
 
@@ -3823,6 +3319,451 @@ components:
       - cedant
       - treatyNumber
       - treatyType
+    EntityResult:
+      type: object
+      properties:
+        entitiesTotalMatch:
+          type: integer
+          format: int64
+        entityItems:
+          $ref: '#/components/schemas/EntityItem'
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        scheme:
+          type: string
+        asOfDate:
+          type: string
+        vintage:
+          type: string
+      required:
+      - asOfDate
+      - code
+      - scheme
+      - vintage
+    ClimateChangeInput:
+      type: object
+      properties:
+        analysisName:
+          description: Name of climate change analysis. Can be alphanumeric string.
+          type: string
+          example: ABC Climate
+        climateConditionView:
+          description: 'One of `Combined All Parameters`, `Frequency and Intensity Only`, `Default`
+
+            '
+          type: string
+          example: Combined All Parameters
+        referenceRateSchemeId:
+          description: 'ID of <<glossary:event rate>> scheme conditioned for climate change. One of `190`, `202`, `84`, `9`.
+
+            * `190`: RMS 2019 Historical Event Rates
+
+            * `202`: RMS 2021 Historical Event Rates
+
+            * `84`: RMS 2015 Historical Event Rates
+
+            * `9`: RMS v2.0 Default Rates
+
+            '
+          type: integer
+          format: int32
+          example: 190
+        rcpScenario:
+          description: 'RCP scenario. One of `2.6`, `4.5`, `6.0`, or `8.5`.
+
+            * `2.6`: A pathway where radiative forcing peaks at approximately 3 W m-2 before 2100 and then declines to 2.6 W m-2.
+
+            * `4.5`: An intermediate stabilization pathway in which radiative forcing is stabilized at approximately 4.5 W m-2 and 6.0 W m-2 after 2100.
+
+            * `6.0`: An intermediate stabilization pathways in which radiative forcing is stabilized at approximately 4.5 W m-2 and 6.0 W m-2 after 2100.
+
+            * `8.5`: A high pathway for which radiative forcing reaches greater than 8.5 W m-2 by 2100 and continues to rise for some amount of time.
+
+            '
+          type: number
+          format: double
+          example: 2.6
+        timeHorizon:
+          description: 'One or more the snapshots included in an RCP scenario-based analysis. Values must be between `2020` and `2100` in five year increments. For example, `2020, 2025, 2030, 2035`
+
+            '
+          type: integer
+          format: int32
+          example: 2025
+        is2CWarmingScenario:
+          description: 'Indicates whether the climate change analysis includes RCP scenarios. If no `rcpScenario` or `timeHorizon` values are specified, set to `false`.
+
+            '
+          type: boolean
+    CedantSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cedant'
+    Producer:
+      description: Agent or brokerage firm that produced a policy.
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    PateInput:
+      type: object
+      properties:
+        insert:
+          type: array
+          description: An array of PATE treaty adjustments to add.
+          items:
+            $ref: '#/components/schemas/Pate'
+        update:
+          type: array
+          description: An array of PATE treaty adjustments to update.
+          items:
+            $ref: '#/components/schemas/Pate'
+        delete:
+          description: An array of PATE treaty adjustments to delete.
+          items:
+            $ref: '#/components/schemas/Pate'
+          type: array
+    MetricsOutput:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 8
+        workflowId:
+          type: integer
+          format: int64
+          example: 9064540
+        structure:
+          type: string
+        position:
+          type: string
+          example: GU
+        portfolioId:
+          type: integer
+          format: int32
+          example: 8
+        variationId:
+          type: integer
+          format: int32
+          example: 0
+        dimensions:
+          type: array
+          items:
+            type: string
+        metricName:
+          type: string
+          example: AEP
+        metricMetadata:
+          $ref: '#/components/schemas/MetricMetadata'
+        modelSettings:
+          $ref: '#/components/schemas/ModelSettings'
+        metricValue:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricValue'
+        exposureNumber:
+          type: string
+    StatisticsItem:
+      type: object
+      properties:
+        anlsid:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        perspcode:
+          type: string
+        eptype:
+          type: string
+        purepremium:
+          type: number
+          format: double
+        totalstddev:
+          type: number
+          format: double
+        netpurepremium:
+          type: number
+          format: double
+        activation:
+          type: number
+          format: double
+        exhaustion:
+          type: number
+          format: double
+        totlossratio:
+          type: number
+          format: double
+        limit:
+          type: number
+          format: double
+        premium:
+          type: number
+          format: double
+        netstddev:
+          type: number
+          format: double
+        exhaustallreinstatements:
+          type: number
+          format: double
+        exposurenumber:
+          type: string
+    SimulateELTToPLTInput:
+      type: object
+      properties:
+        regionCode:
+          type: string
+        perilCode:
+          type: string
+        engineVersion:
+          type: string
+        eventRateSchemeId:
+          description: 'ID of the <<glossary:event rate scheme>> used to calculate a PLT analysis. The PLT Engine substitutes the specified event rate scheme for the event rate scheme used in the ELT-based reference analysis.
+
+            '
+          type: integer
+          format: int32
+        simulationSetId:
+          description: 'ID of a period event quantile table (PEQT).
+
+            '
+          type: integer
+          format: int32
+        simulationSetName:
+          description: 'Name of a period event quantile table (PEQT).
+
+            '
+          type: string
+        simulationPeriods:
+          description: 'Number of <<glossary:simulation period>>s used to generate the PLT.
+
+            '
+          type: integer
+          format: int64
+      required:
+      - simulationPeriods
+      - simulationSetId
+    RegionItem:
+      type: object
+      properties:
+        region:
+          type: string
+        subRegion:
+          type: string
+        peril:
+          type: string
+        rateschemeid:
+          type: integer
+          format: int32
+    LossOccurrence:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        treatyId:
+          type: integer
+          format: int32
+        regionPeril:
+          $ref: '#/components/schemas/ExposureValue'
+        lossOccurrenceTime:
+          type: integer
+          format: int32
+        lossOccurrenceRadius:
+          type: integer
+          format: int32
+        radiusUnit:
+          $ref: '#/components/schemas/ExposureValue'
+        multiLossOccurrence:
+          $ref: '#/components/schemas/ExposureValue'
+      required:
+      - treatyId
+    KeyLossItem:
+      type: object
+      properties:
+        eventid:
+          type: integer
+          format: int32
+        stddev:
+          type: number
+          format: double
+        meanloss:
+          type: number
+          format: double
+        cv:
+          type: number
+          format: double
+    LineOfBusiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          maxLength: 20
+          minLength: 0
+      required:
+      - name
+    SampledLossItem:
+      type: object
+      properties:
+        cedant:
+          type: string
+        lob:
+          type: string
+        losstype:
+          type: string
+        sampleid:
+          type: integer
+          format: int32
+        eventid:
+          type: integer
+          format: int32
+        loss:
+          type: number
+          format: double
+    ConvertEventInput:
+      type: object
+      properties:
+        analysisName:
+          description: 'The name for the analysis with converted rates and/or losses. Valid characters: `0`-`9`, `A`-`Z`, `a`-`z`, `_` (underscore), `-` (hyphen), and '''' '''' (blank space).  String cannot start or end with a hyphen (`-`), colon (`:`), or blank space and cannot include multiple consecutive hyphens (`--`).
+
+            '
+          type: string
+          example: NewAnalysisName
+          maxLength: 64
+          minLength: 0
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        eventRateSchemeIds:
+          description: 'Array of <<glossary:event rate scheme>>s identified by ID number.
+
+            '
+          type: array
+          items:
+            type: integer
+            format: int32
+        eventLossAdjustmentSchemeIds:
+          description: 'Array of <<glossary:event loss adjustment scheme>>s identified by ID number.
+
+            '
+          type: array
+          items:
+            type: integer
+            format: int32
+    AnalysesItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        runDate:
+          type: string
+        description:
+          type: string
+        currency:
+          type: string
+        type:
+          type: integer
+          format: int32
+        exposureType:
+          type: integer
+          format: int32
+        peril:
+          type: string
+        status:
+          type: integer
+          format: int32
+        region:
+          type: string
+        engineVersion:
+          type: string
+        groupType:
+          type: string
+        cedant:
+          type: string
+        lob:
+          type: string
+        engineType:
+          type: integer
+          format: int32
+        subperil:
+          type: integer
+          format: int32
+        exposureId:
+          type: integer
+          format: int32
+        dataSource:
+          type: string
+        jobId:
+          type: integer
+          format: int64
+        jobUUID:
+          type: string
+        isGroup:
+          type: boolean
+        engineName:
+          type: string
+        statusName:
+          type: string
+        typeName:
+          type: string
+        subperilName:
+          type: string
+        rdmName:
+          type: string
+        regroup:
+          type: integer
+          format: int32
+        currencyName:
+          type: string
+        perilName:
+          type: string
+        regionName:
+          type: string
+        lossAmplification:
+          type: integer
+          format: int32
+        lossAmplificationName:
+          type: string
+        mode:
+          type: integer
+          format: int32
+        modeName:
+          type: string
+        insuranceType:
+          type: integer
+          format: int32
+        insuranceTypeName:
+          type: string
+        vulnerabilityCurve:
+          type: integer
+          format: int32
+        vulnerabilityCurveName:
+          type: string
+        riGuid:
+          type: string
     Pate:
       type: object
       properties:
@@ -3934,6 +3875,122 @@ components:
       - cedant
       - treatyNumber
       - treatyType
+    LocationAAL:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          format: int32
+        locationName:
+          type: string
+        locationNumber:
+          type: string
+        aal:
+          type: number
+          format: double
+        standardDeviation:
+          type: number
+          format: double
+        coefficientOfVariation:
+          type: number
+          format: double
+    RenameAnalysisInput:
+      type: object
+      properties:
+        newAnalysisName:
+          type: string
+          description: Name may consist of `0`-`9`, `A`-`Z`, `a`-`z`, and `_` (underscores), `-` (hyphens), `:` (colons), and blank spaces. Maximum length is 64 characters.
+    ConvertResultCurrencyInput:
+      type: object
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+    Cedant:
+      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+      type: object
+      properties:
+        id:
+          type: string
+          maxLength: 20
+          minLength: 0
+          pattern: ^\w([\w-]*\w|)$
+        name:
+          type: string
+          maxLength: 40
+          minLength: 0
+      required:
+      - name
+    LocationAALResult:
+      type: object
+      properties:
+        totalCount:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        locationAALs:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationAAL'
+    MetricValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 0
+        value:
+          $ref: '#/components/schemas/Value'
+        bucket:
+          $ref: '#/components/schemas/Bucket'
+    MarginalImpactInput:
+      type: object
+      properties:
+        marginalImpactAnalysisIds:
+          description: ID of an account-level analysis result. Only one ID is supported in current release.
+          type: array
+          items:
+            type: integer
+            format: int32
+          maxItems: 1
+          minItems: 1
+        currency:
+          $ref: '#/components/schemas/Currency'
+        outputType:
+          description: Granularity of the report. If `Account`, the report returns projected losses for all policies and locations grouped by peril. If `Policy` the report returns projected losses for all analyses grouped by policy.
+          type: string
+          enum:
+          - POLICY
+          - ACCOUNT
+        jobName:
+          description: Unique name for the job.
+          type: string
+          maxLength: 64
+          minLength: 1
+          pattern: ^\w((?!--)[\w\s:-])*\w$|^\w*$
+        rateSchemes:
+          description: Array of event rate scheme IDs to be used in metric calculations. If specified, overrides the event rate schemes used in the original analysis results.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventRateScheme'
+      required:
+      - currency
+      - jobName
+      - outputType
+    TreatySearchResult:
+      type: object
+      properties:
+        totalMatchCount:
+          type: integer
+          format: int64
+        searchMatchingTreatyList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Treaty'
     EventLossItem:
       type: object
       properties:
@@ -3992,135 +4049,69 @@ components:
           example: 1.205676267823641e-06
         exposureNumber:
           type: string
-    Cedant:
-      description: A risk-holding party (insurer/reinsurer) that is transferring a portion of risk to another risk-holding party (reinsurer/retrocessionaire).
+    Value:
       type: object
       properties:
-        id:
-          type: string
-          maxLength: 20
-          minLength: 0
-          pattern: ^\w([\w-]*\w|)$
-        name:
-          type: string
-          maxLength: 40
-          minLength: 0
-      required:
-      - name
-    LocationAALResult:
-      type: object
-      properties:
-        totalCount:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        limit:
-          type: integer
-          format: int32
-        locationAALs:
+        returnPeriods:
           type: array
           items:
-            $ref: '#/components/schemas/LocationAAL'
-    TreatySearchResult:
-      type: object
-      properties:
-        totalMatchCount:
-          type: integer
-          format: int64
-        searchMatchingTreatyList:
+            type: number
+            format: double
+          example:
+          - 1.0
+          - 2.0
+          - 3.0
+        positionValues:
           type: array
           items:
-            $ref: '#/components/schemas/Treaty'
-    ModelSettings:
+            type: number
+            format: double
+          example:
+          - 1.4336826286215238
+          - 1.4336826286215238
+          - 1.4336826286215238
+    EventRateScheme:
       type: object
       properties:
-        modelProfileId:
-          type: integer
-          format: int32
-        currency:
-          $ref: '#/components/schemas/Currency'
-        minLossThreshold:
-          type: number
-          format: float
-        numPeriods:
-          type: integer
-          format: int32
-    SampledLossItem:
-      type: object
-      properties:
-        cedant:
+        modelRegionCode:
           type: string
-        lob:
+          maxLength: 4
+          minLength: 4
+        perilCode:
           type: string
-        losstype:
+          maxLength: 2
+          minLength: 2
+        modelVersion:
           type: string
-        sampleid:
+        eventRateSchemeName:
+          type: string
+        eventRateSchemeId:
           type: integer
           format: int32
-        eventid:
-          type: integer
-          format: int32
-        loss:
-          type: number
-          format: double
-    ClimateChangeInput:
-      type: object
-      properties:
-        analysisName:
-          description: Name of climate change analysis. Can be alphanumeric string.
-          type: string
-          example: ABC Climate
-        climateConditionView:
-          description: 'One of `Combined All Parameters`, `Frequency and Intensity Only`, `Default`
-
-            '
-          type: string
-          example: Combined All Parameters
-        referenceRateSchemeId:
-          description: 'ID of <<glossary:event rate>> scheme conditioned for climate change. One of `190`, `202`, `84`, `9`.
-
-            * `190`: RMS 2019 Historical Event Rates
-
-            * `202`: RMS 2021 Historical Event Rates
-
-            * `84`: RMS 2015 Historical Event Rates
-
-            * `9`: RMS v2.0 Default Rates
-
-            '
-          type: integer
-          format: int32
-          example: 190
-        rcpScenario:
-          description: 'RCP scenario. One of `2.6`, `4.5`, `6.0`, or `8.5`.
-
-            * `2.6`: A pathway where radiative forcing peaks at approximately 3 W m-2 before 2100 and then declines to 2.6 W m-2.
-
-            * `4.5`: An intermediate stabilization pathway in which radiative forcing is stabilized at approximately 4.5 W m-2 and 6.0 W m-2 after 2100.
-
-            * `6.0`: An intermediate stabilization pathways in which radiative forcing is stabilized at approximately 4.5 W m-2 and 6.0 W m-2 after 2100.
-
-            * `8.5`: A high pathway for which radiative forcing reaches greater than 8.5 W m-2 by 2100 and continues to rise for some amount of time.
-
-            '
-          type: number
-          format: double
-          example: 2.6
-        timeHorizon:
-          description: 'One or more the snapshots included in an RCP scenario-based analysis. Values must be between `2020` and `2100` in five year increments. For example, `2020, 2025, 2030, 2035`
-
-            '
-          type: integer
-          format: int32
-          example: 2025
-        is2CWarmingScenario:
-          description: 'Indicates whether the climate change analysis includes RCP scenarios. If no `rcpScenario` or `timeHorizon` values are specified, set to `false`.
-
-            '
+        isDefault:
           type: boolean
-    CedantSearchResult:
+        isActive:
+          type: boolean
+    EntityItem:
+      type: object
+      properties:
+        domainName:
+          type: string
+        tableSpace:
+          type: string
+        tableName:
+          type: string
+        dataOwnedBy:
+          type: string
+        values:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: object
+        isActive:
+          type: boolean
+    AnalysisSearchResult:
       type: object
       properties:
         searchTotalMatch:
@@ -4129,7 +4120,16 @@ components:
         searchItems:
           type: array
           items:
-            $ref: '#/components/schemas/Cedant'
+            $ref: '#/components/schemas/AnalysesItem'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

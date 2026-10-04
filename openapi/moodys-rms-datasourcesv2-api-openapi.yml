@@ -239,6 +239,62 @@ paths:
       - DatasourcesV2
 components:
   schemas:
+    EdmRequest:
+      type: object
+      properties:
+        share:
+          description: Indicates if the exposure set is shared with other groups.
+          type: boolean
+        groups:
+          description: List of groups that may access the exposure set.
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+    DataSourceSearchResultV2:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int32
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDatabaseV2'
+    UserDatabaseV2:
+      type: object
+      properties:
+        datasourceName:
+          type: string
+        edmName:
+          type: string
+        permissionType:
+          type: integer
+          format: int32
+        isDefault:
+          type: boolean
+        metrics:
+          type: object
+          additionalProperties:
+            type: object
+        serverState:
+          type: string
+          enum:
+          - READY
+          - UPGRADING
+          - UPGRADE_FAILED
+          - LOCK
+        serverNamespace:
+          type: string
+          enum:
+          - RISK_MODELER
+          - DATA_BRIDGE
+        owner:
+          type: string
+        exposureSetId:
+          type: string
+        serverName:
+          type: string
     ServerInfo:
       type: object
       properties:
@@ -281,28 +337,6 @@ components:
         defaultServer:
           type: boolean
           example: false
-    DataSourceSearchResultV2:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int32
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDatabaseV2'
-    EdmRequest:
-      type: object
-      properties:
-        share:
-          description: Indicates if the exposure set is shared with other groups.
-          type: boolean
-        groups:
-          description: List of groups that may access the exposure set.
-          type: array
-          items:
-            type: string
-          uniqueItems: true
     ErrorMessage:
       type: object
       properties:
@@ -311,40 +345,6 @@ components:
         message:
           type: string
         logId:
-          type: string
-    UserDatabaseV2:
-      type: object
-      properties:
-        datasourceName:
-          type: string
-        edmName:
-          type: string
-        permissionType:
-          type: integer
-          format: int32
-        isDefault:
-          type: boolean
-        metrics:
-          type: object
-          additionalProperties:
-            type: object
-        serverState:
-          type: string
-          enum:
-          - READY
-          - UPGRADING
-          - UPGRADE_FAILED
-          - LOCK
-        serverNamespace:
-          type: string
-          enum:
-          - RISK_MODELER
-          - DATA_BRIDGE
-        owner:
-          type: string
-        exposureSetId:
-          type: string
-        serverName:
           type: string
   securitySchemes:
     RMS_Auth:

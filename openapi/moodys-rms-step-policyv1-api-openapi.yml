@@ -299,41 +299,6 @@ paths:
       - Step PolicyV1
 components:
   schemas:
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
-    StepPolicySearchResult:
-      type: object
-      properties:
-        totalSearchCount:
-          type: integer
-          format: int64
-        stepPolicies:
-          type: array
-          items:
-            $ref: '#/components/schemas/StepPolicy'
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
-          type: string
-    CopyStepPolicyInfo:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
     StepPolicy:
       type: object
       properties:
@@ -391,6 +356,41 @@ components:
       - expirationDate
       - inceptionDate
       - number
+    StepPolicySearchResult:
+      type: object
+      properties:
+        totalSearchCount:
+          type: integer
+          format: int64
+        stepPolicies:
+          type: array
+          items:
+            $ref: '#/components/schemas/StepPolicy'
+    CopyStepPolicyInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey

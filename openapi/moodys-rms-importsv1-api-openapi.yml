@@ -312,13 +312,60 @@ paths:
       - ImportsV1
 components:
   schemas:
-    ImportSourceFileResult:
+    ImportMappingInput:
       type: object
       properties:
-        items:
+        mapFileName:
+          type: string
+          description: Name of the import mapping file.
+        accountItems:
+          type: array
+          description: Array of mappings between <<glossary:account resource file>> columns and EDM columns.
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        locationItems:
+          description: Array of mappings between <<glossary:location resource file>> columns and EDM columns.
           type: array
           items:
-            $ref: '#/components/schemas/ImportSourceFileItem'
+            $ref: '#/components/schemas/ImportMappingItem'
+        reinsuranceItems:
+          type: array
+          description: Array of mappings between <<glossary:reinsurance resource file>> columns and EDM columns.
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+      required:
+      - accountItems
+      - locationItems
+      - mapFileName
+    ImportMappingOutput:
+      type: object
+      properties:
+        accountItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        locationItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+        reinsuranceItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportMappingItem'
+      required:
+      - accountItems
+      - locationItems
+      - reinsuranceItems
+    AccountFileInput:
+      type: object
+      properties:
+        number:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      - number
     ImportMappingItem:
       type: object
       properties:
@@ -333,6 +380,13 @@ components:
           type: string
         sourceExample:
           type: string
+    ImportSourceFileResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportSourceFileItem'
     SubmittedImportJob:
       type: object
       properties:
@@ -424,50 +478,6 @@ components:
       - bucketId
       - dataSourceName
       - delimiter
-    ImportMappingOutput:
-      type: object
-      properties:
-        accountItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-        locationItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-        reinsuranceItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-      required:
-      - accountItems
-      - locationItems
-      - reinsuranceItems
-    ImportMappingInput:
-      type: object
-      properties:
-        mapFileName:
-          type: string
-          description: Name of the import mapping file.
-        accountItems:
-          type: array
-          description: Array of mappings between <<glossary:account resource file>> columns and EDM columns.
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-        locationItems:
-          description: Array of mappings between <<glossary:location resource file>> columns and EDM columns.
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-        reinsuranceItems:
-          type: array
-          description: Array of mappings between <<glossary:reinsurance resource file>> columns and EDM columns.
-          items:
-            $ref: '#/components/schemas/ImportMappingItem'
-      required:
-      - accountItems
-      - locationItems
-      - mapFileName
     ErrorMessage:
       type: object
       properties:
@@ -477,16 +487,6 @@ components:
           type: string
         logId:
           type: string
-    AccountFileInput:
-      type: object
-      properties:
-        number:
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      - number
   securitySchemes:
     RMS_Auth:
       type: apiKey

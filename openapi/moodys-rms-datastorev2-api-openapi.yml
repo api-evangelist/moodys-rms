@@ -161,16 +161,6 @@ paths:
       - DatastoreV2
 components:
   schemas:
-    DataBridgeDatabaseSearchResult:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-          format: int32
-        dataBridgeDatabases:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataBridgeDatabase'
     ErrorMessage:
       type: object
       properties:
@@ -209,6 +199,16 @@ components:
           type: array
           items:
             type: string
+    DataBridgeDatabaseSearchResult:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          format: int32
+        dataBridgeDatabases:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataBridgeDatabase'
     DataBridgeRegisterInput:
       type: object
       properties:

@@ -278,6 +278,16 @@ paths:
       - UnderwriterV1
 components:
   schemas:
+    UnderwriterSearchResult:
+      type: object
+      properties:
+        searchTotalMatch:
+          type: integer
+          format: int64
+        searchItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/UnderWriter'
     UnderWriter:
       description: "Risk-holding party that transfers risk to a cedant in exchange for some premium. \n"
       type: object
@@ -300,16 +310,6 @@ components:
           type: string
         logId:
           type: string
-    UnderwriterSearchResult:
-      type: object
-      properties:
-        searchTotalMatch:
-          type: integer
-          format: int64
-        searchItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/UnderWriter'
   securitySchemes:
     RMS_Auth:
       type: apiKey

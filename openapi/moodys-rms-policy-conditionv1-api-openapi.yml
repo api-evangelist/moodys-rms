@@ -55,16 +55,6 @@ paths:
       - Policy ConditionV1
 components:
   schemas:
-    ExposureValue:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        code:
-          type: string
-        name:
-          type: string
     PolicyConditionCriteria:
       type: object
       properties:
@@ -82,15 +72,6 @@ components:
         value:
           type: string
         closePar:
-          type: string
-    ErrorMessage:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        logId:
           type: string
     PolicyCondition:
       type: object
@@ -125,6 +106,25 @@ components:
           format: double
         isFranchiseDeductible:
           $ref: '#/components/schemas/ExposureValue'
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        logId:
+          type: string
+    ExposureValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        code:
+          type: string
+        name:
+          type: string
   securitySchemes:
     RMS_Auth:
       type: apiKey
