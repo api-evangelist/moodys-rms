@@ -1591,6 +1591,8 @@ apis:
   humanURL: https://developer.rms.com/platform
   baseURL: https://api-use1.rms.com/platform
   tags:
+  - AccountV2
+  tags_raw:
   - Account V2
   properties:
   - type: OpenAPI
