@@ -1,0 +1,36 @@
+edges:
+- partner_name: Databricks Marketplace
+  partner: databricks
+  partner_match: aggregator
+  type: marketplace
+  marketplace: databricks-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://marketplace.databricks.com/provider/757a382d-5f20-411a-bca0-e3a363112082
+  category: data product listing
+  contract_reference:
+    register: Databricks Marketplace (marketplace.databricks.com/api/2.0/public-marketplace-providers + public-marketplace-listings)
+    spec_file: null
+    role: data-marketplace-seller
+    registered_name: Moody's
+    matched_domain: moodys.com
+    matched_by: domain+name-among-holders
+    listings: 9
+    sample_listings:
+    - Moody's Company Foundations
+    - Moody's Credit MCP
+    - Moody's EDF-X
+    - Moody's Economic Forecast Data
+    - Moody's Growth & Strategy MCP
+    signal_note: 'participation: the provider lists data products on this marketplace; counts are context'
+    detected_by: sweep-data-marketplaces.py
+    detected: '2026-10-20'
+  detected_by: sweep-data-marketplaces.py
+  detected: '2026-10-20'
+generated: '2026-10-20'
+method: searched
+source:
+- https://marketplace.databricks.com/
+checked:
+- https://marketplace.databricks.com/
