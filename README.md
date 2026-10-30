@@ -1,4 +1,4 @@
-# Moody's RMS (moodys-rms)
+# Moody's RMS
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,115 +64,170 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Moody's RMS is the catastrophe risk modeling and risk-data business of Moody's Corporation, headquartered in Newark, California in its home market of the United States and serving property and casualty insurers, reinsurers, brokers, and capital-market participants worldwide. Founded at Stanford in 1988 as Risk Management Solutions and acquired by Moody's in 2021, the company sells peril models and the exposure data infrastructure that carriers use to price, accumulate, and transfer catastrophe risk. Its products run on the cloud-native Intelligent Risk Platform, which fronts Risk Modeler, ExposureIQ, UnderwriteIQ, TreatyIQ, and Risk Data Exchange.
+Moody's RMS is the catastrophe risk modeling and risk-data business of Moody's Corporation, headquartered in Newark, California in its home market of the United States and serving property and casualty insurers, reinsurers, brokers, and capital-market participants worldwide. Founded at Stanford in 1988 as Risk Management Solutions and acquired by Moody's in 2021, the company sells peril models (hurricane, earthquake, flood, wildfire, severe convective storm, terror, cyber, pandemic) and the exposure data infrastructure that carriers use to price, accumulate, and transfer catastrophe risk. Its products run on the cloud-native Intelligent Risk Platform, which fronts Risk Modeler, ExposureIQ, UnderwriteIQ, TreatyIQ, and Risk Data Exchange. Unlike most of the US insurance sector, Moody's RMS is genuinely API-forward: it operates a public, self-serve ReadMe developer portal at developer.rms.com covering Platform APIs, Risk Modeler, Data Bridge, Location Intelligence, and Climate On Demand, publishes downloadable OpenAPI 3.0 definitions and public Postman collections from its own rms-developers GitHub repository, and exposes live REST hosts at api-use1.rms.com and api-euw1.rms.com. Reference documentation is readable without a login, but the APIs themselves are tenant-scoped: keys are issued only to licensed Intelligent Risk Platform tenants, so there is no self-serve signup and no sandbox. Its data-standards posture is cat-risk rather than ACORD — the exchange formats are the RMS EDM/RDM databases, the Risk Data Open Standard (RDOS), and interoperability with CEDE and OED; ACORD appears only as a geocoding-resolution code mapping inside the Location Intelligence API. These are risk-data and analytics APIs, not policy APIs: no quote, bind, issue, or FNOL surface is published.
 
-Unlike most of the US insurance sector — which has no federal regulator, no open-insurance mandate, and almost no public API surface — Moody's RMS is genuinely API-forward. It operates a public, self-serve developer portal at [developer.rms.com](https://developer.rms.com/), publishes downloadable OpenAPI 3.0 definitions and public Postman collections from its own [rms-developers](https://github.com/RMS/rms-developers) GitHub repository, and exposes live REST hosts at `api-use1.rms.com` and `api-euw1.rms.com`. Documentation is readable without a login, but the APIs themselves are tenant-scoped: keys are issued only to licensed Intelligent Risk Platform tenants, so there is no self-serve signup and no sandbox.
+**Areas:** Insurance · United States · Property and Casualty · Reinsurance · Risk Data · Catastrophe Modeling · Underwriting · Climate Risk · Geocoding · Analytics
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/moodys-rms/refs/heads/main/apis.yml)
+## Moody's RMS on APIs.io
 
-## Tags
+Everything profiled for Moody's RMS is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/moodys-rms/](https://apis.io/providers/moodys-rms/)** — or go straight to one of the APIs or properties below.
 
-- Insurance
-- United States
-- Property and Casualty
-- Reinsurance
-- Risk Data
-- Catastrophe Modeling
-- Underwriting
-- Climate Risk
-- Geocoding
-- Analytics
+### APIs (50)
 
-## Timestamps
+- [Moody's RMS Platform APIs](https://apis.io/apis/moodys-rms/platform-apis/) — A collection of REST APIs that let Intelligent Risk Platform tenants automate portfolio management, underwriting, and risk-transfer workflows across Risk…
+- [Moody's RMS Climate On Demand API](https://apis.io/apis/moodys-rms/climate-on-demand-api/) — Physical climate risk data delivered as an API so financial-services organizations can build climate applications on the Intelligent Risk Platform. The…
+- [Moody's RMS Platform MCP Server](https://apis.io/apis/moodys-rms/platform-mcp-server/) — A hosted Model Context Protocol server, irp-integration-mcp, released with Intelligent Risk Platform version 2026.07.c on 2026-06-30. It transforms the…
+- [Moody's RMS Account V1 API](https://apis.io/apis/moodys-rms/moodys-rms-accountv1-api/) — The AccountV1 API from Moody's RMS — 21 operation(s) for accountv1.
+- [Moody's RMS Aggregate PortfolioV1 API](https://apis.io/apis/moodys-rms/moodys-rms-aggregate-portfoliov1-api/) — The Aggregate PortfolioV1 API from Moody's RMS — 12 operation(s) for aggregate portfoliov1.
+- [Moody's RMS Aggregate PortfolioV2 API](https://apis.io/apis/moodys-rms/moodys-rms-aggregate-portfoliov2-api/) — The Aggregate PortfolioV2 API from Moody's RMS — 12 operation(s) for aggregate portfoliov2.
+- [Moody's RMS Analysis GroupsV1 API](https://apis.io/apis/moodys-rms/moodys-rms-analysis-groupsv1-api/) — The Analysis GroupsV1 API from Moody's RMS — 4 operation(s) for analysis groupsv1.
+- [Moody's RMS Analysis GroupsV2 API](https://apis.io/apis/moodys-rms/moodys-rms-analysis-groupsv2-api/) — The Analysis GroupsV2 API from Moody's RMS — 4 operation(s) for analysis groupsv2.
+- [Moody's RMS Branch V1 API](https://apis.io/apis/moodys-rms/moodys-rms-branchv1-api/) — The BranchV1 API from Moody's RMS — 2 operation(s) for branchv1.
+- [Moody's RMS Cedant V1 API](https://apis.io/apis/moodys-rms/moodys-rms-cedantv1-api/) — The CedantV1 API from Moody's RMS — 2 operation(s) for cedantv1.
+- [Moody's RMS Client IP API](https://apis.io/apis/moodys-rms/moodys-rms-client-ip-api/) — The Client IP API from Moody's RMS — 1 operation(s) for client ip.
+- [Moody's RMS Cluster API](https://apis.io/apis/moodys-rms/moodys-rms-cluster-api/) — The Cluster API from Moody's RMS — 5 operation(s) for cluster.
+- [Moody's RMS Composite API](https://apis.io/apis/moodys-rms/moodys-rms-composite-api/) — Returns multiple layers for an address, including chaining the output of one layer into the input for another
+- [Moody's RMS Databases API](https://apis.io/apis/moodys-rms/moodys-rms-databases-api/) — The Databases API from Moody's RMS — 5 operation(s) for databases.
+- [Moody's RMS Datasources V1 API](https://apis.io/apis/moodys-rms/moodys-rms-datasourcesv1-api/) — The DatasourcesV1 API from Moody's RMS — 3 operation(s) for datasourcesv1.
+- [Moody's RMS Datasources V2 API](https://apis.io/apis/moodys-rms/moodys-rms-datasourcesv2-api/) — The DatasourcesV2 API from Moody's RMS — 3 operation(s) for datasourcesv2.
+- [Moody's RMS Datastore V1 API](https://apis.io/apis/moodys-rms/moodys-rms-datastorev1-api/) — The DatastoreV1 API from Moody's RMS — 3 operation(s) for datastorev1.
+- [Moody's RMS Datastore V2 API](https://apis.io/apis/moodys-rms/moodys-rms-datastorev2-api/) — The DatastoreV2 API from Moody's RMS — 3 operation(s) for datastorev2.
+- [Moody's RMS Domains V1 API](https://apis.io/apis/moodys-rms/moodys-rms-domainsv1-api/) — The DomainsV1 API from Moody's RMS — 8 operation(s) for domainsv1.
+- [Moody's RMS Earthquake Hazard Lookup API](https://apis.io/apis/moodys-rms/moodys-rms-earthquake-hazard-lookup-api/) — The Earthquake Hazard Lookup API from Moody's RMS — 40 operation(s) for earthquake hazard lookup.
+- [Moody's RMS Exports V1 API](https://apis.io/apis/moodys-rms/moodys-rms-exportsv1-api/) — The ExportsV1 API from Moody's RMS — 2 operation(s) for exportsv1.
+- [Moody's RMS Exports V2 API](https://apis.io/apis/moodys-rms/moodys-rms-exportsv2-api/) — The ExportsV2 API from Moody's RMS — 1 operation(s) for exportsv2.
+- [Moody's RMS Exposure BatchV3 API](https://apis.io/apis/moodys-rms/moodys-rms-exposure-batchv3-api/) — The Exposure BatchV3 API from Moody's RMS — 1 operation(s) for exposure batchv3.
+- [Moody's RMS Exposure SetsV1 API](https://apis.io/apis/moodys-rms/moodys-rms-exposure-setsv1-api/) — The Exposure SetsV1 API from Moody's RMS — 3 operation(s) for exposure setsv1.
+- [Moody's RMS File StorageV1 API](https://apis.io/apis/moodys-rms/moodys-rms-file-storagev1-api/) — The File StorageV1 API from Moody's RMS — 8 operation(s) for file storagev1.
+- [Moody's RMS Geocoding API](https://apis.io/apis/moodys-rms/moodys-rms-geocoding-api/) — Geocodes an address
+- [Moody's RMS Import Upload API](https://apis.io/apis/moodys-rms/moodys-rms-import-upload-api/) — The Import Upload API from Moody's RMS — 3 operation(s) for import upload.
+- [Moody's RMS Imports V1 API](https://apis.io/apis/moodys-rms/moodys-rms-importsv1-api/) — The ImportsV1 API from Moody's RMS — 6 operation(s) for importsv1.
+- [Moody's RMS Jobs API](https://apis.io/apis/moodys-rms/moodys-rms-jobs-api/) — The Jobs API from Moody's RMS — 2 operation(s) for jobs.
+- [Moody's RMS Line of BusinessV1 API](https://apis.io/apis/moodys-rms/moodys-rms-line-of-businessv1-api/) — The Line of BusinessV1 API from Moody's RMS — 2 operation(s) for line of businessv1.
+- [Moody's RMS Location V1 API](https://apis.io/apis/moodys-rms/moodys-rms-locationv1-api/) — The LocationV1 API from Moody's RMS — 30 operation(s) for locationv1.
+- [Moody's RMS Logins API](https://apis.io/apis/moodys-rms/moodys-rms-logins-api/) — The Logins API from Moody's RMS — 2 operation(s) for logins.
+- [Moody's RMS Metrics V2 API](https://apis.io/apis/moodys-rms/moodys-rms-metricsv2-api/) — The MetricsV2 API from Moody's RMS — 27 operation(s) for metricsv2.
+- [Moody's RMS Pate V1 API](https://apis.io/apis/moodys-rms/moodys-rms-patev1-api/) — The PateV1 API from Moody's RMS — 2 operation(s) for patev1.
+- [Moody's RMS Policy ConditionV1 API](https://apis.io/apis/moodys-rms/moodys-rms-policy-conditionv1-api/) — The Policy ConditionV1 API from Moody's RMS — 1 operation(s) for policy conditionv1.
+- [Moody's RMS Policy V1 API](https://apis.io/apis/moodys-rms/moodys-rms-policyv1-api/) — The PolicyV1 API from Moody's RMS — 15 operation(s) for policyv1.
+- [Moody's RMS Portfolio V1 API](https://apis.io/apis/moodys-rms/moodys-rms-portfoliov1-api/) — The PortfolioV1 API from Moody's RMS — 16 operation(s) for portfoliov1.
+- [Moody's RMS Portfolio V2 API](https://apis.io/apis/moodys-rms/moodys-rms-portfoliov2-api/) — The PortfolioV2 API from Moody's RMS — 16 operation(s) for portfoliov2.
+- [Moody's RMS Producer V1 API](https://apis.io/apis/moodys-rms/moodys-rms-producerv1-api/) — The ProducerV1 API from Moody's RMS — 2 operation(s) for producerv1.
+- [Moody's RMS Reports V1 API](https://apis.io/apis/moodys-rms/moodys-rms-reportsv1-api/) — The ReportsV1 API from Moody's RMS — 2 operation(s) for reportsv1.
+- [Moody's RMS Risk Lookups API](https://apis.io/apis/moodys-rms/moodys-rms-risk-lookups-api/) — Returns one exposure, hazard, risk score, or loss cost layer for an address
+- [Moody's RMS Server Instances API](https://apis.io/apis/moodys-rms/moodys-rms-server-instances-api/) — The Server Instances API from Moody's RMS — 3 operation(s) for server instances.
+- [Moody's RMS Step PolicyV1 API](https://apis.io/apis/moodys-rms/moodys-rms-step-policyv1-api/) — The Step PolicyV1 API from Moody's RMS — 3 operation(s) for step policyv1.
+- [Moody's RMS Treaty V1 API](https://apis.io/apis/moodys-rms/moodys-rms-treatyv1-api/) — The TreatyV1 API from Moody's RMS — 11 operation(s) for treatyv1.
+- [Moody's RMS Underwriter V1 API](https://apis.io/apis/moodys-rms/moodys-rms-underwriterv1-api/) — The UnderwriterV1 API from Moody's RMS — 2 operation(s) for underwriterv1.
+- [Moody's RMS Utility V1 API](https://apis.io/apis/moodys-rms/moodys-rms-utilityv1-api/) — The UtilityV1 API from Moody's RMS — 6 operation(s) for utilityv1.
+- [Moody's RMS Windstorm Hazard Lookup API](https://apis.io/apis/moodys-rms/moodys-rms-windstorm-hazard-lookup-api/) — The Windstorm Hazard Lookup API from Moody's RMS — 14 operation(s) for windstorm hazard lookup.
+- [Moody's RMS Workflows V1 API](https://apis.io/apis/moodys-rms/moodys-rms-workflowsv1-api/) — The WorkflowsV1 API from Moody's RMS — 2 operation(s) for workflowsv1.
+- [Moody's RMS Account V2 API](https://apis.io/apis/moodys-rms/moodys-rms-account-v2-api/) — The Account V2 API from Moody's RMS — 21 operation(s) for account v2.
+- [Moody's RMS Metrics V1 API](https://apis.io/apis/moodys-rms/moodys-rms-metrics-v1-api/) — The Metrics V1 API from Moody's RMS — 24 operation(s) for metrics v1.
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Moody's RMS Platform APIs
+#### MCP servers (1)
 
-A collection of REST APIs that let Intelligent Risk Platform tenants automate portfolio management, underwriting, and risk-transfer workflows across Risk Modeler, UnderwriteIQ, TreatyIQ, ExposureIQ, and Risk Data Exchange. The public reference is segmented into roughly two dozen families including Import, Export, Batch, Model, Accumulation, Rollup, Grouping, Geohaz, Bulk Geohazard, Enrich Exposure, Currency Conversion, Auto Select, Clone, Copy, ESG Data, Exchange Data, Reference Data, Risk Data, Admin Data, Tenant Data, Security, STEP, and Variation. No downloadable OpenAPI definition was published for this family at the time of review.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://developer.rms.com/platform](https://developer.rms.com/platform)
+- [Platform MCP Server](https://apis.io/servers/moodys-rms/irp-integration-mcp/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://developer.rms.com/platform/docs)
-- [API Reference](https://developer.rms.com/platform/reference)
-- [Postman Workspace](https://www.postman.com/rms-developers/rms-developers/overview)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Moody's RMS Risk Modeler API
+- [Moodys Rms Agentic Access](https://apis.io/agentic-access/moodys-rms/moodys-rms-agentic-access/)
 
-The Risk Modeler 2.0 public API — the legacy catastrophe-modeling and underwriting surface of the Intelligent Risk Platform, superseded by the Platform APIs but still documented and specified. The harvested OpenAPI 3.0.1 definition carries 280 paths covering exposure and EDM/RDM management, account and portfolio data, model profiles, analysis runs, results and metrics, imports and exports, geohazard lookups, and job orchestration.
+#### Collections (2)
 
-- **Human URL:** [https://developer.rms.com/risk-modeler](https://developer.rms.com/risk-modeler)
-- **Base URL:** `https://api-use1.rms.com/riskmodeler`
+Postman and Open Collection request collections.
 
-#### Properties
+- [Data Bridge](https://apis.io/collections/moodys-rms/open-moodys-rms-data-bridge/)
+- [Risk Modeler](https://apis.io/collections/moodys-rms/open-moodys-rms-risk-modeler/)
 
-- [Documentation](https://developer.rms.com/risk-modeler)
-- [API Reference](https://developer.rms.com/risk-modeler/reference)
-- [OpenAPI](openapi/moodys-rms-risk-modeler-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](https://github.com/RMS/rms-developers/blob/master/.assets/rm/rm2-postman.zip)
+#### Overlays (3)
 
-### Moody's RMS Data Bridge API
+OpenAPI overlays, including conversational phrasing for each operation.
 
-Administers database connections and moves exposure and results data into and out of the Intelligent Risk Platform. The harvested OpenAPI 3.0.1 definition carries 21 paths covering database and server management, EDM/RDM database creation and deletion, upload and download of exposure databases, and the job status endpoints that track those transfers.
+- [Moodys Rms Data Bridge Overlay](https://apis.io/overlays/moodys-rms/moodys-rms-data-bridge-overlay/)
+- [Moodys Rms Location Intelligence Overlay](https://apis.io/overlays/moodys-rms/moodys-rms-location-intelligence-overlay/)
+- [Moodys Rms Risk Modeler Overlay](https://apis.io/overlays/moodys-rms/moodys-rms-risk-modeler-overlay/)
 
-- **Human URL:** [https://developer.rms.com/databridge](https://developer.rms.com/databridge)
-- **Base URL:** `https://api-use1.rms.com/databridge`
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://developer.rms.com/databridge)
-- [API Reference](https://developer.rms.com/databridge/reference)
-- [OpenAPI](openapi/moodys-rms-data-bridge-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Moodys Rms Authentication](https://apis.io/security/moodys-rms/moodys-rms-authentication/)
+- [Moodys Rms Domain Security](https://apis.io/security/moodys-rms/moodys-rms-domain-security/)
 
-### Moody's RMS Location Intelligence API
+## Where to find this API
 
-Address geocoding and per-location peril and hazard risk lookups used to enrich exposure before modeling. The harvested OpenAPI 3.0.1 definition carries 366 paths under three declared tags — Geocoding, Composite, and Risk Lookups — returning geocode resolution (including a code mapped to the ACORD standard resolution scale), hazard scores, and peril-specific risk attributes by location.
-
-- **Human URL:** [https://developer.rms.com/location-intelligence](https://developer.rms.com/location-intelligence)
-- **Base URL:** `https://api-use1.rms.com/li`
-
-#### Properties
-
-- [Documentation](https://developer.rms.com/location-intelligence)
-- [API Reference](https://developer.rms.com/location-intelligence/reference)
-- [OpenAPI](openapi/moodys-rms-location-intelligence-openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](https://github.com/RMS/rms-developers/blob/master/.assets/li/li-postman.json.zip)
-
-### Moody's RMS Climate On Demand API
-
-Physical climate risk data delivered as an API so financial-services organizations can build climate applications on the Intelligent Risk Platform. The public developer page documents four product surfaces — CoD Real Assets Stn, CoD Real Assets Pro, CoD Corporates, and CoD Spatial Areas — and offers a public Postman collection. No downloadable OpenAPI definition was found for this family at the time of review.
-
-- **Human URL:** [https://developer.rms.com/climate-on-demand](https://developer.rms.com/climate-on-demand)
-
-#### Properties
-
-- [Documentation](https://developer.rms.com/climate-on-demand)
-- [Postman Collection](https://www.postman.com/rms-developers/workspace/cod/collection/21620294-578a748b-78a6-4a3a-b4b3-5c5380b7848e)
-
-## API Posture
-
-- **Developer portal:** [https://developer.rms.com/](https://developer.rms.com/) — HTTP 200, a real self-serve ReadMe documentation hub, publicly readable with no login wall.
-- **Specifications harvested:** 3 OpenAPI 3.0.1 documents, 667 paths total, taken verbatim from the vendor's own [rms-developers](https://github.com/RMS/rms-developers) repository on 2026-07-25.
-- **Authentication:** API key in the `Authorization` header (`RMS_Auth`), issued to licensed Intelligent Risk Platform tenants. No OAuth2, no mTLS, no OpenID discovery document.
-- **ACORD posture:** No ACORD transactional surface. Exchange runs on the company's own cat-risk stack — EDM/RDM databases, the Risk Data Open Standard (RDOS), and interoperability with CEDE and OED. ACORD appears exactly once across all harvested specs, as a geocode-resolution code mapping in the Location Intelligence API.
-- **Quote / bind / issue / FNOL:** None exposed. This is risk-data and catastrophe analytics, consumed by carrier and reinsurer analytics teams, not a policy-transaction surface.
-- **Webhooks / events:** None. Long-running work uses a polling job model.
-- **Home market:** United States.
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.moodys.com/web/en/us/who-we-serve/insurance.html)
 - [Documentation](https://developer.rms.com/)
-- [Developer Portal](https://developer.rms.com/)
-- [GitHub Organization](https://github.com/RMS)
-- [Postman Workspace](https://www.postman.com/rms-developers/rms-developers/overview)
-- [API Reference](https://developer.rms.com/platform/reference)
+- [Getting started](https://developer.rms.com/platform/docs/get-started)
+- [API reference](https://developer.rms.com/platform/reference)
+- [Support](https://support.rms.com/o/html-doc/OLH_Content/SCGuide_Help_Center/Content/SCGuide/Welcome.htm)
+- [Terms of service](https://www.moodys.com/web/en/us/legal/terms-of-use.html)
+- [Privacy policy](https://www.moodys.com/web/en/us/legal/privacy-policy.html)
+- [GitHub](https://github.com/RMS)
+- [Status](https://status.rms.com)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 34.4** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 43.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 22.4 |
+| Developer ergonomics | 43.5 |
+| Access clarity | 21.1 |
+
+**Agent readiness 34.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 21.9** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/moodys-rms/](https://apis.io/providers/moodys-rms/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Moody's RMS: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/moodys-rms/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
